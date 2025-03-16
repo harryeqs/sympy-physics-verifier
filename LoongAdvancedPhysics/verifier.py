@@ -10,16 +10,10 @@ from sympy.physics import units
 import logging
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)  
-
-class ResponseFormat(BaseModel):
-    reasoning: str
-    code: str
-    unit: str
-
-class AnswerFormat(BaseModel):
-    gt_answer: str
-    unit: str
+logger.setLevel(logging.INFO)
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.INFO)
+logger.addHandler(console_handler)
 
 # A dictionary to allow parsing of common unit expressions.
 allowed_units = {
@@ -36,7 +30,7 @@ allowed_units = {
     "newton": units.newton,
     "J": units.joule,
     "joule": units.joule,
-    "\\circ": units.degree,
+    "circ": units.degree,
     "degree": units.degree,
     "degrees": units.degree,
     "K": units.kelvin,
@@ -141,11 +135,8 @@ def parse_unit_with_latex(unit_str: str, allowed_units: dict):
     Returns:
         A simplified sympy expression representing the unit.
     """
-    # Remove any leading/trailing whitespace.
-    unit_str = unit_str.strip()
-    
-    # Remove surrounding dollar signs if present.
-    unit_str = unit_str.lstrip("$").rstrip("$")
+    # Remove any leading/trailing whitespace and dollar signs or ^ characters.
+    unit_str = unit_str.strip().lstrip("$").rstrip("$").lstrip("^")
     
     # Preprocess the string: Replace \mathrm{...} with its inner content.
     unit_str = re.sub(r'\\mathrm\{([^}]*)\}', r'{\\\1}', unit_str)
@@ -157,8 +148,7 @@ def parse_unit_with_latex(unit_str: str, allowed_units: dict):
         expr = parse_latex(unit_str)
         logger.info(f"Parsed LaTeX unit: {expr}")
     except Exception as e:
-        logger.error(f"Failed to parse LaTeX unit '{unit_str}': {e}")
-        return None
+        raise ValueError(f"Failed to parse LaTeX unit '{unit_str}': {e}")
     
     # Substitute allowed unit symbols with their corresponding objects.
     for key, unit_obj in allowed_units.items():
@@ -212,7 +202,7 @@ class PhysicsVerifier:
                 expr = parse_expr(processed_str, local_dict=allowed_units, evaluate=True)
                 return sp.simplify(expr)
             except Exception as e:
-                logger.error(f"Failed to parse unit '{unit_str}' (processed as '{processed_str}'): {e}")
+                raise ValueError(f"Failed to parse unit '{unit_str}' (processed as '{processed_str}'): {e}")
 
     def verify_unit(self) -> bool:
         """
@@ -286,20 +276,20 @@ if __name__ == "__main__":
     # Example response with a LaTeX formatted unit string.
     response = ResponseFormat(
         reasoning="Example with LaTeX formatted unit.",
-        code="import sympy as sp\n\n# Given values\nradius_km = 1200  # radius in km\nradius_cm = radius_km * 1e5  # convert radius to cm\n\ndensity = 12.8  # density in g/cm^3\nspecific_heat = 0.400  # specific heat in J/g\u00b7K\nDelta_T = 1  # change in temperature in \u00b0C\nflux_density = 1e11  # neutrinos/(s\u00b7cm^2)\nenergy_per_neutrino = 8e-14  # energy per neutrino in J\n\n# Calculate the volume of the inner core\nV = (4/3) * sp.pi * radius_cm**3  # volume in cm^3\n\n# Calculate the mass of the inner core\nmass = density * V  # mass in grams\n\n# Calculate the energy required to heat the inner core by 1\u00b0C\nQ = mass * specific_heat * Delta_T  # energy in J\n\n# Calculate the area of the inner core\nA = 4 * sp.pi * radius_cm**2  # area in cm^2\n\n# Calculate the total energy absorbed per second\nE = flux_density * A * energy_per_neutrino  # energy in J/s\n\n# Calculate the time required to heat the inner core\nt = Q / E  # time in seconds\n\n# Express t in the form 1 x 10^N\nN = sp.log(t, 10).evalf()  # calculate N\n\n# Store the result\nresult = int(N)\n\n# Display the result\nresult",
-        unit="s"
+        code="result = 1.00",
+        unit="^{\circ}"
     )
     # Ground truth with equivalent unit in a Python-friendly format.
     answer = AnswerFormat(
-        gt_answer='$1 \\times 10^{14}$',
-        unit="s"
+        gt_answer='$1$',
+        unit="degree"
     )
-    
+ 
     verifier = PhysicsVerifier()
     try:
         result_match, unit_match = verifier.verify(response, answer)
         logger.info("Result Match:", result_match)
         logger.info("Unit Match:", unit_match)
     except Exception as e:
-        logger.info("Verification failed:", e)
+        logger.error("Verification failed:", e)
 
