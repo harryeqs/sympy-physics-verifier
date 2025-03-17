@@ -39,6 +39,7 @@ allowed_units = {
     "gram": units.gram,
     "grams": units.gram,
     "cm": units.centimeter,
+    "km": units.kilometer,
     "centimeter": units.centimeter,
     # Extend this dictionary as needed.
 }
@@ -180,10 +181,11 @@ class PhysicsVerifier:
         namespace = {}
         try:
             exec(code, namespace, namespace)
+            if "result" not in namespace:
+                logger.info("The executed code did not define a variable called 'result'.")
         except Exception as e:
             logger.info(f"Failed to execute code: {e}")
-        if "result" not in namespace:
-            logger.info("The executed code did not define a variable called 'result'.")
+        
         return namespace.get("result", None)
 
     def parse_unit(self, unit_str: str):
@@ -235,6 +237,12 @@ class PhysicsVerifier:
         # Clean and execute the code provided in the response
         cleaned_code = clean_python_code(self.response.code)
         output = self.execute_code(cleaned_code)
+
+        if output is None:
+            return False, False
+
+        if isinstance(output, sp.core.numbers.Float) or isinstance(output, sp.core.numbers.Integer):
+            output = float(output)
 
         # Determine if the output is a float or a symbolic expression
         if isinstance(output, float) or isinstance(output, int):

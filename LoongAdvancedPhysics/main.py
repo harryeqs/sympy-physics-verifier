@@ -88,6 +88,10 @@ if __name__ == "__main__":
     
     output_location = args.out_location if args.out_location else os.path.join(current_path, "output.json")
 
+    # clean the output file if already exists
+    with open(output_location, 'w') as f:
+        f.write('')
+
     pipeline = PhysicsCodeGenPipeline(
         reason_model=reason_model,
         dataset=dataset,

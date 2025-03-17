@@ -89,6 +89,9 @@ class PhysicsCodeGenPipeline():
 
          logger.info(f'=====Verifying Question {sample_id}=====')
          verification_outcome = self.verify(structured_response, full_answer)
+         logger.info(f'Output match: {verification_outcome[0]}')
+         logger.info(f"Unit Match: {verification_outcome[1]}")
+         
          if verification_outcome[0] and verification_outcome[1]:
             self.generation_summary['successful_generations'] += 1
          else:
