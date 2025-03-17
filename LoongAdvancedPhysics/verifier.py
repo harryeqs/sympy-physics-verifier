@@ -16,6 +16,17 @@ console_handler.setLevel(logging.INFO)
 logger.addHandler(console_handler)
 
 # A dictionary to allow parsing of common unit expressions.
+
+SI_base_units = {
+    units.meter,         # Length
+    units.kilogram,      # Mass
+    units.second,        # Time
+    units.ampere,        # Electric current
+    units.kelvin,        # Temperature
+    units.mole,          # Amount of substance
+    units.candela        # Luminous intensity
+}
+
 allowed_units = {
     "m": units.meter,
     "meter": units.meter,
@@ -40,6 +51,7 @@ allowed_units = {
     "grams": units.gram,
     "cm": units.centimeter,
     "km": units.kilometer,
+    "kilometer": units.kilometer,
     "centimeter": units.centimeter,
     # Extend this dictionary as needed.
 }
@@ -120,6 +132,14 @@ def clean_answer(raw_answer: str) -> str:
     answer = answer.replace('\\', '')
     
     return answer
+
+def determine_base_unit(unit_expr: str):
+    try:
+        base_unit_expr = sp.convert_to(unit_expr, SI_base_units)
+        return sp.simplify(base_unit_expr)
+    except Exception as e:
+        logger.error(f"Failed to determine SI base unit for {unit_expr}: {e}")
+        return None
 
 def parse_unit_with_latex(unit_str: str, allowed_units: dict):
     """
@@ -216,6 +236,9 @@ class PhysicsVerifier:
             logger.info(f'Response unit: {response_unit_expr}')
             answer_unit_expr = self.parse_unit(self.answer.unit)
             logger.info(f'Answer unit: {answer_unit_expr}')
+
+            
+
             diff = sp.simplify(response_unit_expr - answer_unit_expr)
             return diff == 0
         except Exception as e:
@@ -240,9 +263,20 @@ class PhysicsVerifier:
 
         if output is None:
             return False, False
+        
+        response_unit_expr = self.parse_unit(self.response.unit)
+        logger.info(f'Response unit: {response_unit_expr}')
+        answer_unit_expr = self.parse_unit(self.answer.unit)
+        logger.info(f'Answer unit: {answer_unit_expr}')
 
-        if isinstance(output, sp.core.numbers.Float) or isinstance(output, sp.core.numbers.Integer):
+        if output.is_number:
+            logger.info(f'Output is number')
             output = float(output)
+            # output_with_unit = output * response_unit_expr
+            # converted_output_expr = units.convert_to(output_with_unit, [answer_unit_expr])
+            # converted_output, converted_unit = converted_output_expr.as_coeff_muls()
+            # converted_output = float(converted_output) if converted_output.is_number else converted_output
+            
 
         # Determine if the output is a float or a symbolic expression
         if isinstance(output, float) or isinstance(output, int):
