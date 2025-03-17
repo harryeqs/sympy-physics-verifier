@@ -323,7 +323,7 @@ class PhysicsVerifier:
         Returns:
             A tuple (result_match: bool, unit_match: bool)
         """
-        
+
         if answer.unit == "dimensionless":
             answer.unit = None
 
@@ -355,16 +355,12 @@ class PhysicsVerifier:
                         logger.error(f'Failed to detect scaling factor for answer unit ({answer_unit_expr}): {e}')
 
                     try:
-                        answer_unit_args = detect_unit_args(answer_unit_expr)
+                        answer_unit_args = detect_unit_args(base_unit)
 
                         if len(answer_unit_args) > 1:
                             logger.info(f'Answer unit is a composite unit with: {answer_unit_args}')
-                            response_unit_args = detect_unit_args(response_unit_expr)
-                            target_units = [unit for unit in answer_unit_args if unit not in response_unit_args]
-                            logger.info(f'Target units to convert to: {target_units}')
-                            logger.info(f'Target units?????: {target_units[0] == units.kilogram}')
 
-                        converted_output_expr = units.convert_to(output_with_unit, target_units)
+                        converted_output_expr = units.convert_to(output_with_unit, answer_unit_args)
                         logger.info(f'Converted response expr: {converted_output_expr}')
                     except Exception as e:
                         logger.error(f'Failed to convert output to the target unit: {e}')
