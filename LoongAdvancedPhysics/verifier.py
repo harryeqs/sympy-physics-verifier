@@ -54,6 +54,11 @@ for prefix, prefix_obj in PREFIXES.items():
         prefixed_unit_name = f"{prefix}{unit_name}"  # Example: "MJ", "kN"
         allowed_prefixed_units[prefixed_unit_name] = prefix_obj.scale_factor * base_unit
 
+#avoid repetition
+allowed_prefixed_units = {k: v for k, v in allowed_prefixed_units.items() if k not in allowed_units}
+
+allowed_units.update(allowed_prefixed_units)
+
 def clean_python_code(raw_code: str) -> str:
     """
     Extracts and cleans Python code from an LLM response.
@@ -226,17 +231,12 @@ def parse_unit_with_latex(unit_str: str):
     
     try:
         expr = parse_latex(unit_str)
-        logger.info(f"Parsed LaTeX unit: {expr}")
+        logger.info(f"Parsed LaTeX unit: {expr}.")
     except Exception as e:
         raise ValueError(f"Failed to parse LaTeX unit '{unit_str}': {e}")
     
     # Substitute allowed unit symbols with their corresponding objects.
     for key, unit_obj in allowed_units.items():
-        sym = sp.symbols(key)
-        expr = expr.subs(sym, unit_obj)
-
-    # Then substitude allowdd unit with prefixes
-    for key, unit_obj in allowed_prefixed_units.items():
         sym = sp.symbols(key)
         expr = expr.subs(sym, unit_obj)
     
@@ -285,7 +285,7 @@ class PhysicsVerifier:
         processed_str = preprocess_unit_string(unit_str)
         
         try:
-            expr = parse_expr(processed_str, local_dict={**allowed_units, **allowed_prefixed_units}, evaluate=True)
+            expr = parse_expr(processed_str, local_dict=allowed_units, evaluate=True)
             return sp.simplify(expr)
         except Exception as e:
             raise ValueError(f"Failed to parse unit '{unit_str}' (processed as '{processed_str}'): {e}")
@@ -323,6 +323,10 @@ class PhysicsVerifier:
         Returns:
             A tuple (result_match: bool, unit_match: bool)
         """
+        
+        if answer.unit == "dimensionless":
+            answer.unit = None
+
         self.response = response
         self.answer = answer
 
@@ -333,7 +337,8 @@ class PhysicsVerifier:
         if output is None:
             return False, False
         
-        response_unit_expr, answer_unit_expr = self.parse_answer_and_response_units()
+        if answer.unit:
+            response_unit_expr, answer_unit_expr = self.parse_answer_and_response_units()
         
         if isinstance(output, (int, float, sp.Number)):
             if answer.unit and (response_unit_expr is not None) and (answer_unit_expr is not None):
@@ -341,7 +346,6 @@ class PhysicsVerifier:
 
                 if not raw_unit_match:
                     logger.info(f'Response unit ({response_unit_expr}) does not match the answer unit ({answer_unit_expr}). Attempting to convert...')
-                    logger.info(f'{answer_unit_expr}, type: {type(answer_unit_expr)}')
 
                     output_with_unit = output * response_unit_expr
 
@@ -355,8 +359,12 @@ class PhysicsVerifier:
 
                         if len(answer_unit_args) > 1:
                             logger.info(f'Answer unit is a composite unit with: {answer_unit_args}')
+                            response_unit_args = detect_unit_args(response_unit_expr)
+                            target_units = [unit for unit in answer_unit_args if unit not in response_unit_args]
+                            logger.info(f'Target units to convert to: {target_units}')
+                            logger.info(f'Target units?????: {target_units[0] == units.kilogram}')
 
-                        converted_output_expr = units.convert_to(output_with_unit, answer_unit_args)
+                        converted_output_expr = units.convert_to(output_with_unit, target_units)
                         logger.info(f'Converted response expr: {converted_output_expr}')
                     except Exception as e:
                         logger.error(f'Failed to convert output to the target unit: {e}')
