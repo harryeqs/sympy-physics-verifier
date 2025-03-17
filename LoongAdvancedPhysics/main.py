@@ -36,7 +36,7 @@ def preprocess_data(data: Dict, dataset_origin: Literal["OlympiadBench", "SciBen
             "metadata": {}
         }
         
-        keys_to_exclude = {"problem_id", "problem_text", "answer_number"}
+        keys_to_exclude = {"problemid", "problem_text", "answer_number"}
     
     # Put the remaining keys into metadata.
     for key, value in data.items():
