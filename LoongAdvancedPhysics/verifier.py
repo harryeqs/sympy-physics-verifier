@@ -6,6 +6,7 @@ import math
 from sympy.parsing.sympy_parser import parse_expr
 from sympy.parsing.latex import parse_latex
 from sympy.physics import units
+from sympy.physics.units.prefixes import PREFIXES
 
 import logging
 
@@ -16,17 +17,6 @@ console_handler.setLevel(logging.INFO)
 logger.addHandler(console_handler)
 
 # A dictionary to allow parsing of common unit expressions.
-
-SI_base_units = {
-    units.meter,         # Length
-    units.kilogram,      # Mass
-    units.second,        # Time
-    units.ampere,        # Electric current
-    units.kelvin,        # Temperature
-    units.mole,          # Amount of substance
-    units.candela        # Luminous intensity
-}
-
 allowed_units = {
     "m": units.meter,
     "meter": units.meter,
@@ -53,8 +43,16 @@ allowed_units = {
     "km": units.kilometer,
     "kilometer": units.kilometer,
     "centimeter": units.centimeter,
-    # Extend this dictionary as needed.
+    # extend as needed
 }
+
+allowed_prefixed_units = {}
+
+# ✅ Add SI Prefix Support to Allowed Units
+for prefix, prefix_obj in PREFIXES.items():
+    for unit_name, base_unit in allowed_units.copy().items():
+        prefixed_unit_name = f"{prefix}{unit_name}"  # Example: "MJ", "kN"
+        allowed_prefixed_units[prefixed_unit_name] = prefix_obj.scale_factor * base_unit
 
 def clean_python_code(raw_code: str) -> str:
     """
@@ -133,15 +131,78 @@ def clean_answer(raw_answer: str) -> str:
     
     return answer
 
-def determine_base_unit(unit_expr: str):
-    try:
-        base_unit_expr = sp.convert_to(unit_expr, SI_base_units)
-        return sp.simplify(base_unit_expr)
-    except Exception as e:
-        logger.error(f"Failed to determine SI base unit for {unit_expr}: {e}")
-        return None
+def detect_unit_args(unit_expr):
+    """
+    Extracts the base units from a composite SymPy unit expression.
 
-def parse_unit_with_latex(unit_str: str, allowed_units: dict):
+    Parameters:
+        unit_expr: SymPy expression representing a composite unit (e.g., kg/m^3)
+
+    Returns:
+        List of SymPy base unit components (e.g., [kg, m])
+    """
+    factors = sp.Mul.make_args(unit_expr)  # Decompose into factors
+    
+    base_units = [factor.base if factor.is_Pow else factor for factor in factors]
+
+    return base_units
+
+def detect_scaling_factor(answer_unit_expr):
+    """
+    Detects a scaling factor in the answer unit expression.
+    
+    Parameters:
+        answer_unit_expr (SymPy expression): The unit expression from the correct answer.
+
+    Returns:
+        (scale_factor, base_unit): Tuple of scale factor (if found) and the base unit.
+    """
+    # Extract value and unit from the answer's unit
+    value, base_unit = extract_value_and_unit(answer_unit_expr)
+
+    # If the extracted value is purely numeric, it's a scale factor
+    if isinstance(value, (int, float, sp.Number)):
+        return value, base_unit  # scale_factor, unit
+    return 1, answer_unit_expr  # No scale factor found, return 1
+
+
+def extract_value_and_unit(expr):
+    """
+    Extracts the numerical value and unit from a SymPy expression.
+    Correctly handles compound units (e.g., m/s, AU, N*m, kg*m/s^2).
+    
+    Parameters:
+        expr: SymPy expression with units (e.g., 3604.36 * meter / second, 0.592092647418689 * AU)
+    
+    Returns:
+        (value, unit): Numerical value and unit as separate expressions.
+    """
+    # Flatten the expression into multiplicative terms
+    factors = sp.Mul.make_args(expr)
+
+    # Separate numerical values and unit terms
+    numeric_terms = []
+    unit_terms = []
+
+    for term in factors:
+        if term.is_number:  # If it's a pure number, store in numeric_terms
+            numeric_terms.append(term)
+        elif isinstance(term, sp.Symbol):  # Ensure AU or other units are handled
+            unit_terms.append(term)
+        elif any(term.has(u) for u in units.__dict__.values()):  # If term contains known units
+            unit_terms.append(term)
+        else:
+            # Handle unknown symbols as part of the value (e.g., h, g in symbolic cases)
+            numeric_terms.append(term)
+
+    # Construct the final numerical value and unit
+    value = sp.Mul(*numeric_terms) if numeric_terms else 1  # If no value found, assume 1
+    unit_expr = sp.Mul(*unit_terms) if unit_terms else 1  # If no unit found, assume dimensionless
+
+    return value, unit_expr
+
+
+def parse_unit_with_latex(unit_str: str):
     """
     Parse a unit string using sympy's LaTeX parser.
     After parsing, substitute any symbols with their corresponding
@@ -150,8 +211,6 @@ def parse_unit_with_latex(unit_str: str, allowed_units: dict):
     
     Parameters:
         unit_str (str): The unit string in LaTeX format, e.g. "$\\frac{\\mathrm{kg}}{\\mathrm{m}^{3}}$"
-        allowed_units (dict): A dictionary mapping unit names (e.g. "kg", "m", "km", "cm", "mm")
-                              to their corresponding sympy unit objects.
     
     Returns:
         A simplified sympy expression representing the unit.
@@ -175,9 +234,14 @@ def parse_unit_with_latex(unit_str: str, allowed_units: dict):
     for key, unit_obj in allowed_units.items():
         sym = sp.symbols(key)
         expr = expr.subs(sym, unit_obj)
+
+    # Then substitude allowdd unit with prefixes
+    for key, unit_obj in allowed_prefixed_units.items():
+        sym = sp.symbols(key)
+        expr = expr.subs(sym, unit_obj)
     
     simplified_expr = sp.simplify(expr)
-    logger.info(f"Response unit: {simplified_expr}")
+    logger.info(f"Simplified LaTex unit: {simplified_expr}")
     return simplified_expr
 
 def preprocess_unit_string(unit_str: str) -> str:
@@ -216,29 +280,34 @@ class PhysicsVerifier:
         """
         if "$" in unit_str or "\\" in unit_str:
             # Likely a LaTeX formatted string.
-            return parse_unit_with_latex(unit_str, allowed_units)
-        else:
-            # Preprocess for caret exponentiation.
-            processed_str = preprocess_unit_string(unit_str)
-            try:
-                expr = parse_expr(processed_str, local_dict=allowed_units, evaluate=True)
-                return sp.simplify(expr)
-            except Exception as e:
-                raise ValueError(f"Failed to parse unit '{unit_str}' (processed as '{processed_str}'): {e}")
-
-    def verify_unit(self) -> bool:
-        """
-        Verifies that the unit provided in the response is equivalent
-        to the ground truth unit by comparing their simplified sympy expressions.
-        """
+            return parse_unit_with_latex(unit_str)
+        
+        processed_str = preprocess_unit_string(unit_str)
+        
+        try:
+            expr = parse_expr(processed_str, local_dict={**allowed_units, **allowed_prefixed_units}, evaluate=True)
+            return sp.simplify(expr)
+        except Exception as e:
+            raise ValueError(f"Failed to parse unit '{unit_str}' (processed as '{processed_str}'): {e}")
+            
+    def parse_answer_and_response_units(self):
         try: 
             response_unit_expr = self.parse_unit(self.response.unit)
             logger.info(f'Response unit: {response_unit_expr}')
             answer_unit_expr = self.parse_unit(self.answer.unit)
             logger.info(f'Answer unit: {answer_unit_expr}')
+            return response_unit_expr, answer_unit_expr
+        except Exception as e:
+            logger.error("Failed to parse units:", e)
+            return None, None
 
-            
-
+    def verify_unit(self, response_unit_expr, answer_unit_expr) -> bool:
+        """
+        Verifies that the unit provided in the response is equivalent
+        to the ground truth unit by comparing their simplified sympy expressions.
+        """
+        try: 
+            logger.info(f'Comparing response unit ({response_unit_expr}) with answer unit ({answer_unit_expr})')
             diff = sp.simplify(response_unit_expr - answer_unit_expr)
             return diff == 0
         except Exception as e:
@@ -264,28 +333,57 @@ class PhysicsVerifier:
         if output is None:
             return False, False
         
-        response_unit_expr = self.parse_unit(self.response.unit)
-        logger.info(f'Response unit: {response_unit_expr}')
-        answer_unit_expr = self.parse_unit(self.answer.unit)
-        logger.info(f'Answer unit: {answer_unit_expr}')
+        response_unit_expr, answer_unit_expr = self.parse_answer_and_response_units()
+        
+        if isinstance(output, (int, float, sp.Number)):
+            if answer.unit and (response_unit_expr is not None) and (answer_unit_expr is not None):
+                raw_unit_match = self.verify_unit(response_unit_expr, answer_unit_expr)
 
-        if output.is_number:
-            logger.info(f'Output is number')
-            output = float(output)
-            # output_with_unit = output * response_unit_expr
-            # converted_output_expr = units.convert_to(output_with_unit, [answer_unit_expr])
-            # converted_output, converted_unit = converted_output_expr.as_coeff_muls()
-            # converted_output = float(converted_output) if converted_output.is_number else converted_output
+                if not raw_unit_match:
+                    logger.info(f'Response unit ({response_unit_expr}) does not match the answer unit ({answer_unit_expr}). Attempting to convert...')
+                    logger.info(f'{answer_unit_expr}, type: {type(answer_unit_expr)}')
+
+                    output_with_unit = output * response_unit_expr
+
+                    try:
+                        scaling_factor, base_unit = detect_scaling_factor(answer_unit_expr)
+                    except Exception as e:
+                        logger.error(f'Failed to detect scaling factor for answer unit ({answer_unit_expr}): {e}')
+
+                    try:
+                        answer_unit_args = detect_unit_args(answer_unit_expr)
+
+                        if len(answer_unit_args) > 1:
+                            logger.info(f'Answer unit is a composite unit with: {answer_unit_args}')
+
+                        converted_output_expr = units.convert_to(output_with_unit, answer_unit_args)
+                        logger.info(f'Converted response expr: {converted_output_expr}')
+                    except Exception as e:
+                        logger.error(f'Failed to convert output to the target unit: {e}')
+
+                    try:
+                        output, response_unit_expr = extract_value_and_unit(converted_output_expr)
+
+                        if not isinstance(output, (int, float, sp.Number)):
+                            raise ValueError(f"Failed to extract value from converted output: {output}")
+                        
+                        output = float(output)
+
+                        if scaling_factor != 1:
+                            logger.info(f'Apply scaling factor {scaling_factor} for answer units to response.')
+                            output /= scaling_factor
+                            response_unit_expr *= scaling_factor
+
+                        logger.info(f'Converted response output: {output}')
+                        logger.info(f'Converted response unit: {response_unit_expr}')
+                    except Exception as e:
+                        logger.error(f'Failed to exparate output value and unit: {e}')
             
-
-        # Determine if the output is a float or a symbolic expression
-        if isinstance(output, float) or isinstance(output, int):
-            # Convert ground truth answer to float and compare using tolerance.
             try:
                 gt_value = float(clean_answer(answer.gt_answer))
-                logger.info(f'Output value: {output}')
+                logger.info(f'Response value: {output}')
                 logger.info(f'Ground truth value: {gt_value}')
-            except ValueError:
+            except Exception as e:
                 logger.error("Failed to convert ground truth answer to float. Error:", e)
                 return False, False
             
@@ -308,8 +406,10 @@ class PhysicsVerifier:
         if not answer.unit:
             # If the ground truth unit is not provided, only check the result.
             return result_match, True
+        elif response_unit_expr is None or answer_unit_expr is None:
+            return result_match, False
         
-        unit_match = self.verify_unit()
+        unit_match = self.verify_unit(response_unit_expr, answer_unit_expr)
         return result_match, unit_match
 
 
