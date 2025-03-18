@@ -12,9 +12,6 @@ import logging
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.INFO)
-logger.addHandler(console_handler)
 
 class UnitParser:
     """
@@ -299,7 +296,8 @@ class PhysicsVerifier:
         self.tolerance = tolerance
         self.unit_parser = UnitParser()
 
-    def execute_code(self, code: str):
+    @staticmethod
+    def execute_code(code: str):
         """
         Executes the generated code from the response in an isolated namespace.
         The environment includes sympy and the necessary physics units.
@@ -315,7 +313,8 @@ class PhysicsVerifier:
         
         return namespace.get("result", None)
 
-    def verify_unit(self, response_unit_expr, answer_unit_expr) -> bool:
+    @staticmethod
+    def verify_unit(response_unit_expr, answer_unit_expr) -> bool:
         """
         Verifies that the unit provided in the response is equivalent
         to the ground truth unit by comparing their simplified sympy expressions.
@@ -403,7 +402,7 @@ class PhysicsVerifier:
         response_unit_expr = self.unit_parser.parse_unit(response.unit)
         answer_unit_expr = self.unit_parser.parse_unit(answer.unit)
         logger.info(f'Response unit: {response_unit_expr}')
-        logger.info(f'Answer unit: {answer_unit_expr}')
+        logger.info(f'Ground truth unit: {answer_unit_expr}')
         
         if isinstance(output, (int, float, sp.Number)):
             if (answer_unit_expr is not None and 
@@ -428,7 +427,7 @@ class PhysicsVerifier:
         else:
             # Compare symbolic expressions
             try:
-                logger.info(f'Output expression: {output}')
+                logger.info(f'Response expression: {output}')
                 gt_expr = parse_latex(answer.gt_answer.lstrip("$").rstrip("$"))
                 logger.info(f'Ground truth expression: {gt_expr}')
 
@@ -441,7 +440,8 @@ class PhysicsVerifier:
                 result_match = False
 
         if not answer.unit:
-            unit_match = True
+            # If the answer is dimensionless, the reponse should also be dimensionless
+            unit_match = response_unit_expr is None
         elif response_unit_expr is None or answer_unit_expr is None:
             unit_match = False
         else:
@@ -452,23 +452,27 @@ class PhysicsVerifier:
 
 # Example usage:
 if __name__ == "__main__":
+    # Set up logging for testing
+    console_handler = logging.StreamHandler()
+    logger.addHandler(console_handler)
+
     # Example response with a LaTeX formatted unit string.
     response = ResponseFormat(
         reasoning="Example with LaTeX formatted unit.",
         code="result = 1.00",
-        unit="^{\circ}"
+        unit="m^2"
     )
     # Ground truth with equivalent unit in a Python-friendly format.
     answer = AnswerFormat(
         gt_answer='$1$',
-        unit="degree"
+        unit=None
     )
  
     verifier = PhysicsVerifier()
     try:
         result_match, unit_match = verifier.verify(response, answer)
-        logger.info("Result Match:", result_match)
-        logger.info("Unit Match:", unit_match)
+        logger.info(f"Result Match: {result_match}")
+        logger.info(f"Unit Match: {unit_match}")
     except Exception as e:
         logger.error("Verification failed:", e)
 
