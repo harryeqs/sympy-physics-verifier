@@ -10,6 +10,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--dataset", type=str, required=True, help="Which dataset to use: OlympiadBench or SciBench")
 parser.add_argument("--num", type=int, required=False, help="Number of samples to generate. If not provided, all samples will be generated.")
+parser.add_argument("--sample", action='store_true', help='randomly sample from the datasets instead of choosing the first few.')
 parser.add_argument("--out_location", type=str, required=False, help="Output directory for the generated samples.")
 args = parser.parse_args()
 
@@ -95,8 +96,9 @@ if __name__ == "__main__":
     pipeline = PhysicsCodeGenPipeline(
         reason_model=reason_model,
         dataset=dataset,
+        output_location = output_location,
         num=args.num,
-        output_location = output_location
+        sample=args.sample,
     )
 
     pipeline.run()
