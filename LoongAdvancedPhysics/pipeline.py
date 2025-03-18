@@ -1,5 +1,6 @@
 import json
 import random
+import time
 import os
 from camel.agents import ChatAgent
 from camel.models import BaseModelBackend
@@ -73,6 +74,7 @@ class PhysicsCodeGenPipeline():
          output_location: str, 
          num: Union[int, None] = None,
          sample: bool = False,
+         problem_ids: Union[int, None] = None,
          ):
       """
       Initialize the pipeline with the reason model and the dataset.
@@ -82,13 +84,20 @@ class PhysicsCodeGenPipeline():
           dataset (dict): The dataset containing physics problems and solutions.
       """
       # Set limit
-      if num is not None:
-         if sample:
-            self.dataset = random.sample(dataset, num)
-         else:
-            self.dataset = dataset[:num]
+      if problem_ids is not None:
+         self.dataset = []
+         for data in dataset:
+            data_id = data['id'].replace(' ', '')
+            if data_id in problem_ids:
+               self.dataset.append(data)
       else:
-         self.dataset = dataset
+         if num is not None:
+            if sample:
+               self.dataset = random.sample(dataset, num)
+            else:
+               self.dataset = dataset[:num]
+         else:
+            self.dataset = dataset
 
       # Initialize the reasoning agent
       self.reason_agent = ChatAgent(
@@ -136,6 +145,7 @@ class PhysicsCodeGenPipeline():
          unit = sample['unit']
 
          full_answer = AnswerFormat(gt_answer=gt_answer, unit=unit) # Create the full answer format including both the numerical answer and unit
+         
          raw_response = self.reason_agent.step(question, response_format=ResponseFormat)
          structured_response = ResponseFormat.model_validate(raw_response.msgs[0].parsed)
 

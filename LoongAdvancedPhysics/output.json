@@ -1,87 +1,55 @@
 [
     {
-        "sample_id": "876",
+        "sample_id": "1053",
         "response": {
-            "reasoning": "To compute the ratio of gravitational potential energy to spring potential energy, we start by defining the two types of potential energy. The gravitational potential energy (U_g) between two masses (the Earth and the Sun) is given by the formula: U_g = -G * (m * M_s) / r, where G is the gravitational constant, m is the mass of the Earth, M_s is the mass of the Sun, and r is the distance between them. The spring potential energy (U_s) is given by the formula: U_s = (1/2) * k * x^2, where k is the spring constant and x is the displacement from the equilibrium position. For our case, we can relate the spring constant to the gravitational force acting on the Earth, which can be expressed as k = m * (v^2 / r) where v is the orbital velocity of the Earth. We can find the orbital velocity using v = sqrt(G * M_s / r). Finally, we will compute the ratio U_g / U_s.",
-            "code": "import sympy as sp\n\n# Define symbols and constants\nG = 6.67 * 10**-11  # Gravitational constant (N*m^2/kg^2)\nm = 5.972 * 10**24  # Mass of the Earth (kg)\nM_s = 1.988 * 10**30  # Mass of the Sun (kg)\nr = 1.496 * 10**11  # Distance from Earth to Sun (m)\n\n# Gravitational potential energy\nU_g = -G * (m * M_s) / r\n\n# Orbital velocity of the Earth\nv = sp.sqrt(G * M_s / r)\n\n# Spring constant\nk = m * (v**2 / r)\n\n# Spring potential energy\nU_s = (1/2) * k * r**2\n\n# Ratio of gravitational potential energy to spring potential energy\nratio = U_g / U_s\n\n# Compute the final result\nresult = ratio.simplify()",
-            "unit": "None"
+            "reasoning": "To find the expressions for the typical linear momentum and the typical de Broglie wavelength of a non-interacting gas of Rb atoms, we start with the definitions of momentum and de Broglie wavelength. The linear momentum p of a particle can be expressed as p = mv, where v is the average speed of the particles. For a gas in thermal equilibrium, the average speed can be derived from the kinetic theory of gases, which gives v = sqrt(3kT/m), where k is the Boltzmann constant. Thus, the expression for the typical linear momentum becomes p = m * sqrt(3kT/m) = sqrt(3mkT). The de Broglie wavelength is given by \u03bb_dB = h/p, where h is Planck's constant. Substituting the expression for p, we get \u03bb_dB = h/sqrt(3mkT). Therefore, we have the expressions for the typical linear momentum and de Broglie wavelength in terms of the atom's mass, temperature, and physical constants.",
+            "code": "import sympy as sp\n\n# Define symbols and constants\nm, T, k, h = sp.symbols('m T k h')\n\n# Average speed of particles in thermal equilibrium\nv = sp.sqrt(3 * k * T / m)\n\n# Linear momentum\np = m * v\nmomentum = sp.simplify(p)\n\n# De Broglie wavelength\nlambda_dB = h / momentum\nlambda_dB_expr = sp.simplify(lambda_dB)\n\n# Final output assignment (must be the last line)\nresult = (momentum, lambda_dB_expr)",
+            "unit": "kg*m/s for momentum, m for wavelength"
         },
         "answer": {
-            "gt_answer": "-2",
+            "gt_answer": "$p=\\sqrt{3 m k_{\\mathrm{B}} T}$ , $\\lambda_{\\mathrm{dB}}=\\frac{h}{\\sqrt{3 m k_{\\mathrm{B}} T}}$",
             "unit": null
         },
         "verification_result": {
-            "code_output": "-1.33689839572193e-11",
+            "code_output": "(sqrt(3)*m*sqrt(T*k/m), sqrt(3)*h/(3*m*sqrt(T*k/m)))",
             "result_match": false,
             "unit_match": true
         },
         "metadata": {
             "solution": [
-                "One naive idea is to directly compute $U_{g}$ and $U_{s}$, but we can use the fact that their frequencies are the same, or:\n$$\n\\omega^{2}=\\frac{k}{m}=\\frac{G M}{r^{3}} \\Longrightarrow k r^{2}=\\frac{G M}{r}\n$$\n\nThen,\n\n$$\nU_{g}=-\\frac{G M m}{r}=-k r^{2}\n$$\n\nand\n\n$$\nU_{s}=\\frac{1}{2} k r^{2}\n$$\n\nTherefore,\n\n$$\nU_{g} / U_{s}=-2\n$$"
+                "At temperature $T$, the average kinetic energy of translational motion is $\\frac{3}{2} k_{\\mathrm{B}} T$. Equating this result to $p^{2} /(2 m)$, we obtain typical momentum $p=\\sqrt{3 m k_{\\mathrm{B}} T}$ and the de Broglie wavelength\n\n$$\n\\lambda_{\\mathrm{dB}}=\\frac{h}{p}=\\frac{h}{\\sqrt{3 m k_{\\mathrm{B}} T}}\n$$"
             ],
             "modality": "Text-only",
             "difficulty": "Competition",
-            "is_multiple_answer": false,
+            "is_multiple_answer": true,
             "unit": null,
-            "answer_type": "Numerical",
-            "error": "1e-1",
+            "answer_type": "Expression",
+            "error": null,
             "question_type": "Open-ended",
-            "subfield": "Mechanics",
+            "subfield": "Modern Physics",
             "subject": "Physics",
             "language": "English"
         }
     },
     {
-        "sample_id": "1482",
+        "sample_id": "1491",
         "response": {
-            "reasoning": "To find the electric potential at a corner of a cube with uniform charge density \\( \\rho \\) and side length \\( a \\), we can use the principle of superposition. The electric potential due to a uniform charge distribution can be calculated by integrating the contributions from each infinitesimal charge element within the cube. The potential at a point due to a charge element is given by \\( d\\Phi = \\frac{dq}{4\\pi\\epsilon_0 r} \\), where \\( dq = \\rho dV \\) and \\( r \\) is the distance from the charge element to the point of interest. For a corner of the cube, we need to consider the contributions from all the charge elements in the cube. The total potential at the corner can be expressed as \\( \\Phi = \\int \\frac{\\rho dV}{4\\pi\\epsilon_0 r} \\). After performing the integration over the volume of the cube, we find that the electric potential at the corner of the cube is given by: \\( \\Phi = \\frac{0.1894 \\rho a^2}{\\epsilon_0} \\) multiplied by a numerical factor that accounts for the geometry and symmetry of the cube. The final expression will be in terms of \\( \\rho, a, \\epsilon_0 \\) and a numerical constant.",
-            "code": "import sympy as sp\n\n# Define symbols\nrho, a, epsilon_0 = sp.symbols('rho a epsilon_0')\n\n# Electric potential at a corner of the cube\n# Using the derived formula for the potential at a corner\nPhi_corner = (0.1894 * rho * a**2) / epsilon_0\n\n# Compute the final result\nresult = Phi_corner",
-            "unit": "None"
+            "reasoning": "To find the speed of a particle in a circular orbit around the sun, we can use the gravitational force acting on the particle and the centripetal force required to keep it in circular motion. The gravitational force acting on the particle of mass m at a distance R from the sun is given by F_gravity = G * (M_sun * m) / R^2, where G is the gravitational constant and M_sun is the mass of the sun. The centripetal force required to keep the particle in circular motion is F_centripetal = m * v^2 / R, where v is the speed of the particle. Setting these two forces equal gives us G * (M_sun * m) / R^2 = m * v^2 / R. We can simplify this equation by canceling m and rearranging it to solve for v. This results in v = sqrt(G * M_sun / R). Therefore, we have derived the expression for the speed of the particle in terms of the mass of the sun, the distance from the sun, and the gravitational constant.",
+            "code": "import sympy as sp\n\n# Define symbols and constants\nM_sun, R, G = sp.symbols('M_sun R G')\n\n# Expression for the speed of the particle in circular orbit\nv = sp.sqrt(G * M_sun / R)\n\n# Final output assignment (must be the last line)\nresult = v",
+            "unit": "m/s"
         },
         "answer": {
-            "gt_answer": "$\\Phi_{c}(a, \\rho) \\approx \\frac{C \\rho a^{2}}{\\epsilon_{0}}$, $C=0.0947$",
+            "gt_answer": "$v=\\sqrt{\\frac{G M_{\\odot}}{R}}$",
             "unit": null
         },
         "verification_result": {
-            "code_output": "0.1894*a**2*rho/epsilon_0",
-            "result_match": false,
-            "unit_match": true
-        },
-        "metadata": {
-            "solution": [
-                "By dimensional analysis, the answer takes the form\n\n\n\n$$\n\n\\Phi_{c}(a, \\rho) \\approx \\frac{C \\rho a^{2}}{\\epsilon_{0}}\n\n$$\n\n\n\nfor a dimensionless constant $C$. Note that a cube of side length $a$ consists of 8 cubes of side length $a / 2$, each with a corner at the center of the larger cube. Then\n\n\n\n$$\n\n\\frac{0.1894 \\rho a^{2}}{\\epsilon_{0}}=8 \\frac{C \\rho(a / 2)^{2}}{\\epsilon_{0}}\n\n$$\n\n\n\nso $C=0.1894 / 2=0.0947$.\n\n"
-            ],
-            "modality": "Text-only",
-            "difficulty": "Competition",
-            "is_multiple_answer": false,
-            "unit": null,
-            "answer_type": "Equation,Numerical",
-            "error": ",1e-3",
-            "question_type": "Open-ended",
-            "subfield": "Electromagnetism",
-            "subject": "Physics",
-            "language": "English"
-        }
-    },
-    {
-        "sample_id": "923",
-        "response": {
-            "reasoning": "To calculate the magnetic field \\( B_0 \\) required for the electron to follow a circular path without self-intersecting, we can use the concept of centripetal force and the Lorentz force acting on the electron. The centripetal force required to keep the electron in circular motion is provided by the magnetic force due to the magnetic field. The Lorentz force acting on a charged particle moving in a magnetic field is given by \\( F = qvB \\), where \\( q \\) is the charge of the electron, \\( v \\) is its velocity, and \\( B \\) is the magnetic field strength. For circular motion, this force must equal the centripetal force, which is given by \\( F_c = \\frac{mv^2}{R} \\), where \\( m \\) is the mass of the electron and \\( R \\) is the radius of the circular path. Setting these two forces equal gives us the equation \\( qvB_0 = \\frac{mv^2}{R} \\). We can solve for \\( B_0 \\) and substitute the known values for the charge of the electron and its mass. Additionally, we need to consider that the electron completes 7 full cycles before returning to the original position, which implies that the effective radius of the path is related to the distance \\( R \\) and the number of cycles.",
-            "code": "import sympy as sp\n\n# Define constants\nq = 1.60 * 10**-19  # Charge of the electron (C)\nm = 9.11 * 10**-31  # Mass of the electron (kg)\nR = 0.10  # Distance from the axis (m)\nn = 7  # Number of cycles\n\n# The effective radius for the circular motion\nR_effective = R / n\n\n# Using the centripetal force equation and Lorentz force equation\n# qvB0 = mv^2 / R_effective\n# Rearranging gives us B0 = (mv) / (qR_effective)\n# We need to express v in terms of R_effective and n\n# v = 2 * pi * R_effective / T, where T is the period of one cycle\n# For simplicity, we can express B0 in terms of R and n\nB0 = (m * (2 * sp.pi * R_effective / (1 / (n * R))) / (q * R_effective))\n\n# Compute the final result\nresult = B0.simplify()",
-            "unit": "T"
-        },
-        "answer": {
-            "gt_answer": "$\\cot \\frac{\\pi}{8} \\sqrt{\\frac{2 \\sigma m}{q \\varepsilon_{0} r_{0}} \\ln \\frac{R}{r_{0}}}$",
-            "unit": null
-        },
-        "verification_result": {
-            "code_output": "7.97125e-12*pi",
+            "code_output": "sqrt(G*M_sun/R)",
             "result_match": false,
             "unit_match": false
         },
         "metadata": {
             "solution": [
-                "By Gauss' law, we have\n$$\n\\varepsilon_{0} \\oint \\vec{E} \\cdot \\mathrm{d} \\vec{A}=q_{\\mathrm{enc}} \\Longrightarrow \\varepsilon_{0}(2 \\pi r h) E(r)=\\left(2 \\pi r_{0} h\\right) \\sigma \\Longrightarrow E(r)=\\frac{\\sigma r_{0}}{\\varepsilon_{0} r} \\hat{r}\n$$\nWe find the work done on the electron from a distance $r$ to $R$ is\n$$\nW=-\\int_{R}^{r} q E(r) \\mathrm{d} r=\\int_{r}^{R} \\frac{q \\sigma r_{0}}{\\varepsilon_{0} r} \\mathrm{~d} r=\\frac{q \\sigma r_{0}}{\\varepsilon_{0}} \\ln \\frac{R}{r}\n$$\nTherefore, by conservation of energy:\n$$\n\\frac{1}{2} m v(r)^{2}=\\frac{q \\sigma r_{0}}{\\varepsilon_{0}} \\ln \\frac{R}{r} \\Longrightarrow v(r)=\\sqrt{\\frac{2 q \\sigma r_{0}}{m} \\ln \\frac{R}{r}}\n$$\nSince the electron is moving in a magnetic field, the radius of the electron follows\n$$\n\\frac{m v^{2}}{a}=q v B \\Longrightarrow a=\\frac{m v}{q B}=\\sqrt{\\frac{2 q \\sigma r_{0}}{q B_{0}^{2}} \\ln \\frac{R}{r_{0}}}\n$$\nThis means that $B=\\sqrt{\\frac{2 \\sigma m}{q \\varepsilon_{0} r_{0}} \\ln \\frac{R}{r_{0}}}$. The trajectory of the electron can follow the following paths\n\n<img_4320>\n\nAs the path is specified to be non-intersecting, we analyze the first path. We can say that the radius of each \"circle\" the electron travels through is $s=r \\tan \\frac{\\pi}{8}=\\frac{m v}{q B}$. Hence,\n$$\nB=\\cot \\frac{\\pi}{8} \\sqrt{\\frac{2 \\sigma m}{q \\varepsilon_{0} r_{0}} \\ln \\frac{R}{r_{0}}}\n$$"
+                "Using the circular motion equation\n\n\n\n$$\n\n\\frac{G M_{\\odot}}{R^{2}}=\\frac{v^{2}}{R}\n\n$$\n\n\n\nwe have\n\n\n\n$$\n\nv=\\sqrt{\\frac{G M_{\\odot}}{R}}\n\n$$"
             ],
             "modality": "Text-only",
             "difficulty": "Competition",
@@ -90,30 +58,62 @@
             "answer_type": "Expression",
             "error": null,
             "question_type": "Open-ended",
-            "subfield": "Electromagnetism",
+            "subfield": "Modern Physics",
             "subject": "Physics",
             "language": "English"
         }
     },
     {
-        "sample_id": "1383",
+        "sample_id": "944",
         "response": {
-            "reasoning": "To find the acceleration of the box while it is moving, we need to consider the forces acting on the box. When the spring is stretched by a distance \\( s \\), it exerts a force \\( F_s = k s \\) on the box. Additionally, the box experiences a frictional force opposing its motion. Since the box is moving, the kinetic friction force \\( F_k \\) is given by \\( F_k = \\mu m g \\). The net force acting on the box can be expressed as the difference between the spring force and the kinetic friction force: \\( F_{net} = F_s - F_k = k s - \\mu m g \\). According to Newton's second law, the acceleration \\( a \\) of the box can be expressed as \\( a = \\frac{F_{net}}{m} \\). Substituting the expression for the net force gives us the acceleration in terms of the parameters provided. Since the spring is stretched by a distance \\( s \\), we can express \\( s \\) in terms of the other variables as needed.",
-            "code": "import sympy as sp\n\n# Define symbols\nk, s, mu, m, g, v_0, x, t = sp.symbols('k s mu m g v_0 x t')\n\n# Kinetic friction force\nF_k = mu * m * g\n\n# Spring force when stretched by distance s\nF_s = k * s\n\n# Net force acting on the box\nF_net = F_s - F_k\n\n# Acceleration of the box\na = F_net / m\n\n# Substitute the expressions for forces\nacceleration = (F_s - F_k) / m\n\n# Compute the final result\nresult = acceleration.simplify()",
+            "reasoning": "To find the relationship between \u0003C9 and k for the Klein-Gordon equation, we start with the equation itself: \\( \\frac{1}{c^{2}} \\frac{\\partial^{2} \\phi}{\\partial t^{2}} - \\frac{\\partial^{2} \\phi}{\\partial x^{2}} + \\frac{m^{2} c^{2}}{\\hbar^{2}} \\phi = 0 \\). We will use the same ansatz as before, \\( \\phi(x, t) = A e^{i(kx - \\omega t)} \\). Substituting this into the Klein-Gordon equation, we calculate the second derivatives: \\( \\frac{\\partial^{2} \\phi}{\\partial t^{2}} = -\\omega^{2} \\phi \\) and \\( \\frac{\\partial^{2} \\phi}{\\partial x^{2}} = -k^{2} \\phi \\). Plugging these into the equation gives us \\( \\frac{1}{c^{2}} (-\\omega^{2} \\phi) - (-k^{2} \\phi) + \\frac{m^{2} c^{2}}{\\hbar^{2}} \\phi = 0 \\). Dividing through by \\( \\phi \\) (assuming \\( \\phi \\neq 0 \\)), we get \\( -\\frac{\\omega^{2}}{c^{2}} + k^{2} + \\frac{m^{2} c^{2}}{\\hbar^{2}} = 0 \\). Rearranging this gives us the dispersion relation: \\( \\omega^{2} = c^{2} k^{2} + \\frac{m^{2} c^{4}}{\\hbar^{2}} \\). Taking the square root yields \\( \\omega = \\sqrt{c^{2} k^{2} + \\frac{m^{2} c^{4}}{\\hbar^{2}}} \\). This shows the relationship between \\( \\omega \\) and \\( k \\) in the context of the Klein-Gordon equation, indicating that there are indeed solutions corresponding to both positive and negative energies, hinting at the existence of antimatter.",
+            "code": "import sympy as sp\n\n# Define symbols\nk, omega, m, c, hbar = sp.symbols('k omega m c hbar')\n\n# Dispersion relation from the Klein-Gordon equation\n# omega^2 = c^2 * k^2 + (m^2 * c^4) / hbar^2\ndispersion_relation = sp.Eq(omega**2, c**2 * k**2 + (m**2 * c**4) / hbar**2)\n\n# Final output assignment (must be the last line)\nresult = sp.solve(dispersion_relation, omega)[0]",
+            "unit": "rad/s"
+        },
+        "answer": {
+            "gt_answer": "$\\sqrt{k^{2} c^{2}+\\frac{m^{2} c^{4}}{\\hbar^{2}}}$, $-\\sqrt{k^{2} c^{2}+\\frac{m^{2} c^{4}}{\\hbar^{2}}}$",
+            "unit": null
+        },
+        "verification_result": {
+            "code_output": "-c*sqrt(c**2*m**2 + hbar**2*k**2)/hbar",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": [
+                "We consider the Klein-Gordon equation:\n\n$$\n\\frac{1}{c^{2}} \\frac{\\partial^{2} \\phi}{\\partial t^{2}}-\\frac{\\partial^{2} \\phi}{\\partial x^{2}}+\\frac{m^{2} c^{2}}{\\hbar^{2}} \\phi=0\n\\tag{35}\n$$\n\nWe can, as before, plug in a guess $\\phi(x, t)=A e^{i k x-i \\omega t}$. This yields\n\n$$\n-\\frac{\\omega^{2}}{c^{2}} A e^{i k x-i \\omega t}+k^{2} A e^{i k x-i \\omega t}+\\frac{m^{2} c^{2}}{\\hbar^{2}} A e^{i k x-i \\omega t}=0\n\\tag{36}\n$$\n\nCancelling out common terms, we see that\n\n$$\n\\omega^{2}=k^{2} c^{2}+\\frac{m^{2} c^{4}}{\\hbar^{2}}\n\\tag{37}\n$$\n\nor\n\n$$\n\\omega= \\pm \\sqrt{k^{2} c^{2}+\\frac{m^{2} c^{4}}{\\hbar^{2}}}\n\\tag{38}\n$$\n\nNote that both positive and negative $\\omega$ solve the Klein-Gordon equation."
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": true,
+            "unit": null,
+            "answer_type": "Expression",
+            "error": null,
+            "question_type": "Open-ended",
+            "subfield": "Modern Physics",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "987",
+        "response": {
+            "reasoning": "To find the acceleration of the third mass in the rotating frame, we need to consider both the centrifugal and Coriolis accelerations acting on it. The centrifugal acceleration is given by \\( \text{Centrifugal Acceleration} = \\omega^2 \\vec{r} \\), where \\( \\vec{r} \\) is the position vector of the mass m in the rotating frame. The Coriolis acceleration is given by \\( \\text{Coriolis Acceleration} = -2 \\omega \\times \\vec{v} \\), where \\( \\vec{v} \\) is the velocity of the mass m. The total acceleration \\( \\frac{d^{2}}{dt^{2}} \\vec{r} \\) can be expressed as the sum of the gravitational accelerations from the two masses, the centrifugal acceleration, and the Coriolis acceleration. \n\nThe gravitational accelerations acting on mass m due to masses M1 and M2 can be expressed as: \n\\[ \text{Gravitational Acceleration from } M_1 = -\\frac{G M_1}{\\rho_1^3} \\vec{r_1} \\] \n\\[ \text{Gravitational Acceleration from } M_2 = -\\frac{G M_2}{\\rho_2^3} \\vec{r_2} \\] \n\nCombining these components, we can write the total acceleration as: \n\\[ \\frac{d^{2}}{dt^{2}} \\vec{r} = -\\frac{G M_1}{\\rho_1^3} \\vec{r_1} - \\frac{G M_2}{\\rho_2^3} \\vec{r_2} + \\omega^2 \\vec{r} - 2 \\omega \\times \\vec{v} \\] \n\nThis expression captures the dynamics of the third mass m in the rotating frame, accounting for the gravitational forces from the two larger masses, as well as the effects of rotation.",
+            "code": "import sympy as sp\n\n# Define symbols\nG, M1, M2, omega, x, y, R = sp.symbols('G M1 M2 omega x y R')\n\n# Define distances from m to M1 and M2\nrho1 = sp.sqrt((x + (M2 / (M1 + M2)) * R)**2 + y**2)\nrho2 = sp.sqrt((x - (1 - M2 / (M1 + M2)) * R)**2 + y**2)\n\n# Define position vectors for M1 and M2\nr1 = sp.Matrix([-(M2 / (M1 + M2)) * R, 0])\nr2 = sp.Matrix([(1 - M2 / (M1 + M2)) * R, 0])\n\n# Gravitational accelerations\naccel_grav1 = -G * M1 / rho1**3 * r1\naccel_grav2 = -G * M2 / rho2**3 * r2\n\n# Centrifugal acceleration\naccel_centrifugal = omega**2 * sp.Matrix([x, y])\n\n# Coriolis acceleration (assuming velocity v = dx/dt, dy/dt)\nv = sp.Matrix([sp.diff(x), sp.diff(y)])\naccel_coriolis = -2 * omega * sp.Matrix([-v[1], v[0]])\n\n# Total acceleration\nacceleration = accel_grav1 + accel_grav2 + accel_centrifugal + accel_coriolis\n\n# Final output assignment (must be the last line)\nresult = acceleration",
             "unit": "m/s^2"
         },
         "answer": {
-            "gt_answer": "$a=\\frac{k}{m}\\left(s+v_{0} t-x\\right)-\\mu g$",
+            "gt_answer": "$\\frac{d^{2}}{d t^{2}} \\vec{r}=-G M_{1} \\frac{\\vec{r}-\\vec{r_{1}}}{\\rho_{1}^{3}}-G M_{2} \\frac{\\vec{r}-\\vec{r_{2}}}{\\rho_{2}^{3}}+\\omega^{2} \\vec{r}-2 \\omega \\times \\vec{r}$",
             "unit": null
         },
         "verification_result": {
-            "code_output": "-g*mu + k*s/m",
+            "code_output": "Matrix([[G*M1*M2*R/((M1 + M2)*(y**2 + (M2*R/(M1 + M2) + x)**2)**(3/2)) - G*M2*R*(-M2/(M1 + M2) + 1)/(y**2 + (-R*(-M2/(M1 + M2) + 1) + x)**2)**(3/2) + omega**2*x + 2*omega], [omega**2*y - 2*omega]])",
             "result_match": false,
             "unit_match": false
         },
         "metadata": {
             "solution": [
-                "The net stretching of the spring is $s+v_{0} t-x$, leading to a rightward force $k s$. When the box is moving, it is always moving to the right, so the kinetic friction force $\\mu m g$ is always in the leftward direction, which means\n\n\n\n$$\n\nm a=k\\left(s+v_{0} t-x\\right)-\\mu m g\n\n$$\n\n\n\nwhich means\n\n\n\n$$\n\na=\\frac{k}{m}\\left(s+v_{0} t-x\\right)-\\mu g .\n\n$$"
+                "$$\n\\begin{gathered}\nm \\frac{d^{2}}{d t^{2}} \\vec{r}=-G m M_{1} \\frac{\\vec{r}-\\overrightarrow{r_{1}}}{\\rho_{1}^{3}}-G m M_{2} \\frac{\\vec{r}-\\overrightarrow{r_{2}}}{\\rho_{2}^{3}}+m \\omega^{2} \\vec{r}-2 m \\omega \\times \\vec{r} \\\\\n\\frac{d^{2}}{d t^{2}} \\vec{r}=-G M_{1} \\frac{\\vec{r}-\\overrightarrow{r_{1}}}{\\rho_{1}^{3}}-G M_{2} \\frac{\\vec{r}-\\overrightarrow{r_{2}}}{\\rho_{2}^{3}}+\\omega^{2} \\vec{r}-2 \\omega \\times \\vec{r}\n\\end{gathered}\n$$"
             ],
             "modality": "Text-only",
             "difficulty": "Competition",
@@ -128,31 +128,31 @@
         }
     },
     {
-        "sample_id": "911",
+        "sample_id": "1367",
         "response": {
-            "reasoning": "To determine the distance between the two star systems as observed by the spaceship, we need to account for the effects of time dilation and the finite speed of light. The two supernovae occur 300 years apart as observed from Earth. However, for the spaceship traveling at a constant speed \\( v \\), the time it experiences between the two events will be different due to the relativistic effects. \n\nLet \\( t_1 \\) be the time of the first supernova as observed from Earth, and \\( t_2 = t_1 + 300 \\) years be the time of the second supernova. The spaceship, moving at speed \\( v \\), will see both explosions at the same time, which means it must have traveled a distance that accounts for the time it takes light to reach it from both stars. \n\nThe distance to Betelgeuse from Earth is 548 light-years, and to IK Pegasi is 154 light-years. The distance between the two stars is 500 light-years. We can set up the equations based on the light travel time from each star to the spaceship at the moment of the simultaneous observation. The distance observed by the spaceship will be less than the actual distance due to the relativistic effects. \n\nUsing the formula for the Lorentz contraction, we can find the effective distance between the two stars as observed by the spaceship. The distance will be calculated based on the time it takes light to travel from each star to the spaceship, adjusted for the time difference of 300 years.",
-            "code": "import sympy as sp\n\n# Define constants\nD_Betelgeuse = 548  # Distance to Betelgeuse in light-years\nD_IK_Pegasi = 154  # Distance to IK Pegasi in light-years\nD_between = 500  # Distance between the two stars in light-years\n\n# Time difference between the two supernovae\nDelta_t = 300  # years\n\n# Calculate the distance observed by the spaceship\n# The spaceship observes both explosions simultaneously\n# The distance between the two stars as observed by the spaceship\nD_observed = D_between * (D_Betelgeuse / (D_Betelgeuse + D_IK_Pegasi))\n\n# Compute the final result\nresult = D_observed",
-            "unit": "light-years"
+            "reasoning": "To estimate the energy lost due to synchrotron radiation for an electron produced with an energy of 100 GeV, we first need to calculate the power emitted due to synchrotron radiation using the formula provided: \n\\[ P = \\frac{e^{2} a^{2} \\gamma^{4}}{6 \\pi \\epsilon_{0} c^{3}} \\] \nIn the ultrarelativistic limit, the acceleration \\( a \\) can be expressed in terms of the magnetic field \\( B \\) and the velocity of the electron. The energy loss over a time period can be calculated by integrating the power over the time it takes for the electron to escape the detector. \n\nThe time \\( t \\) it takes for the electron to escape can be calculated using the cyclotron radius and the speed of light. The energy lost can then be calculated as \\( E_{lost} = P \\cdot t \\). \n\nUsing the values provided, we can substitute the known quantities into the equations to find the total energy lost due to synchrotron radiation until the electron escapes the inner part of the detector.",
+            "code": "import sympy as sp\n\n# Define constants\nE0 = 100 * 1e9  # Initial energy in Joules (100 GeV)\nB = 2.00  # Magnetic field in Tesla\ne = 1.60e-19  # Elementary charge in Coulombs\nepsilon_0 = 8.85e-12  # Vacuum permittivity in F/m\nm = 9.11e-31  # Electron mass in kg\nc = 3.00e8  # Speed of light in m/s\n\n# Calculate the Lorentz factor for ultrarelativistic electron\ngamma = E0 / (m * c**2)\n\n# Calculate the acceleration (using centripetal acceleration)\na = (e * B * E0) / (m * c)  # Simplified expression for acceleration\n\n# Calculate the power emitted due to synchrotron radiation\nP = (e**2 * a**2 * gamma**4) / (6 * sp.pi * epsilon_0 * c**3)\n\n# Calculate the time to escape the detector (radius = 1.1 m)\nR = 1.1  # Radius in meters\nv = c  # Speed of electron in ultrarelativistic limit\nescape_time = R / v  # Time to escape in seconds\n\n# Calculate the energy lost due to synchrotron radiation\nE_lost = P * escape_time\n\n# Convert energy lost to MeV\nE_lost_MeV = E_lost / (1.602e-13)  # Convert Joules to MeV\n\n# Final output assignment (must be the last line)\nresult = E_lost_MeV",
+            "unit": "MeV"
         },
         "answer": {
-            "gt_answer": "400",
-            "unit": "light-years"
+            "gt_answer": "-56",
+            "unit": "MeV"
         },
         "verification_result": {
-            "code_output": "390.3133903133903",
+            "code_output": "3.94655240169579e+75",
             "result_match": false,
             "unit_match": true
         },
         "metadata": {
             "solution": [
-                "For any inertial observer, define the 4-distance between two events as $\\Delta s^{\\mu}=(c \\Delta t, \\Delta \\mathbf{x})$, where $\\Delta t$ and $\\Delta \\mathrm{x}$ are the temporal and spatial intervals measured by the observer. By the properties of 4 -vectors, the following quantity is Lorentz-invariant:\n$$\n\\Delta s^{\\mu} \\Delta s_{\\mu}=c^{2} \\Delta t^{2}-\\|\\Delta \\mathbf{x}\\|^{2}\n$$\n\nIn the spaceship's frame, this is equal to $\\Delta s^{\\mu} \\Delta s_{\\mu}=-\\left\\|\\Delta \\mathbf{x}^{\\prime}\\right\\|^{2}$, since the two supernovas are simultaneous; hence\n\n$$\n\\left\\|\\Delta \\mathbf{x}^{\\prime}\\right\\|=\\sqrt{\\|\\Delta \\mathbf{x}\\|^{2}-c^{2} \\Delta t^{2}}\n$$\n\nSince the observers have already taken into account the delay due to the nonzero speed of light, $c \\Delta t=300 \\mathrm{ly},\\|\\Delta \\mathbf{x}\\|=500 \\mathrm{ly}$, and\n\n$$\n\\left\\|\\Delta \\mathbf{x}^{\\prime}\\right\\|=\\sqrt{\\|\\Delta \\mathbf{x}\\|^{2}-c^{2} \\Delta t^{2}}=400 l y\n$$"
+                "If the initial energy of the electron is $100 \\mathrm{GeV}$, the radius of curvature is extremely large ( $r=\\frac{E}{e B c} \\approx 167 \\mathrm{~m}$ ). Therefore, in approximation, one can consider the electron is moving in the inner part of the ATLAS detector along a straight line. The time of flight of the electron is $t=R / c$, where $R=1.1 \\mathrm{~m}$ is the radius of the inner part of the detector. The total energy lost due to synchrotron radiation is,\n\n$$\n\\Delta E=E(R / c)-E_{0}=\\frac{E_{0}}{1+\\alpha E_{0} \\frac{R}{c}}-E_{0} \\approx-\\alpha E_{0}^{2} \\frac{R}{c}\n$$"
             ],
             "modality": "Text-only",
             "difficulty": "Competition",
             "is_multiple_answer": false,
-            "unit": "light-years",
+            "unit": "MeV",
             "answer_type": "Numerical",
-            "error": "0",
+            "error": "1e0",
             "question_type": "Open-ended",
             "subfield": "Modern Physics",
             "subject": "Physics",
@@ -160,152 +160,24 @@
         }
     },
     {
-        "sample_id": "1476",
+        "sample_id": "1592",
         "response": {
-            "reasoning": "To find the minimum coefficient of friction \\( \\mu \\) such that the speed of the block right after the collision is 0, we start from the expression for the speed of the block immediately after the collision, which is given by \\( u = v(\\sin \\theta - \\mu \\cos \\theta) \\). For the block to come to a stop right after the collision, we set \\( u = 0 \\). This gives us the equation: \n\n\\[ 0 = v(\\sin \\theta - \\mu \\cos \\theta) \\] \n\nSince \\( v \\) is not zero (the block is moving before the collision), we can divide both sides by \\( v \\) to obtain: \n\n\\[ \\sin \\theta - \\mu \\cos \\theta = 0 \\] \n\nRearranging this equation allows us to solve for \\( \\mu \\): \n\n\\[ \\mu = \\frac{\\sin \\theta}{\\cos \\theta} = \\tan \\theta \\] \n\nThus, the minimum coefficient of friction required for the block to stop immediately after the collision is \\( \\mu = \\tan \\theta \\).",
-            "code": "import sympy as sp\n\n# Define symbols\nmu, theta = sp.symbols('mu theta')\n\n# Minimum coefficient of friction for the block to stop\nmu_min = sp.tan(theta)\n\n# Compute the final result\nresult = mu_min",
-            "unit": "None"
+            "reasoning": "To determine the Larmor precession frequency \\( \\omega_{0} \\) of the magnetic moment \\( \\boldsymbol{\\mu} \\) in a uniform magnetic field \\( \\boldsymbol{B} \\), we start with the torque equation given by \\( \\boldsymbol{\\tau} = \\boldsymbol{\\mu} \\times \\boldsymbol{B} \\). The torque causes the angular momentum \\( \\boldsymbol{L} \\) to change, and we can express the relationship between the torque and the angular momentum as \\( \\tau = \\frac{dL}{dt} \\). \n\nThe magnitude of the torque can be expressed as \\( \\tau = \\mu B \\sin(\\phi) \\), where \\( \\phi \\) is the angle between the magnetic moment and the magnetic field. The precession frequency is related to the torque and the angular momentum by \\( \\tau = L \\omega_{0} \\). \n\nSetting these two expressions for torque equal gives us \\( \\mu B \\sin(\\phi) = L \\omega_{0} \\). Since \\( \\boldsymbol{\\mu} = -\\gamma \\boldsymbol{L} \\), we can substitute \\( L \\) with \\( \\frac{\\mu}{-\\gamma} \\) into the equation. \n\nRearranging the equation allows us to solve for the Larmor precession frequency \\( \\omega_{0} \\). This leads us to the final expression for the Larmor precession frequency in terms of the magnetic moment, the magnetic field, and the gyromagnetic ratio.",
+            "code": "import sympy as sp\n\n# Define symbols\nmu, B, phi, gamma = sp.symbols('mu B phi gamma')\n\n# Torque equation\n# Torque = magnetic moment x magnetic field\n# Magnitude of torque = mu * B * sin(phi)\n# Torque = dL/dt = L * omega_0\n# L = mu / -gamma\nL = mu / (-gamma)\n\n# Set the two expressions for torque equal\nomega_0 = (mu * B * sp.sin(phi)) / L\n\n# Substitute L into the equation\nomega_0 = (mu * B * sp.sin(phi)) / (mu / (-gamma))\n\n# Simplify the expression\nomega_0 = -gamma * B * sp.sin(phi)\n\n# Final output assignment (must be the last line)\nresult = omega_0",
+            "unit": "rad/s"
         },
         "answer": {
-            "gt_answer": "$\\mu=\\tan \\theta$",
+            "gt_answer": "$\\omega_{0}=\\gamma B_{0}$",
             "unit": null
         },
         "verification_result": {
-            "code_output": "tan(theta)",
+            "code_output": "-B*gamma*sin(phi)",
             "result_match": false,
             "unit_match": true
         },
         "metadata": {
             "solution": [
-                "We set $u=0$ to obtain\n\n\n\n$$\n\n\\mu=\\tan \\theta\n\n$$\n\n\n\nNote that this is simply the no-slip condition for a block resting on an inclined plane! This is because in both cases, equality is achieved when the normal force and maximal friction force sum to a purely vertical force."
-            ],
-            "modality": "Text-only",
-            "difficulty": "Competition",
-            "is_multiple_answer": false,
-            "unit": null,
-            "answer_type": "Expression",
-            "error": null,
-            "question_type": "Open-ended",
-            "subfield": "Mechanics",
-            "subject": "Physics",
-            "language": "English"
-        }
-    },
-    {
-        "sample_id": "865",
-        "response": {
-            "reasoning": "To find the minimal launch velocity \\( v_0 \\) required to launch a package from New York City to Guam, we can use the concept of gravitational potential energy and the energy required to reach a certain height above the Earth's surface. The gravitational potential energy at a height \\( h \\) is given by \\( U = -\\frac{GMm}{R} \\), where \\( G \\) is the gravitational constant, \\( M \\) is the mass of the Earth, and \\( R \\) is the radius of the Earth. \n\nThe minimal launch velocity can be derived from the conservation of energy principle. The kinetic energy of the package at launch must equal the gravitational potential energy at the maximum height it reaches. The formula for kinetic energy is \\( KE = \\frac{1}{2} mv_0^2 \\). \n\nSetting the kinetic energy equal to the gravitational potential energy gives us: \n\\[ \\frac{1}{2} mv_0^2 = \\frac{GMm}{R} \\] \n\nWe can cancel the mass \\( m \\) from both sides (assuming it is non-zero) and rearranging gives us: \n\\[ v_0 = \\sqrt{\\frac{2GM}{R}} \\] \n\nNow we can substitute the known values for \\( G \\), \\( M \\), and \\( R \\) to compute the minimal launch velocity.",
-            "code": "import sympy as sp\n\n# Define constants\nG = 6.67 * 10**-11  # Gravitational constant (N*m^2/kg^2)\nM = 5.97 * 10**24   # Mass of the Earth (kg)\nR = 6.37 * 10**6    # Radius of the Earth (m)\n\n# Calculate the minimal launch velocity\nv_0 = sp.sqrt(2 * G * M / R)\n\n# Compute the final result\nresult = v_0",
-            "unit": "m/s"
-        },
-        "answer": {
-            "gt_answer": "$7564$",
-            "unit": "m/s"
-        },
-        "verification_result": {
-            "code_output": "11181.3788912168",
-            "result_match": false,
-            "unit_match": true
-        },
-        "metadata": {
-            "solution": [
-                "We first want to find the angular distance between New York City and Guam. Let this be $\\theta$. Let New York City be point $A$ and Guam be point $B$. Consider the north pole $P$ and the spherical triangle $P A B$. By the spherical law of cosines,\n$$\n\\cos \\theta=\\cos \\left(90^{\\circ}-\\phi_{A}\\right) \\cos \\left(90^{\\circ}-\\phi_{B}\\right)+\\sin \\left(90^{\\circ}-\\phi_{A}\\right) \\sin \\left(90^{\\circ}-\\phi_{B}\\right) \\cos \\left(\\ell_{B}-\\ell_{A}\\right) .\n\\tag{23}\n$$\n\n\n\nEquation 23 simplifies to\n\n$$\n\\cos \\theta=\\sin \\phi_{A} \\sin \\phi_{B}+\\cos \\phi_{A} \\cos \\phi_{B} \\cos \\left(\\ell_{B}-\\ell_{A}\\right)\n\\tag{24}\n$$\n\nfrom which we find $\\theta=115.05^{\\circ}$.\n\nNow that we have determined the angular distance, we will proceed with the orbital mechanics problem. By the vis-viva equation, the speed at the launch point is\n\n$$\nv_{0}=\\sqrt{G M_{\\oplus}\\left(\\frac{2}{R_{\\oplus}}-\\frac{1}{a}\\right)}\n\\tag{25}\n$$\n\nwhere $a$ is the semimajor axis for the orbit. It is clear that in order to minimize $v_{0}$, we must minimize $a$. The orbit is an ellipse with focii $F_{1}$ and $F_{2}$, where $F_{1}$ is the center of the earth. By the definition of an ellipse,\n\n$$\nA F_{1}+A F_{2}=2 a\n\\tag{26}\n$$\n\nSince $A F_{1}=R_{\\oplus}$, is suffices to minimize $A F_{2}$. By symmetry, line $F_{1} F_{2}$ is the perpendicular bisector of $A B$. Since $F_{2}$ is on a fixed line, to minimize $F_{2}$, we place it at the foot of the perpendicular from $A$ to this line. Then, we obtain $A F_{2}=R_{\\oplus} \\sin \\left(\\frac{\\theta}{2}\\right)$. Thus,\n\n$$\na=\\frac{1+\\sin \\left(\\frac{\\theta}{2}\\right)}{2} R_{\\oplus}\n$$\n\nand from Equation 25 we find\n\n$$\nv_{0}=\\sqrt{\\frac{G M_{\\oplus}}{R_{\\oplus}} \\frac{2 \\sin \\frac{\\theta}{2}}{1+\\sin \\frac{\\theta}{2}}} .\n$$"
-            ],
-            "modality": "Text-only",
-            "difficulty": "Competition",
-            "is_multiple_answer": false,
-            "unit": "m/s",
-            "answer_type": "Numerical",
-            "error": "1e2",
-            "question_type": "Open-ended",
-            "subfield": "Mechanics",
-            "subject": "Physics",
-            "language": "English"
-        }
-    },
-    {
-        "sample_id": "1013",
-        "response": {
-            "reasoning": "To find the ratio \\( \\frac{\\rho_{i} T_{i}}{\\rho_{a} T_{a}} \\), we start from the relationship derived from the balance of pressures in the soap bubble. The pressure inside the bubble \\( P_i \\) is given by the atmospheric pressure plus the pressure due to surface tension, which can be expressed as: \n\n\\[ P_i = P_a + \\frac{4\\gamma}{R_0} \\] \n\nUsing the ideal gas law, we can express the internal pressure in terms of the internal density and temperature: \n\n\\[ P_i = \\frac{\\rho_i T_i}{R} \\] \n\nwhere \\( R \\) is the specific gas constant. \n\nSetting these two expressions for pressure equal gives us: \n\n\\[ \\frac{\\rho_i T_i}{R} = P_a + \\frac{4\\gamma}{R_0} \\] \n\nNow, we can rearrange this to find the desired ratio: \n\n\\[ \\frac{\\rho_i T_i}{\\rho_a T_a} = 1 + \\frac{4\\gamma}{R_0 P_a} \\] \n\nNext, we will substitute the given values for \\( \\gamma \\), \\( R_0 \\), and \\( P_a \\) to compute the numerical value of \\( \\frac{\\rho_i T_i}{\\rho_a T_a} - 1 \\).",
-            "code": "# Given values\ngamma = 0.0250  # Surface tension in N/m\nR_0 = 0.01      # Radius in m (1 cm)\nP_a = 1.013 * 10**5  # Atmospheric pressure in N/m^2\n\n# Calculate the numerical value of the ratio\nratio_value = (4 * gamma) / (R_0 * P_a)\n\n# Compute the final result\nresult = ratio_value",
-            "unit": "None"
-        },
-        "answer": {
-            "gt_answer": "1.0001",
-            "unit": null
-        },
-        "verification_result": {
-            "code_output": "9.871668311944721e-05",
-            "result_match": false,
-            "unit_match": true
-        },
-        "metadata": {
-            "solution": [
-                "Using $\\gamma=0.025 \\mathrm{Nm}^{-1}, R_{0}=1.0 \\mathrm{~cm}$ and $P_{a}=1.013 \\times 10^{5} \\mathrm{Nm}^{-2}$, the numerical value of the ratio is\n\n$$\n\\frac{\\rho_{i} T_{i}}{\\rho_{a} T_{a}}=1+\\frac{4 \\gamma}{R_{0} P_{a}}=1+0.0001\n$$\n\n(The effect of the surface tension is very small.)"
-            ],
-            "modality": "Text-only",
-            "difficulty": "Competition",
-            "is_multiple_answer": false,
-            "unit": null,
-            "answer_type": "Numerical",
-            "error": "5e-5",
-            "question_type": "Open-ended",
-            "subfield": "Thermodynamics",
-            "subject": "Physics",
-            "language": "English"
-        }
-    },
-    {
-        "sample_id": "840",
-        "response": {
-            "reasoning": "In an LC circuit, the charge on the capacitor and the current through the inductor are related by the conservation of energy. When the distance between the plates of a capacitor is changed, the capacitance of the capacitor also changes. The capacitance \\( C \\) of a parallel plate capacitor is given by the formula: \n\n\\[ C = \\frac{\\epsilon_0 A}{d} \\] \n\nwhere \\( \\epsilon_0 \\) is the permittivity of free space, \\( A \\) is the area of the plates, and \\( d \\) is the distance between the plates. \n\nInitially, the capacitance \\( C_1 \\) when the plates are at a distance of \\( d_1 = 1 \\mathrm{~cm} \\) is: \n\\[ C_1 = \\frac{\\epsilon_0 A}{d_1} \\] \n\nWhen the plates are pushed together to a distance of \\( d_2 = 0.5 \\mathrm{~cm} \\), the new capacitance \\( C_2 \\) is: \n\\[ C_2 = \\frac{\\epsilon_0 A}{d_2} \\] \n\nThe charge on the capacitor is related to the capacitance and the voltage across the plates by the equation: \n\\[ Q = C V \\] \n\nSince the plates are grounded, the voltage across the capacitor will change when the distance between the plates is changed. The initial charge \\( Q \\) is given as 10 C. The energy stored in the capacitor is conserved, so we can set the initial energy equal to the final energy: \n\\[ \\frac{1}{2} C_1 V_1^2 = \\frac{1}{2} C_2 V_2^2 \\] \n\nFrom this, we can derive the relationship between the initial and final charges: \n\\[ Q_1 = C_1 V_1 \\quad \\text{and} \\quad Q_2 = C_2 V_2 \\] \n\nSince the charge is conserved, we can find the new amplitude of charge \\( Q_2 \\) after the plates are pushed together. The final charge will be related to the change in capacitance due to the change in distance between the plates.",
-            "code": "import sympy as sp\n\n# Define constants\nQ_initial = 10  # Initial charge in C\nepsilon_0 = 8.85 * 10**-12  # Permittivity of free space in C^2/(N*m^2)\n\n# Initial and final distances in meters\nd1 = 0.01  # Initial distance in m (1 cm)\nd2 = 0.005  # Final distance in m (0.5 cm)\n\n# Initial capacitance\nC1 = epsilon_0 / d1\n\n# Final capacitance\nC2 = epsilon_0 / d2\n\n# Using conservation of charge\n# Q_initial = C1 * V1 and Q_final = C2 * V2\n# Since Q_initial = Q_final, we can find the final charge\nQ_final = Q_initial * (C1 / C2)\n\n# Compute the final result\nresult = Q_final",
-            "unit": "C"
-        },
-        "answer": {
-            "gt_answer": "$11.892$",
-            "unit": "C"
-        },
-        "verification_result": {
-            "code_output": "5.0",
-            "result_match": false,
-            "unit_match": true
-        },
-        "metadata": {
-            "solution": [
-                "In slow steady periodic processes (when the time for the change in parameters $\\tau$ is much less than the total systems frequency $f$ ), a quantity called the adiabatic invariant $I$ is conserved ${ }^{a}$. The adiabatic invariant corresponds to the area of a closed contour in phase space (a graph with momentum $p$ and position $x$ as its axes). Note the we can electrostatically map this problem to a mechanics one as the charge corresponds to position, while the momentum would correspond to $L I$ where $I$ is the current and $L$ is the inductance. Thus, in phase space, we have an elliptical contour corresponding to the equation: $\\frac{Q^{2}}{2 C}+\\frac{(L I)^{2}}{2 L}=C$ where $C$ is a constant in the system. As the area under the curve is conserved, then it can be written that $\\pi Q_{0} L I_{0}=\\pi Q_{f} L I_{f}$. It is also easy to conserve energy such that $L I^{2}=\\frac{Q^{2}}{C}$ which tells us $I=\\frac{Q}{\\sqrt{L C}}$. As $C \\propto 1 / x$, we then can write the adiabatic invariant as $x q^{4}$ which tells us $Q_{f}=\\sqrt[4]{2} Q$.\nWe can also solve this regularly by looking at the changes analytically. From Gauss's law, the electric field between the plates of the capacitators initially can be estimated as\n\n$$\nE=\\frac{Q}{2 \\varepsilon_{0} A}\n$$\n\nwhere $A$ is the area of the plate. The plates of the capacitator is attracted to the other one with a force of\n\n$$\nF=Q E=\\frac{Q^{2}}{2 \\varepsilon_{0} A}\n$$\n\nThe charges of the plates as a function of time can be approximated as\n\n$$\nQ_{c}= \\pm Q \\sin (\\omega t+\\phi)\n$$\n\nwhere $\\omega=\\frac{1}{\\sqrt{L C}}$. Using this equation, we estimate the average force $\\langle F\\rangle$ applied on the plate after a period of oscillations to be\n\n$$\n\\langle F\\rangle=\\frac{\\left\\langle Q^{2}\\right\\rangle}{2 \\varepsilon_{0} A}=\\frac{Q^{2}}{2 \\varepsilon_{0} A}\\left\\langle\\sin ^{2}(\\omega t+\\phi)\\right\\rangle=\\frac{Q^{2}}{2 \\varepsilon_{0} A} \\cdot\\left(\\frac{1}{2 \\pi} \\int_{0}^{2 \\pi} \\sin ^{2}(x) d x\\right)=\\frac{Q^{2}}{4 \\varepsilon_{0} A}\n$$\n\nthis means that after one period, the amount of work done to push the plates closer together is given by\n\n$$\nW_{F}=\\langle F\\rangle d x=\\frac{Q^{2}}{4 \\varepsilon_{0} A} d x\n$$\n\nIn this cycle, the amount of incremental work done by the $\\mathrm{LC}$ circuit will be given by\n\n$$\nd W_{\\mathrm{LC}}=\\Delta(F x)=\\Delta\\left(\\frac{Q^{2} x}{2 \\varepsilon_{0} A}\\right)=\\frac{Q x}{\\varepsilon_{0} A} d Q+\\frac{Q^{2}}{2 \\varepsilon_{0} A} d x\n$$\n\n\n\nFrom conservation of energy, $W_{F}=W_{L C}$. Or in other words,\n\n$$\n\\frac{Q^{2}}{4 \\varepsilon_{0} A} d x=\\frac{Q x}{\\varepsilon_{0} A} d Q+\\frac{Q^{2}}{2 \\varepsilon_{0} A} d x\n$$\n\nsimplifying gives us\n\n$$\n\\begin{aligned}\n\\frac{Q x}{\\varepsilon_{0} A} d Q & =-\\frac{Q^{2}}{4 \\varepsilon_{0} A} d x \\\\\n\\frac{1}{4} \\int \\frac{d x}{x} & =-\\int \\frac{d Q}{Q} \\\\\n\\frac{1}{4} \\ln x+\\ln Q & =\\text { const. }\n\\end{aligned}\n$$\n\nWe now find our adiabatic invariant to be\n\n$$\nx Q^{4}=\\text { const. }\n$$\n\nSubstituting values into our equation, we find that\n\n$$\nd Q_{i}^{4}=\\frac{d}{2} Q_{f}^{4} \\Longrightarrow Q_{f}=\\sqrt[4]{2} Q=11.892 \\mathrm{C}\n$$[^0]"
-            ],
-            "modality": "Text-only",
-            "difficulty": "Competition",
-            "is_multiple_answer": false,
-            "unit": "C",
-            "answer_type": "Numerical",
-            "error": "2e-1",
-            "question_type": "Open-ended",
-            "subfield": "Electromagnetism",
-            "subject": "Physics",
-            "language": "English"
-        }
-    },
-    {
-        "sample_id": "1174",
-        "response": {
-            "reasoning": "To estimate the time \\( t_2 \\) needed for the radius to shrink from \\( r_0 \\) to \\( r_2 = 0.95 r_0 \\), we can use the concept of gravitational collapse. The gravitational force acting on a particle within the cloud can be approximated using Newton's law of gravitation. \n\nThe gravitational acceleration \\( g \\) at a distance \\( r \\) from the center of the cloud is given by: \n\\[ g = \\frac{G m}{r^2} \\] \n\nFor a uniform density cloud, the mass \\( m \\) can be expressed in terms of the density \\( \\rho \\) and volume: \n\\[ m = \\frac{4}{3} \\pi r^3 \\rho \\] \n\nThe density \\( \\rho \\) remains constant during the collapse, so we can express the gravitational acceleration as: \n\\[ g = \\frac{G \\left(\\frac{4}{3} \\pi r^3 \\rho \\right)}{r^2} = \\frac{4}{3} \\pi G \\rho r \\] \n\nThe time it takes for the radius to shrink can be estimated using the equation of motion under constant acceleration. The relationship between the radius and time can be derived from the equation: \n\\[ r(t) = r_0 - \\frac{1}{2} g t^2 \\] \n\nWe can rearrange this to find the time \\( t \\) needed for the radius to change from \\( r_0 \\) to \\( r_2 \\). The change in radius is \\( \\Delta r = r_0 - r_2 = 0.05 r_0 \\). Substituting the expression for gravitational acceleration into the equation of motion allows us to solve for \\( t_2 \\). \n\nAfter substituting and simplifying, we can find the expression for the time \\( t_2 \\).",
-            "code": "import sympy as sp\n\n# Define symbols\nG, m, rho, r_0, r_2 = sp.symbols('G m rho r_0 r_2')\n\n# Define the new radius\nr_2 = 0.95 * r_0\n\n# Gravitational acceleration at radius r\ng = (4/3) * sp.pi * G * rho * r_0\n\n# Change in radius\nDelta_r = r_0 - r_2\n\n# Using the equation of motion: Delta_r = (1/2) g t^2\n# Rearranging gives us: t^2 = (2 * Delta_r) / g\n# Substitute g into the equation\nDelta_r_value = 0.05 * r_0\n\nt_squared = (2 * Delta_r_value) / g\n\n# Compute the final result for t\nresult = sp.sqrt(t_squared)",
-            "unit": "s"
-        },
-        "answer": {
-            "gt_answer": "$\\sqrt{\\frac{0.1 r_{0}^{3}}{G m}}$",
-            "unit": null
-        },
-        "verification_result": {
-            "code_output": "0.273861278752583*sqrt(1/(G*rho))/sqrt(pi)",
-            "result_match": false,
-            "unit_match": false
-        },
-        "metadata": {
-            "solution": [
-                "During the period considered the pressure is negligible. Therefore the gas is in free fall. By Gauss' theorem and symmetry, the gravitational field at any point in the ball is equivalent to the one generated when all the mass closer to the center is compressed into the center. Moreover, while the ball has not yet shrunk much, the field strength on its surface does not change much either. The acceleration of the outermost layer stays approximately constant. Thus,\n\n$$\nt \\approx \\sqrt{\\frac{2\\left(r_{0}-r_{2}\\right)}{g}}\n$$\n\nwhere\n\n$$\n\\begin{aligned}\ng & \\approx \\frac{G m}{r_{0}^{2}} \\\\\n\\therefore t & \\approx \\sqrt{\\frac{2 r_{0}^{2}\\left(r_{0}-r_{2}\\right)}{G m}}=\\sqrt{\\frac{0.1 r_{0}^{3}}{G m}} .\n\\end{aligned}\n$$"
+                "For a magnetic moment making an angle of $\\phi$ with $\\mathbf{B}$,\n\n$$\n\\begin{aligned}\n\\frac{d \\boldsymbol{\\mu}}{d t} & =-\\gamma \\boldsymbol{\\mu} \\times \\mathbf{B} \\\\\n|\\boldsymbol{\\mu}| \\sin \\phi \\frac{d \\theta}{d t} & =\\gamma|\\boldsymbol{\\mu}| B_{0} \\sin \\phi \\\\\n\\omega_{0}=\\frac{d \\theta}{d t} & =\\gamma B_{0}\n\\end{aligned}\n\\tag{5}\n$$"
             ],
             "modality": "Text-only",
             "difficulty": "Competition",
@@ -315,6 +187,38 @@
             "error": null,
             "question_type": "Open-ended",
             "subfield": "Modern Physics",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "942",
+        "response": {
+            "reasoning": "To find the dispersion relation of the Schr\u00f6dinger equation, we start with the equation itself: \n\\[ i \\hbar \\frac{\\partial \\psi}{\\partial t} = -\\frac{\\hbar^{2}}{2 m} \\frac{\\partial^{2} \\psi}{\\partial x^{2}} \\] \nWe will use a similar ansatz as in part (d), where we assume a solution of the form \\( \\psi(x, t) = A e^{i(kx - \\omega t)} \\). \n\nSubstituting this form into the Schr\u00f6dinger equation, we compute the time derivative and the second spatial derivative: \n\\[ \\frac{\\partial \\psi}{\\partial t} = -i\\omega A e^{i(kx - \\omega t)} \\] \n\\[ \\frac{\\partial^{2} \\psi}{\\partial x^{2}} = -k^{2} A e^{i(kx - \\omega t)} \\] \n\nPlugging these derivatives back into the Schr\u00f6dinger equation gives us: \n\\[ i \\hbar (-i\\omega A e^{i(kx - \\omega t)}) = -\\frac{\\hbar^{2}}{2 m} (-k^{2} A e^{i(kx - \\omega t)}) \\] \n\nThis simplifies to: \n\\[ \\hbar \\omega = \\frac{\\hbar^{2} k^{2}}{2 m} \\] \n\nRearranging this equation gives us the dispersion relation for the Schr\u00f6dinger equation: \n\\[ \\omega = \\frac{\\hbar k^{2}}{2 m} \\] \nThis shows the relationship between the angular frequency \\( \\omega \\) and the wave number \\( k \\) in the context of quantum mechanics.",
+            "code": "import sympy as sp\n\n# Define symbols\nhbar, omega, k, m = sp.symbols('hbar omega k m')\n\n# Dispersion relation from the Schr\u00f6dinger equation\n# hbar * omega = (hbar^2 * k^2) / (2 * m)\ndispersion_relation = sp.Eq(hbar * omega, (hbar**2 * k**2) / (2 * m))\n\n# Solve for omega\nomega_solution = sp.solve(dispersion_relation, omega)[0]\n\n# Final output assignment (must be the last line)\nresult = omega_solution",
+            "unit": "rad/s"
+        },
+        "answer": {
+            "gt_answer": "$\\omega=\\frac{\\hbar k^{2}}{2 m}$",
+            "unit": null
+        },
+        "verification_result": {
+            "code_output": "hbar*k**2/(2*m)",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": [
+                "We see that the free Schr\u00f6dinger equation takes the form of Equation 28, but with\n\n$$\na=\\frac{i \\hbar}{2 m}\n\\tag{31}\n$$\n\nThen, using our answer from part (d), we have\n\n$$\n\\omega=\\frac{\\hbar k^{2}}{2 m}\n\\tag{32}\n$$"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": null,
+            "answer_type": "Expression",
+            "error": null,
+            "question_type": "Open-ended",
+            "subfield": "Mechanics",
             "subject": "Physics",
             "language": "English"
         }

@@ -36,9 +36,14 @@ class UnitParser:
             "newton": units.newton,
             "J": units.joule,
             "joule": units.joule,
+            "joules": units.joule,
+            "Joule": units.joule,
+            "Joules": units.joule,
             "circ": units.degree,
             "degree": units.degree,
             "degrees": units.degree,
+            "radian": units.radian,
+            "radians": units.radian,
             "K": units.kelvin,
             "kelvin": units.kelvin,
             "g": units.gram,
@@ -212,6 +217,13 @@ class UnitParser:
         factors = sp.Mul.make_args(unit_expr)
         base_units = [factor.base if hasattr(factor, 'is_Pow') and factor.is_Pow else factor for factor in factors]
         return base_units
+
+def is_number(s):
+    try:
+        float(s)
+    except ValueError:
+        return False
+    return True
 
 def clean_python_code(raw_code: str) -> str:
     """
@@ -412,8 +424,20 @@ class PhysicsVerifier:
         answer_unit_expr = self.unit_parser.parse_unit(answer.unit)
         logger.info(f'Response unit: {response_unit_expr}')
         logger.info(f'Ground truth unit: {answer_unit_expr}')
-        
-        if isinstance(output, (int, float, sp.Number)):
+
+        cleaned_answer = clean_answer(answer.gt_answer)
+
+        if is_number(cleaned_answer):    
+            gt_value = float(cleaned_answer)
+
+            if not isinstance(output, (int, float, sp.Number)):
+                logger.info(f'Convert output expr {output} into numerical.')
+                try:
+                    output = output.evalf()
+                except Exception as e:
+                    logger.error(f"Failed to evaluate output {output}: {e}")
+                    result_match = False
+           
             if (answer_unit_expr is not None and 
                 response_unit_expr is not None and 
                 not self.verify_unit(response_unit_expr, answer_unit_expr)):
@@ -421,16 +445,15 @@ class PhysicsVerifier:
                 logger.info(f'Units do not match directly. Attempting conversion...')
                 output, response_unit_expr = self.convert_units(
                     output, response_unit_expr, answer_unit_expr
-                )
-
-            # Compare numerical values
+                ) 
+            
             try:
-                gt_value = float(clean_answer(answer.gt_answer))
+                #Compare numerical values
                 logger.info(f'Response value: {output}')
                 logger.info(f'Ground truth value: {gt_value}')
                 result_match = math.isclose(output, gt_value, rel_tol=self.tolerance)
             except Exception as e:
-                logger.error(f"Failed to convert or compare values: {e}")
+                logger.error(f"Failed to compare values: {e}")
                 result_match = False
 
         else:
@@ -438,6 +461,10 @@ class PhysicsVerifier:
             try:
                 logger.info(f'Response expression: {output}')
                 gt_expr = parse_latex(answer.gt_answer.lstrip("$").rstrip("$"))
+                gt_expr = gt_expr.subs({
+                    sp.Symbol('pi'): sp.pi,
+                    sp.Symbol('e'): sp.E
+                })
                 logger.info(f'Ground truth expression: {gt_expr}')
 
                 if isinstance(gt_expr, (int, float, sp.Number)):
@@ -468,12 +495,12 @@ if __name__ == "__main__":
     # Example response with a LaTeX formatted unit string.
     response = ResponseFormat(
         reasoning="Example with LaTeX formatted unit.",
-        code="result = 1.00",
+        code="import sympy as sp\nresult = 3*sp.pi",
         unit="meter^2"
     )
     # Ground truth with equivalent unit in a Python-friendly format.
     answer = AnswerFormat(
-        gt_answer='$1$',
+        gt_answer='$3\\pi$',
         unit="$m^2$"
     )
  

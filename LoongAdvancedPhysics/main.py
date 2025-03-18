@@ -9,9 +9,11 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--dataset", type=str, required=True, help="Which dataset to use: OlympiadBench or SciBench")
-parser.add_argument("--num", type=int, required=False, help="Number of samples to generate. If not provided, all samples will be generated.")
-parser.add_argument("--sample", action='store_true', help='randomly sample from the datasets instead of choosing the first few.')
+parser.add_argument("--num", type=int, required=False, help="Number of samples to generate. If not provided, all samples will be generated. It will be ignored if you have specified problem_ids.")
+parser.add_argument("--sample", action='store_true', help='randomly sample from the datasets instead of choosing the first few. It will be ignored if you have specified problem_ids.')
+parser.add_argument("--problem_ids", nargs='+', default='', help='specify problem ids to solve. Pass in multiples using "--problem_ids id_1 id_2 ... "')
 parser.add_argument("--out_location", type=str, required=False, help="Output directory for the generated samples.")
+
 args = parser.parse_args()
 
 def preprocess_data(data: Dict, dataset_origin: Literal["OlympiadBench", "SciBench"]):
@@ -87,6 +89,13 @@ if __name__ == "__main__":
             "temperature": 0.2,
         }
     )
+
+    # reason_model = DeepSeekModel(
+    #     model_type=ModelType.DEEPSEEK_REASONER,
+    #     model_config_dict={
+    #         "temperature": 0.2,
+    #     }
+    # )
     
     output_location = args.out_location if args.out_location else os.path.join(current_path, "output.json")
 
@@ -94,12 +103,18 @@ if __name__ == "__main__":
     with open(output_location, 'w') as f:
         f.write('')
 
+    if args.problem_ids == '':
+        problem_ids = None
+    else:
+        problem_ids = [problem_id.strip() for problem_id in args.problem_ids]
+
     pipeline = PhysicsCodeGenPipeline(
         reason_model=reason_model,
         dataset=dataset,
         output_location = output_location,
         num=args.num,
         sample=args.sample,
+        problem_ids=problem_ids,
     )
 
     pipeline.run()
