@@ -306,13 +306,13 @@ class PhysicsVerifier:
         namespace = {}
         try:
             pattern = r'([\w\d_]+)\.evalf\(\)'
-            evalf_vars = re.findall(pattern, code)[-1]
+            evalf_vars = set(re.findall(pattern, code))
 
             for var in evalf_vars:
                 # Replace `XXX.evalf()` with a conditional check
                 safe_evalf = f"{var} if isinstance({var}, float) else {var}.evalf()"
                 code = code.replace(f"{var}.evalf()", safe_evalf)
-                
+
             exec(code, namespace, namespace)
                 
             if "result" not in namespace:
