@@ -1,5 +1,5 @@
-from models import ResponseFormat, AnswerFormat
-from pydantic import BaseModel
+from models import ResponseFormat, AnswerFormat, VerificationResult
+from typing import Any, Tuple
 import sympy as sp
 import re
 import math
@@ -378,7 +378,7 @@ class PhysicsVerifier:
             logger.error(f'Unit conversion failed: {e}')
             return output, response_unit_expr
 
-    def verify(self, response: ResponseFormat, answer: AnswerFormat) -> tuple[bool, bool]:
+    def verify(self, response: ResponseFormat, answer: AnswerFormat) -> Tuple[Any, bool, bool]:
         """
         Verifies that:
         - The executed code's output (variable 'result') matches the ground truth answer.
@@ -399,7 +399,7 @@ class PhysicsVerifier:
         output = self.execute_code(cleaned_code)
 
         if output is None:
-            return False, False
+            return VerificationResult(code_output=None, result_match=False, unit_match=False)
         
         response_unit_expr = self.unit_parser.parse_unit(response.unit)
         answer_unit_expr = self.unit_parser.parse_unit(answer.unit)
@@ -449,7 +449,7 @@ class PhysicsVerifier:
         else:
             unit_match = self.verify_unit(response_unit_expr, answer_unit_expr)
         
-        return result_match, unit_match
+        return VerificationResult(code_output=str(output), result_match=result_match, unit_match=unit_match)
 
 
 # Example usage:
@@ -462,19 +462,20 @@ if __name__ == "__main__":
     response = ResponseFormat(
         reasoning="Example with LaTeX formatted unit.",
         code="result = 1.00",
-        unit="m^2"
+        unit="meter^2"
     )
     # Ground truth with equivalent unit in a Python-friendly format.
     answer = AnswerFormat(
         gt_answer='$1$',
-        unit=None
+        unit="$m^2$"
     )
  
     verifier = PhysicsVerifier()
     try:
-        result_match, unit_match = verifier.verify(response, answer)
-        logger.info(f"Result Match: {result_match}")
-        logger.info(f"Unit Match: {unit_match}")
+        outcome = verifier.verify(response, answer)
+        logger.info(f"Code execution output: {outcome.code_output}")
+        logger.info(f"Result Match: {outcome.result_match}")
+        logger.info(f"Unit Match: {outcome.unit_match}")
     except Exception as e:
         logger.error("Verification failed:", e)
 
