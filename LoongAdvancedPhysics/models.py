@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Union
+from typing import Union, Any, Dict
 
 class ResponseFormat(BaseModel):
    reasoning: str
@@ -9,3 +9,16 @@ class ResponseFormat(BaseModel):
 class AnswerFormat(BaseModel):
    gt_answer: str
    unit: Union[str, None] = None
+
+class VerificationResult(BaseModel):
+   code_output: Union[str, None]
+   result_match: bool
+   unit_match: bool
+
+class OutputFormat(BaseModel):
+   sample_id: str
+   response: ResponseFormat
+   answer: AnswerFormat
+   verification_result: VerificationResult
+   metadata: Dict
+   

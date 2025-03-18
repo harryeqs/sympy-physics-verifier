@@ -1,220 +1,322 @@
-{
-    "sample_id": " 2.2",
-    "question": "If the coefficient of static friction between the block and plane in the previous example is $\\mu_s=0.4$, at what angle $\\theta$ will the block start sliding if it is initially at rest?",
-    "response": {
-        "reasoning": "To determine the angle \\( \\theta \\) at which a block will start sliding down an inclined plane due to gravity, we need to analyze the forces acting on the block and apply the concept of static friction. The static friction force must be equal to or greater than the component of gravitational force acting parallel to the incline for the block to remain at rest.\n\n### Step-by-Step Explanation:\n1. **Identify Forces**: When the block is on an incline at angle \\( \\theta \\), the forces acting on it are:\n   - The gravitational force acting downward, \\( mg \\), where \\( m \\) is the mass of the block and \\( g \\) is the acceleration due to gravity.\n   - The normal force \\( N \\) acting perpendicular to the incline.\n   - The static friction force \\( f_s \\) acting up the incline, opposing the motion.\n\n2. **Components of Forces**: We can resolve the gravitational force into two components:\n   - Perpendicular to the incline: \\( mg \\cos(\\theta) \\) (balanced by the normal force)\n   - Parallel to the incline: \\( mg \\sin(\\theta) \\) (causing the block to slide down)\n\n3. **Static Friction**: The maximum static friction force is given by:\n   \\[ f_s = \\mu_s N = \\mu_s (mg \\cos(\\theta)) \\]\n   where \\( \\mu_s \\) is the coefficient of static friction.\n\n4. **Condition for Sliding**: The block will start to slide when the gravitational force component down the incline exceeds the maximum static friction force:\n   \\[ mg \\sin(\\theta) = \\mu_s (mg \\cos(\\theta)) \\]\n   We can cancel \\( mg \\) from both sides (assuming \\( m \\neq 0 \\)):\n   \\[ \\sin(\\theta) = \\mu_s \\cos(\\theta) \\]\n\n5. **Rearranging the Equation**: We can rearrange this equation to find \\( \\theta \\):\n   \\[ \\tan(\\theta) = \\mu_s \\]\n   Therefore, \\( \\theta = \\tan^{-1}(\\mu_s) \\).\n\n6. **Substituting the Given Value**: Given that \\( \\mu_s = 0.4 \\), we can substitute this value into the equation to find \\( \\theta \\).",
-        "code": "import sympy as sp\n\n# Given coefficient of static friction\nmu_s = 0.4\n\n# Calculate the angle theta in radians\ntheta_radians = sp.atan(mu_s)\n\n# Convert radians to degrees for better interpretation\ntheta_degrees = sp.deg(theta_radians)\n\n# Store the final result\nresult = theta_degrees.evalf()\nresult",
-        "unit": "degrees"
+[
+    {
+        "sample_id": "876",
+        "response": {
+            "reasoning": "To compute the ratio of gravitational potential energy to spring potential energy, we start by defining the two types of potential energy. The gravitational potential energy (U_g) between two masses (the Earth and the Sun) is given by the formula: U_g = -G * (m * M_s) / r, where G is the gravitational constant, m is the mass of the Earth, M_s is the mass of the Sun, and r is the distance between them. The spring potential energy (U_s) is given by the formula: U_s = (1/2) * k * x^2, where k is the spring constant and x is the displacement from the equilibrium position. For our case, we can relate the spring constant to the gravitational force acting on the Earth, which can be expressed as k = m * (v^2 / r) where v is the orbital velocity of the Earth. We can find the orbital velocity using v = sqrt(G * M_s / r). Finally, we will compute the ratio U_g / U_s.",
+            "code": "import sympy as sp\n\n# Define symbols and constants\nG = 6.67 * 10**-11  # Gravitational constant (N*m^2/kg^2)\nm = 5.972 * 10**24  # Mass of the Earth (kg)\nM_s = 1.988 * 10**30  # Mass of the Sun (kg)\nr = 1.496 * 10**11  # Distance from Earth to Sun (m)\n\n# Gravitational potential energy\nU_g = -G * (m * M_s) / r\n\n# Orbital velocity of the Earth\nv = sp.sqrt(G * M_s / r)\n\n# Spring constant\nk = m * (v**2 / r)\n\n# Spring potential energy\nU_s = (1/2) * k * r**2\n\n# Ratio of gravitational potential energy to spring potential energy\nratio = U_g / U_s\n\n# Compute the final result\nresult = ratio.simplify()",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "-2",
+            "unit": null
+        },
+        "verification_result": {
+            "code_output": "-1.33689839572193e-11",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": [
+                "One naive idea is to directly compute $U_{g}$ and $U_{s}$, but we can use the fact that their frequencies are the same, or:\n$$\n\\omega^{2}=\\frac{k}{m}=\\frac{G M}{r^{3}} \\Longrightarrow k r^{2}=\\frac{G M}{r}\n$$\n\nThen,\n\n$$\nU_{g}=-\\frac{G M m}{r}=-k r^{2}\n$$\n\nand\n\n$$\nU_{s}=\\frac{1}{2} k r^{2}\n$$\n\nTherefore,\n\n$$\nU_{g} / U_{s}=-2\n$$"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": null,
+            "answer_type": "Numerical",
+            "error": "1e-1",
+            "question_type": "Open-ended",
+            "subfield": "Mechanics",
+            "subject": "Physics",
+            "language": "English"
+        }
     },
-    "gt_answer": "22",
-    "unit": " $^{\\circ}$",
-    "metadata": {
-        "answer_latex": "22 ",
-        "unit": " $^{\\circ}$",
-        "source": "class",
-        "comment": " ",
-        "solution": "\nThe static frictional force has the approximate maximum value$$f_{\\max }=\\mu_s N$$ Then we have, $y$-direction\r\n$$\r\n-F_g \\cos \\theta+N=0\r\n$$\r\n$x$-direction\r\n$$\r\n-f_s+F_g \\sin \\theta=m \\ddot{x}\r\n$$\r\nThe static frictional force $f_s$ will be some value $f_s \\leq f_{\\max }$ required to keep $\\ddot{x}=0$ -that is, to keep the block at rest. However, as the angle $\\theta$ of the plane increases, eventually the static frictional force will be unable to keep the block at rest. At that angle $\\theta^{\\prime}, f_s$ becomes\r\n$$\r\nf_s\\left(\\theta=\\theta^{\\prime}\\right)=f_{\\max }=\\mu_s N=\\mu_s F_g \\cos \\theta\r\n$$\r\nand\r\n$$\r\n\\begin{aligned}\r\nm \\ddot{x} & =F_g \\sin \\theta-f_{\\max } \\\\\r\nm \\ddot{x} & =F_g \\sin \\theta-\\mu_s F_g \\cos \\theta \\\\\r\n\\ddot{x} & =g\\left(\\sin \\theta-\\mu_s \\cos \\theta\\right)\r\n\\end{aligned}\r\n$$\r\nJust before the block starts to slide, the acceleration $\\ddot{x}=0$, so\r\n$$\r\n\\begin{aligned}\r\n\\sin \\theta-\\mu_s \\cos \\theta & =0 \\\\\r\n\\tan \\theta=\\mu_s & =0.4 \\\\\r\n\\theta=\\tan ^{-1}(0.4) & =22^{\\circ}\r\n\\end{aligned}\r\n$$\n\n\n"
+    {
+        "sample_id": "1482",
+        "response": {
+            "reasoning": "To find the electric potential at a corner of a cube with uniform charge density \\( \\rho \\) and side length \\( a \\), we can use the principle of superposition. The electric potential due to a uniform charge distribution can be calculated by integrating the contributions from each infinitesimal charge element within the cube. The potential at a point due to a charge element is given by \\( d\\Phi = \\frac{dq}{4\\pi\\epsilon_0 r} \\), where \\( dq = \\rho dV \\) and \\( r \\) is the distance from the charge element to the point of interest. For a corner of the cube, we need to consider the contributions from all the charge elements in the cube. The total potential at the corner can be expressed as \\( \\Phi = \\int \\frac{\\rho dV}{4\\pi\\epsilon_0 r} \\). After performing the integration over the volume of the cube, we find that the electric potential at the corner of the cube is given by: \\( \\Phi = \\frac{0.1894 \\rho a^2}{\\epsilon_0} \\) multiplied by a numerical factor that accounts for the geometry and symmetry of the cube. The final expression will be in terms of \\( \\rho, a, \\epsilon_0 \\) and a numerical constant.",
+            "code": "import sympy as sp\n\n# Define symbols\nrho, a, epsilon_0 = sp.symbols('rho a epsilon_0')\n\n# Electric potential at a corner of the cube\n# Using the derived formula for the potential at a corner\nPhi_corner = (0.1894 * rho * a**2) / epsilon_0\n\n# Compute the final result\nresult = Phi_corner",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "$\\Phi_{c}(a, \\rho) \\approx \\frac{C \\rho a^{2}}{\\epsilon_{0}}$, $C=0.0947$",
+            "unit": null
+        },
+        "verification_result": {
+            "code_output": "0.1894*a**2*rho/epsilon_0",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": [
+                "By dimensional analysis, the answer takes the form\n\n\n\n$$\n\n\\Phi_{c}(a, \\rho) \\approx \\frac{C \\rho a^{2}}{\\epsilon_{0}}\n\n$$\n\n\n\nfor a dimensionless constant $C$. Note that a cube of side length $a$ consists of 8 cubes of side length $a / 2$, each with a corner at the center of the larger cube. Then\n\n\n\n$$\n\n\\frac{0.1894 \\rho a^{2}}{\\epsilon_{0}}=8 \\frac{C \\rho(a / 2)^{2}}{\\epsilon_{0}}\n\n$$\n\n\n\nso $C=0.1894 / 2=0.0947$.\n\n"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": null,
+            "answer_type": "Equation,Numerical",
+            "error": ",1e-3",
+            "question_type": "Open-ended",
+            "subfield": "Electromagnetism",
+            "subject": "Physics",
+            "language": "English"
+        }
     },
-    "verification_outcome": {
-        "output_match": true,
-        "unit_match": true
+    {
+        "sample_id": "923",
+        "response": {
+            "reasoning": "To calculate the magnetic field \\( B_0 \\) required for the electron to follow a circular path without self-intersecting, we can use the concept of centripetal force and the Lorentz force acting on the electron. The centripetal force required to keep the electron in circular motion is provided by the magnetic force due to the magnetic field. The Lorentz force acting on a charged particle moving in a magnetic field is given by \\( F = qvB \\), where \\( q \\) is the charge of the electron, \\( v \\) is its velocity, and \\( B \\) is the magnetic field strength. For circular motion, this force must equal the centripetal force, which is given by \\( F_c = \\frac{mv^2}{R} \\), where \\( m \\) is the mass of the electron and \\( R \\) is the radius of the circular path. Setting these two forces equal gives us the equation \\( qvB_0 = \\frac{mv^2}{R} \\). We can solve for \\( B_0 \\) and substitute the known values for the charge of the electron and its mass. Additionally, we need to consider that the electron completes 7 full cycles before returning to the original position, which implies that the effective radius of the path is related to the distance \\( R \\) and the number of cycles.",
+            "code": "import sympy as sp\n\n# Define constants\nq = 1.60 * 10**-19  # Charge of the electron (C)\nm = 9.11 * 10**-31  # Mass of the electron (kg)\nR = 0.10  # Distance from the axis (m)\nn = 7  # Number of cycles\n\n# The effective radius for the circular motion\nR_effective = R / n\n\n# Using the centripetal force equation and Lorentz force equation\n# qvB0 = mv^2 / R_effective\n# Rearranging gives us B0 = (mv) / (qR_effective)\n# We need to express v in terms of R_effective and n\n# v = 2 * pi * R_effective / T, where T is the period of one cycle\n# For simplicity, we can express B0 in terms of R and n\nB0 = (m * (2 * sp.pi * R_effective / (1 / (n * R))) / (q * R_effective))\n\n# Compute the final result\nresult = B0.simplify()",
+            "unit": "T"
+        },
+        "answer": {
+            "gt_answer": "$\\cot \\frac{\\pi}{8} \\sqrt{\\frac{2 \\sigma m}{q \\varepsilon_{0} r_{0}} \\ln \\frac{R}{r_{0}}}$",
+            "unit": null
+        },
+        "verification_result": {
+            "code_output": "7.97125e-12*pi",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": [
+                "By Gauss' law, we have\n$$\n\\varepsilon_{0} \\oint \\vec{E} \\cdot \\mathrm{d} \\vec{A}=q_{\\mathrm{enc}} \\Longrightarrow \\varepsilon_{0}(2 \\pi r h) E(r)=\\left(2 \\pi r_{0} h\\right) \\sigma \\Longrightarrow E(r)=\\frac{\\sigma r_{0}}{\\varepsilon_{0} r} \\hat{r}\n$$\nWe find the work done on the electron from a distance $r$ to $R$ is\n$$\nW=-\\int_{R}^{r} q E(r) \\mathrm{d} r=\\int_{r}^{R} \\frac{q \\sigma r_{0}}{\\varepsilon_{0} r} \\mathrm{~d} r=\\frac{q \\sigma r_{0}}{\\varepsilon_{0}} \\ln \\frac{R}{r}\n$$\nTherefore, by conservation of energy:\n$$\n\\frac{1}{2} m v(r)^{2}=\\frac{q \\sigma r_{0}}{\\varepsilon_{0}} \\ln \\frac{R}{r} \\Longrightarrow v(r)=\\sqrt{\\frac{2 q \\sigma r_{0}}{m} \\ln \\frac{R}{r}}\n$$\nSince the electron is moving in a magnetic field, the radius of the electron follows\n$$\n\\frac{m v^{2}}{a}=q v B \\Longrightarrow a=\\frac{m v}{q B}=\\sqrt{\\frac{2 q \\sigma r_{0}}{q B_{0}^{2}} \\ln \\frac{R}{r_{0}}}\n$$\nThis means that $B=\\sqrt{\\frac{2 \\sigma m}{q \\varepsilon_{0} r_{0}} \\ln \\frac{R}{r_{0}}}$. The trajectory of the electron can follow the following paths\n\n<img_4320>\n\nAs the path is specified to be non-intersecting, we analyze the first path. We can say that the radius of each \"circle\" the electron travels through is $s=r \\tan \\frac{\\pi}{8}=\\frac{m v}{q B}$. Hence,\n$$\nB=\\cot \\frac{\\pi}{8} \\sqrt{\\frac{2 \\sigma m}{q \\varepsilon_{0} r_{0}} \\ln \\frac{R}{r_{0}}}\n$$"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": null,
+            "answer_type": "Expression",
+            "error": null,
+            "question_type": "Open-ended",
+            "subfield": "Electromagnetism",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "1383",
+        "response": {
+            "reasoning": "To find the acceleration of the box while it is moving, we need to consider the forces acting on the box. When the spring is stretched by a distance \\( s \\), it exerts a force \\( F_s = k s \\) on the box. Additionally, the box experiences a frictional force opposing its motion. Since the box is moving, the kinetic friction force \\( F_k \\) is given by \\( F_k = \\mu m g \\). The net force acting on the box can be expressed as the difference between the spring force and the kinetic friction force: \\( F_{net} = F_s - F_k = k s - \\mu m g \\). According to Newton's second law, the acceleration \\( a \\) of the box can be expressed as \\( a = \\frac{F_{net}}{m} \\). Substituting the expression for the net force gives us the acceleration in terms of the parameters provided. Since the spring is stretched by a distance \\( s \\), we can express \\( s \\) in terms of the other variables as needed.",
+            "code": "import sympy as sp\n\n# Define symbols\nk, s, mu, m, g, v_0, x, t = sp.symbols('k s mu m g v_0 x t')\n\n# Kinetic friction force\nF_k = mu * m * g\n\n# Spring force when stretched by distance s\nF_s = k * s\n\n# Net force acting on the box\nF_net = F_s - F_k\n\n# Acceleration of the box\na = F_net / m\n\n# Substitute the expressions for forces\nacceleration = (F_s - F_k) / m\n\n# Compute the final result\nresult = acceleration.simplify()",
+            "unit": "m/s^2"
+        },
+        "answer": {
+            "gt_answer": "$a=\\frac{k}{m}\\left(s+v_{0} t-x\\right)-\\mu g$",
+            "unit": null
+        },
+        "verification_result": {
+            "code_output": "-g*mu + k*s/m",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": [
+                "The net stretching of the spring is $s+v_{0} t-x$, leading to a rightward force $k s$. When the box is moving, it is always moving to the right, so the kinetic friction force $\\mu m g$ is always in the leftward direction, which means\n\n\n\n$$\n\nm a=k\\left(s+v_{0} t-x\\right)-\\mu m g\n\n$$\n\n\n\nwhich means\n\n\n\n$$\n\na=\\frac{k}{m}\\left(s+v_{0} t-x\\right)-\\mu g .\n\n$$"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": null,
+            "answer_type": "Expression",
+            "error": null,
+            "question_type": "Open-ended",
+            "subfield": "Mechanics",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "911",
+        "response": {
+            "reasoning": "To determine the distance between the two star systems as observed by the spaceship, we need to account for the effects of time dilation and the finite speed of light. The two supernovae occur 300 years apart as observed from Earth. However, for the spaceship traveling at a constant speed \\( v \\), the time it experiences between the two events will be different due to the relativistic effects. \n\nLet \\( t_1 \\) be the time of the first supernova as observed from Earth, and \\( t_2 = t_1 + 300 \\) years be the time of the second supernova. The spaceship, moving at speed \\( v \\), will see both explosions at the same time, which means it must have traveled a distance that accounts for the time it takes light to reach it from both stars. \n\nThe distance to Betelgeuse from Earth is 548 light-years, and to IK Pegasi is 154 light-years. The distance between the two stars is 500 light-years. We can set up the equations based on the light travel time from each star to the spaceship at the moment of the simultaneous observation. The distance observed by the spaceship will be less than the actual distance due to the relativistic effects. \n\nUsing the formula for the Lorentz contraction, we can find the effective distance between the two stars as observed by the spaceship. The distance will be calculated based on the time it takes light to travel from each star to the spaceship, adjusted for the time difference of 300 years.",
+            "code": "import sympy as sp\n\n# Define constants\nD_Betelgeuse = 548  # Distance to Betelgeuse in light-years\nD_IK_Pegasi = 154  # Distance to IK Pegasi in light-years\nD_between = 500  # Distance between the two stars in light-years\n\n# Time difference between the two supernovae\nDelta_t = 300  # years\n\n# Calculate the distance observed by the spaceship\n# The spaceship observes both explosions simultaneously\n# The distance between the two stars as observed by the spaceship\nD_observed = D_between * (D_Betelgeuse / (D_Betelgeuse + D_IK_Pegasi))\n\n# Compute the final result\nresult = D_observed",
+            "unit": "light-years"
+        },
+        "answer": {
+            "gt_answer": "400",
+            "unit": "light-years"
+        },
+        "verification_result": {
+            "code_output": "390.3133903133903",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": [
+                "For any inertial observer, define the 4-distance between two events as $\\Delta s^{\\mu}=(c \\Delta t, \\Delta \\mathbf{x})$, where $\\Delta t$ and $\\Delta \\mathrm{x}$ are the temporal and spatial intervals measured by the observer. By the properties of 4 -vectors, the following quantity is Lorentz-invariant:\n$$\n\\Delta s^{\\mu} \\Delta s_{\\mu}=c^{2} \\Delta t^{2}-\\|\\Delta \\mathbf{x}\\|^{2}\n$$\n\nIn the spaceship's frame, this is equal to $\\Delta s^{\\mu} \\Delta s_{\\mu}=-\\left\\|\\Delta \\mathbf{x}^{\\prime}\\right\\|^{2}$, since the two supernovas are simultaneous; hence\n\n$$\n\\left\\|\\Delta \\mathbf{x}^{\\prime}\\right\\|=\\sqrt{\\|\\Delta \\mathbf{x}\\|^{2}-c^{2} \\Delta t^{2}}\n$$\n\nSince the observers have already taken into account the delay due to the nonzero speed of light, $c \\Delta t=300 \\mathrm{ly},\\|\\Delta \\mathbf{x}\\|=500 \\mathrm{ly}$, and\n\n$$\n\\left\\|\\Delta \\mathbf{x}^{\\prime}\\right\\|=\\sqrt{\\|\\Delta \\mathbf{x}\\|^{2}-c^{2} \\Delta t^{2}}=400 l y\n$$"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": "light-years",
+            "answer_type": "Numerical",
+            "error": "0",
+            "question_type": "Open-ended",
+            "subfield": "Modern Physics",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "1476",
+        "response": {
+            "reasoning": "To find the minimum coefficient of friction \\( \\mu \\) such that the speed of the block right after the collision is 0, we start from the expression for the speed of the block immediately after the collision, which is given by \\( u = v(\\sin \\theta - \\mu \\cos \\theta) \\). For the block to come to a stop right after the collision, we set \\( u = 0 \\). This gives us the equation: \n\n\\[ 0 = v(\\sin \\theta - \\mu \\cos \\theta) \\] \n\nSince \\( v \\) is not zero (the block is moving before the collision), we can divide both sides by \\( v \\) to obtain: \n\n\\[ \\sin \\theta - \\mu \\cos \\theta = 0 \\] \n\nRearranging this equation allows us to solve for \\( \\mu \\): \n\n\\[ \\mu = \\frac{\\sin \\theta}{\\cos \\theta} = \\tan \\theta \\] \n\nThus, the minimum coefficient of friction required for the block to stop immediately after the collision is \\( \\mu = \\tan \\theta \\).",
+            "code": "import sympy as sp\n\n# Define symbols\nmu, theta = sp.symbols('mu theta')\n\n# Minimum coefficient of friction for the block to stop\nmu_min = sp.tan(theta)\n\n# Compute the final result\nresult = mu_min",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "$\\mu=\\tan \\theta$",
+            "unit": null
+        },
+        "verification_result": {
+            "code_output": "tan(theta)",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": [
+                "We set $u=0$ to obtain\n\n\n\n$$\n\n\\mu=\\tan \\theta\n\n$$\n\n\n\nNote that this is simply the no-slip condition for a block resting on an inclined plane! This is because in both cases, equality is achieved when the normal force and maximal friction force sum to a purely vertical force."
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": null,
+            "answer_type": "Expression",
+            "error": null,
+            "question_type": "Open-ended",
+            "subfield": "Mechanics",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "865",
+        "response": {
+            "reasoning": "To find the minimal launch velocity \\( v_0 \\) required to launch a package from New York City to Guam, we can use the concept of gravitational potential energy and the energy required to reach a certain height above the Earth's surface. The gravitational potential energy at a height \\( h \\) is given by \\( U = -\\frac{GMm}{R} \\), where \\( G \\) is the gravitational constant, \\( M \\) is the mass of the Earth, and \\( R \\) is the radius of the Earth. \n\nThe minimal launch velocity can be derived from the conservation of energy principle. The kinetic energy of the package at launch must equal the gravitational potential energy at the maximum height it reaches. The formula for kinetic energy is \\( KE = \\frac{1}{2} mv_0^2 \\). \n\nSetting the kinetic energy equal to the gravitational potential energy gives us: \n\\[ \\frac{1}{2} mv_0^2 = \\frac{GMm}{R} \\] \n\nWe can cancel the mass \\( m \\) from both sides (assuming it is non-zero) and rearranging gives us: \n\\[ v_0 = \\sqrt{\\frac{2GM}{R}} \\] \n\nNow we can substitute the known values for \\( G \\), \\( M \\), and \\( R \\) to compute the minimal launch velocity.",
+            "code": "import sympy as sp\n\n# Define constants\nG = 6.67 * 10**-11  # Gravitational constant (N*m^2/kg^2)\nM = 5.97 * 10**24   # Mass of the Earth (kg)\nR = 6.37 * 10**6    # Radius of the Earth (m)\n\n# Calculate the minimal launch velocity\nv_0 = sp.sqrt(2 * G * M / R)\n\n# Compute the final result\nresult = v_0",
+            "unit": "m/s"
+        },
+        "answer": {
+            "gt_answer": "$7564$",
+            "unit": "m/s"
+        },
+        "verification_result": {
+            "code_output": "11181.3788912168",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": [
+                "We first want to find the angular distance between New York City and Guam. Let this be $\\theta$. Let New York City be point $A$ and Guam be point $B$. Consider the north pole $P$ and the spherical triangle $P A B$. By the spherical law of cosines,\n$$\n\\cos \\theta=\\cos \\left(90^{\\circ}-\\phi_{A}\\right) \\cos \\left(90^{\\circ}-\\phi_{B}\\right)+\\sin \\left(90^{\\circ}-\\phi_{A}\\right) \\sin \\left(90^{\\circ}-\\phi_{B}\\right) \\cos \\left(\\ell_{B}-\\ell_{A}\\right) .\n\\tag{23}\n$$\n\n\n\nEquation 23 simplifies to\n\n$$\n\\cos \\theta=\\sin \\phi_{A} \\sin \\phi_{B}+\\cos \\phi_{A} \\cos \\phi_{B} \\cos \\left(\\ell_{B}-\\ell_{A}\\right)\n\\tag{24}\n$$\n\nfrom which we find $\\theta=115.05^{\\circ}$.\n\nNow that we have determined the angular distance, we will proceed with the orbital mechanics problem. By the vis-viva equation, the speed at the launch point is\n\n$$\nv_{0}=\\sqrt{G M_{\\oplus}\\left(\\frac{2}{R_{\\oplus}}-\\frac{1}{a}\\right)}\n\\tag{25}\n$$\n\nwhere $a$ is the semimajor axis for the orbit. It is clear that in order to minimize $v_{0}$, we must minimize $a$. The orbit is an ellipse with focii $F_{1}$ and $F_{2}$, where $F_{1}$ is the center of the earth. By the definition of an ellipse,\n\n$$\nA F_{1}+A F_{2}=2 a\n\\tag{26}\n$$\n\nSince $A F_{1}=R_{\\oplus}$, is suffices to minimize $A F_{2}$. By symmetry, line $F_{1} F_{2}$ is the perpendicular bisector of $A B$. Since $F_{2}$ is on a fixed line, to minimize $F_{2}$, we place it at the foot of the perpendicular from $A$ to this line. Then, we obtain $A F_{2}=R_{\\oplus} \\sin \\left(\\frac{\\theta}{2}\\right)$. Thus,\n\n$$\na=\\frac{1+\\sin \\left(\\frac{\\theta}{2}\\right)}{2} R_{\\oplus}\n$$\n\nand from Equation 25 we find\n\n$$\nv_{0}=\\sqrt{\\frac{G M_{\\oplus}}{R_{\\oplus}} \\frac{2 \\sin \\frac{\\theta}{2}}{1+\\sin \\frac{\\theta}{2}}} .\n$$"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": "m/s",
+            "answer_type": "Numerical",
+            "error": "1e2",
+            "question_type": "Open-ended",
+            "subfield": "Mechanics",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "1013",
+        "response": {
+            "reasoning": "To find the ratio \\( \\frac{\\rho_{i} T_{i}}{\\rho_{a} T_{a}} \\), we start from the relationship derived from the balance of pressures in the soap bubble. The pressure inside the bubble \\( P_i \\) is given by the atmospheric pressure plus the pressure due to surface tension, which can be expressed as: \n\n\\[ P_i = P_a + \\frac{4\\gamma}{R_0} \\] \n\nUsing the ideal gas law, we can express the internal pressure in terms of the internal density and temperature: \n\n\\[ P_i = \\frac{\\rho_i T_i}{R} \\] \n\nwhere \\( R \\) is the specific gas constant. \n\nSetting these two expressions for pressure equal gives us: \n\n\\[ \\frac{\\rho_i T_i}{R} = P_a + \\frac{4\\gamma}{R_0} \\] \n\nNow, we can rearrange this to find the desired ratio: \n\n\\[ \\frac{\\rho_i T_i}{\\rho_a T_a} = 1 + \\frac{4\\gamma}{R_0 P_a} \\] \n\nNext, we will substitute the given values for \\( \\gamma \\), \\( R_0 \\), and \\( P_a \\) to compute the numerical value of \\( \\frac{\\rho_i T_i}{\\rho_a T_a} - 1 \\).",
+            "code": "# Given values\ngamma = 0.0250  # Surface tension in N/m\nR_0 = 0.01      # Radius in m (1 cm)\nP_a = 1.013 * 10**5  # Atmospheric pressure in N/m^2\n\n# Calculate the numerical value of the ratio\nratio_value = (4 * gamma) / (R_0 * P_a)\n\n# Compute the final result\nresult = ratio_value",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "1.0001",
+            "unit": null
+        },
+        "verification_result": {
+            "code_output": "9.871668311944721e-05",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": [
+                "Using $\\gamma=0.025 \\mathrm{Nm}^{-1}, R_{0}=1.0 \\mathrm{~cm}$ and $P_{a}=1.013 \\times 10^{5} \\mathrm{Nm}^{-2}$, the numerical value of the ratio is\n\n$$\n\\frac{\\rho_{i} T_{i}}{\\rho_{a} T_{a}}=1+\\frac{4 \\gamma}{R_{0} P_{a}}=1+0.0001\n$$\n\n(The effect of the surface tension is very small.)"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": null,
+            "answer_type": "Numerical",
+            "error": "5e-5",
+            "question_type": "Open-ended",
+            "subfield": "Thermodynamics",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "840",
+        "response": {
+            "reasoning": "In an LC circuit, the charge on the capacitor and the current through the inductor are related by the conservation of energy. When the distance between the plates of a capacitor is changed, the capacitance of the capacitor also changes. The capacitance \\( C \\) of a parallel plate capacitor is given by the formula: \n\n\\[ C = \\frac{\\epsilon_0 A}{d} \\] \n\nwhere \\( \\epsilon_0 \\) is the permittivity of free space, \\( A \\) is the area of the plates, and \\( d \\) is the distance between the plates. \n\nInitially, the capacitance \\( C_1 \\) when the plates are at a distance of \\( d_1 = 1 \\mathrm{~cm} \\) is: \n\\[ C_1 = \\frac{\\epsilon_0 A}{d_1} \\] \n\nWhen the plates are pushed together to a distance of \\( d_2 = 0.5 \\mathrm{~cm} \\), the new capacitance \\( C_2 \\) is: \n\\[ C_2 = \\frac{\\epsilon_0 A}{d_2} \\] \n\nThe charge on the capacitor is related to the capacitance and the voltage across the plates by the equation: \n\\[ Q = C V \\] \n\nSince the plates are grounded, the voltage across the capacitor will change when the distance between the plates is changed. The initial charge \\( Q \\) is given as 10 C. The energy stored in the capacitor is conserved, so we can set the initial energy equal to the final energy: \n\\[ \\frac{1}{2} C_1 V_1^2 = \\frac{1}{2} C_2 V_2^2 \\] \n\nFrom this, we can derive the relationship between the initial and final charges: \n\\[ Q_1 = C_1 V_1 \\quad \\text{and} \\quad Q_2 = C_2 V_2 \\] \n\nSince the charge is conserved, we can find the new amplitude of charge \\( Q_2 \\) after the plates are pushed together. The final charge will be related to the change in capacitance due to the change in distance between the plates.",
+            "code": "import sympy as sp\n\n# Define constants\nQ_initial = 10  # Initial charge in C\nepsilon_0 = 8.85 * 10**-12  # Permittivity of free space in C^2/(N*m^2)\n\n# Initial and final distances in meters\nd1 = 0.01  # Initial distance in m (1 cm)\nd2 = 0.005  # Final distance in m (0.5 cm)\n\n# Initial capacitance\nC1 = epsilon_0 / d1\n\n# Final capacitance\nC2 = epsilon_0 / d2\n\n# Using conservation of charge\n# Q_initial = C1 * V1 and Q_final = C2 * V2\n# Since Q_initial = Q_final, we can find the final charge\nQ_final = Q_initial * (C1 / C2)\n\n# Compute the final result\nresult = Q_final",
+            "unit": "C"
+        },
+        "answer": {
+            "gt_answer": "$11.892$",
+            "unit": "C"
+        },
+        "verification_result": {
+            "code_output": "5.0",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": [
+                "In slow steady periodic processes (when the time for the change in parameters $\\tau$ is much less than the total systems frequency $f$ ), a quantity called the adiabatic invariant $I$ is conserved ${ }^{a}$. The adiabatic invariant corresponds to the area of a closed contour in phase space (a graph with momentum $p$ and position $x$ as its axes). Note the we can electrostatically map this problem to a mechanics one as the charge corresponds to position, while the momentum would correspond to $L I$ where $I$ is the current and $L$ is the inductance. Thus, in phase space, we have an elliptical contour corresponding to the equation: $\\frac{Q^{2}}{2 C}+\\frac{(L I)^{2}}{2 L}=C$ where $C$ is a constant in the system. As the area under the curve is conserved, then it can be written that $\\pi Q_{0} L I_{0}=\\pi Q_{f} L I_{f}$. It is also easy to conserve energy such that $L I^{2}=\\frac{Q^{2}}{C}$ which tells us $I=\\frac{Q}{\\sqrt{L C}}$. As $C \\propto 1 / x$, we then can write the adiabatic invariant as $x q^{4}$ which tells us $Q_{f}=\\sqrt[4]{2} Q$.\nWe can also solve this regularly by looking at the changes analytically. From Gauss's law, the electric field between the plates of the capacitators initially can be estimated as\n\n$$\nE=\\frac{Q}{2 \\varepsilon_{0} A}\n$$\n\nwhere $A$ is the area of the plate. The plates of the capacitator is attracted to the other one with a force of\n\n$$\nF=Q E=\\frac{Q^{2}}{2 \\varepsilon_{0} A}\n$$\n\nThe charges of the plates as a function of time can be approximated as\n\n$$\nQ_{c}= \\pm Q \\sin (\\omega t+\\phi)\n$$\n\nwhere $\\omega=\\frac{1}{\\sqrt{L C}}$. Using this equation, we estimate the average force $\\langle F\\rangle$ applied on the plate after a period of oscillations to be\n\n$$\n\\langle F\\rangle=\\frac{\\left\\langle Q^{2}\\right\\rangle}{2 \\varepsilon_{0} A}=\\frac{Q^{2}}{2 \\varepsilon_{0} A}\\left\\langle\\sin ^{2}(\\omega t+\\phi)\\right\\rangle=\\frac{Q^{2}}{2 \\varepsilon_{0} A} \\cdot\\left(\\frac{1}{2 \\pi} \\int_{0}^{2 \\pi} \\sin ^{2}(x) d x\\right)=\\frac{Q^{2}}{4 \\varepsilon_{0} A}\n$$\n\nthis means that after one period, the amount of work done to push the plates closer together is given by\n\n$$\nW_{F}=\\langle F\\rangle d x=\\frac{Q^{2}}{4 \\varepsilon_{0} A} d x\n$$\n\nIn this cycle, the amount of incremental work done by the $\\mathrm{LC}$ circuit will be given by\n\n$$\nd W_{\\mathrm{LC}}=\\Delta(F x)=\\Delta\\left(\\frac{Q^{2} x}{2 \\varepsilon_{0} A}\\right)=\\frac{Q x}{\\varepsilon_{0} A} d Q+\\frac{Q^{2}}{2 \\varepsilon_{0} A} d x\n$$\n\n\n\nFrom conservation of energy, $W_{F}=W_{L C}$. Or in other words,\n\n$$\n\\frac{Q^{2}}{4 \\varepsilon_{0} A} d x=\\frac{Q x}{\\varepsilon_{0} A} d Q+\\frac{Q^{2}}{2 \\varepsilon_{0} A} d x\n$$\n\nsimplifying gives us\n\n$$\n\\begin{aligned}\n\\frac{Q x}{\\varepsilon_{0} A} d Q & =-\\frac{Q^{2}}{4 \\varepsilon_{0} A} d x \\\\\n\\frac{1}{4} \\int \\frac{d x}{x} & =-\\int \\frac{d Q}{Q} \\\\\n\\frac{1}{4} \\ln x+\\ln Q & =\\text { const. }\n\\end{aligned}\n$$\n\nWe now find our adiabatic invariant to be\n\n$$\nx Q^{4}=\\text { const. }\n$$\n\nSubstituting values into our equation, we find that\n\n$$\nd Q_{i}^{4}=\\frac{d}{2} Q_{f}^{4} \\Longrightarrow Q_{f}=\\sqrt[4]{2} Q=11.892 \\mathrm{C}\n$$[^0]"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": "C",
+            "answer_type": "Numerical",
+            "error": "2e-1",
+            "question_type": "Open-ended",
+            "subfield": "Electromagnetism",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "1174",
+        "response": {
+            "reasoning": "To estimate the time \\( t_2 \\) needed for the radius to shrink from \\( r_0 \\) to \\( r_2 = 0.95 r_0 \\), we can use the concept of gravitational collapse. The gravitational force acting on a particle within the cloud can be approximated using Newton's law of gravitation. \n\nThe gravitational acceleration \\( g \\) at a distance \\( r \\) from the center of the cloud is given by: \n\\[ g = \\frac{G m}{r^2} \\] \n\nFor a uniform density cloud, the mass \\( m \\) can be expressed in terms of the density \\( \\rho \\) and volume: \n\\[ m = \\frac{4}{3} \\pi r^3 \\rho \\] \n\nThe density \\( \\rho \\) remains constant during the collapse, so we can express the gravitational acceleration as: \n\\[ g = \\frac{G \\left(\\frac{4}{3} \\pi r^3 \\rho \\right)}{r^2} = \\frac{4}{3} \\pi G \\rho r \\] \n\nThe time it takes for the radius to shrink can be estimated using the equation of motion under constant acceleration. The relationship between the radius and time can be derived from the equation: \n\\[ r(t) = r_0 - \\frac{1}{2} g t^2 \\] \n\nWe can rearrange this to find the time \\( t \\) needed for the radius to change from \\( r_0 \\) to \\( r_2 \\). The change in radius is \\( \\Delta r = r_0 - r_2 = 0.05 r_0 \\). Substituting the expression for gravitational acceleration into the equation of motion allows us to solve for \\( t_2 \\). \n\nAfter substituting and simplifying, we can find the expression for the time \\( t_2 \\).",
+            "code": "import sympy as sp\n\n# Define symbols\nG, m, rho, r_0, r_2 = sp.symbols('G m rho r_0 r_2')\n\n# Define the new radius\nr_2 = 0.95 * r_0\n\n# Gravitational acceleration at radius r\ng = (4/3) * sp.pi * G * rho * r_0\n\n# Change in radius\nDelta_r = r_0 - r_2\n\n# Using the equation of motion: Delta_r = (1/2) g t^2\n# Rearranging gives us: t^2 = (2 * Delta_r) / g\n# Substitute g into the equation\nDelta_r_value = 0.05 * r_0\n\nt_squared = (2 * Delta_r_value) / g\n\n# Compute the final result for t\nresult = sp.sqrt(t_squared)",
+            "unit": "s"
+        },
+        "answer": {
+            "gt_answer": "$\\sqrt{\\frac{0.1 r_{0}^{3}}{G m}}$",
+            "unit": null
+        },
+        "verification_result": {
+            "code_output": "0.273861278752583*sqrt(1/(G*rho))/sqrt(pi)",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": [
+                "During the period considered the pressure is negligible. Therefore the gas is in free fall. By Gauss' theorem and symmetry, the gravitational field at any point in the ball is equivalent to the one generated when all the mass closer to the center is compressed into the center. Moreover, while the ball has not yet shrunk much, the field strength on its surface does not change much either. The acceleration of the outermost layer stays approximately constant. Thus,\n\n$$\nt \\approx \\sqrt{\\frac{2\\left(r_{0}-r_{2}\\right)}{g}}\n$$\n\nwhere\n\n$$\n\\begin{aligned}\ng & \\approx \\frac{G m}{r_{0}^{2}} \\\\\n\\therefore t & \\approx \\sqrt{\\frac{2 r_{0}^{2}\\left(r_{0}-r_{2}\\right)}{G m}}=\\sqrt{\\frac{0.1 r_{0}^{3}}{G m}} .\n\\end{aligned}\n$$"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": null,
+            "answer_type": "Expression",
+            "error": null,
+            "question_type": "Open-ended",
+            "subfield": "Modern Physics",
+            "subject": "Physics",
+            "language": "English"
+        }
     }
-}
-{
-    "sample_id": " 8.4",
-    "question": "Halley's comet, which passed around the sun early in 1986, moves in a highly elliptical orbit with an eccentricity of 0.967 and a period of 76 years. Calculate its minimum  distances from the Sun.",
-    "response": {
-        "reasoning": "To calculate the minimum distance from the Sun for Halley's comet, we need to determine the perihelion distance of its elliptical orbit. The perihelion distance is the closest point in the orbit of the comet to the Sun.\n\n### Step-by-Step Explanation:\n1. **Understanding Orbital Parameters**: For an elliptical orbit, the perihelion distance \\( r_{min} \\) can be calculated using the semi-major axis \\( a \\) and the eccentricity \\( e \\) of the orbit. The formula for the perihelion distance is:\n   \\[ r_{min} = a(1 - e) \\]\n   where:\n   - \\( a \\) is the semi-major axis of the orbit.\n   - \\( e \\) is the eccentricity of the orbit.\n\n2. **Finding the Semi-Major Axis**: The semi-major axis can be derived from the orbital period using Kepler's third law, which states:\n   \\[ T^2 = k a^3 \\]\n   where \\( T \\) is the orbital period in years, and \\( k \\) is a constant that depends on the units used. For orbits around the Sun, we can use:\n   \\[ T^2 = a^3 \\] (if \\( T \\) is in years and \\( a \\) is in astronomical units, AU).\n   Given that Halley's comet has a period of 76 years:\n   \\[ 76^2 = a^3 \\]\n   \\[ a = (76^2)^{1/3} \\]\n\n3. **Calculating the Semi-Major Axis**: We can compute the semi-major axis using the above equation.\n\n4. **Calculating the Perihelion Distance**: Once we have \\( a \\), we can substitute it into the perihelion distance formula along with the given eccentricity \\( e = 0.967 \\) to find \\( r_{min} \\).",
-        "code": "import sympy as sp\n\n# Given values\nT = 76  # period in years\ne = 0.967  # eccentricity\n\n# Calculate the semi-major axis using Kepler's third law\n# T^2 = a^3 => a = T^(2/3)\na = T**(2/3)\n\n# Calculate the minimum distance from the Sun (perihelion distance)\nr_min = a * (1 - e)\n\n# Evaluate the result\nresult = r_min.evalf()\nresult",
-        "unit": "AU"
-    },
-    "gt_answer": "8.8",
-    "unit": " $10^{10} \\mathrm{m}$",
-    "metadata": {
-        "answer_latex": " 8.8",
-        "unit": " $10^{10} \\mathrm{m}$",
-        "source": "class",
-        "comment": " ",
-        "solution": "\nThe Equation $\\tau^2=\\frac{4 \\pi^2 a^3}{G(m_1+m_2)} \\cong \\frac{4 \\pi^2 a^3}{G m_2}$ relates the period of motion with the semimajor axes. Because $m$ (Halley's comet) $\\ll m_{\\text {Sun }}$\r\n$$\r\n\\begin{aligned}\r\na & =\\left(\\frac{G m_{\\text {Sun }} \\tau^2}{4 \\pi^2}\\right)^{1 / 3} \\\\\r\n& =\\left[\\frac{\\left.\\left(6.67 \\times 10^{-11} \\frac{\\mathrm{Nm}^2}{\\mathrm{~kg}^2}\\right)\\left(1.99 \\times 10^{30} \\mathrm{~kg}\\right)\\left(76 \\mathrm{yr} \\frac{365 \\mathrm{day}}{\\mathrm{yr}} \\frac{24 \\mathrm{hr}}{\\mathrm{day}} \\frac{3600 \\mathrm{~s}}{\\mathrm{hr}}\\right)^2\\right]}{4 \\pi^2}\\right]^{1 / 3} \\\\\r\na & =2.68 \\times 10^{12} \\mathrm{m}\r\n\\end{aligned}\r\n$$\r\nUsing Equation $\\left.\\begin{array}{l}r_{\\min }=a(1-\\varepsilon)=\\frac{\\alpha}{1+\\varepsilon} \\ r_{\\max }=a(1+\\varepsilon)=\\frac{\\alpha}{1-\\varepsilon}\\end{array}\\right\\}$ , we can determine $r_{\\min }$ and $r_{\\max }$\r\n$$\r\n\\begin{aligned}\r\n& r_{\\min }=2.68 \\times 10^{12} \\mathrm{~m}(1-0.967)=8.8 \\times 10^{10} \\mathrm{~m} \\\\\r\n\\end{aligned}\r\n$$\n"
-    },
-    "verification_outcome": {
-        "output_match": false,
-        "unit_match": false
-    }
-}
-{
-    "sample_id": " 2.6",
-    "question": "We treat projectile motion in two dimensions, first without considering air resistance. Let the muzzle velocity of the projectile be $v_0$ and the angle of elevation be $\\theta$. The Germans used a long-range gun named Big Bertha in World War I to bombard Paris. Its muzzle velocity was $1,450 \\mathrm{~m} / \\mathrm{s}$. Find its predicted range of flight if $\\theta=55^{\\circ}$. ",
-    "response": {
-        "reasoning": "To find the predicted range of flight for a projectile launched at an angle \\( \\theta \\) with an initial velocity \\( v_0 \\), we can use the equations of projectile motion. The range \\( R \\) of a projectile launched from the ground level can be calculated using the formula:\n\n\\[ R = \\frac{v_0^2 \\sin(2\\theta)}{g} \\]\n\nwhere:\n- \\( v_0 \\) is the initial velocity (muzzle velocity),\n- \\( \\theta \\) is the angle of elevation,\n- \\( g \\) is the acceleration due to gravity (approximately \\( 9.81 \\, \\text{m/s}^2 \\)).\n\n### Step-by-Step Explanation:\n1. **Identify Given Values**: We have:\n   - Muzzle velocity \\( v_0 = 1450 \\, \\text{m/s} \\)\n   - Angle of elevation \\( \\theta = 55^{\\circ} \\)\n   - Acceleration due to gravity \\( g = 9.81 \\, \\text{m/s}^2 \\)\n\n2. **Calculate \\( \\sin(2\\theta) \\)**: We need to calculate \\( \\sin(2\\theta) \\) using the angle \\( \\theta \\).\n   - First, calculate \\( 2\\theta = 2 \\times 55^{\\circ} = 110^{\\circ} \\)\n   - Then, find \\( \\sin(110^{\\circ}) \\)\n\n3. **Substitute Values into the Range Formula**: Substitute the values of \\( v_0 \\), \\( \\sin(2\\theta) \\), and \\( g \\) into the range formula to find \\( R \\).\n\n4. **Calculate the Result**: Finally, compute the result to find the predicted range of flight.",
-        "code": "import sympy as sp\n\n# Given values\nv0 = 1450  # muzzle velocity in m/s\ng = 9.81  # acceleration due to gravity in m/s^2\ntheta = 55  # angle in degrees\n\n# Calculate sin(2*theta)\ntheta_radians = sp.rad(theta)  # convert degrees to radians\nsin_2theta = sp.sin(2 * theta_radians)\n\n# Calculate the range using the range formula\nR = (v0**2 * sin_2theta) / g\n\n# Evaluate the result\nresult = R.evalf()\nresult",
-        "unit": "m"
-    },
-    "gt_answer": "202",
-    "unit": " $\\mathrm{km}$",
-    "metadata": {
-        "answer_latex": " 72",
-        "unit": " $\\mathrm{km}$",
-        "source": "class",
-        "comment": " ",
-        "solution": "\nUsing $\\mathbf{F}=m \\mathrm{~g}$, the force components become\r\n$x$-direction\r\n$$\r\n0=m \\ddot{x}\r\n$$\r\ny-direction\r\n$-m g=m \\ddot{y}$ Neglect the height of the gun, and assume $x=y=0$ at $t=0$. Then\r\n$$\r\n\\begin{aligned}\r\n& \\ddot{x}=0 \\\\\r\n& \\dot{x}=v_0 \\cos \\theta \\\\\r\n& x=v_0 t \\cos \\theta \\\\\r\n& y=-\\frac{-g t^2}{2}+v_0 t \\sin \\theta \\\\\r\n&\r\n\\end{aligned}\r\n$$\r\nand\r\n$$\r\n\\begin{aligned}\r\n& \\ddot{y}=-g \\\\\r\n& \\dot{y}=-g t+v_0 \\sin \\theta \\\\\r\n& y=\\frac{-g t^2}{2}+v_0 t \\sin \\theta\r\n\\end{aligned}\r\n$$\r\n\r\nWe can find the range by determining the value of $x$ when the projectile falls back to ground, that is, when $y=0$.\r\n$$\r\ny=t\\left(\\frac{-g t}{2}+v_0 \\sin \\theta\\right)=0\r\n$$\r\nOne value of $y=0$ occurs for $t=0$ and the other one for $t=T$.\r\n$$\r\n\\begin{aligned}\r\n\\frac{-g T}{2}+v_0 \\sin \\theta & =0 \\\\\r\nT & =\\frac{2 v_0 \\sin \\theta}{g}\r\n\\end{aligned}\r\n$$The range $R$ is found from\r\n$$\r\n\\begin{aligned}\r\nx(t=T) & =\\text { range }=\\frac{2 v_0^2}{g} \\sin \\theta \\cos \\theta \\\\\r\nR & =\\text { range }=\\frac{v_0^2}{g} \\sin 2 \\theta\r\n\\end{aligned}$$We have $v_0=1450 \\mathrm{~m} / \\mathrm{s}$ and $\\theta=55^{\\circ}$, so the range becomes\r\n$$\r\nR=\\frac{(1450 \\mathrm{~m} / \\mathrm{s})^2}{9.8 \\mathrm{~m} / \\mathrm{s}^2}\\left[\\sin \\left(110^{\\circ}\\right)\\right]=202 \\mathrm{~km}$$. \n"
-    },
-    "verification_outcome": {
-        "output_match": true,
-        "unit_match": true
-    }
-}
-{
-    "sample_id": " 8.5",
-    "question": "Calculate the time needed for a spacecraft to make a Hohmann transfer from Earth to Mars",
-    "response": {
-        "reasoning": "To calculate the time needed for a spacecraft to make a Hohmann transfer from Earth to Mars, we need to understand the Hohmann transfer orbit, which is an efficient way to move between two circular orbits around a central body (in this case, the Sun).\n\n### Step-by-Step Explanation:\n1. **Understanding Hohmann Transfer**: A Hohmann transfer involves two main phases:\n   - The first phase is the burn to enter an elliptical transfer orbit.\n   - The second phase is the burn to circularize the orbit at the destination.\n   The time taken for the transfer is half the orbital period of the elliptical transfer orbit.\n\n2. **Semi-Major Axis Calculation**: The semi-major axis \\( a \\) of the transfer orbit can be calculated as the average of the distances from the Sun to Earth and Mars:\n   - Distance from the Sun to Earth \\( r_E \\approx 1 \\, \\text{AU} \\)\n   - Distance from the Sun to Mars \\( r_M \\approx 1.524 \\, \\text{AU} \\)\n   - Therefore, the semi-major axis is:\n   \\[ a = \\frac{r_E + r_M}{2} = \\frac{1 + 1.524}{2} \\]\n\n3. **Orbital Period Calculation**: The orbital period \\( T \\) of the elliptical orbit can be calculated using Kepler's third law:\n   \\[ T^2 = k a^3 \\] \n   where \\( k \\) is a constant. For orbits around the Sun, we can use:\n   \\[ T^2 = a^3 \\] (if \\( T \\) is in years and \\( a \\) is in AU).\n   Thus, we can find \\( T \\) as:\n   \\[ T = a^{3/2} \\]\n\n4. **Time of Transfer**: Since the time needed for the Hohmann transfer is half the orbital period of the transfer orbit:\n   \\[ t_{transfer} = \\frac{T}{2} \\]\n\n5. **Substituting Values**: We can substitute the calculated value of \\( a \\) into the equations to find the total time for the transfer from Earth to Mars.",
-        "code": "import sympy as sp\n\n# Given distances in AU\nr_E = 1.0  # distance from Sun to Earth in AU\nr_M = 1.524  # distance from Sun to Mars in AU\n\n# Calculate the semi-major axis of the transfer orbit\na = (r_E + r_M) / 2\n\n# Calculate the orbital period using Kepler's third law (T^2 = a^3)\nT = a**(3/2)\n\n# Time of transfer is half the orbital period\nt_transfer = T / 2\n\n# Evaluate the result in years\nresult = t_transfer.evalf()\nresult",
-        "unit": "years"
-    },
-    "gt_answer": "2.24",
-    "unit": " $10^7 \\mathrm{~s}$",
-    "metadata": {
-        "answer_latex": " 2.24",
-        "unit": " $10^7 \\mathrm{~s}$",
-        "source": "class",
-        "comment": " ",
-        "solution": "\n$$\r\n\\begin{aligned}\r\n\\frac{m}{k} & =\\frac{m}{G m M_{\\text {Sun }}}=\\frac{1}{G M_{\\text {Sun }}} \\\\\r\n& =\\frac{1}{\\left(6.67 \\times 10^{-11} \\mathrm{~m}^3 / \\mathrm{s}^2 \\cdot \\mathrm{kg}\\right)\\left(1.99 \\times 10^{30} \\mathrm{~kg}\\right)} \\\\\r\n& =7.53 \\times 10^{-21} \\mathrm{~s}^2 / \\mathrm{m}^3\r\n\\end{aligned}\r\n$$\r\nBecause $k / m$ occurs so often in solar system calculations, we write it as well.\r\n$$\r\n\\begin{aligned}\r\n\\frac{k}{m} & =1.33 \\times 10^{20} \\mathrm{~m}^3 / \\mathrm{s}^2 \\\\\r\na_t & =\\frac{1}{2}\\left(r_{\\text {Earth-Sun }}+r_{\\text {Mars-Sun }}\\right) \\\\\r\n& =\\frac{1}{2}\\left(1.50 \\times 10^{11} \\mathrm{~m}+2.28 \\times 10^{11} \\mathrm{~m}\\right) \\\\\r\n& =1.89 \\times 10^{11} \\mathrm{~m} \\\\\r\nT_t & =\\pi\\left(7.53 \\times 10^{-21} \\mathrm{~s}^2 / \\mathrm{m}^3\\right)^{1 / 2}\\left(1.89 \\times 10^{11} \\mathrm{~m}\\right)^{3 / 2} \\\\\r\n& =2.24 \\times 10^7 \\mathrm{~s} \\\\\r\n\\end{aligned}\r\n$$\n"
-    },
-    "verification_outcome": {
-        "output_match": false,
-        "unit_match": false
-    }
-}
-{
-    "sample_id": " 5.5",
-    "question": "Calculate the maximum height change in the ocean tides caused by the Moon.",
-    "response": {
-        "reasoning": "To calculate the maximum height change in ocean tides caused by the Moon, we need to understand the gravitational effects of the Moon on the Earth's oceans. The tidal force exerted by the Moon results in the rise and fall of sea levels, known as tides.\n\n### Step-by-Step Explanation:\n1. **Understanding Tidal Forces**: The gravitational force exerted by the Moon creates a bulge in the ocean on the side of the Earth facing the Moon, as well as a smaller bulge on the opposite side due to the centrifugal force resulting from the Earth-Moon system's rotation.\n\n2. **Tidal Height Calculation**: The maximum height change (tidal range) can be estimated using the following formula for the tidal height change \\( h \\):\n   \\[ h = \\frac{2G M m}{r^2} \\]\n   where:\n   - \\( G \\) is the gravitational constant (approximately \\( 6.674 \\times 10^{-11} \\, \\text{m}^3 \\, \\text{kg}^{-1} \\, \\text{s}^{-2} \\))\n   - \\( M \\) is the mass of the Moon (approximately \\( 7.347673 \\times 10^{22} \\, \\text{kg} \\))\n   - \\( m \\) is the mass of the Earth (approximately \\( 5.972 \times 10^{24} \\, \\text{kg} \\))\n   - \\( r \\) is the distance from the center of the Earth to the center of the Moon (approximately \\( 3.844 \times 10^8 \\, \\text{m} \\)).\n\n3. **Calculating the Tidal Height Change**: We will substitute the values into the formula to find the maximum height change in the ocean tides caused by the Moon.\n\n4. **Final Consideration**: The calculated height change will give us an estimate of the maximum tidal range, which typically varies depending on local conditions, but this will provide a theoretical maximum based on gravitational interactions.",
-        "code": "import sympy as sp\n\n# Constants\nG = 6.674 * 10**-11  # gravitational constant in m^3 kg^-1 s^-2\nM = 7.347673 * 10**22  # mass of the Moon in kg\nm = 5.972 * 10**24  # mass of the Earth in kg\nr = 3.844 * 10**8  # distance from the Earth to the Moon in meters\n\n# Calculate the maximum height change in tides\nh = (2 * G * M * m) / r**2\n\n# Evaluate the result\nresult = h.evalf()\nresult",
-        "unit": "m"
-    },
-    "gt_answer": "0.54",
-    "unit": "$\\mathrm{m}$",
-    "metadata": {
-        "answer_latex": " 0.54",
-        "unit": "$\\mathrm{m}$",
-        "source": "class",
-        "comment": " ",
-        "solution": "\nWe continue to use our simple model of the ocean surrounding Earth. Newton proposed a solution to this calculation by imagining that two wells be dug, one along the direction of high tide (our $x$-axis) and one along the direction of low tide (our $y$-axis). If the tidal height change we want to determine is $h$, then the difference in potential energy of mass $m$ due to the height difference is $m g h$. Let's calculate the difference in work if we move the mass $m$ from point $c$ to the center of Earth and then to point $a$. This work $W$ done by gravity must equal the potential energy change $m g h$. The work $W$ is\r\n$$\r\nW=\\int_{r+\\delta_1}^0 F_{T_y} d y+\\int_0^{r+\\delta_2} F_{T_x} d x\r\n$$. The small distances $\\delta_1$ and $\\delta_2$ are to account for the small variations from a spherical Earth, but these values are so small they can be henceforth neglected. The value for $W$ becomes\r\n$$\r\n\\begin{aligned}\r\nW & =\\frac{G m M_m}{D^3}\\left[\\int_r^0(-y) d y+\\int_0^r 2 x d x\\right] \\\\\r\n& =\\frac{G m M_m}{D^3}\\left(\\frac{r^2}{2}+r^2\\right)=\\frac{3 G m M_m r^2}{2 D^3}\r\n\\end{aligned}\r\n$$\r\nBecause this work is equal to $m g h$, we have\r\n$$\r\n\\begin{aligned}\r\nm g h & =\\frac{3 G m M_m r^2}{2 D^3} \\\\\r\nh & =\\frac{3 G M_m r^2}{2 g D^3}\r\n\\end{aligned}\r\n$$\r\nNote that the mass $m$ cancels, and the value of $h$ does not depend on $m$. Nor does it depend on the substance, so to the extent Earth is plastic, similar tidal effects should be (and are) observed for the surface land. If we insert the known values of the constants into the Equation, we find\r\n$$\r\nh=\\frac{3\\left(6.67 \\times 10^{-11} \\mathrm{~m}^3 / \\mathrm{kg} \\cdot \\mathrm{s}^2\\right)\\left(7.350 \\times 10^{22} \\mathrm{~kg}\\right)\\left(6.37 \\times 10^6 \\mathrm{~m}\\right)^2}{2\\left(9.80 \\mathrm{~m} / \\mathrm{s}^2\\right)\\left(3.84 \\times 10^8 \\mathrm{~m}\\right)^3}=0.54 \\mathrm{~m}\r\n$$\n"
-    },
-    "verification_outcome": {
-        "output_match": false,
-        "unit_match": false
-    }
-}
-{
-    "sample_id": " 7.10",
-    "question": "A particle of mass $m$ starts at rest on top of a smooth fixed hemisphere of radius $a$. Determine the angle at which the particle leaves the hemisphere.",
-    "response": {
-        "reasoning": "To determine the angle at which a particle of mass \\( m \\) leaves a smooth fixed hemisphere of radius \\( a \\), we need to analyze the forces acting on the particle as it moves down the hemisphere under the influence of gravity.\n\n### Step-by-Step Explanation:\n1. **Understanding the Problem**: The particle starts from rest at the top of the hemisphere and slides down due to gravity. As it moves, it will lose contact with the surface of the hemisphere at a certain angle \\( \\theta \\) from the vertical.\n\n2. **Forces Acting on the Particle**: At any point on the hemisphere, the forces acting on the particle are:\n   - The gravitational force \\( mg \\) acting downward.\n   - The normal force \\( N \\) acting perpendicular to the surface of the hemisphere.\n\n3. **Condition for Leaving the Surface**: The particle will leave the surface when the normal force \\( N \\) becomes zero. At this point, the only force acting on the particle in the radial direction is the component of gravitational force that provides the necessary centripetal force to keep the particle moving in a circular path.\n\n4. **Centripetal Force Requirement**: The centripetal force required for the particle to maintain circular motion at radius \\( a \\) is given by:\n   \\[ F_c = \\frac{mv^2}{a} \\]\n   where \\( v \\) is the speed of the particle at angle \\( \\theta \\).\n\n5. **Components of Forces**: The gravitational force can be resolved into two components:\n   - Radial component: \\( mg \\cos(\\theta) \\) (toward the center of the hemisphere)\n   - Tangential component: \\( mg \\sin(\\theta) \\) (down the slope)\n   The condition for leaving the surface is:\n   \\[ mg \\cos(\\theta) = \\frac{mv^2}{a} \\]\n   Simplifying gives:\n   \\[ g \\cos(\\theta) = \\frac{v^2}{a} \\]\n\n6. **Energy Conservation**: Since the particle starts from rest, we can use conservation of energy to relate the speed \\( v \\) at angle \\( \\theta \\) to the height fallen:\n   - Initial potential energy at the top: \\( U_i = mgh = mga \\)\n   - Potential energy at angle \\( \\theta \\): \\( U_f = mg(a \\, \\cos(\\theta)) \\)\n   - Kinetic energy at angle \\( \\theta \\): \\( K = \\frac{1}{2} mv^2 \\)\n   By conservation of energy:\n   \\[ mga = mg(a \\cos(\\theta)) + \\frac{1}{2} mv^2 \\]\n   Simplifying gives:\n   \\[ v^2 = 2ga(1 - \\cos(\\theta)) \\]\n\n7. **Substituting for v^2**: Substitute \\( v^2 \\) into the centripetal force equation:\n   \\[ g \\cos(\\theta) = \\frac{2ga(1 - \\cos(\\theta))}{a} \\]\n   Simplifying gives:\n   \\[ g \\cos(\\theta) = 2g(1 - \\cos(\\theta)) \\]\n   Dividing by \\( g \\) (assuming \\( g \\neq 0 \\)):\n   \\[ \\cos(\\theta) = 2(1 - \\cos(\\theta)) \\]\n   Rearranging gives:\n   \\[ 3\\cos(\\theta) = 2 \\]\n   Thus:\n   \\[ \\cos(\\theta) = \\frac{2}{3} \\]\n\n8. **Finding the Angle**: Finally, we can find the angle \\( \\theta \\) using the inverse cosine function.",
-        "code": "import sympy as sp\n\n# Calculate the angle theta in radians\ncos_theta = 2 / 3\ntheta_radians = sp.acos(cos_theta)\n\n# Convert radians to degrees for better interpretation\ntheta_degrees = sp.deg(theta_radians)\n\n# Store the final result\nresult = theta_degrees.evalf()\nresult",
-        "unit": "degrees"
-    },
-    "gt_answer": "48.189685",
-    "unit": "$^\\circ$",
-    "metadata": {
-        "answer_latex": " $\\cos ^{-1}\\left(\\frac{2}{3}\\right)$",
-        "unit": "$^\\circ$",
-        "source": "class",
-        "comment": " ",
-        "solution": "\nBecause we are considering the possibility of the particle leaving the hemisphere, we choose the generalized coordinates to be $r$ and $\\theta$. The constraint equation is\r\n$$\r\nf(r, \\theta)=r-a=0\r\n$$\r\nThe Lagrangian is determined from the kinetic and potential energies:\r\n$$\r\n\\begin{aligned}\r\nT & =\\frac{m}{2}\\left(\\dot{r}^2+r^2 \\dot{\\theta}^2\\right) \\\\\r\nU & =m g r \\cos \\theta \\\\\r\nL & =T-U \\\\\r\nL & =\\frac{m}{2}\\left(\\dot{r}^2+r^2 \\dot{\\theta}^2\\right)-m g r \\cos \\theta\r\n\\end{aligned}\r\n$$\r\nwhere the potential energy is zero at the bottom of the hemisphere. The Lagrange equations are\r\n$$\r\n\\begin{aligned}\r\n& \\frac{\\partial L}{\\partial r}-\\frac{d}{d t} \\frac{\\partial L}{\\partial \\dot{r}}+\\lambda \\frac{\\partial f}{\\partial r}=0 \\\\\r\n& \\frac{\\partial L}{\\partial \\theta}-\\frac{d}{d t} \\frac{\\partial L}{\\partial \\dot{\\theta}}+\\lambda \\frac{\\partial f}{\\partial \\theta}=0\r\n\\end{aligned}\r\n$$\r\nPerforming the differentiations gives\r\n$$\r\n\\frac{\\partial f}{\\partial r}=1, \\quad \\frac{\\partial f}{\\partial \\theta}=0\r\n$$Then equations become\r\n$$\r\n\\begin{gathered}\r\nm r \\dot{\\theta}^2-m g \\cos \\theta-m \\ddot{r}+\\lambda=0 \\\\\r\nm g r \\sin \\theta-m r^2 \\ddot{\\theta}-2 m r \\dot{r} \\dot{\\theta}=0\r\n\\end{gathered}\r\n$$\r\nNext, we apply the constraint $r=a$ to these equations of motion:\r\n$$\r\nr=a, \\quad \\dot{r}=0=\\ddot{r}\r\n$$Then $$\r\n\\begin{array}{r}\r\nm a \\dot{\\theta}^2-m g \\cos \\theta+\\lambda=0 \\\\\r\nm g a \\sin \\theta-m a^2 \\ddot{\\theta}=0\r\n\\end{array}\r\n$$We have\r\n$$\r\n\\ddot{\\theta}=\\frac{g}{a} \\sin \\theta\r\n$$\r\nWe can integrate Equation to determine $\\dot{\\theta}^2$.\r\n$$\r\n\\ddot{\\theta}=\\frac{d}{d t} \\frac{d \\theta}{d t}=\\frac{d \\dot{\\theta}}{d t}=\\frac{d \\dot{\\theta}}{d \\theta} \\frac{d \\theta}{d t}=\\dot{\\theta} \\frac{d \\dot{\\theta}}{d \\theta}\r\n$$\r\nWe integrate Equation $$\r\n\\int \\dot{\\theta} d \\dot{\\theta}=\\frac{g}{a} \\int \\sin \\theta d \\theta\r\n$$ which results in\r\n$$\r\n\\frac{\\dot{\\theta}^2}{2}=\\frac{-g}{a} \\cos \\theta+\\frac{g}{a}\r\n$$\r\nwhere the integration constant is $g / a$, because $\\dot{\\theta}=0$ at $t=0$ when $\\theta=0$. Substituting $\\dot{\\theta}^2$ from Equation, after solving for $\\lambda$,\r\n$$\r\n\\lambda=m g(3 \\cos \\theta-2)\r\n$$\r\nwhich is the force of constraint. The particle falls off the hemisphere at angle $\\theta_0$ when $\\lambda=0$.\r\n$$\r\n\\begin{aligned}\r\n\\lambda & =0=m g\\left(3 \\cos \\theta_0-2\\right) \\\\\r\n\\theta_0 & =\\cos ^{-1}\\left(\\frac{2}{3}\\right)\r\n\\end{aligned}\r\n$$\n"
-    },
-    "verification_outcome": {
-        "output_match": true,
-        "unit_match": true
-    }
-}
-{
-    "sample_id": " 9.12",
-    "question": "Consider the first stage of a Saturn $V$ rocket used for the Apollo moon program. The initial mass is $2.8 \\times 10^6 \\mathrm{~kg}$, and the mass of the first-stage fuel is $2.1 \\times 10^6$ kg. Assume a mean thrust of $37 \\times 10^6 \\mathrm{~N}$. The exhaust velocity is $2600 \\mathrm{~m} / \\mathrm{s}$. Calculate the final speed of the first stage at burnout. ",
-    "response": {
-        "reasoning": "To calculate the final speed of the first stage of the Saturn V rocket at burnout, we can use the Tsiolkovsky rocket equation, which relates the change in velocity of a rocket to its exhaust velocity and the mass of the rocket before and after the fuel is burned.\n\n### Step-by-Step Explanation:\n1. **Understanding the Rocket Equation**: The Tsiolkovsky rocket equation is given by:\n   \\[ \\Delta v = v_e \\ln\\left(\\frac{m_0}{m_f}\\right) \\]\n   where:\n   - \\( \\Delta v \\) is the change in velocity (final speed at burnout),\n   - \\( v_e \\) is the exhaust velocity,\n   - \\( m_0 \\) is the initial mass of the rocket (including fuel),\n   - \\( m_f \\) is the final mass of the rocket (after fuel is burned).\n\n2. **Identify Given Values**:\n   - Initial mass \\( m_0 = 2.8 \\times 10^6 \\, \\text{kg} \\)\n   - Mass of the first-stage fuel = \\( 2.1 \\times 10^6 \\, \\text{kg} \\)\n   - Exhaust velocity \\( v_e = 2600 \\, \\text{m/s} \\)\n\n3. **Calculate Final Mass**: The final mass \\( m_f \\) after burning the fuel is:\n   \\[ m_f = m_0 - \\text{mass of fuel} = 2.8 \\times 10^6 \\, \\text{kg} - 2.1 \\times 10^6 \\, \\text{kg} = 0.7 \\times 10^6 \\, \\text{kg} \\]\n\n4. **Substituting Values into the Rocket Equation**: Now we can substitute the values into the rocket equation:\n   \\[ \\Delta v = 2600 \\ln\\left(\\frac{2.8 \\times 10^6}{0.7 \\times 10^6}\\right) \\]\n\n5. **Calculating the Final Speed**: We will compute the value of \\( \\Delta v \\) to find the final speed of the rocket at burnout.",
-        "code": "import sympy as sp\n\n# Given values\nm0 = 2.8 * 10**6  # initial mass in kg\nfuel_mass = 2.1 * 10**6  # mass of fuel in kg\nv_e = 2600  # exhaust velocity in m/s\n\n# Calculate final mass after burning fuel\nm_f = m0 - fuel_mass\n\n# Calculate the change in velocity using the rocket equation\nDelta_v = v_e * sp.ln(m0 / m_f)\n\n# Evaluate the result\nresult = Delta_v.evalf()\nresult",
-        "unit": "m/s"
-    },
-    "gt_answer": "2.16",
-    "unit": " $10^3 \\mathrm{~m} / \\mathrm{s}$",
-    "metadata": {
-        "answer_latex": " 2.16",
-        "unit": " $10^3 \\mathrm{~m} / \\mathrm{s}$",
-        "source": "class",
-        "comment": " ",
-        "solution": "\nFrom the thrust, we can determine the fuel burn rate:$$\\frac{d m}{d t}=\\frac{\\text { thrust }}{-u}=\\frac{37 \\times 10^6 \\mathrm{~N}}{-2600 \\mathrm{~m} / \\mathrm{s}}=-1.42 \\times 10^4 \\mathrm{~kg} / \\mathrm{s}\r\n$$The final rocket mass is $\\left(2.8 \\times 10^6 \\mathrm{~kg}-2.1 \\times 10^6 \\mathrm{~kg}\\right)$ or $0.7 \\times 10^6 \\mathrm{~kg}$. We can determine the rocket speed at burnout $\\left(v_b\\right)$.\r\n$$\r\n\\begin{aligned}\r\nv_b & =-\\frac{9.8 \\mathrm{~m} / \\mathrm{s}^2\\left(2.1 \\times 10^6 \\mathrm{~kg}\\right)}{1.42 \\times 10^4 \\mathrm{~kg} / \\mathrm{s}}+(2600 \\mathrm{~m} / \\mathrm{s}) \\ln \\left[\\frac{2.8 \\times 10^6 \\mathrm{~kg}}{0.7 \\times 10^6 \\mathrm{~kg}}\\right] \\\\\r\nv_b & =2.16 \\times 10^3 \\mathrm{~m} / \\mathrm{s}\r\n\\end{aligned}\r\n$$\n"
-    },
-    "verification_outcome": {
-        "output_match": false,
-        "unit_match": true
-    }
-}
-{
-    "sample_id": " 8.04",
-    "question": "A $2.00 \\mathrm{~kg}$ particle moves along an $x$ axis in one-dimensional motion while a conservative force along that axis acts on it. The potential energy $U(x)$ is 0 when $x = 6.5 \\mathrm{~m} $ and is $7 \\mathrm{~J}$ when $x = 4.5 \\mathrm{~m} $. At $x=6.5 \\mathrm{~m}$, the particle has velocity $\\vec{v}_0=(-4.00 \\mathrm{~m} / \\mathrm{s}) \\hat{\\mathrm{i}}$ Determine the particle's speed at $x_1=4.5 \\mathrm{~m}$.",
-    "response": {
-        "reasoning": "To determine the particle's speed at position \\( x_1 = 4.5 \\, \\text{m} \\), we can use the principle of conservation of mechanical energy. The total mechanical energy of the particle is the sum of its kinetic energy (KE) and potential energy (PE). Since the force acting on the particle is conservative, the total mechanical energy remains constant.\n\n### Step-by-Step Explanation:\n1. **Identify Given Values**:\n   - Mass of the particle: \\( m = 2.00 \\, \\text{kg} \\)\n   - Potential energy at \\( x = 6.5 \\, \\text{m} \\): \\( U(6.5) = 0 \\, \\text{J} \\)\n   - Potential energy at \\( x = 4.5 \\, \\text{m} \\): \\( U(4.5) = 7 \\, \\text{J} \\)\n   - Initial velocity at \\( x = 6.5 \\, \\text{m} \\): \\( v_0 = -4.00 \\, \\text{m/s} \\)\n\n2. **Calculate Initial Kinetic Energy**: The kinetic energy (KE) at \\( x = 6.5 \\, \\text{m} \\) is given by:\n   \\[ KE_0 = \\frac{1}{2} mv_0^2 \\]\n   Substituting the values:\n   \\[ KE_0 = \\frac{1}{2} (2.00) (-4.00)^2 \\]\n\n3. **Calculate Total Mechanical Energy at Initial Position**: The total mechanical energy \\( E \\) at \\( x = 6.5 \\, \\text{m} \\) is:\n   \\[ E = KE_0 + U(6.5) = KE_0 + 0 \\]\n\n4. **Calculate Total Mechanical Energy at Position \\( x_1 \\)**: At position \\( x_1 = 4.5 \\, \\text{m} \\), the total mechanical energy is:\n   \\[ E = KE_1 + U(4.5) \\]\n   where \\( KE_1 \\) is the kinetic energy at \\( x_1 \\).\n\n5. **Set the Total Energies Equal**: Since the total mechanical energy is conserved:\n   \\[ KE_0 = KE_1 + U(4.5) \\]\n   Rearranging gives:\n   \\[ KE_1 = KE_0 - U(4.5) \\]\n\n6. **Calculate Kinetic Energy at \\( x_1 \\)**: Substitute the values to find \\( KE_1 \\) and then use it to find the speed at \\( x_1 \\):\n   \\[ KE_1 = \\frac{1}{2} mv_1^2 \\]\n   Rearranging gives:\n   \\[ v_1 = \\sqrt{\\frac{2 KE_1}{m}} \\]\n\n7. **Final Calculation**: We will compute the values step by step to find the final speed \\( v_1 \\) at \\( x_1 = 4.5 \\, \\text{m} \\).",
-        "code": "import sympy as sp\n\n# Given values\nm = 2.00  # mass in kg\nv0 = -4.00  # initial velocity in m/s\nU_6_5 = 0  # potential energy at x = 6.5 m in J\nU_4_5 = 7  # potential energy at x = 4.5 m in J\n\n# Calculate initial kinetic energy at x = 6.5 m\nKE_0 = 0.5 * m * v0**2\n\n# Total mechanical energy at x = 6.5 m\nE = KE_0 + U_6_5\n\n# Calculate kinetic energy at x = 4.5 m\nKE_1 = E - U_4_5\n\n# Calculate speed at x = 4.5 m\nv1 = sp.sqrt(2 * KE_1 / m)\n\n# Evaluate the result\nresult = v1.evalf()\nresult",
-        "unit": "m/s"
-    },
-    "gt_answer": "3.0",
-    "unit": " m/s",
-    "metadata": {
-        "answer_latex": "3.0",
-        "unit": " m/s",
-        "source": "fund",
-        "comment": " ",
-        "solution": "\nAt $x=6.5 \\mathrm{~m}$, the particle has kinetic energy\n$$\n\\begin{aligned}\nK_0 & =\\frac{1}{2} m v_0^2=\\frac{1}{2}(2.00 \\mathrm{~kg})(4.00 \\mathrm{~m} / \\mathrm{s})^2 \\\\\n& =16.0 \\mathrm{~J} .\n\\end{aligned}\n$$\nBecause the potential energy there is $U=0$, the mechanical energy is\n$$\nE_{\\text {mec }}=K_0+U_0=16.0 \\mathrm{~J}+0=16.0 \\mathrm{~J} .\n$$The kinetic energy $K_1$ is the difference between $E_{\\text {mec }}$ and $U_1$ :\n$$\nK_1=E_{\\text {mec }}-U_1=16.0 \\mathrm{~J}-7.0 \\mathrm{~J}=9.0 \\mathrm{~J} .\n$$\nBecause $K_1=\\frac{1}{2} m v_1^2$, we find\n$$\nv_1=3.0 \\mathrm{~m} / \\mathrm{s}\n$$\n\n\n"
-    },
-    "verification_outcome": {
-        "output_match": true,
-        "unit_match": true
-    }
-}
-{
-    "sample_id": " 13.05",
-    "question": "A playful astronaut releases a bowling ball, of mass $m=$ $7.20 \\mathrm{~kg}$, into circular orbit about Earth at an altitude $h$ of $350 \\mathrm{~km}$.\r\nWhat is the mechanical energy $E$ of the ball in its orbit?",
-    "response": {
-        "reasoning": "To calculate the mechanical energy \\( E \\) of a bowling ball in circular orbit around the Earth, we need to consider both the gravitational potential energy (U) and the kinetic energy (K) of the ball.\n\n### Step-by-Step Explanation:\n1. **Identify Given Values**:\n   - Mass of the bowling ball: \\( m = 7.20 \\, \\text{kg} \\)\n   - Altitude of the orbit: \\( h = 350 \\, \\text{km} = 350,000 \\, \\text{m} \\)\n   - Radius of the Earth: \\( R_E \\approx 6.371 \\, \\times 10^6 \\, \\text{m} \\)\n   - Gravitational constant: \\( G = 6.674 \\times 10^{-11} \\, \\text{m}^3 \\, \\text{kg}^{-1} \\, \\text{s}^{-2} \\)\n   - Mass of the Earth: \\( M_E \text{ (approximately)} = 5.972 \\times 10^{24} \\, \\text{kg} \\)\n\n2. **Calculate the Radius of Orbit**: The radius of the orbit \\( r \\) is the sum of the Earth's radius and the altitude:\n   \\[ r = R_E + h = 6.371 \\times 10^6 \\, \text{m} + 350,000 \\, \text{m} \\]\n\n3. **Calculate Gravitational Potential Energy (U)**: The gravitational potential energy of the ball in orbit is given by:\n   \\[ U = -\\frac{G M_E m}{r} \\]\n\n4. **Calculate Kinetic Energy (K)**: The kinetic energy of the ball in circular orbit can be calculated using the formula:\n   \\[ K = \\frac{1}{2} m v^2 \\]\n   The orbital speed \\( v \\) can be derived from the gravitational force providing the centripetal force:\n   \\[ v = \\sqrt{\\frac{G M_E}{r}} \\]\n   Therefore, substituting for \\( v \\) gives:\n   \\[ K = \\frac{1}{2} m \\left(\\frac{G M_E}{r}\\right) \\]\n\n5. **Total Mechanical Energy (E)**: The total mechanical energy in orbit is the sum of kinetic and potential energy:\n   \\[ E = K + U \\]\n   Substituting the expressions for \\( K \\) and \\( U \\) gives:\n   \\[ E = \\frac{1}{2} m \\left(\\frac{G M_E}{r}\\right) - \\frac{G M_E m}{r} \\]\n   This simplifies to:\n   \\[ E = -\\frac{G M_E m}{2r} \\]\n\n6. **Final Calculation**: We will compute the values step by step to find the total mechanical energy \\( E \\) of the bowling ball in its orbit.",
-        "code": "import sympy as sp\n\n# Given values\nm = 7.20  # mass of the bowling ball in kg\nh = 350000  # altitude in meters\nR_E = 6.371 * 10**6  # radius of the Earth in meters\nG = 6.674 * 10**-11  # gravitational constant in m^3 kg^-1 s^-2\nM_E = 5.972 * 10**24  # mass of the Earth in kg\n\n# Calculate the radius of the orbit\nr = R_E + h\n\n# Calculate the total mechanical energy in orbit\nE = - (G * M_E * m) / (2 * r)\n\n# Evaluate the result\nresult = E.evalf()\nresult",
-        "unit": "J"
-    },
-    "gt_answer": "-214",
-    "unit": " MJ",
-    "metadata": {
-        "answer_latex": " -214",
-        "unit": " MJ",
-        "source": "fund",
-        "comment": " ",
-        "solution": "We can get $E$ from the orbital energy, given by Eq. $13-40$ ( $E=-G M m / 2 r)$ ), if we first find the orbital radius $r$. (It is not simply the given altitude.)\nCalculations: The orbital radius must be\n$$\nr=R+h=6370 \\mathrm{~km}+350 \\mathrm{~km}=6.72 \\times 10^6 \\mathrm{~m},\n$$\nin which $R$ is the radius of Earth. Then, from Eq. 13-40 with Earth mass $M=5.98 \\times 10^{24} \\mathrm{~kg}$, the mechanical energy is\n$$\n\\begin{aligned}\nE & =-\\frac{G M m}{2 r} \\\\\n& =-\\frac{\\left(6.67 \\times 10^{-11} \\mathrm{~N} \\cdot \\mathrm{m}^2 / \\mathrm{kg}^2\\right)\\left(5.98 \\times 10^{24} \\mathrm{~kg}\\right)(7.20 \\mathrm{~kg})}{(2)\\left(6.72 \\times 10^6 \\mathrm{~m}\\right)} \\\\\n& =-2.14 \\times 10^8 \\mathrm{~J}=-214 \\mathrm{MJ} .\n\\end{aligned}\n$$"
-    },
-    "verification_outcome": {
-        "output_match": false,
-        "unit_match": false
-    }
-}
-{
-    "sample_id": " 10.11",
-    "question": "There is a disk mounted on a fixed horizontal axle, with mass $M = 2.5 \\mathrm{~kg}$ and radius $R = 20\\mathrm{~cm}$. A block with mass m = $1.2 \\mathrm{~kg}$ hangs from a massless cord that is wrapped around the rim of the disk. A block hangs from a massless cord that is wrapped around the rim of the disk. The cord does not slip and there is no friction at the axle. Let the disk start from rest at time $t=0$ and also let the tension in the massless cord be $6.0 \\mathrm{~N}$ and the angular acceleration of the disk be $-24 \\mathrm{rad} / \\mathrm{s}^2$. What is its rotational kinetic energy $K$ at $t=2.5 \\mathrm{~s}$ ?",
-    "response": {
-        "reasoning": "To find the rotational kinetic energy \\( K \\) of the disk at time \\( t = 2.5 \\, \\text{s} \\), we can use the following steps:\n\n### Step-by-Step Explanation:\n1. **Identify Given Values**:\n   - Mass of the disk: \\( M = 2.5 \\, \\text{kg} \\)\n   - Radius of the disk: \\( R = 20 \\, \\text{cm} = 0.2 \\, \\text{m} \\)\n   - Tension in the cord: \\( T = 6.0 \\, \\text{N} \\)\n   - Angular acceleration of the disk: \\( \\alpha = -24 \\, \\text{rad/s}^2 \\)\n   - Time: \\( t = 2.5 \\, \\text{s} \\)\n\n2. **Calculate the Angular Displacement**: The angular displacement \\( \\theta \\) of the disk can be calculated using the formula:\n   \\[ \\theta = \\omega_0 t + \\frac{1}{2} \\alpha t^2 \\]\n   Since the disk starts from rest, \\( \\omega_0 = 0 \\), so:\n   \\[ \\theta = \\frac{1}{2} \\alpha t^2 \\]\n\n3. **Calculate the Final Angular Velocity**: The final angular velocity \\( \\omega \\) at time \\( t \\) can be calculated using:\n   \\[ \\omega = \\omega_0 + \\alpha t \\]\n   Again, since \\( \\omega_0 = 0 \\), we have:\n   \\[ \\omega = \\alpha t \\]\n\n4. **Calculate the Rotational Kinetic Energy**: The rotational kinetic energy \\( K \\) of the disk is given by:\n   \\[ K = \\frac{1}{2} I \\omega^2 \\]\n   where \\( I \\) is the moment of inertia of the disk. For a solid disk, the moment of inertia is:\n   \\[ I = \\frac{1}{2} M R^2 \\]\n\n5. **Substituting Values**: We will substitute the values into the equations to find the angular displacement, final angular velocity, moment of inertia, and finally the rotational kinetic energy at \\( t = 2.5 \\, \\text{s} \\).\n\n6. **Final Calculation**: We will compute the values step by step to find the rotational kinetic energy \\( K \\).",
-        "code": "import sympy as sp\n\n# Given values\nM = 2.5  # mass of the disk in kg\nR = 0.2  # radius of the disk in m\nT = 6.0  # tension in the cord in N\nalpha = -24  # angular acceleration in rad/s^2\nt = 2.5  # time in seconds\n\n# Calculate the angular displacement\ntheta = (1/2) * alpha * t**2\n\n# Calculate the final angular velocity\nomega = alpha * t\n\n# Calculate the moment of inertia of the disk\nI = (1/2) * M * R**2\n\n# Calculate the rotational kinetic energy\nK = (1/2) * I * omega**2\n\n# Evaluate the result\nresult = K.evalf()\nresult",
-        "unit": "J"
-    },
-    "gt_answer": "90",
-    "unit": " J",
-    "metadata": {
-        "answer_latex": " 90",
-        "unit": " J",
-        "source": "fund",
-        "comment": " ",
-        "solution": "\nWe can find $K$ with Eq. $10-34\\left(K=\\frac{1}{2} I \\omega^2\\right)$. We already know that $I=\\frac{1}{2} M R^2$, but we do not yet know $\\omega$ at $t=2.5 \\mathrm{~s}$. However, because the angular acceleration $\\alpha$ has the constant value of $-24 \\mathrm{rad} / \\mathrm{s}^2$, we can apply the equations for constant angular acceleration.\n\nCalculations: Because we want $\\omega$ and know $\\alpha$ and $\\omega_0(=0)$, we use Eq. 10-12:\n$$\n\\omega=\\omega_0+\\alpha t=0+\\alpha t=\\alpha t .\n$$\nSubstituting $\\omega=\\alpha t$ and $I=\\frac{1}{2} M R^2$ into Eq. 10-34, we find\n$$\n\\begin{aligned}\nK & =\\frac{1}{2} I \\omega^2=\\frac{1}{2}\\left(\\frac{1}{2} M R^2\\right)(\\alpha t)^2=\\frac{1}{4} M(R \\alpha t)^2 \\\\\n& =\\frac{1}{4}(2.5 \\mathrm{~kg})\\left[(0.20 \\mathrm{~m})\\left(-24 \\mathrm{rad} / \\mathrm{s}^2\\right)(2.5 \\mathrm{~s})\\right]^2 \\\\\n& =90 \\mathrm{~J} .\n\\end{aligned}\n$$\n\n"
-    },
-    "verification_outcome": {
-        "output_match": false,
-        "unit_match": false
-    }
-}
+]
