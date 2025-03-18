@@ -1,4 +1,5 @@
 import json
+import random
 from camel.agents import ChatAgent
 from camel.models import BaseModelBackend
 from typing import List, Dict, Union
@@ -33,7 +34,14 @@ class PhysicsCodeGenPipeline():
    """
    A pipeline for generating physics solutions using symbolic computation with Python's Sympy library.
    """
-   def __init__(self, reason_model: BaseModelBackend, dataset: List[Dict], output_location: str, num: Union[int, None] = None):
+   def __init__(
+         self, 
+         reason_model: BaseModelBackend, 
+         dataset: List[Dict], 
+         output_location: str, 
+         num: Union[int, None] = None,
+         sample: bool = False,
+         ):
       """
       Initialize the pipeline with the reason model and the dataset.
 
@@ -43,7 +51,10 @@ class PhysicsCodeGenPipeline():
       """
       # Set limit
       if num is not None:
-         self.dataset = dataset[:num]
+         if sample:
+            self.dataset = random.sample(dataset, num)
+         else:
+            self.dataset = dataset[:num]
       else:
          self.dataset = dataset
 
