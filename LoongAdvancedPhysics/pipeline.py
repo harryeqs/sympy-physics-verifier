@@ -1,10 +1,11 @@
 import json
 import random
+import os
 from camel.agents import ChatAgent
 from camel.models import BaseModelBackend
 from typing import List, Dict, Union
 from verifier import PhysicsVerifier, logger
-from models import ResponseFormat, AnswerFormat
+from models import ResponseFormat, AnswerFormat, VerificationResult, OutputFormat
 
 import logging
 
@@ -12,23 +13,54 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)  
 
 REASON_AGENT_PROMPT = """
-You are an expert in physics and symbolic computation using Python's Sympy library. When given a physics problem, follow these instructions:
+Task: Solve the given Physics problem using symbolic computation with Sympy and return the response in a structured JSON format defined by the following ResponseFormat:
+    class ResponseFormat(BaseModel):
+       reasoning: str
+       code: str
+       unit: Union[str, None] = None
 
-1. **Understanding the Problem**: Carefully read and interpret the problem statement. Identify the underlying physics concepts and relevant equations.
+Instructions:
+1. The primary goal is to solve a Physics problem using symbolic computation. Your solution should involve setting up equations, solving them symbolically, and computing the desired physical quantity.
+2. Begin by importing the necessary libraries from Sympy.
+3. Clearly define all symbolic variables and physical constants required for the problem.
+4. Write the Sympy code that sets up and solves the Physics problem.
+5. Ensure that the very last line of the code assigns the final computed result to a variable with the format:
+       result = <computed_value>
+   This is mandatory since the result will be extracted and compared with the ground truth.
+6. Prepare a plain text explanation of the solution steps and reasoning, assigning it to the "reasoning" field in the response.
+7. If the Physics problem involves any units (e.g., meters, seconds, kilograms, etc.), specify the unit in the explanation or assign it to the "unit" field. If no unit is applicable, set the unit field to None.
+8. Return the complete response in a JSON object with the keys:
+       - "reasoning": containing the explanation as a string,
+       - "code": containing the complete Sympy code as a string,
+       - "unit": containing the appropriate unit as a string (or None if not applicable).
 
-2. **Reasoning and Explanation**: 
-   - Provide a detailed, step-by-step explanation of your thought process.
-   - Explain the physical principles, assumptions, and logical steps used to approach the problem.
-   - Keep the explanation clear and thorough so that a human reviewer can follow the reasoning without referring to the code.
+Example structure of the code output (as a string):
+-----------------------------------------------------------
+import sympy as sp
 
-3. **Sympy Code Implementation**:
-   - Write the Python code that uses the Sympy library to solve the problem.
-   - Ensure that the code is well-commented to clarify each step.
-   - The code should be fully self-contained and verifiable independently of the reasoning section.
-   - **Be extremely careful with units: verify that any unit conversions or unit-related calculations are correct, and include units with any numerical output.**
-   - **Ensure that the final computed result is stored in a variable named `result` (i.e., `result = <final_value>`).**
+# Define symbols, physical constants, and variables
+x, y, t = sp.symbols('x y t')
+g = sp.symbols('g')  # gravitational constant, for instance
+
+# [Your problem-specific code here to set up and solve the Physics problem]
+
+# Compute the final result
+final_result = ...  # your computation
+
+# Explanation of the approach in plain text
+reasoning = "Step 1: ... Step 2: ... (include details of the physics concepts used and any relevant unit information)"
+
+# Final output assignment (must be the last line)
+result = final_result
+-----------------------------------------------------------
+
+Ensure that your response strictly follows the ResponseFormat structure:
+{
+    "reasoning": <your explanation as a string>,
+    "code": <your complete Sympy code as a string>,
+    "unit": <unit as a string or None>
+}
 """
-
 
 class PhysicsCodeGenPipeline():
    """
@@ -72,7 +104,7 @@ class PhysicsCodeGenPipeline():
          'failed_generations': 0
       }
       
-   def verify(self, response: ResponseFormat, gt_answer: str):
+   def verify(self, response: ResponseFormat, answer: AnswerFormat) -> VerificationResult:
       """
       A method to verify the correctness of the generated code using PythonVerifier.
 
@@ -80,44 +112,54 @@ class PhysicsCodeGenPipeline():
           response (ResponseFormat): The response format containing the reasoning and code sections.
           gt_answer (str): The ground truth answer to compare against.
       """
-      output_match, unit_match = self.verifier.verify(response, gt_answer)
-      return output_match, unit_match
+      return self.verifier.verify(response, answer)
       
 
    def run(self):
       """
-      Run the pipeline on the dataset.
+      Run the pipeline on the dataset and sequentially update the JSON array output.
       """
+      # Load existing output if it exists, otherwise initialize an empty list.
+      if os.path.exists(self.output_location):
+         try:
+            with open(self.output_location, 'r') as f:
+               outputs = json.load(f)
+         except json.JSONDecodeError:
+            outputs = []
+      else:
+         outputs = []
+      
       for sample in self.dataset:
          sample_id = sample['id']
          question = sample['question']
          gt_answer = sample['gt_answer']
          unit = sample['unit']
-         full_answer = AnswerFormat(gt_answer=gt_answer, unit=unit) # Create the full answer format including both the numerical answer and unit
 
-         llm_response = self.reason_agent.step(question, response_format=ResponseFormat)
-         structured_response = llm_response.msgs[0].parsed
+         full_answer = AnswerFormat(gt_answer=gt_answer, unit=unit) # Create the full answer format including both the numerical answer and unit
+         raw_response = self.reason_agent.step(question, response_format=ResponseFormat)
+         structured_response = ResponseFormat.model_validate(raw_response.msgs[0].parsed)
 
          logger.info(f'=====Verifying Question {sample_id}=====')
          verification_outcome = self.verify(structured_response, full_answer)
-         logger.info(f'Output match: {verification_outcome[0]}')
-         logger.info(f"Unit Match: {verification_outcome[1]}")
+         logger.info(f'Verification Outcome: Result Match: {verification_outcome.result_match}, Unit Match: {verification_outcome.unit_match}')
          
-         if verification_outcome[0] and verification_outcome[1]:
+         if verification_outcome.result_match and verification_outcome.unit_match:
             self.generation_summary['successful_generations'] += 1
          else:
             self.generation_summary['failed_generations'] += 1
 
-         with open(self.output_location, 'a') as f:
-            entry = {
-               'sample_id': sample_id,
-               'question': question,
-               'response': structured_response.model_dump(),
-               'gt_answer': gt_answer,
-               'unit': unit,
-               'metadata': sample['metadata'],
-               'verification_outcome': {'output_match': verification_outcome[0], 'unit_match': verification_outcome[1]}
-            }
-            f.write(json.dumps(entry, indent=4) + '\n')
+         output = OutputFormat(
+            sample_id=str(sample_id),
+            response=structured_response,
+            answer=full_answer,
+            verification_result=verification_outcome,
+            metadata=sample['metadata']
+         )
+
+         outputs.append(output.model_dump())
+
+         with open(self.output_location, 'w') as f:
+            json.dump(outputs, f, indent=4)
+
       
       logger.info(f"Generation Summary: {self.generation_summary}")

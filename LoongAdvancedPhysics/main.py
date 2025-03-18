@@ -27,7 +27,8 @@ def preprocess_data(data: Dict, dataset_origin: Literal["OlympiadBench", "SciBen
         }
         
         # Define keys that should be moved out of metadata.
-        keys_to_exclude = {"id", "question", "context", "final_answer"}
+        keys_to_exclude = {"id", "question", "context", "final_answer", \
+                           "image_1", "image_2", "image_3", "image_4", "image_5"}
     elif dataset_origin == "SciBench":
         processed = {
             "id": data.get("problemid"),
