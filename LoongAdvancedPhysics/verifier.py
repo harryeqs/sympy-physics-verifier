@@ -461,6 +461,10 @@ class PhysicsVerifier:
             try:
                 logger.info(f'Response expression: {output}')
                 gt_expr = parse_latex(answer.gt_answer.lstrip("$").rstrip("$"))
+                gt_expr = gt_expr.subs({
+                    sp.Symbol('pi'): sp.pi,
+                    sp.Symbol('e'): sp.E
+                })
                 logger.info(f'Ground truth expression: {gt_expr}')
 
                 if isinstance(gt_expr, (int, float, sp.Number)):
@@ -491,12 +495,12 @@ if __name__ == "__main__":
     # Example response with a LaTeX formatted unit string.
     response = ResponseFormat(
         reasoning="Example with LaTeX formatted unit.",
-        code="result = 1.00",
+        code="import sympy as sp\nresult = 3*sp.pi",
         unit="meter^2"
     )
     # Ground truth with equivalent unit in a Python-friendly format.
     answer = AnswerFormat(
-        gt_answer='$1$',
+        gt_answer='$3\\pi$',
         unit="$m^2$"
     )
  
