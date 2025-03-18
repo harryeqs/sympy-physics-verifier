@@ -305,6 +305,8 @@ class PhysicsVerifier:
         """
         namespace = {}
         try:
+            pattern = r'([\w\d_]+)\.evalf\(\)'
+            final_evalf_variable = re.findall(pattern, code)
             exec(code, namespace, namespace)
             if "result" not in namespace:
                 logger.info("The executed code did not define a variable called 'result'.")
