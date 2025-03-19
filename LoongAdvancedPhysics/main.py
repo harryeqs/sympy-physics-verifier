@@ -56,7 +56,8 @@ def preprocess_dataset(dataset_origin: Literal["OlympiadBench", "SciBench"]):
         files = ['OE_TO_physics_en_COMP.json']
     elif dataset_origin == "SciBench":
         dataset_path = os.path.join(current_path, "PhysicsDatasets/SciBench/")
-        files = ['class_sol.json', 'fund_sol.json', 'thermo_sol.json']
+        # files = ['class_sol.json', 'fund_sol.json', 'thermo_sol.json']
+        files = ['full_question.json']
     else:
         raise ValueError("Invalid dataset name. Please choose either 'OlympiadBench' or 'SciBench'.")
 
