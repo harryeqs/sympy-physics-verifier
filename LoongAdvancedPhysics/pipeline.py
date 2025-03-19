@@ -4,7 +4,7 @@ import time
 import os
 from camel.agents import ChatAgent
 from camel.models import BaseModelBackend
-from typing import List, Dict, Union
+from typing import List, Dict, Union, Literal
 from verifier import PhysicsVerifier, logger
 from models import ResponseFormat, AnswerFormat, VerificationResult, OutputFormat
 
