@@ -35,12 +35,14 @@ if __name__ == "__main__":
     #     }
     # )
     
-    output_location = os.path.join(current_path, 'seed_dataset', DATASET_ORIGIN)
+    output_location = os.path.join(current_path, 'PhysicsDatasets', 'seed_dataset', f'{DATASET_ORIGIN}.json')
 
     all_problem_ids = [sample['id'] for sample in dataset]
 
     if not os.path.isfile(output_location):
-        os.mknod(output_location)
+        # os.mknod(output_location)
+        with open(output_location, 'w') as f:
+            f.write("")
         unsolved_problem_ids = all_problem_ids
     else:
         with open(output_location) as f:
@@ -48,6 +50,8 @@ if __name__ == "__main__":
 
         solved_problem_ids = [sample['id'] for sample in solved_dataset]
         unsolved_problem_ids = [problem_id for problem_id in all_problem_ids if problem_id not in solved_problem_ids]
+
+    logger.info(f'No. of problem to solve: {len(unsolved_problem_ids)}')
 
     pipeline = PhysicsCodeGenPipeline(
         reason_model=reason_model,

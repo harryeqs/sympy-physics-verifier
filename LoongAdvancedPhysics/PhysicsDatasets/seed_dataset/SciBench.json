@@ -1,0 +1,50 @@
+[
+    {
+        "sample_id": "p2.21",
+        "response": {
+            "reasoning": "To calculate the change in enthalpy (\u0394H_m) for nitrogen treated as a van der Waals gas when the pressure decreases from 500 atm to 1 atm at a constant temperature of 300 K, we will use the given formula for the chemical potential (\u03bc) of a van der Waals gas. The formula provided is \u03bc = {(2a / RT) - b} / C_{p,m}, where C_{p,m} is the molar heat capacity at constant pressure. Given that C_{p,m} = (7/2)R, we can substitute this into the equation. We will first calculate \u03bc at both pressures and then find \u0394H_m using the difference in chemical potential. The final result will be expressed in appropriate units of energy per mole (e.g., kJ/mol).",
+            "code": "import sympy as sp\n\n# Define symbols and constants\nR, T, a, b, P1, P2 = sp.symbols('R T a b P1 P2')\nC_p_m = (7/2) * R  # Molar heat capacity at constant pressure for nitrogen\n\na_value = 1.352  # dm^6 atm mol^-2\nb_value = 0.0387  # dm^3 mol^-1\nT_value = 300  # K\nP1_value = 500  # atm\nP2_value = 1.00  # atm\n\n# Substitute values into the equations\nmu1 = (2 * a_value / (R * T_value)) - b_value\nmu2 = (2 * a_value / (R * T_value)) - b_value\n\n# Calculate the change in chemical potential\nDelta_mu = mu2 - mu1\n\n# Calculate Delta H_m\nDelta_H_m = Delta_mu * C_p_m\n\n# Final result\nresult = Delta_H_m.subs({R: 0.0821, T: T_value})  # R in dm^3 atm K^-1 mol^-1\n",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "+3.60",
+            "unit": "$\\text{kJ}$ "
+        },
+        "verification_result": {
+            "code_output": "0.0",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " +3.60",
+            "comment": " ",
+            "unit": "$\\text{kJ}$ ",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e2.1(a)(b)",
+        "response": {
+            "reasoning": "To calculate the work needed for a person to climb a certain height, we can use the formula for gravitational potential energy, which is given by W = m * g * h, where W is the work done, m is the mass of the person, g is the acceleration due to gravity, and h is the height climbed. In this case, the mass of the person is 65 kg, the acceleration due to gravity on the Moon is 1.60 m/s\u00b2, and the height climbed is 4.0 m. By substituting these values into the equation, we can compute the work done in joules. The final result will be expressed in joules (J).",
+            "code": "import sympy as sp\n\n# Define symbols and constants\nm, g, h = sp.symbols('m g h')\n\n# Given values\nmass = 65  # kg\ngravity = 1.60  # m/s^2\nheight = 4.0  # m\n\n# Calculate work done\nwork_done = mass * gravity * height\n\n# Final result\nresult = work_done\n",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "420",
+            "unit": " $\\mathrm{J}$"
+        },
+        "verification_result": {
+            "code_output": "416.0",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "$4.2 \\times 10^2$",
+            "comment": " ",
+            "unit": " $\\mathrm{J}$",
+            "source": "atkins"
+        }
+    }
+]
