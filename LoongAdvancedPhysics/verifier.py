@@ -117,7 +117,8 @@ class UnitParser:
             expr = parse_latex(unit_str)
             logger.info(f"Parsed LaTeX unit: {expr}.")
         except Exception as e:
-            raise ValueError(f"Failed to parse LaTeX unit '{unit_str}': {e}")
+            logger.info(f"Failed to parse LaTeX unit '{unit_str}': {e}")
+            return unit_str
         
         # Substitute allowed unit symbols
         for key, unit_obj in self.allowed_units.items():

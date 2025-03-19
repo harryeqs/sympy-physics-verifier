@@ -7,6 +7,8 @@ import json
 import logging
 import argparse
 
+from data_processor import DataProcessor
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--dataset", type=str, required=True, help="Which dataset to use: OlympiadBench or SciBench")
 parser.add_argument("--num", type=int, required=False, help="Number of samples to generate. If not provided, all samples will be generated. It will be ignored if you have specified problem_ids.")
@@ -16,65 +18,6 @@ parser.add_argument("--out_location", type=str, required=False, help="Output dir
 
 args = parser.parse_args()
 
-def preprocess_data(data: Dict, dataset_origin: Literal["OlympiadBench", "SciBench"]):
-
-    if dataset_origin == "OlympiadBench":
-        # Create a new dictionary with the selected keys.
-        processed = {
-            "id": data.get("id"),
-            "question": data.get("context") + '\n' + data.get("question"),
-            "gt_answer": data.get("final_answer")[0],
-            "unit": data.get("unit"),
-            "metadata": {}
-        }
-        
-        # Define keys that should be moved out of metadata.
-        keys_to_exclude = {"id", "question", "context", "final_answer", \
-                           "image_1", "image_2", "image_3", "image_4", "image_5"}
-    elif dataset_origin == "SciBench":
-        processed = {
-            "id": data.get("problemid"),
-            "question": data.get("problem_text"),
-            "gt_answer": data.get("answer_number"),
-            "unit": data.get("unit"),
-            "metadata": {}
-        }
-        
-        keys_to_exclude = {"problemid", "problem_text", "answer_number"}
-    
-    # Put the remaining keys into metadata.
-    for key, value in data.items():
-        if key not in keys_to_exclude:
-            processed["metadata"][key] = value
-            
-    return processed
-
-def preprocess_dataset(dataset_origin: Literal["OlympiadBench", "SciBench"]):
-
-    if dataset_origin == "OlympiadBench":
-        dataset_path = os.path.join(current_path, "PhysicsDatasets/OlympiadBench/")
-        files = ['OE_TO_physics_en_COMP.json']
-    elif dataset_origin == "SciBench":
-        dataset_path = os.path.join(current_path, "PhysicsDatasets/SciBench/")
-        # files = ['class_sol.json', 'fund_sol.json', 'thermo_sol.json']
-        files = ['full_question.json']
-    else:
-        raise ValueError("Invalid dataset name. Please choose either 'OlympiadBench' or 'SciBench'.")
-
-    dataset = []
-    for file in files:
-        with open(os.path.join(dataset_path, file)) as f:
-            d = json.load(f)
-            f.close()
-        dataset += d
-
-    processed_dataset = []
-    for data in dataset:
-        processed_data = preprocess_data(data, dataset_origin)
-        processed_dataset.append(processed_data)
-
-    return processed_dataset
-
 if __name__ == "__main__":
     # Set up logging
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -82,7 +25,8 @@ if __name__ == "__main__":
 
     current_path = os.path.dirname(os.path.abspath(__file__))
 
-    dataset = preprocess_dataset(args.dataset)
+    physics_data_processor = DataProcessor(dataset_origin=args.dataset, base_dir=current_path)
+    dataset = physics_data_processor.preprocess_dataset()
 
     reason_model = OpenAIModel(
         model_type=ModelType.GPT_4O_MINI,
