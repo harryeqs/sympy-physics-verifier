@@ -48,16 +48,17 @@ if __name__ == "__main__":
         with open(output_location) as f:
             solved_dataset = json.load(f)
 
-        solved_problem_ids = [sample['id'] for sample in solved_dataset]
-        unsolved_problem_ids = [problem_id for problem_id in all_problem_ids if problem_id not in solved_problem_ids]
+        solved_problem_ids = [sample['sample_id'] for sample in solved_dataset]
+        unsolved_problem_ids = [problem_id.strip() for problem_id in all_problem_ids if problem_id not in solved_problem_ids]
 
-    logger.info(f'No. of problem to solve: {len(unsolved_problem_ids)}')
+    print(f'No. of problem to solve: {len(unsolved_problem_ids)}')
 
     pipeline = PhysicsCodeGenPipeline(
         reason_model=reason_model,
         dataset=dataset,
         output_location=output_location,
         problem_ids=unsolved_problem_ids,
+        save_right_solution=True,
     )
 
     pipeline.run()

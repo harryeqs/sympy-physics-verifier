@@ -46,5 +46,437 @@
             "unit": " $\\mathrm{J}$",
             "source": "atkins"
         }
+    },
+    {
+        "sample_id": "12.1",
+        "response": {
+            "reasoning": "To calculate the moment of inertia of a water molecule (H2O) around the axis defined by the bisector of the HOH angle, we first need to determine the positions of the hydrogen atoms relative to the oxygen atom. The bond angle is given as 104.5 degrees, and the bond length is 95.7 pm. We can use trigonometric functions to find the coordinates of the hydrogen atoms in a 2D plane, assuming the oxygen atom is at the origin. The moment of inertia (I) is calculated using the formula I = \u03a3 m_i * r_i^2, where m_i is the mass of each atom and r_i is the distance from the axis of rotation. We will consider the contributions from both hydrogen atoms and the oxygen atom, and since the axis is along the bisector, we will calculate the distances accordingly. The final result will be expressed in kg\u00b7m\u00b2.",
+            "code": "import sympy as sp\n\n# Define constants\nm_H = 1.00784e-3  # mass of hydrogen atom in kg\nm_O = 15.999e-3   # mass of oxygen atom in kg\nbond_length = 95.7e-12  # bond length in meters\nbond_angle = 104.5  # bond angle in degrees\n\n# Convert bond angle to radians\nbond_angle_rad = sp.rad(bond_angle)\n\n# Calculate the coordinates of the hydrogen atoms\n# Oxygen atom at the origin (0, 0)\n# Hydrogen 1 coordinates\nH1_x = bond_length * sp.cos(bond_angle_rad / 2)\nH1_y = bond_length * sp.sin(bond_angle_rad / 2)\n\n# Hydrogen 2 coordinates (symmetric to H1)\nH2_x = -H1_x\nH2_y = H1_y\n\n# Calculate the distances from the bisector axis (y-axis)\n# The distance from the y-axis for H1 and H2 is their x-coordinates\nr_H1 = H1_x\nr_H2 = H2_x\n\n# Moment of inertia calculation\nI = m_H * r_H1**2 + m_H * r_H2**2 + m_O * 0**2  # Oxygen contributes nothing as it lies on the axis\n\n# Final result\nresult = I\n",
+            "unit": "kg\u00b7m\u00b2"
+        },
+        "answer": {
+            "gt_answer": "1.91",
+            "unit": " $10^{-47} \\mathrm{~kg} \\mathrm{~m}^2$"
+        },
+        "verification_result": {
+            "code_output": "6.91921187260291e-24",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "\n$$\r\nI=\\sum_i m_i x_i^2=m_{\\mathrm{H}} x_{\\mathrm{H}}^2+0+m_{\\mathrm{H}} x_{\\mathrm{H}}^2=2 m_{\\mathrm{H}} x_{\\mathrm{H}}^2\r\n$$\r\nIf the bond angle of the molecule is denoted $2 \\phi$ and the bond length is $R$, trigonometry gives $x_{\\mathrm{H}}=R \\sin \\phi$. It follows that\r\n$$\r\nI=2 m_{\\mathrm{H}} R^2 \\sin ^2 \\phi\r\n$$\r\nSubstitution of the data gives\r\n$$\r\n\\begin{aligned}\r\nI & =2 \\times\\left(1.67 \\times 10^{-27} \\mathrm{~kg}\\right) \\times\\left(9.57 \\times 10^{-11} \\mathrm{~m}\\right)^2 \\times \\sin ^2\\left(\\frac{1}{2} \\times 104.5^{\\circ}\\right) \\\\\r\n& =1.91 \\times 10^{-47} \\mathrm{~kg} \\mathrm{~m}^2\r\n\\end{aligned}\r\n$$\r\nNote that the mass of the $\\mathrm{O}$ atom makes no contribution to the moment of inertia for this mode of rotation as the atom is immobile while the $\\mathrm{H}$ atoms circulate around it.\n",
+            "answer_latex": " 1.91",
+            "comment": " ",
+            "unit": " $10^{-47} \\mathrm{~kg} \\mathrm{~m}^2$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "15.4.35",
+        "response": {
+            "reasoning": "To find the volume of water in the swimming pool, we can model the pool as a circular cylinder with a varying depth. The diameter of the pool is given as 40 ft, which gives a radius of 20 ft. The depth of the pool varies linearly from 2 ft at the south end to 7 ft at the north end. We can express the depth as a function of the position along the north-south axis (y-axis), where the south end corresponds to y = -20 ft and the north end corresponds to y = 20 ft. The depth function can be defined as d(y) = 2 + (5/40)(y + 20), where the slope (5/40) represents the change in depth per foot. The volume can then be calculated by integrating the area of circular cross-sections of the pool along the y-axis from -20 ft to 20 ft. The area of a circular cross-section at depth d(y) is A(y) = \u03c0 * (20^2) * d(y). The final volume will be expressed in cubic feet (ft\u00b3).",
+            "code": "import sympy as sp\n\n# Define symbols\nr = 20  # radius of the pool in feet\n\n# Define the depth function d(y)\n# y ranges from -20 ft (south end) to 20 ft (north end)\n# d(y) = 2 + (5/40)(y + 20)\n# where (5/40) is the slope of the depth increase\ny = sp.symbols('y')\nd = 2 + (5/40) * (y + 20)  # depth as a function of y\n\n# Area of the circular cross-section at depth d(y)\nA = sp.pi * r**2 * d\n\n# Volume is the integral of the area from y = -20 to y = 20\nvolume = sp.integrate(A, (y, -20, 20))\n\n# Final result\nresult = volume\n",
+            "unit": "ft\u00b3"
+        },
+        "answer": {
+            "gt_answer": "5654.86677646",
+            "unit": " $\\mathrm{ft}^3$"
+        },
+        "verification_result": {
+            "code_output": "226194.671058465",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " $1800\\pi$",
+            "comment": " ",
+            "unit": " $\\mathrm{ft}^3$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "D-1",
+        "response": {
+            "reasoning": "To calculate the percentage difference between the values of e^x and 1+x for a small value of x (in this case, x = 0.0050), we first compute both expressions. The percentage difference can be calculated using the formula: \n\nPercentage Difference = |(e^x - (1 + x)) / e^x| * 100%. \n\nThis formula gives us the relative difference between the two values as a percentage of e^x. We will substitute x = 0.0050 into both expressions, compute their values, and then calculate the percentage difference. The final result will be expressed as a percentage.",
+            "code": "import sympy as sp\n\n# Define the variable\nx = 0.0050\n\n# Calculate e^x and 1+x\nexp_x = sp.exp(x)\nlinear_approx = 1 + x\n\n# Calculate the percentage difference\npercentage_difference = sp.Abs((exp_x - linear_approx) / exp_x) * 100\n\n# Final result\nresult = percentage_difference\n",
+            "unit": "%"
+        },
+        "answer": {
+            "gt_answer": "1.25",
+            "unit": " $10^{-3} \\%$"
+        },
+        "verification_result": {
+            "code_output": "0.00124584113542779",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1.25",
+            "comment": "Math Part D (after chapter 4)",
+            "unit": " $10^{-3} \\%$",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "page66-28",
+        "response": {
+            "reasoning": "To find the maximum height from which a mass can be dropped while attaining a velocity of no more than 10 m/s, we can use the principles of dynamics and energy conservation. The mass experiences gravitational force and a resistive force proportional to its velocity. The equation of motion can be expressed as: \n\nm * dv/dt = mg - kv, \n\nwhere m is the mass (0.25 kg), g is the acceleration due to gravity (approximately 9.81 m/s\u00b2), and k is the resistance coefficient (0.2). \n\nWe can rearrange this equation and separate variables to solve for the velocity as a function of time. After finding the expression for velocity, we can use the kinematic equation to relate the maximum height (h) to the initial potential energy and the kinetic energy at the maximum velocity. The potential energy at height h is mgh, and the kinetic energy at maximum velocity is (1/2)mv\u00b2. Setting these equal gives us the maximum height. \n\nFinally, we will compute the maximum height using the given values. The final result will be expressed in meters.",
+            "code": "import sympy as sp\n\n# Define constants\nm = 0.25  # mass in kg\nk = 0.2   # resistance coefficient\ng = 9.81  # acceleration due to gravity in m/s^2\nv_max = 10  # maximum velocity in m/s\n\n# Using energy conservation: mgh = (1/2)mv_max^2\n# We can cancel mass m from both sides since it is non-zero\nh = (1/2) * (v_max**2) / g\n\n# Final result\nresult = h\n",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": " 13.45",
+            "unit": " m"
+        },
+        "verification_result": {
+            "code_output": "5.09683995922528",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 13.45",
+            "comment": " ",
+            "unit": " m",
+            "source": "diff"
+        }
+    },
+    {
+        "sample_id": " page 66-28",
+        "response": {
+            "reasoning": "To find the velocity of a mass when it hits the ground after being dropped from a height of 30 m in a medium offering resistance proportional to the velocity, we can use the principles of dynamics. The equation of motion for the mass can be expressed as:\n\nm * dv/dt = mg - kv,\n\nwhere m is the mass (0.25 kg), g is the acceleration due to gravity (approximately 9.81 m/s\u00b2), and k is the resistance coefficient (0.2). \n\nWe can rearrange this equation to separate variables and integrate to find the velocity as a function of time. However, a more straightforward approach is to use energy conservation principles. The potential energy at the height of 30 m will be converted into kinetic energy and work done against the resistive force.\n\nThe potential energy (PE) at height h is given by:\nPE = mgh,\n\nThe work done against the resistive force when the mass falls a distance h is:\nWork = \u222b(0 to h) kv dx = k * v * h.\n\nSetting the potential energy equal to the sum of kinetic energy and work done against resistance will allow us to solve for the final velocity when the mass hits the ground. The kinetic energy (KE) is given by:\nKE = (1/2)mv\u00b2.\n\nBy equating these energies, we can solve for the final velocity. The final result will be expressed in m/s.",
+            "code": "import sympy as sp\n\n# Define constants\nm = 0.25  # mass in kg\nk = 0.2   # resistance coefficient\nh = 30    # height in m\ng = 9.81  # acceleration due to gravity in m/s^2\n\n# Potential energy at height h\nPE = m * g * h\n\n# Work done against resistance when falling distance h\n# We will assume the average velocity during the fall is v_avg = v_final / 2 for simplicity\n# Thus, Work = k * v_avg * h = k * (v_final / 2) * h\n# Setting PE = KE + Work\n# PE = (1/2) * m * v_final^2 + k * (v_final / 2) * h\n# Rearranging gives:\n# m * g * h = (1/2) * m * v_final^2 + k * (v_final / 2) * h\n# m * g * h = (1/2) * v_final * (m + k * h)\n# v_final = (2 * m * g * h) / (m + k * h)\n\nv_final = (2 * m * g * h) / (m + k * h)\n\n# Final result\nresult = v_final\n",
+            "unit": "m/s"
+        },
+        "answer": {
+            "gt_answer": " 11.58",
+            "unit": " m/s"
+        },
+        "verification_result": {
+            "code_output": "23.544",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 11.58",
+            "comment": " ",
+            "unit": " m/s",
+            "source": "diff"
+        }
+    },
+    {
+        "sample_id": "5.6-9",
+        "response": {
+            "reasoning": "To compute the probability P(1.7 \u2264 Y \u2264 3.2) where Y is the mean of a random sample of size n = 4 from a distribution with a known mean and variance, we first need to determine the mean and standard deviation of the sample mean. \n\nGiven that the population mean (\u03bc) is 40 and the population variance (\u03c3\u00b2) is 8, the standard deviation (\u03c3) is the square root of the variance, which is \u221a8. The standard deviation of the sample mean (\u03c3_Y) for a sample size of n = 4 is given by:\n\n\u03c3_Y = \u03c3 / \u221an = \u221a8 / \u221a4 = \u221a2.\n\nNext, we can standardize the variable Y using the Z-score formula:\n\nZ = (Y - \u03bc_Y) / \u03c3_Y,\n\nwhere \u03bc_Y is the mean of the sample means, which is equal to the population mean (\u03bc). Therefore, we can find the Z-scores for the values 1.7 and 3.2. After calculating the Z-scores, we can use the standard normal distribution to find the probabilities corresponding to these Z-scores and then compute the probability P(1.7 \u2264 Y \u2264 3.2) as the difference between these probabilities. The final result will be expressed as a probability value.",
+            "code": "import sympy as sp\nfrom scipy.stats import norm\n\n# Given parameters\nmu = 40  # population mean\nsigma_squared = 8  # population variance\nn = 4  # sample size\n\n# Calculate standard deviation of the population\nsigma = sp.sqrt(sigma_squared)\n\n# Standard deviation of the sample mean\nsigma_Y = sigma / sp.sqrt(n)\n\n# Define the range for Y\nY_lower = 1.7\nY_upper = 3.2\n\n# Calculate Z-scores for the lower and upper bounds\nZ_lower = (Y_lower - mu) / sigma_Y\nZ_upper = (Y_upper - mu) / sigma_Y\n\n# Calculate the probabilities using the standard normal distribution\nP_lower = norm.cdf(Z_lower)\nP_upper = norm.cdf(Z_upper)\n\n# Calculate the probability P(1.7 \u2264 Y \u2264 3.2)\nprobability = P_upper - P_lower\n\n# Final result\nresult = probability\n",
+            "unit": "probability"
+        },
+        "answer": {
+            "gt_answer": "0.6749",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": null,
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " $0.6749$",
+            "comment": " ",
+            "unit": " ",
+            "source": "stat"
+        }
+    },
+    {
+        "sample_id": " e1.17(a)(a)",
+        "response": {
+            "reasoning": "To find the pressure exerted by the ethane gas, we can use the Ideal Gas Law, which is given by the equation: \\( PV = nRT \\). Here, \\( P \\) is the pressure, \\( V \\) is the volume, \\( n \\) is the number of moles, \\( R \\) is the ideal gas constant, and \\( T \\) is the temperature in Kelvin. \\n\\n1. First, we need to convert the temperature from Celsius to Kelvin: \\( T(K) = 27 + 273.15 = 300.15 \\, K \\). \\n2. The volume is given as \\( V = 4.860 \\, dm^3 \\). \\n3. The number of moles is given as \\( n = 10.0 \\, mol \\). \\n4. The ideal gas constant \\( R \\) is approximately \\( 0.0821 \\, L \\, atm \\, K^{-1} \\, mol^{-1} \\). \\n\\nNow we can rearrange the Ideal Gas Law to solve for pressure: \\( P = \\frac{nRT}{V} \\). \\nSubstituting the values into the equation will give us the pressure in atm. Finally, we will compute the result and assign it to the variable 'result'.",
+            "code": "import sympy as sp\n\n# Define symbols, physical constants, and variables\nn = 10.0  # moles of C2H6\nV = 4.860  # volume in dm^3\nT = 27 + 273.15  # temperature in Kelvin\nR = 0.0821  # ideal gas constant in L atm K^-1 mol^-1\n\n# Calculate pressure using the Ideal Gas Law: P = nRT / V\nP = n * R * T / V\n\n# Compute the final result\nfinal_result = P\n\n# Final output assignment (must be the last line)\nresult = final_result",
+            "unit": "atm"
+        },
+        "answer": {
+            "gt_answer": "50.7",
+            "unit": "$\\mathrm{atm}$ "
+        },
+        "verification_result": {
+            "code_output": "50.70435185185185",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 50.7",
+            "comment": " ",
+            "unit": "$\\mathrm{atm}$ ",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": " e3.19(a)",
+        "response": {
+            "reasoning": "To calculate the change in chemical potential (\\( \\Delta \\mu \\)) of a perfect gas when its pressure is increased isothermally, we can use the following equation: \\[ \\Delta \\mu = RT \\ln\\left(\\frac{P_2}{P_1}\\right) \\] where: \\( R \\) is the ideal gas constant, \\( T \\) is the absolute temperature in Kelvin, \\( P_1 \\) is the initial pressure, and \\( P_2 \\) is the final pressure. \\n\\n1. First, we need to convert the temperature from Celsius to Kelvin: \\( T(K) = 40 + 273.15 = 313.15 \\, K \\). \\n2. The initial pressure \\( P_1 = 1.8 \\, atm \\) and the final pressure \\( P_2 = 29.5 \\, atm \\). \\n3. The ideal gas constant \\( R \\) is approximately \\( 0.0821 \\, L \\, atm \\, K^{-1} \\, mol^{-1} \\). \\n\\nNow we can substitute these values into the equation to compute the change in chemical potential. Finally, we will assign the result to the variable 'result'.",
+            "code": "import sympy as sp\n\n# Define the symbols and constants\nR = 0.0821  # ideal gas constant in L atm K^-1 mol^-1\nT = 40 + 273.15  # temperature in Kelvin\nP1 = 1.8  # initial pressure in atm\nP2 = 29.5  # final pressure in atm\n\n# Calculate the change in chemical potential\nDelta_mu = R * T * sp.ln(P2 / P1)\n\n# Compute the final result\nfinal_result = Delta_mu\n\n# Final output assignment (must be the last line)\nresult = final_result",
+            "unit": "L atm/mol"
+        },
+        "answer": {
+            "gt_answer": "+7.3",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "71.8996018236010",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " +7.3",
+            "comment": " ",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": " e3.1(a)(b)",
+        "response": {
+            "reasoning": "To calculate the change in entropy (\\( \\Delta S \\)) when energy is transferred reversibly and isothermally, we can use the formula: \\[ \\Delta S = \\frac{Q}{T} \\] where: \\( Q \\) is the heat transferred and \\( T \\) is the absolute temperature in Kelvin. \\n\\n1. First, we need to convert the temperature from Celsius to Kelvin: \\( T(K) = 100 + 273.15 = 373.15 \\, K \\). \\n2. The heat transferred is given as \\( Q = 25 \\, kJ = 25000 \\, J \\). \\n\\nNow we can substitute these values into the equation to compute the change in entropy. Finally, we will assign the result to the variable 'result'.",
+            "code": "import sympy as sp\n\n# Define the symbols and constants\nQ = 25000  # heat transferred in J\nT = 100 + 273.15  # temperature in Kelvin\n\n# Calculate the change in entropy\nDelta_S = Q / T\n\n# Compute the final result\nfinal_result = Delta_S\n\n# Final output assignment (must be the last line)\nresult = final_result",
+            "unit": "J/K"
+        },
+        "answer": {
+            "gt_answer": "67",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1}$ "
+        },
+        "verification_result": {
+            "code_output": "66.99718611818304",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 67",
+            "comment": " ",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1}$ ",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": " e3.4(a)(a)",
+        "response": {
+            "reasoning": "In an adiabatic process, there is no heat exchange with the surroundings, which means that the heat transfer \\( q \\) is equal to zero. Therefore, for the given problem, since the gas is compressed adiabatically, we can conclude that: \\[ q = 0 \\, J \\] \\nThis is because, by definition, an adiabatic process is characterized by the absence of heat transfer. Thus, the final result for the heat transfer during this process is simply zero. The final result will be assigned to the variable 'result'.",
+            "code": "# Since the process is adiabatic, the heat transfer is zero\nq = 0  # heat transfer in J\n\n# Compute the final result\nfinal_result = q\n\n# Final output assignment (must be the last line)\nresult = final_result",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "0",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "0",
+            "result_match": true,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "0 ",
+            "comment": " ",
+            "unit": " ",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e2.24(a) ",
+        "response": {
+            "reasoning": "To calculate the standard enthalpy change (\\( \\Delta_{r} H^{\\ominus} \\)) for the given reaction, we can use the relationship between the change in internal energy (\\( \\Delta_{r} U^{\\ominus} \\)) and the change in enthalpy: \\[ \\Delta_{r} H^{\\ominus} = \\Delta_{r} U^{\\ominus} + \\Delta n \\cdot R \\, T \\] where: \\( \\Delta n \\) is the change in the number of moles of gas, \\( R \\) is the ideal gas constant (approximately \\( 8.314 \\, J \\, K^{-1} \\, mol^{-1} \\)), and \\( T \\) is the temperature in Kelvin. \\n\\n1. First, we need to calculate \\( \\Delta n \\): \\[ \\Delta n = n_{products} - n_{reactants} \\] \\[ n_{products} = 2 \\, (CO_2) + 3 \\, (H_2O) = 5 \\] \\[ n_{reactants} = 3 \\, (O_2) \\] \\[ \\Delta n = 5 - 3 = 2 \\] \\n2. Now we can substitute the values into the equation. The temperature is given as \\( T = 298 \\, K \\). \\n3. The ideal gas constant \\( R \\) in kJ is \\( R = 0.008314 \\, kJ \\, K^{-1} \\, mol^{-1} \\). \\n\\nNow we can compute \\( \\Delta_{r} H^{\\ominus} \\) using the values we have calculated. Finally, we will assign the result to the variable 'result'.",
+            "code": "import sympy as sp\n\n# Given values\nDelta_U = -1373  # kJ/mol\nR = 0.008314  # kJ K^-1 mol^-1\nT = 298  # K\n\n# Calculate change in moles of gas\nn_products = 2 + 3  # 2 CO2 and 3 H2O\nn_reactants = 3  # 3 O2\nDelta_n = n_products - n_reactants\n\n# Calculate the change in enthalpy\nDelta_H = Delta_U + Delta_n * R * T\n\n# Compute the final result\nfinal_result = Delta_H\n\n# Final output assignment (must be the last line)\nresult = final_result",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "-1368",
+            "unit": "$\\mathrm{~kJ} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "-1368.044856",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -1368",
+            "comment": " ",
+            "unit": "$\\mathrm{~kJ} \\mathrm{~mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "p2.3(a) ",
+        "response": {
+            "reasoning": "To calculate the work done (\\( w \\)) during the heating of the gas, we can use the formula for work done on a gas during an isochoric (constant volume) process: \\[ w = -P \\Delta V \\] where \\( P \\) is the pressure and \\( \\Delta V \\) is the change in volume. Since the volume is fixed, \\( \\Delta V = 0 \\), which means that the work done is zero: \\[ w = 0 \\, J \\] \\nThis is because, in an isochoric process, there is no volume change, and thus no work is done on or by the system. Therefore, the final result for the work done during this process is simply zero. The final result will be assigned to the variable 'result'.",
+            "code": "# Since the volume is fixed, the change in volume is zero\nw = 0  # work done in J\n\n# Compute the final result\nfinal_result = w\n\n# Final output assignment (must be the last line)\nresult = final_result",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "0",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "0",
+            "result_match": true,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0",
+            "comment": " ",
+            "unit": " ",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": " e2.7(a)",
+        "response": {
+            "reasoning": "To calculate the work done by the system during the reaction of magnesium with hydrochloric acid, we can use the formula for work done by a gas during expansion against a constant external pressure: \\[ w = -P \\Delta V \\] where \\( P \\) is the pressure and \\( \\Delta V \\) is the change in volume. \\n\\n1. The reaction of magnesium with hydrochloric acid produces hydrogen gas and magnesium chloride: \\[ \\text{Mg}(s) + 2 \\text{HCl}(aq) \\rightarrow \\text{MgCl}_2(aq) + \\text{H}_2(g) \\] \\n2. From the stoichiometry of the reaction, 1 mole of magnesium produces 1 mole of hydrogen gas. \\n3. First, we need to calculate the number of moles of magnesium: \\[ n_{Mg} = \\frac{m_{Mg}}{M_{Mg}} \\] where \\( m_{Mg} = 15 \\, g \\) and \\( M_{Mg} \\approx 24.31 \\, g/mol \\). \\[ n_{Mg} = \\frac{15 \\, g}{24.31 \\, g/mol} \\] \\n4. Since 1 mole of magnesium produces 1 mole of hydrogen gas, the number of moles of hydrogen produced is equal to the number of moles of magnesium. \\n5. The volume of one mole of gas at standard conditions (1 atm and 25 \u00b0C) is approximately 24.45 L. Therefore, the change in volume \\( \\Delta V \\) can be calculated as: \\[ \\Delta V = n_{H_2} \\times V_{molar} \\] where \\( V_{molar} = 24.45 \\, L \\). \\n6. Convert \\( \\Delta V \\) to cubic meters (1 L = 0.001 m\u00b3) for the work calculation. \\n7. Finally, substitute the values into the work formula to compute the work done by the system. The atmospheric pressure is given as 1.0 atm, which can be converted to Pascals (1 atm = 101325 Pa). The final result will be assigned to the variable 'result'.",
+            "code": "import sympy as sp\n\n# Given values\nmass_Mg = 15  # g\nmolar_mass_Mg = 24.31  # g/mol\nP_atm = 1.0  # atm\nV_molar = 24.45  # L\n\n# Calculate the number of moles of magnesium\nn_Mg = mass_Mg / molar_mass_Mg\n\n# Number of moles of hydrogen produced is equal to the number of moles of magnesium\nn_H2 = n_Mg\n\n# Calculate the change in volume in cubic meters\nDelta_V_L = n_H2 * V_molar  # in L\nDelta_V_m3 = Delta_V_L * 0.001  # convert to m^3\n\n# Convert pressure to Pascals\nP = P_atm * 101325  # in Pa\n\n# Calculate the work done by the system\nw = -P * Delta_V_m3\n\n# Compute the final result\nfinal_result = w\n\n# Final output assignment (must be the last line)\nresult = final_result",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "-1.5",
+            "unit": "$\\text{kJ}$ "
+        },
+        "verification_result": {
+            "code_output": "-1528.6278794734676",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "$-1.5$",
+            "comment": " ",
+            "unit": "$\\text{kJ}$ ",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": " e2.31(a)(a)",
+        "response": {
+            "reasoning": "To calculate the change in internal energy (\\( \\Delta U_m \\)) for the isothermal expansion of a van der Waals gas, we can use the fact that for an ideal gas, the change in internal energy is given by: \\[ \\Delta U = n C_V \\Delta T \\] where \\( C_V \\) is the molar heat capacity at constant volume and \\( \\Delta T \\) is the change in temperature. However, since this is an isothermal process, \\( \\Delta T = 0 \\) and thus \\( \\Delta U = 0 \\) for an ideal gas. \\n\\nFor a van der Waals gas, we can also consider the work done during the expansion, which is related to the change in internal energy. The van der Waals equation is given by: \\[ (P + \\frac{a}{V_m^2})(V_m - b) = RT \\] where \\( a \\) and \\( b \\) are the van der Waals constants. \\n\\n1. We need to calculate the initial and final pressures using the van der Waals equation for the given volumes. \\n2. The work done during the isothermal expansion can be calculated using the formula: \\[ W = -\\int_{V_i}^{V_f} P \\, dV \\] where \\( P \\) can be expressed using the van der Waals equation. \\n3. The change in internal energy can be related to the work done and the heat exchanged during the process. However, since this is an isothermal process, we can conclude that the change in internal energy is zero for an ideal gas. \\n4. Therefore, we can state that for the isothermal expansion of nitrogen gas, \\( \\Delta U_m = 0 \\). The final result will be assigned to the variable 'result'.",
+            "code": "# Since this is an isothermal process for an ideal gas, the change in internal energy is zero\nDelta_U_m = 0  # change in internal energy in J\n\n# Compute the final result\nfinal_result = Delta_U_m\n\n# Final output assignment (must be the last line)\nresult = final_result",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "131",
+            "unit": "$\\mathrm{J} \\mathrm{mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "0.0",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 131",
+            "comment": " ",
+            "unit": "$\\mathrm{J} \\mathrm{mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": " e3.2(a)",
+        "response": {
+            "reasoning": "To calculate the molar entropy of neon at a temperature of 500 K, we can use the following relationship for the change in molar entropy with temperature at constant volume: \\[ S(T) = S(T_0) + C_V \\ln\\left(\\frac{T}{T_0}\\right) \\] where: \\( S(T) \\) is the molar entropy at temperature \\( T \\), \\( S(T_0) \\) is the molar entropy at the reference temperature \\( T_0 \\), and \\( C_V \\) is the molar heat capacity at constant volume. \\n\\n1. We are given that the molar entropy at \\( T_0 = 298 \\, K \\) is \\( S(298) = 146.22 \\, J \\, K^{-1} \\, mol^{-1} \\). \\n2. We need to find the molar heat capacity at constant volume \\( C_V \\) for neon. For a monatomic ideal gas like neon, \\( C_V \\) can be approximated as: \\[ C_V = \\frac{3}{2} R \\] where \\( R \\approx 8.314 \\, J \\, K^{-1} \\, mol^{-1} \\). \\n3. Calculate \\( C_V \\) and then substitute the values into the entropy equation to find the molar entropy at 500 K. \\n4. Finally, we will assign the result to the variable 'result'.",
+            "code": "import sympy as sp\n\n# Given values\nS_298 = 146.22  # J/(K mol)\nT_0 = 298  # K\nT = 500  # K\nR = 8.314  # J/(K mol)\n\n# Calculate C_V for a monatomic ideal gas\nC_V = (3/2) * R\n\n# Calculate the molar entropy at 500 K\nS_500 = S_298 + C_V * sp.ln(T / T_0)\n\n# Compute the final result\nfinal_result = S_500\n\n# Final output assignment (must be the last line)\nresult = final_result",
+            "unit": "J/(K mol)"
+        },
+        "answer": {
+            "gt_answer": "152.67",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "152.673924725214",
+            "result_match": true,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 152.67",
+            "comment": " ",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1} \\mathrm{~mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": " e2.9(a)",
+        "response": {
+            "reasoning": "To find the final temperature of a sample of argon that is expanded reversibly and adiabatically, we can use the relationship for an ideal gas undergoing an adiabatic process, which is given by: \\[ \\frac{T_1}{T_2} = \\left(\\frac{V_2}{V_1}\\right)^{(\\gamma - 1)} \\] where: \\( T_1 \\) is the initial temperature, \\( T_2 \\) is the final temperature, \\( V_1 \\) is the initial volume, \\( V_2 \\) is the final volume, and \\( \\gamma \\) is the heat capacity ratio (\\( C_p/C_v \\)). \\n\\n1. For argon, which is a monatomic ideal gas, \\( \\gamma \\) is approximately \\( 5/3 \\). \\n2. The initial temperature \\( T_1 = 273.15 \\, K \\), the initial volume \\( V_1 = 1.0 \\, dm^3 \\), and the final volume \\( V_2 = 3.0 \\, dm^3 \\). \\n3. We can rearrange the equation to solve for the final temperature \\( T_2 \\): \\[ T_2 = T_1 \\left(\\frac{V_1}{V_2}\\right)^{(\\gamma - 1)} \\] \\n4. Now we can substitute the values into the equation to compute the final temperature. Finally, we will assign the result to the variable 'result'.",
+            "code": "import sympy as sp\n\n# Given values\nT1 = 273.15  # initial temperature in K\nV1 = 1.0  # initial volume in dm^3\nV2 = 3.0  # final volume in dm^3\ngamma = 5/3  # heat capacity ratio for argon\n\n# Calculate the final temperature using the adiabatic relation\nT2 = T1 * (V1 / V2)**(gamma - 1)\n\n# Compute the final result\nfinal_result = T2\n\n# Final output assignment (must be the last line)\nresult = final_result",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "131",
+            "unit": " $\\mathrm{K}$"
+        },
+        "verification_result": {
+            "code_output": "131.3168233764895",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "131",
+            "comment": " ",
+            "unit": " $\\mathrm{K}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e3.1(a)(a) ",
+        "response": {
+            "reasoning": "To calculate the change in entropy (\\( \\Delta S \\)) when energy is transferred reversibly and isothermally, we can use the formula: \\[ \\Delta S = \\frac{Q}{T} \\] where: \\( Q \\) is the heat transferred and \\( T \\) is the absolute temperature in Kelvin. \\n\\n1. First, we need to convert the temperature from Celsius to Kelvin: \\( T(K) = 0 + 273.15 = 273.15 \\, K \\). \\n2. The heat transferred is given as \\( Q = 25 \\, kJ = 25000 \\, J \\). \\n\\nNow we can substitute these values into the equation to compute the change in entropy. Finally, we will assign the result to the variable 'result'.",
+            "code": "import sympy as sp\n\n# Define the symbols and constants\nQ = 25000  # heat transferred in J\nT = 0 + 273.15  # temperature in Kelvin\n\n# Calculate the change in entropy\nDelta_S = Q / T\n\n# Compute the final result\nfinal_result = Delta_S\n\n# Final output assignment (must be the last line)\nresult = final_result",
+            "unit": "J/K"
+        },
+        "answer": {
+            "gt_answer": "92",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "91.52480322167308",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 92",
+            "comment": " ",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": " p2.3(c)",
+        "response": {
+            "reasoning": "To calculate the change in enthalpy (\\( \\Delta H \\)) for the given process, we can use the relationship between heat added to the system and the change in enthalpy at constant volume. The change in enthalpy for an ideal gas can be expressed as: \\[ \\Delta H = n C_p \\Delta T \\] where: \\( n \\) is the number of moles, \\( C_p \\) is the molar heat capacity at constant pressure, and \\( \\Delta T \\) is the change in temperature. \\n\\nHowever, since we are given the heat added (\\( Q \\)) and the process occurs at constant volume, we can relate the heat added to the change in internal energy (\\( \\Delta U \\)) and the work done on/by the system. For an ideal gas, at constant volume: \\[ Q = \\Delta U \\] \\n\\n1. The heat added is given as \\( Q = 2.35 \\, kJ = 2350 \\, J \\). \\n2. The initial temperature is \\( T_i = 300 \\, K \\) and the final temperature is \\( T_f = 341 \\, K \\). \\n3. The change in temperature is \\( \\Delta T = T_f - T_i = 341 - 300 = 41 \\, K \\). \\n\\nSince we are dealing with a fixed volume and the heat added is equal to the change in internal energy, we can use the heat capacity at constant volume (\\( C_v \\)) to find the change in internal energy. For \\( CO_2 \\), the molar heat capacity at constant volume is approximately \\( C_v \\approx 28.46 \\, J/(mol \\, K) \\). \\n\\nNow we can calculate \\( \\Delta U \\) and then use the relationship \\( \\Delta H = \\Delta U + P \\Delta V \\). Since the volume is constant, \\( \\Delta V = 0 \\), thus \\( \\Delta H = \\Delta U \\). Therefore, we can conclude that \\( \\Delta H = Q \\). The final result will be assigned to the variable 'result'.",
+            "code": "# Given values\nQ = 2350  # heat added in J\n\n# Since the process occurs at constant volume, we can say that Delta H = Q\nDelta_H = Q\n\n# Compute the final result\nfinal_result = Delta_H\n\n# Final output assignment (must be the last line)\nresult = final_result",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "+3.03",
+            "unit": "$\\text{kJ}$"
+        },
+        "verification_result": {
+            "code_output": "2350.0",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " +3.03",
+            "comment": " ",
+            "unit": "$\\text{kJ}$",
+            "source": "atkins"
+        }
     }
 ]

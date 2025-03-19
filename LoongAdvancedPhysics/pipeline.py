@@ -75,6 +75,7 @@ class PhysicsCodeGenPipeline():
          num: Union[int, None] = None,
          sample: bool = False,
          problem_ids: Union[int, None] = None,
+         save_right_solution: bool = False,
          ):
       """
       Initialize the pipeline with the reason model and the dataset.
@@ -82,12 +83,17 @@ class PhysicsCodeGenPipeline():
       Args:
           reason_model (BaseModelBackend): The model used for reasoning and code generation.
           dataset (dict): The dataset containing physics problems and solutions.
+          output_location: The file path for the output.
+          num: number of samples to generate.
+          sample: wether or not randomly sample from the dataset.
+          problem_ids: the problem ids for the problems to run.
+          save_right_solution: wether or not to only save correct llm solutions.
       """
       # Set limit
       if problem_ids is not None:
          self.dataset = []
          for data in dataset:
-            data_id = data['id'].replace(' ', '')
+            data_id = data['id'].strip()
             if data_id in problem_ids:
                self.dataset.append(data)
       else:
@@ -107,6 +113,8 @@ class PhysicsCodeGenPipeline():
       
       self.verifier = PhysicsVerifier()
       self.output_location = output_location
+      self.save_right_solution = save_right_solution
+
       self.generation_summary = {
          'total_samples': len(self.dataset),
          'successful_generations': 0,
@@ -137,7 +145,8 @@ class PhysicsCodeGenPipeline():
             outputs = []
       else:
          outputs = []
-      
+
+      print(len(self.dataset))
       for sample in self.dataset:
          sample_id = sample['id']
          question = sample['question']
@@ -166,10 +175,13 @@ class PhysicsCodeGenPipeline():
             metadata=sample['metadata']
          )
 
+         if self.save_right_solution:
+            if not verification_outcome.result_match and verification_outcome.unit_match:
+               continue
+
          outputs.append(output.model_dump())
 
          with open(self.output_location, 'w') as f:
             json.dump(outputs, f, indent=4)
-
       
       logger.info(f"Generation Summary: {self.generation_summary}")
