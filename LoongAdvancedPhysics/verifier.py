@@ -313,7 +313,7 @@ class PhysicsVerifier:
 
             exec(code, namespace, namespace)
         except Exception as e:
-            logger.info("Failed to execute code:", e)
+            logger.info("Failed to execute llm generated code.")
             return None
 
         if "result" not in namespace:
