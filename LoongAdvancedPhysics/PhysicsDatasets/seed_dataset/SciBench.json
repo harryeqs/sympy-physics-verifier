@@ -3694,5 +3694,389 @@
             "unit": " ",
             "source": "calculus"
         }
+    },
+    {
+        "sample_id": " e2.18(a)",
+        "response": {
+            "reasoning": "To calculate the standard enthalpy of combustion (\u0394H_c\u00b0) of ethylbenzene (C\u2088H\u2081\u2080), we can use the standard enthalpy of formation (\u0394H_f\u00b0) and the combustion reaction. The combustion of ethylbenzene can be represented as:\n\nC\u2088H\u2081\u2080 + 10 O\u2082 \u2192 8 CO\u2082 + 5 H\u2082O\n\nThe standard enthalpy of combustion can be calculated using the following relationship:\n\n\u0394H_c\u00b0 = \u03a3\u0394H_f\u00b0(products) - \u0394H_f\u00b0(reactants)\n\nFor the combustion reaction, the products are carbon dioxide (CO\u2082) and water (H\u2082O). The standard enthalpies of formation for these products are:\n- \u0394H_f\u00b0(CO\u2082) = -393.5 kJ/mol,\n- \u0394H_f\u00b0(H\u2082O) = -285.8 kJ/mol.\n\nNow we can calculate the total enthalpy of formation for the products:\n- For 8 moles of CO\u2082: 8 * (-393.5 kJ/mol) = -3148 kJ,\n- For 5 moles of H\u2082O: 5 * (-285.8 kJ/mol) = -1429 kJ.\n\nNow we can sum these values to find the total enthalpy of formation of the products:\nTotal \u0394H_f\u00b0(products) = -3148 kJ + (-1429 kJ) = -4577 kJ.\n\nNow we can substitute the values into the combustion enthalpy equation:\n\u0394H_c\u00b0 = Total \u0394H_f\u00b0(products) - \u0394H_f\u00b0(ethylbenzene).\n\nSubstituting the values:\n\u0394H_c\u00b0 = -4577 kJ - (-12.5 kJ) = -4577 kJ + 12.5 kJ = -4564.5 kJ.\n\nThus, the standard enthalpy of combustion of ethylbenzene is approximately -4564.5 kJ/mol.",
+            "code": "import sympy as sp\n\n# Given values\nDelta_H_f_ethylenebenzene = -12.5  # kJ/mol\nDelta_H_f_CO2 = -393.5  # kJ/mol\nDelta_H_f_H2O = -285.8  # kJ/mol\n\n# Calculate the total enthalpy of formation for the products\nDelta_H_f_products = (8 * Delta_H_f_CO2) + (5 * Delta_H_f_H2O)\n\n# Calculate the standard enthalpy of combustion\nDelta_H_c = Delta_H_f_products - Delta_H_f_ethylenebenzene\n\n# Final output assignment (must be the last line)\nresult = Delta_H_c",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "-4564.7",
+            "unit": " $\\mathrm{kJ} \\mathrm{mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "-4564.5",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -4564.7",
+            "comment": " ",
+            "unit": " $\\mathrm{kJ} \\mathrm{mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": " 14.4.5",
+        "response": {
+            "reasoning": "To estimate the maximum error in the calculated volume of a right circular cone using differentials, we start with the formula for the volume \\( V \\) of a cone:\n\n\\[ V = \\frac{1}{3} \\pi r^2 h \\]\n\nWhere:\n- \\( r \\) is the base radius,\n- \\( h \\) is the height.\n\n1. **Calculate the differential of the volume**:\n   We will use the total differential to estimate the change in volume \\( dV \\):\n   \\[ dV = \\frac{\\partial V}{\\partial r} dr + \\frac{\\partial V}{\\partial h} dh \\]\n\n2. **Calculate the partial derivatives**:\n   - The partial derivative with respect to \\( r \\):\n   \\[ \\frac{\\partial V}{\\partial r} = \\frac{1}{3} \\pi (2rh) = \\frac{2}{3} \\pi rh \\]\n   - The partial derivative with respect to \\( h \\):\n   \\[ \\frac{\\partial V}{\\partial h} = \\frac{1}{3} \\pi r^2 \\]\n\n3. **Substitute the values**:\n   - Given values:\n     - Base radius \\( r = 10 \\) cm,\n     - Height \\( h = 25 \\) cm,\n     - Possible errors: \\( dr = 0.1 \\) cm and \\( dh = 0.1 \\) cm.\n   - Calculate the partial derivatives at these values:\n   \\[ \\frac{\\partial V}{\\partial r} = \\frac{2}{3} \\pi (10)(25) = \\frac{500}{3} \\pi \\]\n   \\[ \\frac{\\partial V}{\\partial h} = \\frac{1}{3} \\pi (10^2) = \\frac{100}{3} \\pi \\]\n\n4. **Calculate the differential \\( dV \\)**:\n   \\[ dV = \\left( \\frac{500}{3} \\pi \\right)(0.1) + \\left( \\frac{100}{3} \\pi \\right)(0.1) \\]\n   \\[ dV = \\frac{50}{3} \\pi + \\frac{10}{3} \\pi = \\frac{60}{3} \\pi = 20 \\pi \\]\n\n5. **Estimate the maximum error**:\n   The maximum error in the calculated volume of the cone is approximately:\n   \\[ dV \\approx 20 \\pi \\text{ cm}^3 \\]\n   Now we can compute the numerical value of this expression.",
+            "code": "import sympy as sp\n\n# Given values\nr = 10  # base radius in cm\nh = 25  # height in cm\ndr = 0.1  # error in radius in cm\ndh = 0.1  # error in height in cm\n\n# Calculate the partial derivatives\npartial_V_r = (2/3) * sp.pi * r * h  # \u2202V/\u2202r\npartial_V_h = (1/3) * sp.pi * r**2  # \u2202V/\u2202h\n\n# Calculate the differential dV\ndV = (partial_V_r * dr) + (partial_V_h * dh)\n\n# Final output assignment (must be the last line)\nresult = dV",
+            "unit": "cm^3"
+        },
+        "answer": {
+            "gt_answer": "62.8318530718",
+            "unit": " $\\mathrm{~cm}^3$"
+        },
+        "verification_result": {
+            "code_output": "62.8318530717959",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "The volume $V$ of a cone with base radius $r$ and height $h$ is $V=\\pi r^2 h / 3$. So the differential of $V$ is\r\n$$\r\nd V=\\frac{\\partial V}{\\partial r} d r+\\frac{\\partial V}{\\partial h} d h=\\frac{2 \\pi r h}{3} d r+\\frac{\\pi r^2}{3} d h\r\n$$\r\nSince each error is at most $0.1 \\mathrm{~cm}$, we have $|\\Delta r| \\leqslant 0.1,|\\Delta h| \\leqslant 0.1$. To estimate the largest error in the volume we take the largest error in the measurement of $r$ and of $h$. Therefore we take $d r=0.1$ and $d h=0.1$ along with $r=10, h=25$. This gives\r\n$$\r\nd V=\\frac{500 \\pi}{3}(0.1)+\\frac{100 \\pi}{3}(0.1)=20 \\pi\r\n$$\r\nThus the maximum error in the calculated volume is about $20 \\pi \\mathrm{cm}^3 \\approx 63 \\mathrm{~cm}^3$.\r\n",
+            "answer_latex": " $20\\pi$",
+            "comment": "with solution ",
+            "unit": " $\\mathrm{~cm}^3$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "1-38 ",
+        "response": {
+            "reasoning": "To calculate the de Broglie wavelength of an electron with a given kinetic energy, we can use the de Broglie wavelength formula:\n\n\\[ \\lambda = \\frac{h}{p} \\]\n\nwhere:\n- \\( \\lambda \\) is the de Broglie wavelength,\n- \\( h \\) is the Planck constant (approximately \\( 6.626 \\times 10^{-34} \\, \\text{J} \\, \\text{s} \\)), and\n- \\( p \\) is the momentum of the electron.\n\nThe momentum \\( p \\) can be related to the kinetic energy (KE) of the electron using the following relationship:\n\n\\[ KE = \\frac{p^2}{2m} \\]\n\nwhere:\n- \\( m \\) is the mass of the electron (approximately \\( 9.109 \\times 10^{-31} \\, \\text{kg} \\)).\n\n1. **Convert the kinetic energy from eV to Joules**:\n   The conversion factor is \\( 1 \\, \\text{eV} = 1.602 \\times 10^{-19} \\, \\text{J} \\).\n   Therefore,\n   \\[ KE = 100 \\, \\text{eV} \\times 1.602 \\times 10^{-19} \\, \\text{J/eV} = 1.602 \\times 10^{-17} \\, \\text{J} \\]\n\n2. **Calculate the momentum \\( p \\)**:\n   Rearranging the kinetic energy formula gives:\n   \\[ p = \\sqrt{2m \\cdot KE} \\]\n   Substituting the values:\n   \\[ p = \\sqrt{2 \\cdot (9.109 \\times 10^{-31} \\, \\text{kg}) \\cdot (1.602 \\times 10^{-17} \\, \\text{J})} \\]\n\n3. **Calculate the de Broglie wavelength \\( \\lambda \\)**:\n   Now substitute \\( p \\) back into the de Broglie wavelength formula:\n   \\[ \\lambda = \\frac{h}{p} \\]\n\nNow we can compute the values step by step.",
+            "code": "import sympy as sp\n\n# Given values\nKE_eV = 100  # kinetic energy in eV\nh = 6.626e-34  # Planck constant in J\u00b7s\nm_e = 9.109e-31  # mass of electron in kg\n\n# Convert kinetic energy from eV to Joules\nKE_J = KE_eV * 1.602e-19  # 1 eV = 1.602 x 10^-19 J\n\n# Calculate momentum p\np = sp.sqrt(2 * m_e * KE_J)\n\n# Calculate de Broglie wavelength\nlambda_de_Broglie = h / p\n\n# Final output assignment (must be the last line)\nresult = lambda_de_Broglie",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "0.123",
+            "unit": "nm "
+        },
+        "verification_result": {
+            "code_output": "0.122650642280104",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.123",
+            "comment": " ",
+            "unit": "nm ",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": " 1-18",
+        "response": {
+            "reasoning": "To calculate the work function \\( \\phi \\) of potassium metal using the threshold wavelength, we can use the relationship between the work function and the threshold wavelength given by the equation:\n\n\\[ \\phi = \\frac{hc}{\\lambda} \\]\n\nWhere:\n- \\( \\phi \\) is the work function in joules,\n- \\( h \\) is the Planck constant (approximately \\( 6.626 \\times 10^{-34} \\, \\text{J} \\, \\text{s} \\)),\n- \\( c \\) is the speed of light (approximately \\( 3.00 \\times 10^{8} \\, \\text{m/s} \\)), and\n- \\( \\lambda \\) is the threshold wavelength in meters.\n\n1. **Convert the threshold wavelength from nanometers to meters**:\n   \\[ \\lambda = 564 \\, \\text{nm} = 564 \\times 10^{-9} \\, \\text{m} \\]\n\n2. **Substitute the values into the equation**:\n   \\[ \\phi = \\frac{(6.626 \\times 10^{-34} \\, \\text{J} \\, \\text{s})(3.00 \\times 10^{8} \\, \\text{m/s})}{564 \\times 10^{-9} \\, \\text{m}} \\]\n\nNow we can compute the work function using these values.",
+            "code": "import sympy as sp\n\n# Given values\nh = 6.626e-34  # Planck constant in J\u00b7s\nc = 3.00e8  # speed of light in m/s\nlambda_nm = 564  # threshold wavelength in nm\n\n# Convert wavelength from nm to m\nlambda_m = lambda_nm * 1e-9  # convert nm to m\n\n# Calculate the work function\nphi = (h * c) / lambda_m\n\n# Final output assignment (must be the last line)\nresult = phi",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "3.52",
+            "unit": "$10^{-19} \\mathrm{~J}$"
+        },
+        "verification_result": {
+            "code_output": "3.52446808510638",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 3.52",
+            "comment": " Only the first part, the work function is taken",
+            "unit": "$10^{-19} \\mathrm{~J}$",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": " 1-17",
+        "response": {
+            "reasoning": "To find the temperature needed for a blackbody radiator (like a tungsten filament in a lightbulb) to emit light with a peak wavelength of \\( \\lambda_{\\max} = 550 \\, \\text{nm} \\), we can use Wien's displacement law, which states:\n\n\\[ \\lambda_{\\max} T = b \\]\n\nwhere:\n- \\( \\lambda_{\\max} \\) is the peak wavelength in meters,\n- \\( T \\) is the absolute temperature in Kelvin,\n- \\( b \\) is Wien's displacement constant, approximately equal to \\( 2.898 \\times 10^{-3} \\, \\text{m} \\, \\text{K} \\).\n\n1. **Convert the wavelength from nanometers to meters**:\n   \\[ \\lambda_{\\max} = 550 \\, \\text{nm} = 550 \\times 10^{-9} \\, \\text{m} \\]\n\n2. **Rearrange Wien's law to solve for temperature \\( T \\)**:\n   \\[ T = \\frac{b}{\\lambda_{\\max}} \\]\n\n3. **Substitute the values into the equation**:\n   \\[ T = \\frac{2.898 \\times 10^{-3} \\, \\text{m} \\, \\text{K}}{550 \\times 10^{-9} \\, \\text{m}} \\]\n\nNow we can compute the temperature using these values.",
+            "code": "import sympy as sp\n\n# Given values\nb = 2.898e-3  # Wien's displacement constant in m\u00b7K\nlambda_max_nm = 550  # peak wavelength in nm\n\n# Convert wavelength from nm to m\nlambda_max_m = lambda_max_nm * 1e-9  # convert nm to m\n\n# Calculate the temperature using Wien's law\nT = b / lambda_max_m\n\n# Final output assignment (must be the last line)\nresult = T",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "5300",
+            "unit": " $\\mathrm{~K}$\r\n"
+        },
+        "verification_result": {
+            "code_output": "5269.090909090909",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 5300",
+            "comment": " ",
+            "unit": " $\\mathrm{~K}$\r\n",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "1-40 ",
+        "response": {
+            "reasoning": "To find the potential through which a proton must fall to achieve a specific de Broglie wavelength, we can use the de Broglie wavelength formula:\n\n\\[ \\lambda = \\frac{h}{p} \\]\n\nwhere:\n- \\( \\lambda \\) is the de Broglie wavelength,\n- \\( h \\) is the Planck constant (approximately \\( 6.626 \\times 10^{-34} \\, \\text{J} \\, \\text{s} \\)), and\n- \\( p \\) is the momentum of the proton.\n\n1. **Calculate the momentum \\( p \\)**:\n   Rearranging the de Broglie wavelength formula gives:\n   \\[ p = \\frac{h}{\\lambda} \\]\n   Substituting the given wavelength \\( \\lambda = 1.0 \\times 10^{-10} \\, \\text{m} \\):\n   \\[ p = \\frac{6.626 \\times 10^{-34} \\, \\text{J} \\, \\text{s}}{1.0 \\times 10^{-10} \\, \\text{m}} \\]\n\n2. **Calculate the kinetic energy \\( KE \\)**:\n   The kinetic energy of the proton can be expressed in terms of its momentum:\n   \\[ KE = \\frac{p^2}{2m} \\]\n   where \\( m \\) is the mass of the proton (approximately \\( 1.67 \\times 10^{-27} \\, \\text{kg} \\)).\n\n3. **Relate the kinetic energy to the potential energy**:\n   The potential energy lost by the proton when falling through a potential \\( V \\) is equal to its kinetic energy:\n   \\[ KE = qV \\]\n   where \\( q \\) is the charge of the proton (approximately \\( 1.602 \\times 10^{-19} \\, \\text{C} \\)).\n   Therefore, we can express the potential as:\n   \\[ V = \\frac{KE}{q} \\]\n\n4. **Combine the equations**:\n   We can substitute the expression for kinetic energy into the potential energy equation:\n   \\[ V = \\frac{p^2}{2mq} \\]\n\nNow we can compute the potential using these values.",
+            "code": "import sympy as sp\n\n# Given values\nh = 6.626e-34  # Planck constant in J\u00b7s\nlambda_de_Broglie = 1.0e-10  # de Broglie wavelength in m\nm_proton = 1.67e-27  # mass of proton in kg\nq_proton = 1.602e-19  # charge of proton in C\n\n# Calculate momentum p\np = h / lambda_de_Broglie\n\n# Calculate kinetic energy KE\nKE = (p**2) / (2 * m_proton)\n\n# Calculate potential V\nV = KE / q_proton\n\n# Final output assignment (must be the last line)\nresult = V",
+            "unit": "V"
+        },
+        "answer": {
+            "gt_answer": "0.082",
+            "unit": "V "
+        },
+        "verification_result": {
+            "code_output": "0.08205289047373415",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.082",
+            "comment": " ",
+            "unit": "V ",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": " 1-15",
+        "response": {
+            "reasoning": "To calculate the frequency of light emitted by a helium-neon laser, we can use the relationship between the speed of light, wavelength, and frequency, given by the equation:\n\n\\[ c = \\lambda \\, f \\]\n\nWhere:\n- \\( c \\) is the speed of light (approximately \\( 3.00 \\times 10^8 \\, \\text{m/s} \\)),\n- \\( \\lambda \\) is the wavelength of the light (in meters), and\n- \\( f \\) is the frequency of the light (in Hz).\n\n1. **Convert the wavelength from nanometers to meters**:\n   \\[ \\lambda = 632.8 \\, \\text{nm} = 632.8 \\times 10^{-9} \\, \\text{m} \\]\n\n2. **Rearrange the equation to solve for frequency \\( f \\)**:\n   \\[ f = \\frac{c}{\\lambda} \\]\n\n3. **Substitute the values into the equation**:\n   \\[ f = \\frac{3.00 \\times 10^8 \\, \\text{m/s}}{632.8 \\times 10^{-9} \\, \\text{m}} \\]\n\nNow we can compute the frequency using these values.",
+            "code": "import sympy as sp\n\n# Given values\nc = 3.00e8  # speed of light in m/s\nlambda_nm = 632.8  # wavelength in nm\n\n# Convert wavelength from nm to m\nlambda_m = lambda_nm * 1e-9  # convert nm to m\n\n# Calculate the frequency\nfrequency = c / lambda_m\n\n# Final output assignment (must be the last line)\nresult = frequency",
+            "unit": "Hz"
+        },
+        "answer": {
+            "gt_answer": "4.738",
+            "unit": "$10^{14} \\mathrm{~Hz}$ "
+        },
+        "verification_result": {
+            "code_output": "4.74083438685209",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 4.738",
+            "comment": " just the first part is taken: frequency of light",
+            "unit": "$10^{14} \\mathrm{~Hz}$ ",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "1-45 ",
+        "response": {
+            "reasoning": "To find the distance between the slits in a double-slit experiment, we can use the formula for the position of the bright fringes:\n\\[ y_n = \\frac{n \\lambda L}{d} \\]\nwhere:\n- \\( y_n \\) is the distance from the central maximum to the nth bright fringe,\n- \\( n \\) is the order of the fringe (1 for the first bright fringe, 2 for the second, etc.),\n- \\( \\lambda \\) is the wavelength of the light,\n- \\( L \\) is the distance from the slits to the screen,\n- \\( d \\) is the distance between the slits.\n\nGiven that the distance between the bands (bright fringes) is \\( \\Delta y = 1.50 \\, \\text{cm} = 0.0150 \\, \\text{m} \\) and the distance from the slits to the screen is \\( L = 3.00 \\, \\text{m} \\), we can find the distance between the slits \\( d \\) using the first-order fringe (n = 1) as follows:\n\\[ \\Delta y = \\frac{\\lambda L}{d} \\]\nRearranging gives:\n\\[ d = \\frac{\\lambda L}{\\Delta y} \\]\n\n1. Substitute the values:\n   - Wavelength \\( \\lambda = 694.3 \\, \\text{nm} = 694.3 \\times 10^{-9} \\, \\text{m} \\)\n   - Distance to screen \\( L = 3.00 \\, \\text{m} \\)\n   - Distance between bands \\( \\Delta y = 0.0150 \\, \\text{m} \\)\n\nNow we can perform the calculation to find the distance between the slits \\( d \\).",
+            "code": "# Given values\nlambda_nm = 694.3e-9  # wavelength in meters\nL = 3.00  # distance to screen in meters\nDelta_y = 1.50e-2  # distance between bands in meters\n\n# Calculate the distance between the slits using the rearranged formula\nslit_distance = (lambda_nm * L) / Delta_y\n\n# Final output assignment\nresult = slit_distance",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "0.139",
+            "unit": "mm "
+        },
+        "verification_result": {
+            "code_output": "0.138860000000000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.139",
+            "comment": " ",
+            "unit": "mm ",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": " 1-37",
+        "response": {
+            "reasoning": "To calculate the frequency associated with the transition from the n=1 to n=2 energy level in a mesonic atom (proton and muon), we can use the Bohr model for hydrogen-like atoms. The energy levels for a hydrogen-like atom are given by:\n\\[ E_n = -\\frac{Z^2 \\cdot R_H}{n^2} \\]\nwhere:\n- \\( E_n \\) is the energy of the level,\n- \\( Z \\) is the atomic number (for a proton and muon system, \\( Z = 1 \\)),\n- \\( R_H \\) is the Rydberg constant for hydrogen (approximately \\( 13.6 \\, \\text{eV} \\)),\n- \\( n \\) is the principal quantum number.\n\nHowever, since the mass of the muon is different from that of the electron, we need to use the reduced mass \\( \\mu \\) in the formula:\n\\[ \\mu = \\frac{m_p m_{\\mu}}{m_p + m_{\\mu}} \\]\nwhere:\n- \\( m_p \\) is the mass of the proton (approximately \\( 1.67 \\times 10^{-27} \\, \\text{kg} \\))\n- \\( m_{\\mu} = 207 m_e \\) is the mass of the muon, with \\( m_e \\) being the mass of the electron (approximately \\( 9.11 \\times 10^{-31} \\, \\text{kg} \\)).\n\n1. **Calculate the reduced mass \\( \\mu \\)**:\n   \\[ m_{\\mu} = 207 \\times 9.11 \\times 10^{-31} \\, \\text{kg} \\approx 1.89 \\times 10^{-28} \\, \\text{kg} \\]\n   \\[ \\mu = \\frac{(1.67 \\times 10^{-27}) (1.89 \\times 10^{-28})}{1.67 \\times 10^{-27} + 1.89 \\times 10^{-28}} \\]\n\n2. **Calculate the energy levels using the reduced mass:**\n   The Rydberg constant for the muon-proton system is modified as:\n   \\[ R = \\frac{\\mu}{m_e} R_H \\]\n   Thus:\n   \\[ E_n = -\\frac{Z^2 \\cdot R}{n^2} \\]\n   For the transition from n=1 to n=2:\n   \\[ \\Delta E = E_2 - E_1 \\]\n\n3. **Calculate the frequency of the transition:**\n   The frequency associated with the transition can be calculated using:\n   \\[ \\Delta E = h \\nu \\]\n   Rearranging gives:\n   \\[ \\nu = \\frac{\\Delta E}{h} \\]\n\nNow we can perform the calculations to find the frequency associated with the transition in the mesonic atom.",
+            "code": "import sympy as sp\n\n# Constants\nm_p = 1.67e-27  # mass of proton in kg\nm_e = 9.11e-31  # mass of electron in kg\nZ = 1  # atomic number for the mesonic atom\nR_H = 13.6  # Rydberg constant in eV\n\n# Calculate the mass of the muon\nm_mu = 207 * m_e  # mass of muon in kg\n\n# Calculate the reduced mass\nmu = (m_p * m_mu) / (m_p + m_mu)\n\n# Calculate the modified Rydberg constant for the muon-proton system\nR = (mu / m_e) * R_H\n\n# Calculate the energy levels\nE_1 = -Z**2 * R / 1**2  # energy for n=1\nE_2 = -Z**2 * R / 2**2  # energy for n=2\n\n# Calculate the energy difference for the transition\nDelta_E = E_2 - E_1\n\n# Calculate the frequency of the transition\nh = 6.626e-34  # Planck's constant in J*s\nnu = Delta_E / h  # frequency in Hz\n\n# Convert Delta_E from eV to J for the calculation\nDelta_E_J = Delta_E * 1.602e-19  # convert eV to J\nnu = Delta_E_J / h\n\n# Final output assignment\nresult = nu",
+            "unit": "Hz"
+        },
+        "answer": {
+            "gt_answer": "4.59",
+            "unit": "$10^{17} \\mathrm{~Hz}$"
+        },
+        "verification_result": {
+            "code_output": "4.58688139084579",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1.69",
+            "comment": " only the ground state energy is there",
+            "unit": "$10^{17} \\mathrm{~Hz}$",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "1-44 ",
+        "response": {
+            "reasoning": "To find the distance between the central maximum and the first maximum in a double-slit interference pattern, we can use the formula for the position of the bright fringes:\n\\[ y_n = \\frac{n \\lambda L}{d} \\]\nwhere:\n- \\( y_n \\) is the distance from the central maximum to the nth bright fringe,\n- \\( n \\) is the order of the fringe (1 for the first maximum),\n- \\( \\lambda \\) is the wavelength of the light,\n- \\( L \\) is the distance from the slits to the screen,\n- \\( d \\) is the distance between the slits.\n\nGiven:\n- \\( d = 0.10 \\, \\text{mm} = 0.10 \\times 10^{-3} \\, \\text{m} = 1.0 \\times 10^{-4} \\, \\text{m} \\)\n- \\( \\lambda = 600 \\, \\text{nm} = 600 \\times 10^{-9} \\, \\text{m} \\)\n- \\( L = 2.00 \\, \\text{m} \\)\n\n1. **Calculate the position of the first maximum (n=1):**\n   \\[ y_1 = \\frac{1 \\cdot (600 \\times 10^{-9} \\, \\text{m}) \\cdot (2.00 \\, \\text{m})}{1.0 \\times 10^{-4} \\, \\text{m}} \\]\n\nNow we can perform the calculation to find the distance between the central maximum and the first maximum.",
+            "code": "# Given values\nd = 0.10e-3  # distance between the slits in meters\nlambda_nm = 600e-9  # wavelength in meters\nL = 2.00  # distance to the screen in meters\n\n# Calculate the position of the first maximum (n=1)\ny_1 = (1 * lambda_nm * L) / d\n\n# Final output assignment\nresult = y_1",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "12",
+            "unit": " mm"
+        },
+        "verification_result": {
+            "code_output": "12.0000000000000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 12",
+            "comment": " ",
+            "unit": " mm",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": " 1.1_3",
+        "response": {
+            "reasoning": "To calculate the threshold frequency \\( v_0 \\) for sodium metal given its work function \\( \\phi = 2.28 \\, \\text{eV} \\), we can use the relationship between the work function and the threshold frequency:\n\\[ \\phi = h v_0 \\]\nwhere:\n- \\( \\phi \\) is the work function in joules,\n- \\( h \\) is Planck's constant (approximately \\( 6.626 \\times 10^{-34} \\, \\text{J s} \\)),\n- \\( v_0 \\) is the threshold frequency in Hz.\n\n1. **Convert the work function from electron volts to joules:**\n   \\[ \\phi = 2.28 \\, \\text{eV} \\times 1.602 \\times 10^{-19} \\, \\text{J/eV} \\]\n\n2. **Rearranging the equation to solve for the threshold frequency:**\n   \\[ v_0 = \\frac{\\phi}{h} \\]\n\n3. **Substituting the values into the equation to calculate \\( v_0 \\).**\n\nNow we can perform the calculations to find the threshold frequency for sodium.",
+            "code": "# Given values\nphi_eV = 2.28  # work function in eV\nh = 6.626e-34  # Planck's constant in J*s\nconversion_factor = 1.602e-19  # J per eV\n\n# Convert the work function from eV to J\nphi_J = phi_eV * conversion_factor\n\n# Calculate the threshold frequency\nv_0 = phi_J / h  # frequency in Hz\n\n# Final output assignment\nresult = v_0",
+            "unit": "Hz"
+        },
+        "answer": {
+            "gt_answer": "5.51",
+            "unit": "$10^{14}\\mathrm{~Hz}$"
+        },
+        "verification_result": {
+            "code_output": "5.51246604286145",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "\nWe must first convert $\\phi$ from electron volts to joules.\r\n$$\r\n\\begin{aligned}\r\n\\phi & =2.28 \\mathrm{eV}=(2.28 \\mathrm{eV})\\left(1.602 \\times 10^{-19} \\mathrm{~J} \\cdot \\mathrm{eV}^{-1}\\right) \\\\\r\n& =3.65 \\times 10^{-19} \\mathrm{~J}\r\n\\end{aligned}\r\n$$\r\nUsing Equation $h v_0=\\phi$, we have\r\n$$\r\nv_0=\\frac{3.65 \\times 10^{-19} \\mathrm{~J}}{6.626 \\times 10^{-34} \\mathrm{~J} \\cdot \\mathrm{s}}=5.51 \\times 10^{14} \\mathrm{~Hz}$$\n",
+            "answer_latex": " 5.51",
+            "comment": " ",
+            "unit": "$10^{14}\\mathrm{~Hz}$",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": " 1.1_11",
+        "response": {
+            "reasoning": "To calculate the de Broglie wavelength of an electron traveling at a speed of 1.00% of the speed of light, we can use the de Broglie wavelength formula:\n\\[ \\lambda = \\frac{h}{p} \\]\nwhere:\n- \\( \\lambda \\) is the de Broglie wavelength,\n- \\( h \\) is Planck's constant (approximately \\( 6.626 \\times 10^{-34} \\, \\text{J s} \\)),\n- \\( p \\) is the momentum of the electron.\n\nThe momentum \\( p \\) of the electron can be expressed as:\n\\[ p = mv \\]\nwhere:\n- \\( m \\) is the mass of the electron (approximately \\( 9.11 \\times 10^{-31} \\, \\text{kg} \\))\n- \\( v \\) is the speed of the electron.\n\n1. **Calculate the speed of the electron:**\n   The speed of light \\( c \\) is approximately \\( 3.00 \\times 10^8 \\, \\text{m/s} \\), so:\n   \\[ v = 0.01 \\cdot c = 0.01 \\cdot 3.00 \\times 10^8 \\, \\text{m/s} = 3.00 \\times 10^6 \\, \\text{m/s} \\]\n\n2. **Calculate the momentum of the electron:**\n   \\[ p = m v = (9.11 \\times 10^{-31} \\, \\text{kg})(3.00 \\times 10^6 \\, \\text{m/s}) \\]\n\n3. **Calculate the de Broglie wavelength:**\n   Substitute the momentum into the de Broglie wavelength formula:\n   \\[ \\lambda = \\frac{h}{p} \\]\n\nNow we can perform the calculations to find the de Broglie wavelength of the electron.",
+            "code": "# Given values\nv_percent = 0.01  # speed as a percentage of the speed of light\nc = 3.00e8  # speed of light in m/s\nm_e = 9.11e-31  # mass of electron in kg\nh = 6.626e-34  # Planck's constant in J*s\n\n# Calculate the speed of the electron\nv = v_percent * c  # speed of electron in m/s\n\n# Calculate the momentum of the electron\np = m_e * v  # momentum in kg*m/s\n\n# Calculate the de Broglie wavelength\nlambda_de_Broglie = h / p  # wavelength in meters\n\n# Final output assignment\nresult = lambda_de_Broglie",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "243",
+            "unit": " $\\mathrm{pm}$"
+        },
+        "verification_result": {
+            "code_output": "242.444200512258",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "The mass of an electron is $9.109 \\times 10^{-31} \\mathrm{~kg}$. One percent of the speed of light is\r\n$$\r\nv=(0.0100)\\left(2.998 \\times 10^8 \\mathrm{~m} \\cdot \\mathrm{s}^{-1}\\right)=2.998 \\times 10^6 \\mathrm{~m} \\cdot \\mathrm{s}^{-1}\r\n$$\r\nThe momentum of the electron is given by\r\n$$\r\n\\begin{aligned}\r\np=m_{\\mathrm{e}} v & =\\left(9.109 \\times 10^{-31} \\mathrm{~kg}\\right)\\left(2.998 \\times 10^6 \\mathrm{~m} \\cdot \\mathrm{s}^{-1}\\right) \\\\\r\n& =2.73 \\times 10^{-24} \\mathrm{~kg} \\cdot \\mathrm{m} \\cdot \\mathrm{s}^{-1}\r\n\\end{aligned}\r\n$$\r\nThe de Broglie wavelength of this electron is\r\n$$\r\n\\begin{aligned}\r\n\\lambda=\\frac{h}{p} & =\\frac{6.626 \\times 10^{-34} \\mathrm{~J} \\cdot \\mathrm{s}}{2.73 \\times 10^{-24} \\mathrm{~kg} \\cdot \\mathrm{m} \\cdot \\mathrm{s}^{-1}}=2.43 \\times 10^{-10} \\mathrm{~m} \\\\\r\n& =243 \\mathrm{pm}\r\n\\end{aligned}\r\n$$\r\nThis wavelength is of atomic dimensions.\r\n",
+            "answer_latex": " 243",
+            "comment": " ",
+            "unit": " $\\mathrm{pm}$",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": " Problem 2.30",
+        "response": {
+            "reasoning": "To find the height of the building from which the balloon is dropped, we need to consider two parts of the problem: the time it takes for the balloon to fall to the ground and the time it takes for the sound of the splash to travel back up to the student.\n\n### Step 1: Define the variables\nLet:\n- \\( h \\) be the height of the building in meters.\n- \\( t_f \\) be the time it takes for the balloon to fall to the ground.\n- \\( t_s \\) be the time it takes for the sound to travel back up to the student.\n\nFrom the problem, we know:\n\\[ t_f + t_s = 4.021 \\, \\text{s} \\]\n\n### Step 2: Calculate the time for sound to travel back up\nThe speed of sound is given as \\( v_s = 331 \\, \\text{m/s} \\). The time for the sound to travel back up is:\n\\[ t_s = \\frac{h}{v_s} \\]\n\n### Step 3: Use the free fall equation for the balloon\nThe time it takes for the balloon to fall can be calculated using the equation for free fall:\n\\[ h = \\frac{1}{2} g t_f^2 \\]\nwhere \\( g \\) is the acceleration due to gravity (approximately \\( 9.81 \\, \\text{m/s}^2 \\)).\n\n### Step 4: Substitute and solve\nNow we can express \\( t_f \\) in terms of \\( h \\) and substitute it into the total time equation:\n1. From the free fall equation, we can express \\( t_f \\) as:\n   \\[ t_f = \\sqrt{\\frac{2h}{g}} \\]\n2. Substitute this into the total time equation:\n   \\[ \\sqrt{\\frac{2h}{g}} + \\frac{h}{v_s} = 4.021 \\, \\text{s} \\]\n\nNow we can solve this equation for \\( h \\).",
+            "code": "# Given values\nimport sympy as sp\n\nh = sp.symbols('h')  # height of the building in meters\nv_s = 331  # speed of sound in m/s\ng = 9.81  # acceleration due to gravity in m/s^2\n\n# Total time equation\ntotal_time_eq = sp.Eq(sp.sqrt(2*h/g) + h/v_s, 4.021)\n\n# Solve for h\nheight_solution = sp.solve(total_time_eq, h)\n\n# Final output assignment\nresult = height_solution[0]",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "71",
+            "unit": "$\\mathrm{~m}$ "
+        },
+        "verification_result": {
+            "code_output": "71.0634948415474",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 71",
+            "comment": " ",
+            "unit": "$\\mathrm{~m}$ ",
+            "source": "class"
+        }
+    },
+    {
+        "sample_id": " Problem 9.42",
+        "response": {
+            "reasoning": "To find the velocity of the steel ball after it bounces off the plate, we can use the concept of the coefficient of restitution (e), which relates the velocities before and after the collision. The coefficient of restitution is defined as:\n\\[ e = \\frac{v_{b}}{v_{a}} \\]\nwhere:\n- \\( v_{b} \\) is the velocity component after the collision along the normal to the surface,\n- \\( v_{a} \\) is the velocity component before the collision along the normal to the surface.\n\n### Step 1: Resolve the initial velocity into components\nThe initial velocity of the steel ball is given as \\( v = 5 \\, \\text{m/s} \\) at an angle of \\( 30^{\\circ} \\) from the normal. We can resolve this velocity into components:\n- The component of the velocity normal to the plate (\\( v_{a} \\)):\n\\[ v_{a} = v \\cos(30^{\\circ}) \\]\n- The component of the velocity parallel to the plate (which remains unchanged during the collision):\n\\[ v_{parallel} = v \\sin(30^{\\circ}) \\]\n\n### Step 2: Calculate the normal component before the collision\nSubstituting the values:\n\\[ v_{a} = 5 \\, \\text{m/s} \\cdot \\cos(30^{\\circ}) = 5 \\, \\text{m/s} \\cdot \\frac{\\sqrt{3}}{2} \\approx 4.33 \\, \\text{m/s} \\]\n\n### Step 3: Apply the coefficient of restitution\nUsing the coefficient of restitution:\n\\[ e = 0.8 = \\frac{v_{b}}{v_{a}} \\]\nRearranging gives:\n\\[ v_{b} = e \\cdot v_{a} = 0.8 \\cdot 4.33 \\, \\text{m/s} \\]\n\n### Step 4: Calculate the final velocity\nThe final velocity normal to the plate after the collision is:\n\\[ v_{b} = 0.8 \\cdot 4.33 \\approx 3.464 \\, \\text{m/s} \\]\n\n### Step 5: Determine the total velocity after the bounce\nThe total velocity after the bounce can be found by combining the normal and parallel components:\n\\[ v_{final} = \\sqrt{v_{b}^2 + v_{parallel}^2} \\]\nwhere:\n\\[ v_{parallel} = 5 \\, \\text{m/s} \\cdot \\sin(30^{\\circ}) = 5 \\, \\text{m/s} \\cdot \\frac{1}{2} = 2.5 \\, \\text{m/s} \\]\n\nNow we can perform the calculations to find the final velocity of the steel ball after it bounces off the plate.",
+            "code": "import sympy as sp\n\n# Given values\nv_initial = 5  # initial velocity in m/s\nangle = 30  # angle in degrees\ncoefficient_of_restitution = 0.8  # coefficient of restitution\n\n# Calculate the normal and parallel components of the initial velocity\nv_a = v_initial * sp.cos(sp.rad(angle))  # normal component\nv_parallel = v_initial * sp.sin(sp.rad(angle))  # parallel component\n\n# Calculate the normal component after the collision\nv_b = coefficient_of_restitution * v_a\n\n# Calculate the final velocity after the bounce\nv_final = sp.sqrt(v_b**2 + v_parallel**2)\n\n# Final output assignment\nresult = v_final",
+            "unit": "m/s"
+        },
+        "answer": {
+            "gt_answer": "4.3",
+            "unit": "$\\mathrm{~m} / \\mathrm{s}$ "
+        },
+        "verification_result": {
+            "code_output": "4.27200187265877",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " $4.3$",
+            "comment": " ",
+            "unit": "$\\mathrm{~m} / \\mathrm{s}$ ",
+            "source": "class"
+        }
+    },
+    {
+        "sample_id": "Problem 1.40 ",
+        "response": {
+            "reasoning": "To find the \\( x \\) distance of the top of the hill described by the function:\n\\[ z = 2xy - 3x^2 - 4y^2 - 18x + 28y + 12 \\]\nwe need to find the critical points of this function. This involves taking the partial derivatives with respect to \\( x \\) and \\( y \\), setting them to zero, and solving for \\( x \\) and \\( y \\).\n\n### Step 1: Calculate the partial derivatives\n1. **Partial derivative with respect to \\( x \\):**\n   \\[ \\frac{\\partial z}{\\partial x} = 2y - 6x - 18 \\]\n\n2. **Partial derivative with respect to \\( y \\):**\n   \\[ \\frac{\\partial z}{\\partial y} = 2x - 8y + 28 \\]\n\n### Step 2: Set the partial derivatives to zero\nTo find the critical points, we set both partial derivatives to zero:\n1. \\[ 2y - 6x - 18 = 0 \\quad (1) \\]\n2. \\[ 2x - 8y + 28 = 0 \\quad (2) \\]\n\n### Step 3: Solve the system of equations\nFrom equation (1), we can express \\( y \\) in terms of \\( x \\):\n\\[ y = 3x + 9 \\]\n\nSubstituting this expression for \\( y \\) into equation (2):\n\\[ 2x - 8(3x + 9) + 28 = 0 \\]\n\\[ 2x - 24x - 72 + 28 = 0 \\]\n\\[ -22x - 44 = 0 \\]\n\\[ -22x = 44 \\]\n\\[ x = -2 \\]\n\n### Step 4: Find the corresponding value of \\( y \\)\nSubstituting \\( x = -2 \\) back into the expression for \\( y \\):\n\\[ y = 3(-2) + 9 = 3 \\]\n\n### Conclusion\nThe critical point is \\( (x, y) = (-2, 3) \\). The \\( x \\) distance of the top of the hill is therefore \\( -2 \\) meters. However, since the context of the problem may imply a positive distance, we should interpret this result carefully based on the coordinate system used. \n\nNow we can summarize the result.",
+            "code": "# Given values\nfrom sympy import symbols, Eq, solve\n\n# Define variables\nx, y = symbols('x y')\n\n# Define the equations from the partial derivatives\npartial_x = Eq(2*y - 6*x - 18, 0)\npartial_y = Eq(2*x - 8*y + 28, 0)\n\n# Solve the system of equations\nsolution = solve((partial_x, partial_y), (x, y))\n\n# Final output assignment\nresult = solution[x]",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "-2",
+            "unit": "m "
+        },
+        "verification_result": {
+            "code_output": "-2",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -2",
+            "comment": " ",
+            "unit": "m ",
+            "source": "class"
+        }
+    },
+    {
+        "sample_id": "9.42 B. ",
+        "response": {
+            "reasoning": "To determine the angle at which the steel ball bounces off the plate after striking it, we can use the concept of the coefficient of restitution (e) and the laws of reflection in elastic collisions.\n\n### Step 1: Define the variables\nLet:\n- \\( v = 5 \\, \\text{m/s} \\) (initial speed of the steel ball)\n- \\( \\theta_i = 30^{\\circ} \\) (angle of incidence from the normal)\n- \\( e = 0.8 \\) (coefficient of restitution)\n- \\( \\theta_f \\) (angle of reflection from the normal)\n\n### Step 2: Analyze the collision\nThe coefficient of restitution relates the velocities before and after the collision along the normal direction:\n\\[ e = \\frac{v_{f,n}}{v_{i,n}} \\]\nwhere:\n- \\( v_{i,n} \\) is the component of the initial velocity normal to the surface:\n\\[ v_{i,n} = v \\cos(\\theta_i) \\]\n- \\( v_{f,n} \\) is the component of the final velocity normal to the surface:\n\\[ v_{f,n} = -e v_{i,n} \\]\n\n### Step 3: Calculate the normal components\n1. **Calculate the initial normal component:**\n   \\[ v_{i,n} = v \\cos(30^{\\circ}) = 5 \\cdot \\frac{\\sqrt{3}}{2} \\approx 4.33 \\, \\text{m/s} \\]\n\n2. **Calculate the final normal component:**\n   \\[ v_{f,n} = -e v_{i,n} = -0.8 \\cdot 4.33 \\approx -3.464 \\, \\text{m/s} \\]\n\n### Step 4: Calculate the tangential component\nThe tangential component of the velocity remains unchanged during the collision:\n\\[ v_{i,t} = v \\sin(30^{\\circ}) = 5 \\cdot \\frac{1}{2} = 2.5 \\, \\text{m/s} \\]\n\n### Step 5: Calculate the final velocity components\nThe final velocity components can be expressed as:\n- Normal component: \\( v_{f,n} \\approx -3.464 \\, \\text{m/s} \\)\n- Tangential component: \\( v_{f,t} = v_{i,t} = 2.5 \\, \\text{m/s} \\)\n\n### Step 6: Calculate the angle of reflection\nThe angle of reflection can be found using the relationship:\n\\[ \\tan(\\theta_f) = \\frac{v_{f,t}}{-v_{f,n}} \\]\nSubstituting the values gives:\n\\[ \\tan(\\theta_f) = \\frac{2.5}{3.464} \\]\n\nNow we can perform the calculations to find the angle \\( \\theta_f \\) from the normal at which the steel ball bounces off the plate.",
+            "code": "# Given values\nimport sympy as sp\n\nv = 5  # initial speed in m/s\ntheta_i = 30  # angle of incidence in degrees\ne = 0.8  # coefficient of restitution\n\n# Calculate the initial normal component\nv_i_n = v * sp.cos(sp.rad(theta_i))  # normal component in m/s\n\n# Calculate the final normal component\nv_f_n = -e * v_i_n  # final normal component in m/s\n\n# Calculate the tangential component\nv_i_t = v * sp.sin(sp.rad(theta_i))  # tangential component in m/s\n\n# Calculate the angle of reflection\nv_f_t = v_i_t  # final tangential component remains the same\n\n# Calculate the angle of reflection\ntheta_f = sp.atan(v_f_t / -v_f_n)  # in radians\ntheta_f_degrees = sp.deg(theta_f)  # convert to degrees\n\n# Final output assignment\nresult = theta_f_degrees",
+            "unit": "degrees"
+        },
+        "answer": {
+            "gt_answer": "36",
+            "unit": "$^\\circ$"
+        },
+        "verification_result": {
+            "code_output": "35.8175256444436",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": null,
+            "answer_latex": "$36^\\circ$",
+            "comment": " ",
+            "unit": "$^\\circ$",
+            "source": "class"
+        }
     }
 ]

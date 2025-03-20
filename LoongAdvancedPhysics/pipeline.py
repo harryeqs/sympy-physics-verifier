@@ -11,7 +11,9 @@ from models import ResponseFormat, AnswerFormat, VerificationResult, OutputForma
 import logging
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)  
+logger.setLevel(logging.INFO)
+
+MAX_ATTEMPTS = 5
 
 REASON_AGENT_PROMPT = """
 Task: Solve the given Physics problem using symbolic computation with Sympy and return the response in a structured JSON format defined by the following ResponseFormat:
@@ -157,12 +159,20 @@ class PhysicsCodeGenPipeline():
 
          full_answer = AnswerFormat(gt_answer=gt_answer, unit=unit) # Create the full answer format including both the numerical answer and unit
          
-         raw_response = self.reason_agent.step(question, response_format=ResponseFormat)
-         structured_response = ResponseFormat.model_validate(raw_response.msgs[0].parsed)
+         attempts = 0
+   
+         while attempts < 5:
+            try:
+               raw_response = self.reason_agent.step(question, response_format=ResponseFormat)
+               structured_response = ResponseFormat.model_validate(raw_response.msgs[0].parsed)
 
-         logger.info(f'==========Verifying Question {sample_id}==========')
-         verification_outcome = self.verify(structured_response, full_answer)
-         logger.info(f'Verification Outcome: Result Match: {verification_outcome.result_match}, Unit Match: {verification_outcome.unit_match}')
+               logger.info(f'==========Verifying Question {sample_id}==========')
+               verification_outcome = self.verify(structured_response, full_answer)
+               logger.info(f'Verification Outcome: Result Match: {verification_outcome.result_match}, Unit Match: {verification_outcome.unit_match}')
+               break
+            except Exception as e:
+               logger.info(f'Failed to generate or verify Question {sample_id} with error {e}, retrying with attempt {attempts} out of {MAX_ATTEMPTS}')
+               attempts += 1
          
          if verification_outcome.result_match and verification_outcome.unit_match:
             self.generation_summary['successful_generations'] += 1
