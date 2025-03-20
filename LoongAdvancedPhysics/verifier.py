@@ -335,7 +335,7 @@ class PhysicsVerifier:
             logger.error("Failed to compare units:", e)
             return False
         
-    def execute_code(self, code: str, timeout: int = 300):
+    def execute_code(self, code: str, timeout: int = 120):
         """
         Executes the generated code from the response in an isolated namespace.
         The environment includes sympy and the necessary physics units.

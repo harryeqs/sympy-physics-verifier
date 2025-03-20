@@ -2998,5 +2998,413 @@
             "unit": " $\\mathrm{s}$",
             "source": "matter"
         }
+    },
+    {
+        "sample_id": "70.8(a)",
+        "response": {
+            "reasoning": "To find the molar mass of the non-volatile organic compound, we can use Raoult's Law, which states that the vapor pressure of a solvent is directly proportional to the mole fraction of the solvent in the solution. We start with the initial vapor pressure of benzene (P0) and the vapor pressure after the solute is added (P). The change in vapor pressure (delta P) can be calculated. Using the formula for the mole fraction of the solvent and the number of moles of benzene and the solute, we can derive the molar mass of the solute. The steps include calculating the mole fraction of benzene in the solution and then using it to find the molar mass of the solute.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP0 = 53.3  # kPa, vapor pressure of pure benzene\nP = 51.5   # kPa, vapor pressure after solute is added\nmass_solute = 19.0  # g, mass of the non-volatile organic compound\nmass_benzene = 500.0  # g, mass of benzene\nM_solute = sp.symbols('M_solute')  # molar mass of the solute\n\n# Step 2: Calculate the change in vapor pressure\nDelta_P = P0 - P\n\n# Step 3: Calculate the moles of benzene\nM_benzene = 78.11  # g/mol, molar mass of benzene\nn_benzene = mass_benzene / M_benzene  # moles of benzene\n\n# Step 4: Using Raoult's Law to find the mole fraction of benzene\n# Delta_P / P0 = (n_solute / (n_solute + n_benzene))\n# Rearranging gives us n_solute = (Delta_P / P0) * (n_solute + n_benzene)\n# Let n_solute = mass_solute / M_solute\nn_solute = mass_solute / M_solute\n\n# Step 5: Substitute and solve for M_solute\nmole_fraction_eq = sp.Eq(Delta_P / P0, n_solute / (n_solute + n_benzene))\n\n# Step 6: Solve the equation for M_solute\nsolution = sp.solve(mole_fraction_eq, M_solute)\nresult = solution[0]  # Get the first solution\n",
+            "unit": "g/mol"
+        },
+        "answer": {
+            "gt_answer": "85",
+            "unit": " $\\mathrm{~g} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "84.9229277777777",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 85",
+            "comment": " ",
+            "unit": " $\\mathrm{~g} \\mathrm{~mol}^{-1}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "64.5(a)",
+        "response": {
+            "reasoning": "To calculate the electronic contribution to the molar Gibbs energy of Cl atoms at 500 K, we first need to determine the partition function for the electronic states. The ground state is at energy E0 = 0 cm^-1 (for the ^2P_{3/2} level) and the excited state is at E1 = 881 cm^-1 (for the ^2P_{1/2} level). The partition function Z is given by Z = g0 * exp(-E0/kT) + g1 * exp(-E1/kT), where g0 and g1 are the degeneracies of the states. For Cl, g0 = 4 (for ^2P_{3/2}) and g1 = 2 (for ^2P_{1/2}). The Gibbs energy contribution is then calculated using G = -kT ln(Z), where k is the Boltzmann constant. We will convert the energy from cm^-1 to Joules using the conversion factor (1 cm^-1 = 1.986 x 10^-23 J). Finally, we will compute the Gibbs energy and express it in terms of molar Gibbs energy by multiplying by Avogadro's number.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nk = 1.380649e-23  # Boltzmann constant in J/K\nT = 500  # Temperature in K\nE1_cm = 881  # Energy difference in cm^-1\n\n# Step 2: Convert energy from cm^-1 to Joules\nE1 = E1_cm * 1.986e-23  # Energy in Joules\nE0 = 0  # Ground state energy in Joules\n\n# Step 3: Define degeneracies\ng0 = 4  # Degeneracy of ^2P_{3/2}\ng1 = 2  # Degeneracy of ^2P_{1/2}\n\n# Step 4: Calculate partition function Z\nZ = g0 * sp.exp(-E0 / (k * T)) + g1 * sp.exp(-E1 / (k * T))\n\n# Step 5: Calculate Gibbs energy contribution G\nG = -k * T * sp.log(Z)\n\n# Step 6: Convert to molar Gibbs energy (per mole)\nN_A = 6.022e23  # Avogadro's number\nG_molar = G * N_A\n\n# Step 7: Assign the final result to 'result'\nresult = G_molar",
+            "unit": "J/mol"
+        },
+        "answer": {
+            "gt_answer": "-6.42",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "-5.92465197440785",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -6.42",
+            "comment": " ",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "4.1",
+        "response": {
+            "reasoning": "To find the maximum wavelength capable of ejecting an electron from the metal, we can use the photoelectric effect equation: E = hf - W, where E is the kinetic energy of the ejected electron, hf is the energy of the incoming photon, and W is the work function of the metal. The energy of the photon can be expressed in terms of its wavelength using the equation E = hc/\u03bb. We can rearrange the equation to find the maximum wavelength (\u03bb_max) when the kinetic energy is zero (i.e., the photon energy equals the work function). Thus, \u03bb_max = hc/W. First, we need to find the work function W using the given photon wavelength and kinetic energy. After calculating W, we can find \u03bb_max. The constants used are h (Planck's constant) and c (speed of light).",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nh = 6.626e-34  # Planck's constant in J.s\nc = 3e8  # Speed of light in m/s\nE_kinetic = 1.77 * 1.602e-19  # Kinetic energy in Joules (1 eV = 1.602e-19 J)\n\n# Step 2: Calculate the energy of the incoming photon\nwavelength_photon = 305e-9  # Wavelength in meters\nE_photon = h * c / wavelength_photon  # Energy of the photon in Joules\n\n# Step 3: Calculate the work function W\nW = E_photon - E_kinetic  # Work function in Joules\n\n# Step 4: Calculate the maximum wavelength \u03bb_max\nlambda_max = h * c / W  # Maximum wavelength in meters\n\n# Step 5: Assign the final computed result to 'result'\nresult = lambda_max",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "540",
+            "unit": "$\\mathrm{~nm}$ "
+        },
+        "verification_result": {
+            "code_output": "539.8935296287856",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "From the expression for the work function $\\Phi=h \\nu-E_{\\mathrm{k}}$ the minimum frequency for photoejection is\r\n$$\r\n\\nu_{\\min }=\\frac{\\Phi}{h}=\\frac{h v-E_{\\mathrm{k}}}{h} \\stackrel{\\nu=c \\mid \\lambda}{=} \\frac{c}{\\lambda}-\\frac{E_{\\mathrm{k}}}{h}\r\n$$\r\nThe maximum wavelength is therefore\r\n$$\r\n\\lambda_{\\max }=\\frac{c}{v_{\\min }}=\\frac{c}{c / \\lambda-E_{\\mathrm{k}} / h}=\\frac{1}{1 / \\lambda-E_{\\mathrm{k}} / h c}\r\n$$\r\nNow we substitute the data. The kinetic energy of the electron is\r\n$$\r\n\\begin{aligned}\r\n& E_k=1.77 \\mathrm{eV} \\times\\left(1.602 \\times 10^{-19} \\mathrm{JeV}^{-1}\\right)=2.83 \\ldots \\times 10^{-19} \\mathrm{~J} \\\\\r\n& \\frac{E_k}{h c}=\\frac{2.83 \\ldots \\times 10^{-19} \\mathrm{~J}}{\\left(6.626 \\times 10^{-34} \\mathrm{~J} \\mathrm{~s}\\right) \\times\\left(2.998 \\times 10^8 \\mathrm{~m} \\mathrm{~s}^{-1}\\right)}=1.42 \\ldots \\times 10^6 \\mathrm{~m}^{-1}\r\n\\end{aligned}\r\n$$\r\nTherefore, with\r\n$$\r\n\\begin{aligned}\r\n& 1 / \\lambda=1 / 305 \\mathrm{~nm}=3.27 \\ldots \\times 10^6 \\mathrm{~m}^{-1}, \\\\\r\n& \\lambda_{\\max }=\\frac{1}{\\left(3.27 \\ldots \\times 10^6 \\mathrm{~m}^{-1}\\right)-\\left(1.42 \\ldots \\times 10^6 \\mathrm{~m}^{-1}\\right)}=5.40 \\times 10^{-7} \\mathrm{~m}\r\n\\end{aligned}\r\n$$\r\nor $540 \\mathrm{~nm}$.\r\n",
+            "answer_latex": " 540",
+            "comment": " with solution",
+            "unit": "$\\mathrm{~nm}$ ",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "17.1",
+        "response": {
+            "reasoning": "The energy levels of a hydrogenic atom can be calculated using the formula E_n = -Z^2 * 13.6 eV / n^2, where Z is the atomic number and n is the principal quantum number. For the He+ ion, Z = 2 and the principal quantum number n = 3 (from the wavefunction R_{3,2}). Therefore, we substitute Z and n into the formula to find the energy of the electron.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nZ = 2  # atomic number for He+\nn = 3  # principal quantum number\n\n# Step 2: Calculate energy using the formula E_n = -Z^2 * 13.6 / n^2\ne = -Z**2 * 13.6 / n**2\n\n# Step 3: Compute the final result\nresult = e.evalf()  # evaluate the expression numerically",
+            "unit": "eV"
+        },
+        "answer": {
+            "gt_answer": " -6.04697",
+            "unit": "$ \\mathrm{eV}$ "
+        },
+        "verification_result": {
+            "code_output": "-6.044444444444444",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "\nReplacing $\\mu$ by $m_{\\mathrm{e}}$ and using $\\hbar=h / 2 \\pi$, we can write the expression for the energy as\r\n$$\r\nE_n=-\\frac{Z^2 m_e e^4}{8 \\varepsilon_0^2 h^2 n^2}=-\\frac{Z^2 h c \\tilde{R}_{\\infty}}{n^2}\r\n$$\r\nwith\r\n$$\n\\tilde{R}_{\\infty}=\\frac{9.10938 \\times 10^{-31} \\mathrm{~kg} \\times (1.602176 \\times 10^{-19} \\mathrm{C})^4}{8 \\times (8.85419 \\times 10^{-12} \\mathrm{~J}^{-1} \\mathrm{C}^2 \\mathrm{~m}^{-1} )^2 \\times(6.62608 \\times 10^{-34} \\mathrm{Js})^3} \\times \\underbrace{2.997926 \\times 10^{10} \\mathrm{~cm} \\mathrm{~s}^{-1}}_c =109737 \\mathrm{~cm}^{-1} $$\r\nand\r\n$$\r\n\\begin{aligned}\r\nh c \\tilde{R}_{\\infty}= & \\left(6.62608 \\times 10^{-34} \\mathrm{Js}\\right) \\times\\left(2.997926 \\times 10^{10} \\mathrm{~cm} \\mathrm{~s}^{-1}\\right) \\\\\r\n& \\times\\left(109737 \\mathrm{~cm}^{-1}\\right) \\\\\r\n= & 2.17987 \\times 10^{-18} \\mathrm{~J}\r\n\\end{aligned}\r\n$$\r\nTherefore, for $n=3$, the energy is\r\n$$\r\n\\begin{aligned}\r\n& E_3=-\\frac{\\overbrace{4}^{Z^2} \\times \\overbrace{2.17987 \\times 10^{-18} \\mathrm{~J}}^{h c \\tilde{R}_{\\infty}}}{\\underset{\\tilde{n}^2}{9}} \\\\\r\n& =-9.68831 \\times 10^{-19} \\mathrm{~J} \\\\\r\n&\r\n\\end{aligned}\r\n$$\r\nor $-0.968831 \\mathrm{aJ}$ (a, for atto, is the prefix that denotes $10^{-18}$ ). In some applications it is useful to express the energy in electronvolts $\\left(1 \\mathrm{eV}=1.602176 \\times 10^{-19} \\mathrm{~J}\\right)$; in this case, $E_3=-6.04697 \\mathrm{eV}$\n",
+            "answer_latex": " -6.04697",
+            "comment": " with solution",
+            "unit": "$ \\mathrm{eV}$ ",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "1.1",
+        "response": {
+            "reasoning": "To calculate the pressure exerted by nitrogen gas using the perfect gas equation (PV = nRT), we first need to convert the mass of nitrogen gas to moles. The molar mass of nitrogen (N2) is approximately 28.02 g/mol. Thus, n = mass / molar mass = 1.25 g / 28.02 g/mol. The volume must be converted from cm^3 to m^3 (1 cm^3 = 1e-6 m^3), so 250 cm^3 = 250e-6 m^3. The temperature must be converted from Celsius to Kelvin: T = 20 + 273.15 = 293.15 K. The ideal gas constant R is 8.314 J/(mol\u00b7K). Finally, we can rearrange the ideal gas equation to solve for pressure P = nRT/V. The result will be in Pascals, which we will convert to kilopascals (1 kPa = 1000 Pa).",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nmass = 1.25  # mass of nitrogen in grams\ntemperature_C = 20  # temperature in Celsius\nvolume_cm3 = 250  # volume in cm^3\nmolar_mass_N2 = 28.02  # molar mass of nitrogen in g/mol\nR = 8.314  # ideal gas constant in J/(mol*K)\n\n# Step 2: Convert units\nvolume_m3 = volume_cm3 * 1e-6  # convert volume to m^3\ntemperature_K = temperature_C + 273.15  # convert temperature to Kelvin\n\n# Step 3: Calculate number of moles of nitrogen gas\nn = mass / molar_mass_N2  # number of moles\n\n# Step 4: Use the ideal gas equation to calculate pressure\nP = n * R * temperature_K / volume_m3  # pressure in Pascals\nP_kPa = P / 1000  # convert pressure to kilopascals\n\n# Step 5: Assign the final result to 'result'\nresult = P_kPa",
+            "unit": "kPa"
+        },
+        "answer": {
+            "gt_answer": "435",
+            "unit": " $\\mathrm{kPa}$"
+        },
+        "verification_result": {
+            "code_output": "434.9124018558172",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "The amount of $\\mathrm{N}_2$ molecules (of molar mass $28.02 \\mathrm{~g}$ $\\mathrm{mol}^{-1}$ ) present is\r\n$$\r\nn\\left(\\mathrm{~N}_2\\right)=\\frac{m}{M\\left(\\mathrm{~N}_2\\right)}=\\frac{1.25 \\mathrm{~g}}{28.02 \\mathrm{~g} \\mathrm{~mol}^{-1}}=\\frac{1.25}{28.02} \\mathrm{~mol}\r\n$$\r\nThe temperature of the sample is\r\n$$\r\nT / K=20+273.15, \\text { so } T=(20+273.15) \\mathrm{K}\r\n$$\r\nTherefore, after rewriting eqn 1.5 as $p=n R T / V$,\r\n$$\r\n\\begin{aligned}\r\np & =\\frac{\\overbrace{(1.25 / 28.02) \\mathrm{mol}}^n \\times \\overbrace{\\left(8.3145 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}\\right)}^R \\times \\overbrace{(20+273.15) \\mathrm{K}}^{\\left(2.50 \\times 10^{-4}\\right) \\mathrm{m}^3}}{\\underbrace{R}_V} \\\\\r\n& =\\frac{(1.25 / 28.02) \\times(8.3145) \\times(20+273.15)}{2.50 \\times 10^{-4}} \\frac{\\mathrm{J}}{\\mathrm{m}^3} \\\\\r\n1 \\mathrm{Jm}^{-3} & =1 \\mathrm{~Pa} \\\\\r\n& \\stackrel{\\infty}{=} 4.35 \\times 10^5 \\mathrm{~Pa}=435 \\mathrm{kPa}\r\n\\end{aligned}\r\n$$\r\n",
+            "answer_latex": " 435",
+            "comment": " with equation",
+            "unit": " $\\mathrm{kPa}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "17.2",
+        "response": {
+            "reasoning": "To find the wavenumber of the emission line corresponding to the transition of an electron in a hydrogen atom from n=2 to n=1, we can use the Rydberg formula for hydrogen. The formula for the wavenumber (in reciprocal meters) is given by: \\( \\bar{\nu} = R_H \\left( \\frac{1}{n_1^2} - \\frac{1}{n_2^2} \\right) \\), where \\( R_H \\) is the Rydberg constant (approximately 1.097373 x 10^7 m^-1), \\( n_1 \\) is the lower energy level (1 in this case), and \\( n_2 \\) is the upper energy level (2 in this case). Substituting these values into the formula will yield the wavenumber of the emitted photon during the transition.",
+            "code": "import sympy as sp\n\n# Step 1: Define the Rydberg constant and the quantum levels\nR_H = 1.097373 * 10**7  # m^-1\nn1 = 1  # lower energy level\nn2 = 2  # upper energy level\n\n# Step 2: Calculate the wavenumber using the Rydberg formula\nwavenumber = R_H * (1/n1**2 - 1/n2**2)\n\n# Step 3: Assign the final computed result to 'result'\nresult = wavenumber",
+            "unit": "m^-1"
+        },
+        "answer": {
+            "gt_answer": "82258",
+            "unit": " $\\mathrm{~cm}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "82302.975",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "The wavenumber of the photon emitted when an electron makes a transition from $n_2=2$ to $n_1=1$ is given by\r\n$$\r\n\\begin{aligned}\r\n\\tilde{\\boldsymbol{v}} & =-\\tilde{R}_{\\mathrm{H}}\\left(\\frac{1}{n_2^2}-\\frac{1}{n_1^2}\\right) \\\\\r\n& =-\\left(109677 \\mathrm{~cm}^{-1}\\right) \\times\\left(\\frac{1}{2^2}-\\frac{1}{1^2}\\right) \\\\\r\n& =82258 \\mathrm{~cm}^{-1}\r\n\\end{aligned}\r\n$$",
+            "answer_latex": " 82258",
+            "comment": " with solution",
+            "unit": " $\\mathrm{~cm}^{-1}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "1.3",
+        "response": {
+            "reasoning": "To calculate the energy of one mole of UV photons with a wavelength of 300 nm, we first use the formula for the energy of a single photon, E = hc/\u03bb, where h is Planck's constant (6.626 x 10^-34 J\u00b7s), c is the speed of light (3.00 x 10^8 m/s), and \u03bb is the wavelength in meters (300 nm = 300 x 10^-9 m). After calculating the energy of one photon, we multiply it by Avogadro's number (6.022 x 10^23 mol^-1) to find the energy per mole of photons. Finally, we compare this energy with the typical single-bond energy of 400 kJ/mol.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nh = 6.626e-34  # Planck's constant in J\u00b7s\nc = 3.00e8     # Speed of light in m/s\nlambda_nm = 300e-9  # Wavelength in meters (300 nm)\nN_A = 6.022e23  # Avogadro's number in mol^-1\n\n# Step 2: Calculate the energy of one photon\nE_photon = h * c / lambda_nm  # Energy of one photon in Joules\n\n# Step 3: Calculate the energy of one mole of photons\nE_mole_photons = E_photon * N_A  # Energy per mole in Joules\nE_mole_photons_kJ = E_mole_photons / 1000  # Convert to kJ\n\n# Step 4: Compare with typical single-bond energy\nbond_energy_kJ = 400  # Typical single-bond energy in kJ/mol\n\n# Step 5: Assign the final result\nresult = E_mole_photons_kJ",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "399",
+            "unit": " $\\mathrm{~kJ} / \\mathrm{mol}$"
+        },
+        "verification_result": {
+            "code_output": "399.01772000000005",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 399",
+            "comment": " ",
+            "unit": " $\\mathrm{~kJ} / \\mathrm{mol}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "13.5",
+        "response": {
+            "reasoning": "To calculate the dissociation energy D_e for the molecule, we can use the relationship between D_0, omega_e, and omega_e x_e. The dissociation energy D_e is given by the formula: D_e = D_0 + (nu_e x_e / c). Here, D_0 is the energy required to dissociate the molecule from its ground state, and the term (nu_e x_e / c) accounts for the zero-point energy correction due to the vibrational motion of the molecule. We will convert the values into consistent units and perform the calculation.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nD0 = 2.4287  # eV\nnu_e_c = 1405.65  # cm^-1 (not used directly in this calculation)\nnu_e_x_e_c = 23.20  # cm^-1\n\n# Step 2: Calculate D_e using the formula D_e = D_0 + (nu_e x_e / c)\n# Convert nu_e_x_e_c from cm^-1 to eV (1 cm^-1 = 1.23984e-4 eV)\nnu_e_x_e = nu_e_x_e_c * 1.23984e-4  # eV\n\n# Calculate D_e\nD_e = D0 + nu_e_x_e\n\n# Step 3: Assign the final computed result to 'result'\nresult = D_e",
+            "unit": "eV"
+        },
+        "answer": {
+            "gt_answer": "2.5151",
+            "unit": " $\\mathrm{eV}$"
+        },
+        "verification_result": {
+            "code_output": "2.4315764288",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 2.5151",
+            "comment": " ",
+            "unit": " $\\mathrm{eV}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "1.6",
+        "response": {
+            "reasoning": "To calculate the de Broglie wavelength of an electron, we use the formula \\( \\lambda = \\frac{h}{p} \\), where \\( h \\) is Planck's constant and \\( p \\) is the momentum of the electron. The momentum \\( p \\) can be expressed as \\( p = mv \\), where \\( m \\) is the mass of the electron and \\( v \\) is its velocity. Given that the speed of the electron is \\( v = \\frac{1}{137} c \\), we can substitute this into the momentum equation. The mass of the electron is approximately \\( 9.11 \\times 10^{-31} \\) kg, and Planck's constant is approximately \\( 6.626 \\times 10^{-34} \\) J\u00b7s. After calculating the momentum, we can find the de Broglie wavelength by substituting \\( p \\) back into the wavelength formula. The final result will be in meters.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nh = 6.626e-34  # Planck's constant in J\u00b7s\nm = 9.11e-31   # mass of the electron in kg\nc = 3e8        # speed of light in m/s\nv = (1/137) * c  # speed of the electron\n\n# Step 2: Calculate momentum\np = m * v\n\n# Step 3: Calculate de Broglie wavelength\nlambda_de_broglie = h / p\n\n# Step 4: Assign the final result to 'result'\nresult = lambda_de_broglie",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "0.332",
+            "unit": "$\\mathrm{~nm}$"
+        },
+        "verification_result": {
+            "code_output": "0.33214855470179294",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.332",
+            "comment": " ",
+            "unit": "$\\mathrm{~nm}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "3.35",
+        "response": {
+            "reasoning": "To find the frequency of the photon emitted during the transition of an electron in a three-dimensional rectangular box, we first need to calculate the energy levels of the electron in the box. The energy levels for a particle in a 3D box are given by the formula: E_n = (h^2 * n_x^2) / (8 * m * L_x^2) + (h^2 * n_y^2) / (8 * m * L_y^2) + (h^2 * n_z^2) / (8 * m * L_z^2), where n_x, n_y, n_z are quantum numbers, h is Planck's constant, m is the mass of the electron, and L_x, L_y, L_z are the dimensions of the box. The ground state corresponds to (n_x, n_y, n_z) = (1, 1, 1) and the first excited state corresponds to (n_x, n_y, n_z) = (1, 1, 2). We will calculate the energy difference between these states and then use the relation E = h * f to find the frequency of the emitted photon. The dimensions are converted to meters for calculations.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nh = 6.62607015e-34  # Planck's constant in J*s\nm = 9.10938356e-31  # mass of electron in kg\nL_x = 5.00e-10  # length in meters\nL_y = 3.00e-10  # width in meters\nL_z = 6.00e-10  # height in meters\n\n# Step 2: Define quantum numbers for ground state and first excited state\nn1 = (1, 1, 1)  # ground state\nn2 = (1, 1, 2)  # first excited state\n\n# Step 3: Calculate energy levels for both states\nE_ground = (h**2 * n1[0]**2) / (8 * m * L_x**2) + (h**2 * n1[1]**2) / (8 * m * L_y**2) + (h**2 * n1[2]**2) / (8 * m * L_z**2)\nE_excited = (h**2 * n2[0]**2) / (8 * m * L_x**2) + (h**2 * n2[1]**2) / (8 * m * L_y**2) + (h**2 * n2[2]**2) / (8 * m * L_z**2)\n\n# Step 4: Calculate the energy difference\nDelta_E = E_excited - E_ground\n\n# Step 5: Calculate the frequency of the emitted photon\nfrequency = Delta_E / h\n\n# Final result assignment\nresult = frequency",
+            "unit": "Hz"
+        },
+        "answer": {
+            "gt_answer": "7.58",
+            "unit": " $10^{14} \\mathrm{~s}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "7.57697418358570",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "7.58",
+            "comment": " Angstrom ",
+            "unit": " $10^{14} \\mathrm{~s}^{-1}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "1.31",
+        "response": {
+            "reasoning": "To calculate the force on an alpha particle passing a gold atomic nucleus, we can use Coulomb's law, which describes the electrostatic force between two charged particles. The formula is given by F = k * |q1 * q2| / r^2, where k is Coulomb's constant (approximately 8.99 x 10^9 N m^2/C^2), q1 and q2 are the charges of the particles, and r is the distance between them. An alpha particle has a charge of +2e (where e is the elementary charge, approximately 1.602 x 10^-19 C), and a gold nucleus has a charge of +79e. The distance r is given as 0.00300 \u00c5, which we convert to meters (1 \u00c5 = 1 x 10^-10 m). After substituting the values into the formula, we can compute the force.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nk = 8.99e9  # Coulomb's constant in N m^2/C^2\nq1 = 2 * 1.602e-19  # Charge of alpha particle in C\nq2 = 79 * 1.602e-19  # Charge of gold nucleus in C\nr = 0.00300 * 1e-10  # Distance in meters\n\n# Step 2: Calculate the force using Coulomb's law\nF = k * sp.Abs(q1 * q2) / r**2\n\n# Step 3: Compute the final result\nresult = F",
+            "unit": "N"
+        },
+        "answer": {
+            "gt_answer": "0.405",
+            "unit": " $\\mathrm{~N}$"
+        },
+        "verification_result": {
+            "code_output": "0.405041285520000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.405",
+            "comment": " ",
+            "unit": " $\\mathrm{~N}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "13.2",
+        "response": {
+            "reasoning": "To find the enthalpy change (Delta H) for the dissociation of molecular hydrogen (H2) into atomic hydrogen (H), we start with the bond dissociation energy (D0) given as 4.4781 eV. This value represents the energy required to break one mole of H2 molecules into two moles of H atoms. To convert this energy from eV to kJ/mol, we use the conversion factor: 1 eV = 96.485 kJ/mol. Therefore, we multiply the given D0 by this conversion factor to obtain Delta H0 in kJ/mol.",
+            "code": "import sympy as sp\n\n# Step 1: Define the bond dissociation energy in eV\nD0_eV = 4.4781  # bond dissociation energy in eV\n\n# Step 2: Define the conversion factor from eV to kJ/mol\nconversion_factor = 96.485  # kJ/mol per eV\n\n# Step 3: Calculate Delta H0 in kJ/mol\nDelta_H0_kJ_per_mol = D0_eV * conversion_factor\n\n# Step 4: Assign the final result to 'result'\nresult = Delta_H0_kJ_per_mol",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "432.07",
+            "unit": " $\\mathrm{~kJ} / \\mathrm{mol}$"
+        },
+        "verification_result": {
+            "code_output": "432.06947850000006",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 432.07",
+            "comment": " ",
+            "unit": " $\\mathrm{~kJ} / \\mathrm{mol}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "15.39",
+        "response": {
+            "reasoning": "To calculate the contribution to the molar internal energy due to molecular vibrations, we first need to convert the given wavenumber into the vibrational frequency. The wavenumber is given as 900 cm^-1, which can be converted to frequency using the speed of light (c). The relationship is given by: \\( \\nu_s = \\widetilde{v} \\cdot c \\). Next, we calculate \\( \\theta_s \\) using the formula \\( \\theta_s = \\frac{h \\nu_s}{k} \\), where h is Planck's constant and k is the Boltzmann constant. After calculating \\( \\theta_s \\), we can substitute it into the expression for \\( U_{m, \\text{vib}} \\) at a temperature of 25\u00b0C (298 K). Finally, we compute the value of \\( U_{m, \\text{vib}} \\) using the provided formula.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nR = 8.314  # J/(mol*K), universal gas constant\nh = 6.626e-34  # J*s, Planck's constant\nk = 1.381e-23  # J/K, Boltzmann's constant\nc = 3e10  # cm/s, speed of light\nT = 298  # K, temperature in Kelvin\nwavenumber = 900  # cm^-1\n\n# Step 2: Convert wavenumber to frequency\nnu_s = wavenumber * c  # frequency in cm/s\n\n# Step 3: Calculate theta_s\ntheta_s = (h * nu_s) / k\n\n# Step 4: Calculate U_{m, vib}\nU_m_vib = R * (theta_s / (sp.exp(theta_s / T) - 1))\n\n# Step 5: Compute the final result\nresult = U_m_vib.evalf()",
+            "unit": "J/mol"
+        },
+        "answer": {
+            "gt_answer": "0.14",
+            "unit": " $\\mathrm{kJ} / \\mathrm{mol}$"
+        },
+        "verification_result": {
+            "code_output": "0.141235402311204",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.14",
+            "comment": " ",
+            "unit": " $\\mathrm{kJ} / \\mathrm{mol}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "4.3",
+        "response": {
+            "reasoning": "To find the force constant of the molecule ${ }^{12} \\mathrm{C}^{16} \\mathrm{O}$, we can use the formula that relates the vibrational frequency of a diatomic molecule to its force constant and reduced mass. The vibrational frequency in wavenumbers (\\tilde{\\nu}) is given by \\tilde{\\nu} = \\frac{1}{2\\pi c} \\sqrt{\\frac{k}{\\mu}} where k is the force constant and \\mu is the reduced mass. We first need to calculate the reduced mass of the molecule using the atomic masses of carbon and oxygen. The atomic mass of \\mathrm{C} is approximately 12 u and that of \\mathrm{O} is approximately 16 u. The reduced mass \\mu is given by \\mu = \\frac{m_1 m_2}{m_1 + m_2}. After calculating \\mu, we can rearrange the formula to solve for k: k = (2\\pi c \\tilde{\\nu})^2 \\mu. Finally, we will compute k using the given \\tilde{\\nu} value.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nnu_tilde = 2143  # in cm^-1\nc = 3e10  # speed of light in cm/s\nm_C = 12  # atomic mass of Carbon in atomic mass units (u)\nm_O = 16  # atomic mass of Oxygen in atomic mass units (u)\n\n# Step 2: Calculate the reduced mass in atomic mass units\nmu = (m_C * m_O) / (m_C + m_O)  # reduced mass in u\n\n# Step 3: Convert reduced mass to kg (1 u = 1.66053906660e-27 kg)\nmu_kg = mu * 1.66053906660e-27  # in kg\n\n# Step 4: Calculate the force constant k\nk = (2 * sp.pi * c * nu_tilde)**2 * mu_kg  # in N/m\n\n# Step 5: Assign the final computed result to 'result'\nresult = k",
+            "unit": "N/m"
+        },
+        "answer": {
+            "gt_answer": "1855",
+            "unit": " $\\mathrm{~N} / \\mathrm{m}$"
+        },
+        "verification_result": {
+            "code_output": "1857.97079468127",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "\nThe strongest infrared band corresponds to the $v=0 \\rightarrow 1$ transition. We approximate the molecular vibration as that of a harmonic oscillator. The equilibrium molecular vibrational frequency is approximately\r\n$$\r\n\\nu_e \\approx \\nu_{\\text {light }}=\\widetilde{\\nu} c=\\left(2143 \\mathrm{~cm}^{-1}\\right)\\left(2.9979 \\times 10^{10} \\mathrm{~cm} / \\mathrm{s}\\right)=6.424 \\times 10^{13} \\mathrm{~s}^{-1}\r\n$$\r\nTo relate $k$ to $\\nu_e$, we need the reduced mass $\\mu=m_1 m_2 /\\left(m_1+m_2\\right)$. One mole of ${ }^{12} \\mathrm{C}$ has a mass of $12 \\mathrm{~g}$ and contains Avogadro's number of atoms. Hence the mass of one atom of ${ }^{12} \\mathrm{C}$ is $(12 \\mathrm{~g}) /\\left(6.02214 \\times 10^{23}\\right)$. The reduced mass and force constant are\r\n$$\r\n\\begin{gathered}\r\n\\mu=\\frac{12(15.9949) \\mathrm{g}}{27.9949} \\frac{1}{6.02214 \\times 10^{23}}=1.1385 \\times 10^{-23} \\mathrm{~g} \\\\\r\nk=4 \\pi^2 \\nu_e^2 \\mu=4 \\pi^2\\left(6.424 \\times 10^{13} \\mathrm{~s}^{-1}\\right)^2\\left(1.1385 \\times 10^{-26} \\mathrm{~kg}\\right)=1855 \\mathrm{~N} / \\mathrm{m}\r\n\\end{gathered}\r\n$$\n",
+            "answer_latex": " 1855",
+            "comment": " ",
+            "unit": " $\\mathrm{~N} / \\mathrm{m}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "6.37",
+        "response": {
+            "reasoning": "To calculate the standard Gibbs free energy change (\u0394G_R\u00b0) for the dissociation of N2O3, we can use the relationship between the Gibbs free energy change and the equilibrium constant (K). The degree of dissociation (\u03b1) is given as 3.5 \u00d7 10^-3, which allows us to calculate the equilibrium constant K. The reaction is: N2O3(g) \u21cc NO2(g) + NO(g). For every mole of N2O3 that dissociates, 1 mole of NO2 and 1 mole of NO are produced. Therefore, if we start with 1 mole of N2O3, at equilibrium we have: N2O3 = 1 - \u03b1, NO2 = \u03b1, NO = \u03b1. The equilibrium constant K can be expressed as K = (\u03b1)(\u03b1) / (1 - \u03b1) = \u03b1^2 / (1 - \u03b1). We can then calculate \u0394G_R\u00b0 using the equation \u0394G_R\u00b0 = -RT ln(K), where R is the gas constant and T is the temperature in Kelvin. After substituting the values, we can compute \u0394G_R\u00b0. The final result will be in kJ/mol.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nR = 8.314  # J/(mol*K), gas constant\nT = 298  # K, temperature\nalpha = 3.5e-3  # degree of dissociation\n\n# Step 2: Calculate the equilibrium constant K\nK = (alpha**2) / (1 - alpha)\n\n# Step 3: Calculate \u0394G_R\u00b0 using the formula \u0394G_R\u00b0 = -RT ln(K)\n\u0394G_R = -R * T * sp.ln(K)\n\n# Step 4: Convert \u0394G_R from J/mol to kJ/mol\n\u0394G_R_kJ = \u0394G_R / 1000\n\n# Step 5: Assign the final computed result to 'result'\nresult = \u0394G_R_kJ",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "28",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "28.0126145047243",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 28",
+            "comment": " ",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "2.13",
+        "response": {
+            "reasoning": "To find the final temperature of the water, we first calculate the energy supplied by the immersion heater using the formula for electrical power: P = I^2 * R, where I is the current and R is the resistance. The energy (Q) supplied over time (t) is given by Q = P * t. Next, we use the specific heat capacity of water (c = 4.18 J/g\u00b7K) to find the temperature change (\u0394T) using the formula Q = m * c * \u0394T, where m is the mass of the water. Finally, we add the temperature change to the initial temperature to find the final temperature.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nI = 1.75  # current in Amperes\nR = 25.0  # resistance in Ohms\nt = 100.0  # time in seconds\nm = 82.5  # mass of water in grams\nc = 4.18  # specific heat capacity of water in J/g\u00b7K\nT_initial = 300  # initial temperature in K\n\n# Step 2: Calculate power and energy supplied\nP = I**2 * R  # Power in Watts\nQ = P * t  # Energy in Joules\n\n# Step 3: Calculate the temperature change\n# Q = m * c * \u0394T => \u0394T = Q / (m * c)\nDelta_T = Q / (m * c)\n\n# Step 4: Calculate final temperature\nT_final = T_initial + Delta_T\n\n# Step 5: Assign the final computed result to 'result'\nresult = T_final",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "322",
+            "unit": "$\\mathrm{~K}$"
+        },
+        "verification_result": {
+            "code_output": "322.2016818906771",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 322",
+            "comment": " ",
+            "unit": "$\\mathrm{~K}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "2.10",
+        "response": {
+            "reasoning": "To calculate the work performed by the muscle fiber, we can use the formula for work done by a spring (or a muscle fiber in this case) which follows Hooke's law. The work done (W) when a spring is compressed or stretched from an initial position (x=0) to a final position (x) is given by W = (1/2) * k * x^2, where k is the spring constant and x is the displacement. Here, the displacement is 3.5 cm, which we convert to meters (0.035 m). Substituting the values into the formula gives us the total work done by the muscle fiber.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nk = 750  # spring constant in N/m\nx = 3.5 / 100  # displacement in meters (converted from cm)\n\n# Step 2: Calculate the work done using the formula W = (1/2) * k * x^2\nW = (1/2) * k * x**2\n\n# Step 3: Compute the final result\nresult = W\n\n# Evaluate the result\nresult = result.evalf()",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "0.46",
+            "unit": "$\\mathrm{~J}$"
+        },
+        "verification_result": {
+            "code_output": "0.4593750000000001",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.46",
+            "comment": " ",
+            "unit": "$\\mathrm{~J}$",
+            "source": "thermo"
+        }
     }
 ]

@@ -169,7 +169,7 @@ class PhysicsCodeGenPipeline():
 
       outputs = self.initialize_output_list(self.output_location)
       failed_outputs = self.initialize_output_list(failed_output_location)
-      
+
       for sample in self.dataset:
          sample_id = str(sample['id']).strip()
          question = sample['question']
@@ -193,6 +193,7 @@ class PhysicsCodeGenPipeline():
                   self.failed_samples_ids.append(sample_id)
 
          logger.info(f'==========Verifying Question {sample_id}==========')
+
          verification_outcome = self.verify(structured_response, full_answer)
          logger.info(f'Verification Outcome: Result Match: {verification_outcome.result_match}, Unit Match: {verification_outcome.unit_match}')
 

@@ -6502,5 +6502,1421 @@
             "unit": " $10^3$",
             "source": "matter"
         }
+    },
+    {
+        "sample_id": "52.10(a)",
+        "response": {
+            "reasoning": "To find the temperature at which the vibrational partition function of Br2 is within 5% of the approximate formula, we first define the vibrational partition function using the exact formula: Z_vib = sum(exp(-h * nu * (v + 1) / (k * T))) for v = 0 to infinity, where nu is the vibrational wavenumber. The approximate formula for the vibrational partition function is Z_vib_approx = exp(h * nu / (2 * k * T)) / (1 - exp(-h * nu / (k * T))). We will set up the equations for both partition functions, solve for T, and find the temperature where the two values differ by no more than 5%.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nT, h, k, nu = sp.symbols('T h k nu')\nnu_value = 323.2 * 100 * sp.pi / (3 * 10**10)  # Convert cm^-1 to Hz\n\n# Step 2: Define the exact vibrational partition function Z_vib\nv = sp.symbols('v', integer=True)\nZ_vib_exact = sp.Sum(sp.exp(-h * nu_value * (v + 1) / (k * T)), (v, 0, sp.oo)).doit()\n\n# Step 3: Define the approximate vibrational partition function Z_vib_approx\nZ_vib_approx = sp.exp(h * nu_value / (2 * k * T)) / (1 - sp.exp(-h * nu_value / (k * T)))\n\n# Step 4: Set up the equation to find T where the two partition functions are within 5%\n# We want |Z_vib_exact - Z_vib_approx| / Z_vib_approx < 0.05\n# This leads to the equation: Z_vib_exact < 1.05 * Z_vib_approx and Z_vib_exact > 0.95 * Z_vib_approx\n# We will solve for T in both inequalities\ninequality1 = Z_vib_exact - 1.05 * Z_vib_approx\ninequality2 = Z_vib_exact - 0.95 * Z_vib_approx\n\n# Step 5: Solve the inequalities for T\nT_solution1 = sp.solve(inequality1, T)\nT_solution2 = sp.solve(inequality2, T)\n\n# Step 6: Find the range of T that satisfies both inequalities\n# We will take the maximum of the lower bounds and the minimum of the upper bounds\nT_final = sp.Min(T_solution2).evalf()  # Get the upper bound from the second inequality\n\n# Step 7: Assign the final result\nresult = T_final",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "4500",
+            "unit": "$\\mathrm{~K}$"
+        },
+        "verification_result": {
+            "code_output": null,
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 4500",
+            "comment": " ",
+            "unit": "$\\mathrm{~K}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "57.5",
+        "response": {
+            "reasoning": "To find the standard enthalpy of formation of solid DyCl3, we can use Hess's law, which states that the total enthalpy change for a reaction is the sum of the enthalpy changes for the individual steps. We will manipulate the given reactions to arrive at the formation reaction of DyCl3(s). The formation reaction is: Dy(s) + 3/2 Cl2(g) -> DyCl3(s). We will reverse and adjust the given reactions accordingly to derive this equation and calculate the overall enthalpy change.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols for the enthalpy changes\nDelta_r1 = -180.06  # kJ/mol for reaction 1\nDelta_r2 = -699.43  # kJ/mol for reaction 2\nDelta_r3 = -158.31  # kJ/mol for reaction 3\n\n# Step 2: Set up the equations based on Hess's law\n# We need to reverse reaction 3 and adjust it to match the formation of HCl\n# Reaction 3: H2(g) + Cl2(g) -> 2 HCl(aq)  (reverse and divide by 2)\n# This gives us: HCl(aq) -> 1/2 H2(g) + 1/2 Cl2(g)  (Delta_r3 reversed)\nDelta_r3_reversed = +158.31 / 2  # kJ/mol for the reversed reaction\n\n# Now we can write the overall reaction:\n# 1. Dy(s) + 3 HCl(aq) -> DyCl3(aq) + 3/2 H2(g) (reaction 2)\n# 2. DyCl3(aq) -> DyCl3(s) (reaction 1)\n# 3. HCl(aq) -> 1/2 H2(g) + 1/2 Cl2(g) (reversed reaction 3)\n\n# Overall reaction: \n# Dy(s) + 3/2 Cl2(g) -> DyCl3(s)\n\n# Calculate the overall enthalpy change:\nDelta_f_H = Delta_r2 + Delta_r1 + 3 * Delta_r3_reversed\n\n# Step 3: Compute the final result\nresult = Delta_f_H  # kJ/mol",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "-994.3",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "-642.025",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -994.3",
+            "comment": " problem",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "66.1",
+        "response": {
+            "reasoning": "To calculate the standard Gibbs free energy change at 375 K for the reaction 2 CO(g) + O2(g) \u2192 2 CO2(g), we can use the Gibbs-Helmholtz equation, which relates the change in Gibbs free energy with temperature. The equation is given by: \u0394G(T) = \u0394H\u00b0 - T\u0394S\u00b0. We first need to calculate \u0394S\u00b0 at 298 K using the relation \u0394G\u00b0(298 K) = \u0394H\u00b0(298 K) - 298\u0394S\u00b0. Rearranging gives us \u0394S\u00b0 = (\u0394H\u00b0(298 K) - \u0394G\u00b0(298 K)) / 298. After finding \u0394S\u00b0, we can then substitute it into the Gibbs-Helmholtz equation to find \u0394G\u00b0(375 K) = \u0394H\u00b0(298 K) - 375\u0394S\u00b0. This will give us the desired value of \u0394G\u00b0 at 375 K.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nT1 = 298  # Temperature in K\nT2 = 375  # Temperature in K\nDelta_G_298 = sp.symbols('Delta_G_298')  # Gibbs free energy change at 298 K\nDelta_H_298 = sp.symbols('Delta_H_298')  # Enthalpy change at 298 K\nDelta_S = (Delta_H_298 - Delta_G_298) / T1  # Entropy change at 298 K\n\n# Step 2: Calculate Delta G at 375 K using the Gibbs-Helmholtz equation\nDelta_G_375 = Delta_H_298 - T2 * Delta_S\n\n# Step 3: Assign the final result to 'result'\nresult = Delta_G_375",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "-501",
+            "unit": "$\\mathrm{~kJ} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "1.25838926174497*Delta_G_298 - 0.258389261744966*Delta_H_298",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "-501",
+            "comment": " problem",
+            "unit": "$\\mathrm{~kJ} \\mathrm{~mol}^{-1}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "60.3",
+        "response": {
+            "reasoning": "To compute the standard molar entropy of F2- at 298 K, we can use the formula for the vibrational contribution to the entropy of a diatomic molecule. The standard molar entropy S can be calculated using the formula: S = R * ln(Q) + S_trans + S_rot + S_vib, where R is the gas constant, Q is the partition function, and S_trans, S_rot, and S_vib are the contributions from translational, rotational, and vibrational motions respectively. For a diatomic molecule, the translational and rotational contributions can be calculated using standard formulas, while the vibrational contribution can be derived from the fundamental vibrational wavenumber. We will calculate these contributions and sum them to find the total standard molar entropy.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nR = 8.314  # J/(mol*K), gas constant\nT = 298  # K, temperature\nvib_wavenumber = 450.0  # cm^-1, fundamental vibrational wavenumber\n\n# Step 2: Convert wavenumber to frequency (in Hz)\n# 1 cm^-1 = 3.00e10 Hz\nvib_frequency = vib_wavenumber * 3.00e10  # Hz\n\n# Step 3: Calculate the vibrational contribution to entropy S_vib\n# S_vib = R * (1/2 + (1/(exp(h * nu / (R * T)) - 1)))\n# where h is Planck's constant (6.626e-34 J*s)\n\nh = 6.626e-34  # J*s\nS_vib = R * (1/2 + (1 / (sp.exp(h * vib_frequency / (R * T)) - 1)))\n\n# Step 4: Calculate translational and rotational contributions\n# For a diatomic molecule:\n# S_trans = R * (5/2) + R * ln((2 * pi * m * R * T / h^2)^(3/2))\n# S_rot = R * ln(2 * pi * I / h^2) + R\n\n# Step 5: Calculate the mass of F2- (molecular weight = 2 * 19.00 g/mol = 38.00 g/mol)\n# Convert to kg/mol\nm = 38.00 / 1000  # kg/mol\n\n# Moment of inertia I = m * r^2 (r in meters)\n# Convert equilibrium internuclear distance from pm to meters\nr_eq = 190.0e-12  # m\nI = m * (r_eq ** 2)\n\n# Calculate translational and rotational contributions\nS_trans = R * (5/2) + R * sp.ln((2 * sp.pi * m * R * T / h**2)**(3/2))\nS_rot = R * sp.ln(2 * sp.pi * I / h**2) + R\n\n# Step 6: Total standard molar entropy\nS_total = S_trans + S_rot + S_vib\n\n# Step 7: Assign the final computed result to 'result'\nresult = S_total",
+            "unit": "J/(mol*K)"
+        },
+        "answer": {
+            "gt_answer": "199.4",
+            "unit": " $\\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "zoo",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 199.4",
+            "comment": " problem",
+            "unit": " $\\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "49.1(a)",
+        "response": {
+            "reasoning": "To find the strength of the B1 field, we can use the relationship between the pulse duration and the B1 field strength. The duration of a 180-degree pulse is given by the formula: T = \u03c0 / (\u03b3 * B1), where \u03b3 is the gyromagnetic ratio. For protons, \u03b3 is approximately 42.58 MHz/T. Given that the duration T for a 180-degree pulse is 12.5 microseconds, we can rearrange the formula to solve for B1: B1 = \u03c0 / (\u03b3 * T). Substituting the values, we can compute the strength of the B1 field.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nT = 12.5e-6  # duration in seconds (12.5 microseconds)\npi = sp.pi\ngamma = 42.58e6  # gyromagnetic ratio for protons in Hz/T (42.58 MHz/T)\n\n# Step 2: Set up the equation for B1 field strength\nB1 = pi / (gamma * T)\n\n# Step 3: Compute the strength of the B1 field\nresult = B1.evalf()  # Evaluate the expression to get a numerical result",
+            "unit": "T"
+        },
+        "answer": {
+            "gt_answer": "5.9",
+            "unit": " $10^{-4} \\mathrm{~T}$"
+        },
+        "verification_result": {
+            "code_output": "59.0247562910248",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 5.9",
+            "comment": " ",
+            "unit": " $10^{-4} \\mathrm{~T}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "18.1",
+        "response": {
+            "reasoning": "To find the most probable distance of the innermost electrons from the nucleus of an atom with atomic number Z=126, we can use the Bohr model of the atom. The radius of the nth orbit in a hydrogen-like atom is given by the formula r_n = n^2 * (4 * pi * epsilon_0 * hbar^2) / (Z * e^2), where Z is the atomic number, e is the elementary charge, hbar is the reduced Planck's constant, and epsilon_0 is the vacuum permittivity. For the innermost electron (n=1), we can simplify this to r_1 = (4 * pi * epsilon_0 * hbar^2) / (Z * e^2). We will substitute Z=126 and calculate the radius.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nZ = 126  # atomic number for the superheavy element\nepsilon_0 = sp.symbols('epsilon_0')  # vacuum permittivity\nhbar = sp.symbols('hbar')  # reduced Planck's constant\ne = sp.symbols('e')  # elementary charge\n\n# Step 2: Calculate the radius of the innermost electron (n=1)\nr_1 = (4 * sp.pi * epsilon_0 * hbar**2) / (Z * e**2)\n\n# Step 3: Assign the final computed result to 'result'\nresult = r_1",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "0.42",
+            "unit": " $\\mathrm{pm}$"
+        },
+        "verification_result": {
+            "code_output": "99733100113.9617*hbar**2/e**2",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.42",
+            "comment": " problem",
+            "unit": " $\\mathrm{pm}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "69.9(a)",
+        "response": {
+            "reasoning": "To calculate the melting point of ice under a pressure of 50 bar, we can use the Clausius-Clapeyron equation, which relates the change in pressure to the change in temperature at the phase boundary. The equation is given by: dP/dT = L/(T * \u0394V), where L is the latent heat of fusion, T is the temperature, and \u0394V is the change in volume during the phase transition. We can express \u0394V in terms of the densities of ice and water. The densities are given as 0.92 g/cm\u00b3 for ice and 1.00 g/cm\u00b3 for water. We can convert these densities to kg/m\u00b3 for consistency in SI units. The latent heat of fusion for ice is approximately 334,000 J/kg. We will rearrange the equation to find the change in temperature (dT) corresponding to the change in pressure (dP) and integrate to find the new melting point under the given pressure.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP, T, L, rho_ice, rho_water = sp.symbols('P T L rho_ice rho_water')\n\n# Given values\nP_0 = 1 * 1e5  # standard atmospheric pressure in Pa\nP_1 = 50 * 1e5  # pressure in Pa (50 bar)\nL = 334000  # latent heat of fusion in J/kg\nrho_ice_value = 0.92 * 1000  # density of ice in kg/m\u00b3\nrho_water_value = 1.00 * 1000  # density of water in kg/m\u00b3\n\n# Step 2: Calculate change in volume \u0394V\nDelta_V = (1/rho_water_value) - (1/rho_ice_value)\n\n# Step 3: Use Clausius-Clapeyron equation dP/dT = L/(T * \u0394V)\n# Rearranging gives dT = L/(Delta_V) * dP/(P_1 - P_0)\n\n# Calculate dP\nDelta_P = P_1 - P_0\n\n# Step 4: Calculate dT\nDelta_T = L / (Delta_V * (P_1 - P_0))\n\n# Step 5: Assume the normal melting point of ice is 273.15 K\nT_melting_normal = 273.15  # in K\n\n# Calculate new melting point\nT_melting_new = T_melting_normal + Delta_T\n\n# Final result assignment\nresult = T_melting_new",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "272.8",
+            "unit": " $\\mathrm{K}$"
+        },
+        "verification_result": {
+            "code_output": "-510.7275510204083",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 272.8",
+            "comment": " ",
+            "unit": " $\\mathrm{K}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "51.4(a)",
+        "response": {
+            "reasoning": "To find the temperature of a two-level system where the population of the upper state is one-third that of the lower state, we can use the Boltzmann distribution. The ratio of populations is given by: N_upper / N_lower = exp(-E/kT), where E is the energy separation, k is the Boltzmann constant, and T is the temperature. Given that N_upper / N_lower = 1/3, we can set up the equation: 1/3 = exp(-E/kT). Rearranging gives us T = -E / (k * ln(1/3)). We convert the energy from cm^-1 to Joules using the conversion factor (1 cm^-1 = 1.986 x 10^-23 J). Finally, we substitute the values into the equation to solve for T.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nE = 400 * sp.constants.h * sp.constants.c * 100  # Energy in Joules (400 cm^-1)\nk = sp.constants.Boltzmann  # Boltzmann constant in J/K\nT = sp.symbols('T')  # Temperature in Kelvin\n\n# Step 2: Set up the equation based on the population ratio\npopulation_ratio = 1/3\n# Using the Boltzmann distribution\n# N_upper / N_lower = exp(-E/(kT))\nequation = sp.Eq(population_ratio, sp.exp(-E / (k * T)))\n\n# Step 3: Solve for temperature T\ntemperature_solution = sp.solve(equation, T)[0]\n\n# Step 4: Assign the final result to 'result'\nresult = temperature_solution",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "524",
+            "unit": " $ \\mathrm{~K}$"
+        },
+        "verification_result": {
+            "code_output": null,
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 524",
+            "comment": " ",
+            "unit": " $ \\mathrm{~K}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "36.3(a)",
+        "response": {
+            "reasoning": "To calculate the volume occupied by the gas, we can use the compressibility factor (Z) and the ideal gas law. The compressibility factor is defined as Z = PV/(nRT), where P is the pressure, V is the volume, n is the number of moles, R is the ideal gas constant, and T is the temperature in Kelvin. Rearranging this equation to solve for V gives us V = nRT/(ZP). We first convert the amount of gas from mmol to moles, then substitute the values into the equation to find the volume.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP = 20 * 101325  # Pressure in Pascals (20 atm)\nT = 300  # Temperature in Kelvin\nR = 8.314  # Ideal gas constant in J/(mol*K)\nZ = 0.86  # Compression factor\nn_mmol = 8.2  # Amount of gas in mmol\nn = n_mmol / 1000  # Convert mmol to mol\n\n# Step 2: Calculate the volume using the formula V = nRT/(ZP)\nV = (n * R * T) / (Z * P)\n\n# Step 3: Compute the final result\nresult = V.evalf()  # Evaluate to get a numerical result",
+            "unit": "m^3"
+        },
+        "answer": {
+            "gt_answer": "8.7",
+            "unit": " $\\mathrm{~cm}^3$"
+        },
+        "verification_result": {
+            "code_output": "11.735458661112352",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 8.7",
+            "comment": " problem",
+            "unit": " $\\mathrm{~cm}^3$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "11.3",
+        "response": {
+            "reasoning": "To predict the wavelength of the first excitation of C60, we can model the \u03c0 electrons as a particle in a three-dimensional box (a cube) with sides equal to the mean diameter of the molecule. The energy levels of a particle in a box are given by the formula E_n = (n^2 * h^2) / (8 * m * L^2), where n is the quantum number, h is Planck's constant, m is the mass of the electron, and L is the length of the side of the box. The first excitation corresponds to n=2, and the wavelength can be found using the relation E = h * c / \u03bb. By substituting the energy expression into this relation, we can solve for \u03bb. The final result will give us the predicted wavelength for the first excitation.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nh = sp.symbols('h')  # Planck's constant in J.s\nm = sp.symbols('m')  # mass of an electron in kg\nL = 0.7e-9  # length of the side of the cube in meters (0.7 nm)\nc = 3e8  # speed of light in m/s\nn = 2  # quantum number for the first excitation\n\n# Step 2: Calculate the energy of the first excitation state\nE_n = (n**2 * h**2) / (8 * m * L**2)\n\n# Step 3: Relate energy to wavelength\n# E = h * c / \u03bb => \u03bb = h * c / E\nlambda_n = h * c / E_n\n\n# Step 4: Substitute E_n into the wavelength equation\nlambda_n = h * c / ((n**2 * h**2) / (8 * m * L**2))\n\n# Step 5: Simplify the expression for wavelength\nlambda_n = (8 * m * L**2 * c) / (n**2 * h)\n\n# Step 6: Assign the final computed result to 'result'\nresult = lambda_n",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "1.6",
+            "unit": " $\\mu \\mathrm{m}$"
+        },
+        "verification_result": {
+            "code_output": "2.94e-10/h",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1.6",
+            "comment": " problem",
+            "unit": " $\\mu \\mathrm{m}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "36.1",
+        "response": {
+            "reasoning": "To estimate the molar volume of CO2 at 500 K and 100 atm using the van der Waals equation, we first need to define the van der Waals constants for CO2. The van der Waals equation is given by: (P + a(n/V)^2)(V - nb) = nRT, where P is the pressure, V is the molar volume, n is the number of moles, R is the ideal gas constant, and a and b are the van der Waals constants for the gas. For CO2, a = 3.59 L^2 atm/mol^2 and b = 0.0427 L/mol. We will rearrange the equation to solve for V and substitute the values for P, T, a, and b. After solving, we will compute the molar volume in liters.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP, V, n, R, T = sp.symbols('P V n R T')\n\n# Constants for CO2\nR_value = 0.0821  # L atm / (K mol)\nT_value = 500  # K\nP_value = 100  # atm\nn_value = 1  # 1 mole\n\na = 3.59  # L^2 atm / mol^2\nb = 0.0427  # L / mol\n\n# Step 2: Set up the van der Waals equation\n# (P + a(n/V)^2)(V - nb) = nRT\n# Rearranging gives us:\n# V = (nRT)/(P + a(n/V)^2) + nb\n\n# Substitute n, R, T, P, a, b into the equation\nV_eq = (n * R * T) / (P + a * (n / V)**2) + n * b\n\n# Step 3: Solve for V using the van der Waals equation\n# We will use n = 1 mole for simplicity\nV_solution = sp.solve(V_eq.subs({n: n_value, R: R_value, T: T_value, P: P_value, a: a, b: b}), V)\n\n# Step 4: Assign the final computed result to 'result'\nresult = V_solution[0]  # Taking the first solution",
+            "unit": "L"
+        },
+        "answer": {
+            "gt_answer": "0.366",
+            "unit": "$\\mathrm{dm}^3 \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "-0.0581589036683523*I",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "\nFor van der Waals gas of $\\mathrm{CO}_2$ , $a=3.610 \\mathrm{dm}^6$ atm $\\mathrm{mol}^{-2}$ and $b=4.29 \\times 10^{-2} \\mathrm{dm}^3 \\mathrm{~mol}^{-1}$. Under the stated conditions, $R T / p=0.410 \\mathrm{dm}^3 \\mathrm{~mol}^{-1}$. The coefficients in the equation for $V_{\\mathrm{m}}$ are therefore\r\n$$\r\n\\begin{aligned}\r\nb+R T / p & =0.453 \\mathrm{dm}^3 \\mathrm{~mol}^{-1} \\\\\r\na / p & =3.61 \\times 10^{-2}\\left(\\mathrm{dm}^3 \\mathrm{~mol}^{-1}\\right)^2 \\\\\r\na b / p & =1.55 \\times 10^{-3}\\left(\\mathrm{dm}^3 \\mathrm{~mol}^{-1}\\right)^3\r\n\\end{aligned}\r\n$$\r\nTherefore, on writing $x=V_{\\mathrm{m}} /\\left(\\mathrm{dm}^3 \\mathrm{~mol}^{-1}\\right)$, the equation to solve is\r\n$$\r\nx^3-0.453 x^2+\\left(3.61 \\times 10^{-2}\\right) x-\\left(1.55 \\times 10^{-3}\\right)=0\r\n$$\r\nThe acceptable root is $x=0.366$, which implies that $V_{\\mathrm{m}}=0.366$ $\\mathrm{dm}^3 \\mathrm{~mol}^{-1}$. The molar volume of a perfect gas under these conditions is $0.410 \\mathrm{dm}^3 \\mathrm{~mol}^{-1}$.\n",
+            "answer_latex": " 0.366",
+            "comment": " with solution",
+            "unit": "$\\mathrm{dm}^3 \\mathrm{~mol}^{-1}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "37.4",
+        "response": {
+            "reasoning": "To find the typical wavelength of neutrons at thermal equilibrium, we can use the de Broglie wavelength formula, which is given by \\( \\lambda = \\frac{h}{p} \\), where \\( h \\) is Planck's constant and \\( p \\) is the momentum of the neutrons. The momentum can be expressed in terms of the kinetic energy, which at thermal equilibrium is given by \\( K.E. = \\frac{3}{2} k_B T \\) for three dimensions. However, since we are considering one dimension, we can use \\( K.E. = \\frac{1}{2} m v^2 \\). We can relate the kinetic energy to the momentum as \\( p = mv \\). Therefore, we can derive the typical wavelength using the temperature and the mass of the neutron. The final result will be expressed in meters.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nT = 373  # Temperature in Kelvin\nk_B = 1.380649e-23  # Boltzmann constant in J/K\nh = 6.62607015e-34  # Planck's constant in J.s\nm_n = 1.675e-27  # Mass of neutron in kg\n\n# Step 2: Calculate the average kinetic energy at thermal equilibrium\nK_E = (3/2) * k_B * T  # Kinetic energy in Joules\n\n# Step 3: Relate kinetic energy to momentum\n# p = sqrt(2 * m * K_E)\np = sp.sqrt(2 * m_n * K_E)\n\n# Step 4: Calculate the de Broglie wavelength\nlambda_n = h / p\n\n# Step 5: Compute the final result\nresult = lambda_n.simplify()",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "226",
+            "unit": "$\\mathrm{pm}$"
+        },
+        "verification_result": {
+            "code_output": "130.25426096669779",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "From the equipartition principle, we know that the mean translational kinetic energy of a neutron at a temperature $T$ travelling in the $x$-direction is $E_{\\mathrm{k}}=\\frac{1}{2} k T$. The kinetic energy is also equal to $p^2 / 2 m$, where $p$ is the momentum of the neutron and $m$ is its mass. Hence, $p=(m k T)^{1 / 2}$. It follows from the de Broglie relation $\\lambda=h / p$ that the neutron's wavelength is\r\n$$\r\n\\lambda=\\frac{h}{(m k T)^{1 / 2}}\r\n$$\r\nTherefore, at $373 \\mathrm{~K}$,\r\n$$\r\n\\begin{aligned}\r\n\\lambda & =\\frac{6.626 \\times 10^{-34} \\mathrm{~J} \\mathrm{~s}}{\\left\\{\\left(1.675 \\times 10^{-27} \\mathrm{~kg}\\right) \\times\\left(1.381 \\times 10^{-23} \\mathrm{~J} \\mathrm{~K}^{-1}\\right) \\times(373 \\mathrm{~K})\\right\\}^{1 / 2}} \\\\\r\n& =\\frac{6.626 \\times 10^{-34}}{\\left(1.675 \\times 10^{-27} \\times 1.381 \\times 10^{-23} \\times 373\\right)^{1 / 2}} \\frac{\\mathrm{kg} \\mathrm{m}^2 \\mathrm{~s}^{-1}}{\\left(\\mathrm{~kg}^2 \\mathrm{~m}^2 \\mathrm{~s}^{-2}\\right)^{1 / 2}} \\\\\r\n& =2.26 \\times 10^{-10} \\mathrm{~m}=226 \\mathrm{pm}\r\n\\end{aligned}\r\n$$\r\nwhere we have used $1 \\mathrm{~J}=1 \\mathrm{~kg} \\mathrm{~m}^2 \\mathrm{~s}^{-2}$.",
+            "answer_latex": " 226",
+            "comment": " with solution",
+            "unit": "$\\mathrm{pm}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "14.1",
+        "response": {
+            "reasoning": "To determine the energies and degeneracies of the lowest four energy levels of a freely rotating diatomic molecule, we use the formula for rotational energy levels: E(J) = (h^2 / (8 * pi^2 * I)) * J * (J + 1), where J is the rotational quantum number, h is Planck's constant, and I is the moment of inertia. The degeneracy of each level is given by g(J) = 2J + 1. We will calculate the energies for J = 0, 1, 2, and 3. The transition frequency between the lowest two levels (J=0 and J=1) can be found using the energy difference and the relation frequency = \u0394E / h.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nh = 6.62607015e-34  # Planck's constant in J.s\nI = 2.6422e-47  # Moment of inertia in kg.m^2\n\n# Step 2: Define the rotational quantum number J\nJ = sp.symbols('J', integer=True)\n\n# Step 3: Calculate energies for J = 0, 1, 2, 3\nE = (h**2 / (8 * sp.pi**2 * I)) * J * (J + 1)\nenergies = [E.subs(J, j) for j in range(4)]\n\n# Step 4: Calculate degeneracies for J = 0, 1, 2, 3\ndegeneracies = [2*j + 1 for j in range(4)]\n\n# Step 5: Calculate the transition frequency between J=0 and J=1\nE_0 = energies[0]\nE_1 = energies[1]\nfrequency = (E_1 - E_0) / h\n\n# Step 6: Assign the final results\nresult = {'energies': energies, 'degeneracies': degeneracies, 'transition_frequency': frequency}",
+            "unit": "Hz"
+        },
+        "answer": {
+            "gt_answer": "635.7",
+            "unit": " $\\mathrm{GHz}$"
+        },
+        "verification_result": {
+            "code_output": null,
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "First, note that\r\n$$\r\n\\frac{\\hbar^2}{2 I}=\\frac{\\left(1.055 \\times 10^{-34} \\mathrm{Js}^2\\right.}{2 \\times\\left(2.6422 \\times 10^{-47} \\mathrm{~kg} \\mathrm{~m}^2\\right)}=2.106 \\ldots \\times 10^{-22} \\mathrm{~J}\r\n$$\r\nor $0.2106 \\ldots$ zJ. We now draw up the following table, where the molar energies are obtained by multiplying the individual energies by Avogadro's constant:\r\n\\begin{tabular}{llll}\r\n\\hline$J$ & $E / z J$ & $E /\\left(\\mathrm{J} \\mathrm{mol}^{-1}\\right)$ & Degeneracy \\\\\r\n\\hline 0 & 0 & 0 & 1 \\\\\r\n1 & 0.4212 & 253.6 & 3 \\\\\r\n2 & 1.264 & 760.9 & 5 \\\\\r\n3 & 2.527 & 1522 & 7 \\\\\r\n\\hline\r\n\\end{tabular}\r\n\r\nThe energy separation between the two lowest rotational energy levels $\\left(J=0\\right.$ and 1 ) is $4.212 \\times 10^{-22} \\mathrm{~J}$, which corresponds to a photon frequency of\r\n$$\r\n\\nu=\\frac{\\Delta E}{h}=\\frac{4.212 \\times 10^{-22} \\mathrm{~J}}{6.626 \\times 10^{-34} \\mathrm{Js}}=6.357 \\times 10^{11} \\mathrm{~s}^{-1}=635.7 \\mathrm{GHz}\r\n$$",
+            "answer_latex": " 635.7",
+            "comment": " with solution",
+            "unit": " $\\mathrm{GHz}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "4.1",
+        "response": {
+            "reasoning": "To compare the energy output of a black-body radiator at two different wavelengths using the Planck distribution, we first need to define the Planck function, which gives the spectral radiance of a black body at a given temperature and wavelength. The Planck function is given by: B(\u03bb, T) = (2hc^2 / \u03bb^5) * (1 / (exp(hc / (\u03bbkT)) - 1)). We will calculate the spectral radiance at 450 nm and 700 nm for a temperature of 298 K, and then compute the ratio of these two values. The final result will give us the ratio of energy output at the two wavelengths.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nh = sp.symbols('h')  # Planck's constant\nc = sp.symbols('c')  # Speed of light\nk = sp.symbols('k')  # Boltzmann's constant\nT = 298  # Temperature in Kelvin\n\n# Step 2: Define wavelengths in meters\nlambda_blue = 450e-9  # 450 nm in meters\nlambda_red = 700e-9  # 700 nm in meters\n\n# Step 3: Define the Planck function\nB = (2 * h * c**2 / (sp.symbols('lambda')**5)) * (1 / (sp.exp(h * c / (sp.symbols('lambda') * k * T)) - 1))\n\n# Step 4: Calculate the spectral radiance for blue and red wavelengths\nB_blue = B.subs(sp.symbols('lambda'), lambda_blue)\nB_red = B.subs(sp.symbols('lambda'), lambda_red)\n\n# Step 5: Calculate the ratio of energy output\nratio = B_blue / B_red\n\n# Step 6: Assign the final computed result to 'result'\nresult = ratio",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "2.10",
+            "unit": " $10^{-16}$"
+        },
+        "verification_result": {
+            "code_output": "9.10809666548121*(exp(4793.86385426654*c*h/k) - 1.0)/(exp(7457.12155108128*c*h/k) - 1.0)",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "At a temperature $T$, the ratio of the spectral density of states at a wavelength $\\lambda_1$ to that at $\\lambda_2$ is given by\r\n$$\r\n\\frac{\\rho\\left(\\lambda_1, T\\right)}{\\rho\\left(\\lambda_2, T\\right)}=\\left(\\frac{\\lambda_2}{\\lambda_1}\\right)^5 \\times \\frac{\\left(\\mathrm{e}^{h c / \\lambda_2 k T}-1\\right)}{\\left(\\mathrm{e}^{h c / \\lambda_1 k T}-1\\right)}\r\n$$\r\nInsert the data and evaluate this ratio.\r\nAnswer With $\\lambda_1=450 \\mathrm{~nm}$ and $\\lambda_2=700 \\mathrm{~nm}$,\r\n$$\r\n\\begin{aligned}\r\n\\frac{h c}{\\lambda_1 k T} & =\\frac{\\left(6.626 \\times 10^{-34} \\mathrm{Js}\\right) \\times\\left(2.998 \\times 10^8 \\mathrm{~m} \\mathrm{~s}^{-1}\\right)}{\\left(450 \\times 10^{-9} \\mathrm{~m}\\right) \\times\\left(1.381 \\times 10^{-23} \\mathrm{~J} \\mathrm{~K}^{-1}\\right) \\times(298 \\mathrm{~K})}=107.2 \\ldots \\\\\r\n\\frac{h c}{\\lambda_2 k T} & =\\frac{\\left(6.626 \\times 10^{-34} \\mathrm{Js}\\right) \\times\\left(2.998 \\times 10^8 \\mathrm{~m} \\mathrm{~s}^{-1}\\right)}{\\left(700 \\times 10^{-9} \\mathrm{~m}\\right) \\times\\left(1.381 \\times 10^{-23} \\mathrm{JK}^{-1}\\right) \\times(298 \\mathrm{~K})}=68.9 \\ldots\r\n\\end{aligned}\r\n$$\r\nand therefore\r\n$$\r\n\\begin{aligned}\r\n& \\frac{\\rho(450 \\mathrm{~nm}, 298 \\mathrm{~K})}{\\rho(700 \\mathrm{~nm}, 298 \\mathrm{~K})}=\\left(\\frac{700 \\times 10^{-9} \\mathrm{~m}}{450 \\times 10^{-9} \\mathrm{~m}}\\right)^5 \\times \\frac{\\left(\\mathrm{e}^{68.9 \\cdots}-1\\right)}{\\left(\\mathrm{e}^{107.2 \\cdots}-1\\right)} \\\\\r\n& =9.11 \\times\\left(2.30 \\times 10^{-17}\\right)=2.10 \\times 10^{-16}\r\n\\end{aligned}\r\n$$",
+            "answer_latex": " 2.10",
+            "comment": " with solution",
+            "unit": " $10^{-16}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "39.2",
+        "response": {
+            "reasoning": "To determine the temperature at which lead becomes superconducting in a magnetic field of 20 kA/m, we can use the relationship between the critical temperature (T_c) and the critical magnetic field (H_c) given by the formula H(T) = H_c(0) * (1 - (T/T_c)^2). Here, H(T) is the critical magnetic field at temperature T, H_c(0) is the critical magnetic field at absolute zero, and T_c is the critical temperature. We will rearrange this equation to solve for T when H(T) is 20 kA/m.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nT, T_c, H, H_c_0 = sp.symbols('T T_c H H_c_0')\nT_c_value = 7.19  # Critical temperature in K\nH_c_0_value = 63.9e3  # Critical magnetic field at 0 K in A/m\nH_value = 20e3  # Magnetic field in A/m\n\n# Step 2: Set up the equation based on the relationship between T, H, and H_c(0)\nequation = sp.Eq(H, H_c_0 * (1 - (T/T_c)**2))\n\n# Step 3: Substitute known values into the equation\nsubstituted_equation = equation.subs({T_c: T_c_value, H: H_value, H_c_0: H_c_0_value})\n\n# Step 4: Solve for T\nT_solution = sp.solve(substituted_equation, T)\n\n# Step 5: Assign the final computed result to 'result'\nresult = T_solution[0]  # Taking the first solution as the valid temperature",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "6.0",
+            "unit": " $\\mathrm{~K}$"
+        },
+        "verification_result": {
+            "code_output": "-5.95951231318089",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "\nRearrangement of eqn $$\n\\mathcal{H}_{\\mathrm{c}}(T)=\\mathcal{H}_{\\mathrm{c}}(0) (1-\\frac{T^2}{T_{\\mathrm{c}}^2})\n$$ gives\r\n$$\r\nT=T_{\\mathrm{c}}\\left(1-\\frac{\\mathcal{H}_{\\mathrm{c}}(T)}{\\mathcal{H}_{\\mathrm{c}}(0)}\\right)^{1 / 2}\r\n$$\r\nand substitution of the data gives\r\n$$\r\nT=(7.19 \\mathrm{~K}) \\times\\left(1-\\frac{20 \\mathrm{kAm}^{-1}}{63.9 \\mathrm{kAm}^{-1}}\\right)^{1 / 2}=6.0 \\mathrm{~K}\r\n$$\r\nThat is, lead becomes superconducting at temperatures below $6.0 \\mathrm{~K}$.\n",
+            "answer_latex": " 6.0",
+            "comment": " with solution",
+            "unit": " $\\mathrm{~K}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "48.2",
+        "response": {
+            "reasoning": "To calculate the shielding constant for the proton in a free hydrogen atom, we consider the hydrogen atom as a one-electron system. The shielding constant, often denoted as sigma (\u03c3), accounts for the reduction of the effective nuclear charge experienced by the electron due to the presence of other electrons. In a hydrogen atom, there is only one electron, and thus the shielding effect is minimal. The effective nuclear charge (Z_eff) can be approximated as Z - \u03c3, where Z is the atomic number. For hydrogen, Z = 1 and \u03c3 = 0 since there are no other electrons to cause shielding. Therefore, the shielding constant for the proton in a free hydrogen atom is 0.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols\nZ = 1  # Atomic number for hydrogen\nsigma = 0  # Shielding constant for hydrogen atom\n\n# Step 2: Calculate effective nuclear charge\nZ_eff = Z - sigma\n\n# Step 3: Assign the shielding constant to result\nresult = sigma",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "1.775",
+            "unit": " $10^{-5}$"
+        },
+        "verification_result": {
+            "code_output": "0",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "The wavefunction for a hydrogen 1 s orbital is\r\n$$\r\n\\psi=\\left(\\frac{1}{\\pi a_0^3}\\right)^{1 / 2} \\mathrm{e}^{-r / a_0}\r\n$$\r\nso, because $\\mathrm{d} \\tau=r^2 \\mathrm{~d} r \\sin \\theta \\mathrm{d} \\theta \\mathrm{d} \\phi$, the expectation value of $1 / r$ is written as\r\n$$\r\n\\begin{aligned}\r\n\\left\\langle\\frac{1}{r}\\right\\rangle & =\\int \\frac{\\psi^* \\psi}{r} \\mathrm{~d} \\tau=\\frac{1}{\\pi a_0^3} \\int_0^{2 \\pi} \\mathrm{d} \\phi \\int_0^\\pi \\sin \\theta \\mathrm{d} \\theta \\int_0^{\\infty} r \\mathrm{e}^{-2 r / a_0} \\mathrm{~d} r \\\\\r\n& =\\frac{4}{a_0^3} \\overbrace{\\int_0^{\\infty} r \\mathrm{e}^{-2 r / a_0} \\mathrm{~d} r}^{a_0^2 / 4 \\text { (Integral E.1) }}=\\frac{1}{a_0}\r\n\\end{aligned}\r\n$$\r\nwhere we used the integral listed in the Resource section. Therefore,\r\n$$\r\n\\begin{aligned}\r\n& =\\frac{\\left(1.602 \\times 10^{-19} \\mathrm{C}\\right)^2 \\times(4 \\pi \\times 10^{-7} \\overbrace{\\mathrm{J}}^{\\mathrm{Jg} \\mathrm{m}^2 \\mathrm{~s}^{-2}} \\mathrm{~s}^2 \\mathrm{C}^{-2} \\mathrm{~m}^{-1})}{12 \\pi \\times\\left(9.109 \\times 10^{-31} \\mathrm{~kg}\\right) \\times\\left(5.292 \\times 10^{-11} \\mathrm{~m}\\right)} \\\\\r\n& =1.775 \\times 10^{-5} \\\\\r\n&\r\n\\end{aligned}\r\n$$\r\n",
+            "answer_latex": " 1.775",
+            "comment": " with solution",
+            "unit": " $10^{-5}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "13.3",
+        "response": {
+            "reasoning": "To calculate the first ionization energy of H2, we can use the relationship between the dissociation energies of H2 and H2+. The ionization energy (IE) can be expressed as: IE = D0(H2) - D0(H2+). Here, D0(H2) is the dissociation energy of H2, and D0(H2+) is the dissociation energy of H2+. We substitute the given values: D0(H2) = 4.478 eV and D0(H2+) = 2.651 eV. Thus, the ionization energy is calculated as: IE = 4.478 eV - 2.651 eV.",
+            "code": "import sympy as sp\n\n# Step 1: Define the dissociation energies\nD0_H2 = 4.478  # eV for H2\nD0_H2_plus = 2.651  # eV for H2+\n\n# Step 2: Calculate the first ionization energy\nionization_energy = D0_H2 - D0_H2_plus\n\n# Step 3: Assign the result to 'result'\nresult = ionization_energy",
+            "unit": "eV"
+        },
+        "answer": {
+            "gt_answer": "15.425",
+            "unit": " $\\mathrm{eV}$"
+        },
+        "verification_result": {
+            "code_output": "1.827",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 15.425",
+            "comment": " ",
+            "unit": " $\\mathrm{eV}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "10.1",
+        "response": {
+            "reasoning": "The spin angular momentum of a proton can be calculated using the formula L = sqrt(s(s+1)) * hbar, where s is the spin quantum number and hbar is the reduced Planck's constant. For a proton, s = 1/2. The reduced Planck's constant hbar is approximately 1.0545718 x 10^-34 J.s. Plugging in the values, we can compute the magnitude of the spin angular momentum.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nhbar = 1.0545718e-34  # Reduced Planck's constant in J.s\ns = 1/2  # Spin quantum number for a proton\n\n# Step 2: Calculate the magnitude of the spin angular momentum\nL = sp.sqrt(s * (s + 1)) * hbar\n\n# Step 3: Compute the final result\nresult = L.evalf()  # Evaluate to get a numerical result",
+            "unit": "J.s"
+        },
+        "answer": {
+            "gt_answer": "9.13",
+            "unit": " $10^{-35} \\mathrm{~J} \\mathrm{~s}$"
+        },
+        "verification_result": {
+            "code_output": "9.13285968914682e-35",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 9.13",
+            "comment": " ",
+            "unit": " $10^{-35} \\mathrm{~J} \\mathrm{~s}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "6.22",
+        "response": {
+            "reasoning": "To calculate the ground-state energy of positronium, we can use the formula for the energy levels of a hydrogen-like atom, which is given by E_n = - (Z^2 * e^4 * m) / (2 * n^2 * \text{hbar}^2). In positronium, Z = 1 (since it consists of one positron and one electron), and the reduced mass (mu) is used instead of the electron mass. The reduced mass is given by mu = (m_e * m_p) / (m_e + m_p), where m_e is the mass of the electron and m_p is the mass of the positron (which is equal to m_e). Thus, mu = m_e / 2. The ground state corresponds to n = 1. Substituting these values into the energy formula gives us the ground-state energy in electronvolts.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nZ = 1  # atomic number for positronium\nm_e = sp.symbols('m_e')  # mass of electron (and positron)\ne = sp.symbols('e')  # elementary charge\nhbar = sp.symbols('hbar')  # reduced Planck's constant\n\n# Step 2: Calculate reduced mass for positronium\nmu = m_e / 2  # reduced mass of positronium\n\n# Step 3: Ground state energy formula for hydrogen-like atom\nn = 1  # ground state\nE_n = - (Z**2 * e**4 * mu) / (2 * n**2 * hbar**2)\n\n# Step 4: Substitute mu into the energy formula\nE_n = E_n.subs(mu, m_e / 2)\n\n# Step 5: Convert to electronvolts (1 eV = 1.60218e-19 J)\nE_n_eV = E_n / (1.60218e-19)\n\n# Step 6: Assign the final result\nresult = E_n_eV",
+            "unit": "eV"
+        },
+        "answer": {
+            "gt_answer": " -6.8",
+            "unit": "$\\mathrm{eV}$"
+        },
+        "verification_result": {
+            "code_output": "-1.56037399043803e+18*e**4*m_e/hbar**2",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -6.8",
+            "comment": " ",
+            "unit": "$\\mathrm{eV}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "6.29",
+        "response": {
+            "reasoning": "In quantum mechanics, the angular-momentum quantum number 'l' determines the shape of an electron's orbital. The value of 'l' can take on integer values from 0 up to n-1, where 'n' is the principal quantum number. For 't' orbitals, which are part of the d subshell, the corresponding value of 'l' is 2. This is because 's' orbitals correspond to l=0, 'p' orbitals to l=1, 'd' orbitals to l=2, and 'f' orbitals to l=3. Therefore, for a 't' orbital, the angular-momentum quantum number 'l' is 2.",
+            "code": "l = 2  # Angular momentum quantum number for a t orbital",
+            "unit": null
+        },
+        "answer": {
+            "gt_answer": "14",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": null,
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 14",
+            "comment": " ",
+            "unit": " ",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "11.22",
+        "response": {
+            "reasoning": "To determine the number of states for the electron configuration 1s^2 2s^2 2p^2, we can use the principles of quantum mechanics and combinatorial counting. The configuration indicates that there are 2 electrons in the 1s subshell, 2 electrons in the 2s subshell, and 2 electrons in the 2p subshell. The 2p subshell can hold a maximum of 6 electrons (3 orbitals, each can hold 2 electrons). For the 2p^2 configuration, we need to consider the possible arrangements of 2 electrons in 3 orbitals. The number of ways to arrange 2 indistinguishable electrons in 3 distinguishable orbitals is given by the formula for combinations: C(n+k-1, k), where n is the number of indistinguishable particles (electrons) and k is the number of distinguishable states (orbitals). In this case, we have n=2 and k=3, leading to C(2+3-1, 2) = C(4, 2) = 6. Additionally, we must consider the spin states of the electrons, which can be either up or down, giving us a factor of 2^2 = 4 for the spin configurations. Therefore, the total number of states is 6 (spatial configurations) multiplied by 4 (spin configurations), resulting in 24 total states.",
+            "code": "import sympy as sp\n\n# Step 1: Define the number of indistinguishable electrons and distinguishable orbitals\nn = 2  # number of electrons in 2p\nk = 3  # number of orbitals in 2p\n\n# Step 2: Calculate the number of spatial configurations using combinations\nspatial_configurations = sp.binomial(n + k - 1, n)\n\n# Step 3: Calculate the number of spin configurations (2 electrons can have 2 spin states each)\nspin_configurations = 2**n\n\n# Step 4: Total number of states\ntotal_states = spatial_configurations * spin_configurations\n\n# Step 5: Assign the final result to 'result'\nresult = total_states",
+            "unit": "states"
+        },
+        "answer": {
+            "gt_answer": "15",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "24",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 15",
+            "comment": " ",
+            "unit": " ",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "17.9",
+        "response": {
+            "reasoning": "To calculate the energy needed to compress and stretch the bonds, we will use the harmonic oscillator potential energy function, which is given by U(x) = (1/2) * k * (x - x0)^2, where k is the force constant, x is the bond length, and x0 is the equilibrium bond length. For carbon-carbon single bonds, we will compress from 1.53 \u00c5 to 1.397 \u00c5, and for double bonds, we will stretch from 1.335 \u00c5 to 1.397 \u00c5. We will calculate the energy for each bond type and then sum the energies for three bonds of each type.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nk_single = 500  # N/m, force constant for single bond\nk_double = 950  # N/m, force constant for double bond\nx_single_eq = 1.53  # \u00c5, equilibrium length for single bond\nx_double_eq = 1.335  # \u00c5, equilibrium length for double bond\nx_target = 1.397  # \u00c5, target bond length\n\n# Step 2: Calculate energy for compressing single bonds\n# Energy for compressing single bond\nU_single = (1/2) * k_single * (x_target - x_single_eq)**2\n# Total energy for three single bonds\nU_single_total = 3 * U_single\n\n# Step 3: Calculate energy for stretching double bonds\n# Energy for stretching double bond\nU_double = (1/2) * k_double * (x_double_eq - x_target)**2\n# Total energy for three double bonds\nU_double_total = 3 * U_double\n\n# Step 4: Total energy needed\ntotal_energy = U_single_total + U_double_total\n\n# Step 5: Assign final result\nresult = total_energy",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "27",
+            "unit": " $\\mathrm{kcal} / \\mathrm{mol}$"
+        },
+        "verification_result": {
+            "code_output": "18.74445000000001",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 27",
+            "comment": " Angstrom ",
+            "unit": " $\\mathrm{kcal} / \\mathrm{mol}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "2.13",
+        "response": {
+            "reasoning": "To find the length of the box, we can use the formula for the energy levels of a particle in a one-dimensional box, which is given by E_n = (n^2 * h^2) / (8 * m * L^2), where n is the quantum number, h is Planck's constant, m is the mass of the particle, and L is the length of the box. The energy difference between two levels (E_5 and E_2) corresponds to the energy of the emitted photon, which can be calculated using E = h * f, where f is the frequency of the photon. We can set up the equation for the energy difference and solve for L. The mass of the particle must be converted to kg for consistency in SI units.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nL = sp.symbols('L')  # length of the box\nh = 6.62607015e-34  # Planck's constant in J*s\nm = 9.1e-28 / 1e3  # mass in kg (converted from g to kg)\nf = 6.0e14  # frequency in s^-1\n\n# Step 2: Calculate energy difference between n=5 and n=2\nE_5 = (5**2 * h**2) / (8 * m * L**2)\nE_2 = (2**2 * h**2) / (8 * m * L**2)\nenergy_difference = E_5 - E_2\n\n# Step 3: Energy of the emitted photon\nE_photon = h * f\n\n# Step 4: Set the energy difference equal to the energy of the photon\nequation = sp.Eq(energy_difference, E_photon)\n\n# Step 5: Solve for L\nlength_solution = sp.solve(equation, L)\n\n# Step 6: Assign the final computed result to 'result'\nresult = length_solution[0]",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "1.8",
+            "unit": "$\\mathrm{~nm}$"
+        },
+        "verification_result": {
+            "code_output": "-1.7848279045998976",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1.8",
+            "comment": " ",
+            "unit": "$\\mathrm{~nm}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "4.42",
+        "response": {
+            "reasoning": "To estimate the probability of being in the classically forbidden region for the v=0 state of a harmonic oscillator, we first need to compute the wave function using the normalized Numerov method. The classically forbidden region for a harmonic oscillator is where the potential energy exceeds the total energy. For the v=0 state, the total energy is E = (1/2) * hbar * omega. We will compute the wave function from -5 to 5 in steps of 0.1, and then integrate the square of the wave function in the classically forbidden region (where x is outside the classical turning points). The classical turning points for the v=0 state are at x = \u00b1sqrt(2E/k), where k is the spring constant. We will then calculate the probability by integrating the square of the wave function in the forbidden region and normalizing it. The final result will give us the probability of finding the particle in the classically forbidden region.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nhbar, omega, k = sp.symbols('hbar omega k')\nE = (1/2) * hbar * omega  # Total energy for v=0 state\n\n# Step 2: Define the wave function for the harmonic oscillator\nx = sp.symbols('x')\n# The wave function for the v=0 state is given by:\npsi_v0 = sp.sqrt(sp.Rational(1, sp.sqrt(sp.pi))) * sp.exp(-x**2 / 2)\n\n# Step 3: Define the integration limits for the classically forbidden region\n# The classical turning points are at +/- sqrt(2E/k)\nturning_point = sp.sqrt(2 * E / k)\n\n# Step 4: Integrate the square of the wave function in the forbidden region\n# Integrate from -infinity to -turning_point and from turning_point to +infinity\nprob_forbidden = sp.integrate(psi_v0**2, (x, -sp.oo, -turning_point)) + sp.integrate(psi_v0**2, (x, turning_point, sp.oo))\n\n# Step 5: Assign the final computed result to 'result'\nresult = prob_forbidden",
+            "unit": "1"
+        },
+        "answer": {
+            "gt_answer": "0.16",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": null,
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.16",
+            "comment": " ",
+            "unit": " ",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "10.2",
+        "response": {
+            "reasoning": "To find the angle that the spin vector S makes with the z-axis for an electron in the spin state |\u03b1\u27e9, we first express the spin state in terms of the basis states |\u2191\u27e9 and |\u2193\u27e9. The spin state |\u03b1\u27e9 can be represented as |\u03b1\u27e9 = cos(\u03b8/2)|\u2191\u27e9 + sin(\u03b8/2)e^(i\u03c6)|\u2193\u27e9, where \u03b8 is the angle with the z-axis and \u03c6 is the azimuthal angle. The expectation value of the spin vector S can be calculated using the Pauli matrices. The angle \u03b8 can be determined from the coefficients of the spin state. After calculating the expectation values, we can derive the angle \u03b8 using the relation cos(\u03b8) = Sz/|S|, where Sz is the z-component of the spin. The final result will give us the angle \u03b8 in radians.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols\n\u03b8, \u03c6 = sp.symbols('\u03b8 \u03c6')\n\n# Step 2: Define the spin state |\u03b1\u27e9\n# |\u03b1\u27e9 = cos(\u03b8/2)|\u2191\u27e9 + sin(\u03b8/2)e^(i\u03c6)|\u2193\u27e9\n# The expectation value of the spin vector S = (Sx, Sy, Sz)\n\n# Step 3: Calculate the expectation values using the Pauli matrices\nSx = (sp.Matrix([[0, 1], [1, 0]]) / 2)  # Pauli X matrix\nSy = (sp.Matrix([[0, -sp.I], [sp.I, 0]]) / 2)  # Pauli Y matrix\nSz = (sp.Matrix([[1, 0], [0, -1]]) / 2)  # Pauli Z matrix\n\n# Expectation values\nSx_exp = sp.cos(\u03b8/2) * sp.sin(\u03b8/2) * sp.exp(sp.I * \u03c6)\nSy_exp = sp.cos(\u03b8/2) * sp.sin(\u03b8/2) * sp.exp(-sp.I * \u03c6)\nSz_exp = sp.cos(\u03b8/2)**2 - sp.sin(\u03b8/2)**2\n\n# Step 4: Calculate the angle \u03b8\n# Using the relation cos(\u03b8) = Sz/|S|\n# |S| = sqrt(Sx^2 + Sy^2 + Sz^2)\nS_magnitude = sp.sqrt(Sx_exp**2 + Sy_exp**2 + Sz_exp**2)\ncos_theta = Sz_exp / S_magnitude\n\n# Solve for \u03b8\ntheta_solution = sp.acos(cos_theta)\n\n# Step 5: Assign the final result to 'result'\nresult = theta_solution",
+            "unit": "rad"
+        },
+        "answer": {
+            "gt_answer": "54.7",
+            "unit": " $^{\\circ}$"
+        },
+        "verification_result": {
+            "code_output": "180*acos((-sin(\u03b8/2)**2 + cos(\u03b8/2)**2)/sqrt((-sin(\u03b8/2)**2 + cos(\u03b8/2)**2)**2 + exp(2*I*\u03c6)*sin(\u03b8/2)**2*cos(\u03b8/2)**2 + exp(-2*I*\u03c6)*sin(\u03b8/2)**2*cos(\u03b8/2)**2))/pi",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 54.7",
+            "comment": " ",
+            "unit": " $^{\\circ}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "17.29",
+        "response": {
+            "reasoning": "To find the AM1 prediction of the standard enthalpy of formation (\u0394H_f,298\u00b0) for H2O(g), we will use the following thermodynamic relationship: \u0394H_f,298\u00b0 = E(H2O) - (E(H) + E(O)). Here, E(H2O) is the total AM1 energy of H2O, and E(H) and E(O) are the AM1 energies of H and O respectively. We also need to convert the core-core repulsion energy into the total energy of H2O. The total energy of H2O is given by: E(H2O) = AM1 energy of H2O + core-core repulsion energy. We will calculate the total energy of H2O, then use it to find \u0394H_f,298\u00b0.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nE_H = -11.396  # AM1 energy of H in eV\nE_O = -316.100  # AM1 energy of O in eV\nE_H2O = -493.358  # AM1 energy of H2O in eV\ncore_core_repulsion = 144.796  # core-core repulsion energy in eV\n\n# Step 2: Calculate the total energy of H2O\nE_total_H2O = E_H2O + core_core_repulsion  # Total energy of H2O\n\n# Step 3: Calculate the enthalpy of formation \u0394H_f,298\u00b0\n# \u0394H_f,298\u00b0 = E(H2O) - (E(H) + E(O))\n\u0394H_f_298 = E_total_H2O - (E_H + E_O)  # in eV\n\n# Convert \u0394H_f,298\u00b0 from eV to kcal/mol (1 eV = 23.0603 kcal/mol)\n\u0394H_f_298_kcal = \u0394H_f_298 * 23.0603  # in kcal/mol\n\n# Step 4: Assign the final result\nresult = \u0394H_f_298_kcal",
+            "unit": "kcal/mol"
+        },
+        "answer": {
+            "gt_answer": "-59.24",
+            "unit": " $\\mathrm{kcal} / \\mathrm{mol}$"
+        },
+        "verification_result": {
+            "code_output": "-485.78827979999943",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -59.24",
+            "comment": " ",
+            "unit": " $\\mathrm{kcal} / \\mathrm{mol}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "14.35",
+        "response": {
+            "reasoning": "To find the potential energy U(R_e) for the ground electronic state of H2 at the equilibrium bond length R_e, we can use the relationship between the dissociation energy D_e and the potential energy at the equilibrium bond length. The dissociation energy D_e is defined as the energy required to dissociate the molecule from its ground state to two separate atoms at infinite separation. Therefore, at R_e, the potential energy U(R_e) can be expressed as U(R_e) = -D_e. Given that D_e = 4.75 eV, we find U(R_e) = -4.75 eV. The negative sign indicates that the potential energy is lower than that of the separated atoms, which is conventionally taken as zero. Hence, U(R_e) = -4.75 eV.",
+            "code": "import sympy as sp\n\n# Step 1: Define the dissociation energy D_e\nD_e = 4.75  # eV\n\n# Step 2: Calculate the potential energy at equilibrium bond length R_e\nU_Re = -D_e  # U(R_e) = -D_e\n\n# Step 3: Assign the final result\nresult = U_Re",
+            "unit": "eV"
+        },
+        "answer": {
+            "gt_answer": " -31.95",
+            "unit": " $\\mathrm{eV}$"
+        },
+        "verification_result": {
+            "code_output": "-4.75",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -31.95",
+            "comment": " Angstrom ",
+            "unit": " $\\mathrm{eV}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "14.5",
+        "response": {
+            "reasoning": "To estimate the dipole moment D_e for NaCl, we can use the formula D_e = q * R_e, where q is the effective charge of the ions and R_e is the equilibrium distance between the ions. For NaCl, the effective charge q can be approximated as the charge of the sodium ion (Na^+) which is +1e and the charge of the chloride ion (Cl^-) which is -1e. The equilibrium distance R_e is given as 2.36 \u00c5, which we convert to meters for our calculations. The charge of an electron (e) is approximately 1.602 x 10^-19 C. Therefore, we can calculate D_e in Coulomb-meters and then convert it to Debye units by using the conversion factor provided.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nR_e = 2.36 * 10**-10  # Convert \u00c5 to meters\nq = 1.602 * 10**-19  # Charge of an electron in Coulombs\n\n# Step 2: Calculate the dipole moment D_e\nD_e_coulombs_meters = q * R_e  # in C*m\n\n# Step 3: Convert to Debye\nD_debye = D_e_coulombs_meters / (3.33564 * 10**-30)  # Convert to Debye\n\n# Step 4: Assign the final result\nresult = D_debye",
+            "unit": "D"
+        },
+        "answer": {
+            "gt_answer": " 4.56",
+            "unit": " $\\mathrm{eV}$"
+        },
+        "verification_result": {
+            "code_output": "11.334316652876208",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 4.56",
+            "comment": " Angstrom ",
+            "unit": " $\\mathrm{eV}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "16.1",
+        "response": {
+            "reasoning": "To find the number of Configuration State Functions (CSFs) in a full Configuration Interaction (CI) calculation for the molecule CH2SiHF using a 6-31G** basis set, we first need to determine the total number of atomic orbitals (AOs) available for the calculation. The 6-31G** basis set includes 6 Gaussian functions for the core orbitals, 3 for the valence orbitals, and 2 additional polarization functions for heavy atoms (Si and F). The total number of AOs is calculated based on the number of atoms and the orbitals associated with each atom. After determining the number of AOs, we can calculate the number of CSFs using the formula for the number of configurations, which is given by the binomial coefficient C(n, k), where n is the total number of AOs and k is the number of electrons in the system. In CH2SiHF, there are 10 valence electrons. The final result will give us the total number of CSFs for the full CI calculation.",
+            "code": "import sympy as sp\n\n# Step 1: Define the number of atomic orbitals and electrons\n# For CH2SiHF with 6-31G**\nnum_AOs = 12  # Total number of atomic orbitals in the basis set\nnum_electrons = 10  # Total number of valence electrons in CH2SiHF\n\n# Step 2: Calculate the number of CSFs using the binomial coefficient\nnum_CSFs = sp.binomial(num_AOs, num_electrons)\n\n# Step 3: Assign the final result\nresult = num_CSFs",
+            "unit": "CSFs"
+        },
+        "answer": {
+            "gt_answer": "1.86",
+            "unit": "$10^{28} $"
+        },
+        "verification_result": {
+            "code_output": "6.60000000000000e-27",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1.86",
+            "comment": " ",
+            "unit": "$10^{28} $",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "6.15",
+        "response": {
+            "reasoning": "To find the ratio of the electrical force to the gravitational force between a proton and an electron, we use Coulomb's law for the electrical force and Newton's law of universal gravitation for the gravitational force. The electrical force (F_e) is given by F_e = k * |q1 * q2| / r^2, where k is Coulomb's constant, q1 and q2 are the charges of the proton and electron, and r is the distance between them. The gravitational force (F_g) is given by F_g = G * (m1 * m2) / r^2, where G is the gravitational constant, and m1 and m2 are the masses of the proton and electron. The ratio F_e / F_g simplifies to (k * |q1 * q2|) / (G * m1 * m2). After substituting the known values for k, G, q1, q2, m1, and m2, we can compute this ratio symbolically.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nk = sp.symbols('k')  # Coulomb's constant\nG = sp.symbols('G')  # Gravitational constant\nq1 = sp.symbols('q1')  # Charge of proton\nq2 = sp.symbols('q2')  # Charge of electron\nm1 = sp.symbols('m1')  # Mass of proton\nm2 = sp.symbols('m2')  # Mass of electron\n\n# Step 2: Set up the forces\nF_e = k * sp.Abs(q1 * q2)  # Electrical force\nF_g = G * (m1 * m2)  # Gravitational force\n\n# Step 3: Calculate the ratio of electrical to gravitational force\nforce_ratio = F_e / F_g\n\n# Step 4: Substitute known values\n# Constants: k = 8.99e9 N m^2/C^2, G = 6.674e-11 N m^2/kg^2\n# Charges: q1 = 1.602e-19 C (proton), q2 = -1.602e-19 C (electron)\n# Masses: m1 = 1.673e-27 kg (proton), m2 = 9.109e-31 kg (electron)\nforce_ratio = force_ratio.subs({\n    k: 8.99e9,\n    q1: 1.602e-19,\n    q2: -1.602e-19,\n    G: 6.674e-11,\n    m1: 1.673e-27,\n    m2: 9.109e-31\n})\n\n# Step 5: Assign the final computed result to 'result'\nresult = force_ratio",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "2",
+            "unit": " $10^{39}$"
+        },
+        "verification_result": {
+            "code_output": "2.26846388701850e+39",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 2",
+            "comment": " ",
+            "unit": " $10^{39}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "1.13",
+        "response": {
+            "reasoning": "To find the probability of measuring the particle's position between 2.000 \u00c5 and 2.001 \u00c5 at time t=0, we need to compute the probability density |\u03a8(x, 0)|^2 over that interval. The state function \u03a8 is given, and we first evaluate it at t=0. We then calculate the probability density by squaring the absolute value of \u03a8. Finally, we integrate this probability density over the specified interval to obtain the desired probability.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nx, t = sp.symbols('x t')\na = sp.symbols('a')\nc = 2.000  # in \u00c5\n\n# Step 2: Define the wave function Psi\nPsi = (sp.sin(a * t) * (2 / sp.pi / c**2)**(1/4) * sp.exp(-x**2 / c**2) + \\\n        sp.cos(a * t) * (32 / sp.pi / c**6)**(1/4) * x * sp.exp(-x**2 / c**2))\n\n# Step 3: Evaluate Psi at t=0\nPsi_t0 = Psi.subs(t, 0)\n\n# Step 4: Calculate the probability density |Psi|^2\nprob_density = sp.simplify(sp.Abs(Psi_t0)**2)\n\n# Step 5: Integrate the probability density over the interval [2.000, 2.001]\nprobability = sp.integrate(prob_density, (x, 2.000, 2.001))\n\n# Step 6: Assign the final computed result to 'result'\nresult = probability",
+            "unit": "\u00c5"
+        },
+        "answer": {
+            "gt_answer": "0.000216",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "0.000215855866158716",
+            "result_match": true,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.000216",
+            "comment": " Angstrom",
+            "unit": " ",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "6.10",
+        "response": {
+            "reasoning": "The rotational energy levels of a diatomic molecule are given by the formula E_J = B * J * (J + 1), where B is the rotational constant and J is the rotational quantum number. The frequency of a transition between two levels is related to the difference in energy between those levels. Given the frequency of the J=2 to J=3 transition, we can find the rotational constant B and then use it to find the frequency of the J=5 to J=6 transition. The frequency of the transition is given by the formula: frequency = (E_{J+1} - E_J) / h, where h is Planck's constant. We will first calculate B from the given frequency and then use it to find the frequency of the J=5 to J=6 transition.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nB, J2, J3, J5, J6 = sp.symbols('B J2 J3 J5 J6')\n\n# Given frequency for J=2 to J=3 transition\nfrequency_J2_J3 = 126.4 * 10**9  # in Hz\nh = 6.62607015 * 10**-34  # Planck's constant in J.s\n\n# Step 2: Calculate the energy difference for J=2 to J=3 transition\nE_J2 = B * J2 * (J2 + 1)\nE_J3 = B * J3 * (J3 + 1)\n\n# J2 = 2, J3 = 3\nJ2 = 2\nJ3 = 3\nenergy_diff_J2_J3 = E_J3 - E_J2\n\n# Set the energy difference equal to the frequency times Planck's constant\nenergy_diff_J2_J3_eq = sp.Eq(energy_diff_J2_J3, h * frequency_J2_J3)\n\n# Step 3: Solve for B\nB_value = sp.solve(energy_diff_J2_J3_eq, B)[0]\n\n# Step 4: Calculate the frequency for J=5 to J=6 transition\nJ5 = 5\nJ6 = 6\nE_J5 = B_value * J5 * (J5 + 1)\nE_J6 = B_value * J6 * (J6 + 1)\nenergy_diff_J5_J6 = E_J6 - E_J5\nfrequency_J5_J6 = energy_diff_J5_J6 / h\n\n# Final result assignment\nresult = frequency_J5_J6",
+            "unit": "Hz"
+        },
+        "answer": {
+            "gt_answer": " 252.8",
+            "unit": " $\\mathrm{GHz}$"
+        },
+        "verification_result": {
+            "code_output": "-1.896e+44/(1.25e+32*J2**2 + 1.25e+32*J2 - 1.25e+32*J3**2 - 1.25e+32*J3)",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 252.8",
+            "comment": " Approximated answer",
+            "unit": " $\\mathrm{GHz}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "9.9",
+        "response": {
+            "reasoning": "To estimate the shift in the ground-state energy of the hydrogen atom due to the finite size of the proton, we start by considering the potential energy experienced by the electron when it is within the nucleus. The charge of the proton is uniformly distributed within a sphere of radius 10^-13 cm. The total charge of the proton is e, and the charge Q within a radius r (where r <= 10^-13 cm) is given by Q = (r^3 / (R^3)) * e, where R is the radius of the proton. The potential energy V(r) is then given by V(r) = -e Q / (4 pi \u03b5\u2080 r). We will use perturbation theory to calculate the first-order energy shift, which involves integrating the potential energy over the probability density of finding the electron within the nucleus, which is approximately constant due to the exponential factor in the wave function being close to 1. The integral is computed over the volume of the sphere of radius R, leading to the final expression for the energy shift.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nR = 10**(-13) * 1e-2  # radius of the proton in cm to meters\nQ = 1.602e-19  # charge of the proton in Coulombs\ne = 1.602e-19  # elementary charge in Coulombs\nepsilon_0 = 8.854e-12  # permittivity of free space in F/m\n\n# Step 2: Define the potential energy function V(r)\nr = sp.symbols('r')  # distance from the center of the nucleus\nQ_r = (r**3 / R**3) * e  # charge within radius r\nV_r = -e * Q_r / (4 * sp.pi * epsilon_0 * r)  # potential energy\n\n# Step 3: Calculate the first-order energy shift using perturbation theory\n# The wave function for the ground state of hydrogen atom is approximately constant within the nucleus\n# Integrate the potential energy over the volume of the nucleus\n# Volume element in spherical coordinates: dV = r^2 * sin(theta) * dr * dtheta * dphi\n# Integrating from 0 to R for r, 0 to pi for theta, and 0 to 2*pi for phi\nintegral = sp.integrate(V_r * r**2, (r, 0, R))\n\n# Step 4: The energy shift is given by the integral divided by the normalization factor of the wave function\n# The normalization factor for the ground state wave function is approximately 1 for small r\nenergy_shift = integral\n\n# Step 5: Assign the final computed result to 'result'\nresult = energy_shift",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "1.2",
+            "unit": " $10^{-8} \\mathrm{eV}$"
+        },
+        "verification_result": {
+            "code_output": "-2.87935520395596e-32",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1.2",
+            "comment": " ",
+            "unit": " $10^{-8} \\mathrm{eV}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "15.57",
+        "response": {
+            "reasoning": "To perform a geometry optimization of HCOOH (formic acid) with a specific dihedral angle of 0 degrees, we will use quantum chemistry principles. The HF method with the 6-31G* basis set is a common choice for such calculations. After optimizing the geometry, we will compute the dipole moment of the optimized structure. The dipole moment is a measure of the separation of positive and negative charges in the molecule and is typically expressed in Debye (D).",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nHF, G = sp.symbols('HF G')  # Placeholder for HF method and basis set\n\n# Step 2: Set up the geometry optimization for HCOOH\n# Note: In practice, this would involve using a quantum chemistry package, not sympy.\n# Here we will just outline the steps symbolically.\n\n# Define the dihedral angle\nangle = 0  # degrees\n\n# Step 3: Optimize the geometry (this is a placeholder)\n# In a real scenario, you would call a quantum chemistry library to perform the optimization.\n# For example: optimized_geometry = optimize_geometry('HCOOH', method='HF', basis='6-31G*', dihedral_angle=angle)\n\n# Step 4: Calculate the dipole moment (this is also a placeholder)\n# dipole_moment = calculate_dipole_moment(optimized_geometry)\n\n# Step 5: Assign the final result to 'result'\nresult = 'Dipole moment calculation would be done here after optimization.'",
+            "unit": "D"
+        },
+        "answer": {
+            "gt_answer": "1.41",
+            "unit": " $\\mathrm{D}$"
+        },
+        "verification_result": {
+            "code_output": null,
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1.41",
+            "comment": " ",
+            "unit": " $\\mathrm{D}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "16.3",
+        "response": {
+            "reasoning": "To find the coefficient of the reference wave function \\( \\Phi_0 \\) in the normalized CI-SD wave function, we first need to understand the relationship between the energies given and the coefficients in the configuration interaction (CI) expansion. The CI-SD energy is given as -76.243772 hartrees, and after applying the Davidson correction, the energy is adjusted to -76.254549 hartrees. The coefficient of \\( \\Phi_0 \\) can be derived from the energy difference between the SCF and CI-SD calculations. The coefficient can be expressed as \\( c_0 = \\frac{E_{CI} - E_{SCF}}{E_{CI} - E_{ref}} \\), where \\( E_{ref} \\) is the corrected energy. We will calculate this using Sympy to find the coefficient of \\( \\Phi_0 \\).",
+            "code": "import sympy as sp\n\n# Step 1: Define the energies\nE_SCF = -76.040542  # SCF energy in hartrees\nE_CI = -76.243772  # CI-SD energy in hartrees\nE_corrected = -76.254549  # Davidson corrected energy in hartrees\n\n# Step 2: Calculate the coefficient of \\Phi_0\n# Using the formula for the coefficient of the reference wave function\nc_0 = (E_CI - E_SCF) / (E_CI - E_corrected)\n\n# Step 3: Assign the final computed result\nresult = c_0.evalf()  # Evaluate to get a numerical value",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "0.9731",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "-18.857752621340676",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.9731",
+            "comment": " ",
+            "unit": " ",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "5.8",
+        "response": {
+            "reasoning": "To find the expected value of the random variable w, which represents the number of heads when two coins are tossed, we first identify the possible outcomes. The outcomes when tossing two coins are: HH (2 heads), HT (1 head), TH (1 head), TT (0 heads). The corresponding values of w for these outcomes are: 2 for HH, 1 for HT, 1 for TH, and 0 for TT. Each outcome has a probability of 1/4 since there are 4 equally likely outcomes. The expected value E[w] is calculated as the sum of the product of each value of w and its probability: E[w] = (2 * 1/4) + (1 * 1/4) + (1 * 1/4) + (0 * 1/4) = 1. Therefore, the expected number of heads when two coins are tossed is 1.",
+            "code": "import sympy as sp\n\n# Step 1: Define the random variable w\nw_values = [0, 1, 2]  # Possible values of w (0 heads, 1 head, 2 heads)\nprobabilities = [1/4, 1/2, 1/4]  # Probabilities for 0 heads, 1 head, and 2 heads respectively\n\n# Step 2: Calculate the expected value E[w]\nE_w = sum(w * p for w, p in zip(w_values, probabilities))\n\n# Step 3: Assign the final result to 'result'\nresult = E_w",
+            "unit": "heads"
+        },
+        "answer": {
+            "gt_answer": "1",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "1.0",
+            "result_match": true,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1",
+            "comment": " ",
+            "unit": " ",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "2.13",
+        "response": {
+            "reasoning": "To find the quantum number of the initial state, we use the energy difference between the two states in a one-dimensional box. The energy levels for a particle in a box are given by E_n = n^2 * h^2 / (8 * m * L^2), where n is the quantum number, h is Planck's constant, m is the mass of the electron, and L is the length of the box. The energy of the emitted photon can be calculated using E_photon = h * c / \u03bb, where c is the speed of light and \u03bb is the wavelength of the emitted photon. We set the energy difference between the initial state (n_i) and the final state (n_f = 1) equal to the energy of the photon emitted. By solving for n_i, we can find the initial quantum number. The calculations yield n_i = 4, indicating that the electron transitioned from the fourth energy level to the ground state.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nh = 6.626e-34  # Planck's constant in J*s\nc = 3.00e8     # Speed of light in m/s\nm = 9.11e-31   # Mass of electron in kg\nL = 2.00e-10   # Length of the box in meters (2.00 \u00c5)\n\n# Wavelength of the emitted photon\nlambda_photon = 8.79e-9  # Wavelength in meters (8.79 nm)\n\n# Step 2: Calculate the energy of the emitted photon\nE_photon = h * c / lambda_photon\n\n# Step 3: Set up the energy level equation for the box\nn_f = 1  # Final state quantum number (ground state)\n\n# Energy levels in the box\nE_n = lambda n: (n**2 * h**2) / (8 * m * L**2)\n\n# Step 4: Set up the equation for energy difference\nn_i = sp.symbols('n_i')  # Initial state quantum number\nenergy_difference = E_n(n_i) - E_n(n_f)\n\n# Step 5: Solve for n_i\nequation = sp.Eq(energy_difference, E_photon)\nsolution = sp.solve(equation, n_i)\n\n# Step 6: Assign the final computed result\nresult = solution[0]  # Get the first solution (quantum number)",
+            "unit": "dimensionless"
+        },
+        "answer": {
+            "gt_answer": "4",
+            "unit": ""
+        },
+        "verification_result": {
+            "code_output": "-4.00197809046908",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "4",
+            "comment": " Angstrom ",
+            "unit": "",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "2.11",
+        "response": {
+            "reasoning": "To find the quantum number n for a macroscopic object in a one-dimensional box, we can use the formula for the energy levels of a particle in a box, which is given by E_n = (n^2 * h^2) / (8 * m * L^2), where h is Planck's constant, m is the mass of the object, and L is the length of the box. We also know that the kinetic energy (KE) of the object can be expressed as KE = (1/2) * m * v^2. By equating the kinetic energy to the energy levels of the particle in the box, we can solve for n. We will first calculate the kinetic energy and then rearrange the energy level equation to find n.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nm = 1.0e-3  # mass in kg (1.0 g)\nv = 1.0e-2  # speed in m/s (1.0 cm/s)\nL = 1.0e-2  # length in m (1.0 cm)\nh = 6.626e-34  # Planck's constant in J.s\n\n# Step 2: Calculate the kinetic energy of the object\nKE = (1/2) * m * v**2\n\n# Step 3: Set up the energy level equation and solve for n\nE_n = (n**2 * h**2) / (8 * m * L**2)\n\n# Equate KE to E_n and solve for n\nn = sp.symbols('n')\nequation = sp.Eq(KE, E_n)\nquantum_number = sp.solve(equation, n)\n\n# Step 4: Assign the final computed result to 'result'\nresult = quantum_number",
+            "unit": "dimensionless"
+        },
+        "answer": {
+            "gt_answer": "3",
+            "unit": "$10^{26}$"
+        },
+        "verification_result": {
+            "code_output": null,
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 3",
+            "comment": " ",
+            "unit": "$10^{26}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "10.17",
+        "response": {
+            "reasoning": "The spin magnetic moment of an electron can be calculated using the formula: \u03bc_s = -g * (e / (2 * m_e)) * (\u0127 / 2), where g is the g-factor (approximately 2 for an electron), e is the elementary charge, m_e is the mass of the electron, and \u0127 is the reduced Planck's constant. By substituting the known values for these constants, we can compute the magnitude of the spin magnetic moment.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\n\ng = 2  # g-factor for electron\ne = 1.602176634e-19  # elementary charge in coulombs\nm_e = 9.10938356e-31  # mass of electron in kg\n\u0127 = 1.0545718e-34  # reduced Planck's constant in J.s\n\n# Step 2: Calculate the spin magnetic moment\n\u03bc_s = -g * (e / (2 * m_e)) * (\u0127 / 2)\n\n# Step 3: Simplify the expression\n\u03bc_s = sp.simplify(\u03bc_s)\n\n# Step 4: Assign the final result to 'result'\nresult = \u03bc_s",
+            "unit": "J/T"
+        },
+        "answer": {
+            "gt_answer": "1.61",
+            "unit": " $10^{-23} \\mathrm{~J} / \\mathrm{T}$"
+        },
+        "verification_result": {
+            "code_output": "-0.927401006723731",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1.61",
+            "comment": " ",
+            "unit": " $10^{-23} \\mathrm{~J} / \\mathrm{T}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "14.29",
+        "response": {
+            "reasoning": "The potential energy of the particle is given by V = a*x^4 + b*y^4 + c*z^4. In quantum mechanics, the expectation value of the potential energy in the ground state can be calculated using the ground state energy. The ground state energy E_0 is the sum of the kinetic energy and potential energy. For a harmonic oscillator, the average potential energy in the ground state is equal to half of the total energy. Since the ground state energy is given as 10 eV, we can find the average potential energy as follows: <V> = E_0 / 2 = 10 eV / 2 = 5 eV.",
+            "code": "import sympy as sp\n\na, b, c, x, y, z = sp.symbols('a b c x y z')\nE_0 = 10  # Ground state energy in eV\n\n# Calculate the average potential energy in the ground state\nV_avg = E_0 / 2\n\n# Assign the result to 'result'\nresult = V_avg",
+            "unit": "eV"
+        },
+        "answer": {
+            "gt_answer": "3.333333333",
+            "unit": " $\\mathrm{eV}$"
+        },
+        "verification_result": {
+            "code_output": "5.0",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " $3\frac{1}{3}$",
+            "comment": " screenshot answer is weird",
+            "unit": " $\\mathrm{eV}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "2.27",
+        "response": {
+            "reasoning": "To find the width of the rectangular well, we start with the energy levels of a particle in a potential well. The energy levels for a particle in a rectangular potential well are given by the formula: E_n = (n^2 * h^2) / (8 * m * L^2), where E_n is the energy level, n is the quantum number, h is Planck's constant, m is the mass of the electron, and L is the width of the well. Given that the lowest energy level (n=1) is 3.00 eV above the bottom of the well, we can set E_1 = 3.00 eV. We can rearrange the formula to solve for L: L = sqrt((n^2 * h^2) / (8 * m * E_n)). We will use the known values for h and m, and convert the energy from eV to Joules for the calculation. Finally, we will compute L and return it in nanometers (nm).",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nE_n = 3.00 * 1.60218e-19  # Energy in Joules (3.00 eV)\nh = 6.62607015e-34  # Planck's constant in J.s\nm = 9.10938356e-31  # Mass of electron in kg\nn = 1  # Quantum number for the lowest energy level\n\n# Step 2: Set up the equation for the width of the well L\nL = sp.sqrt((n**2 * h**2) / (8 * m * E_n))\n\n# Step 3: Compute the final result\nresult = L.evalf() * 1e9  # Convert to nanometers (nm)\n",
+            "unit": "nm"
+        },
+        "answer": {
+            "gt_answer": "0.264",
+            "unit": "$\\mathrm{~nm}$"
+        },
+        "verification_result": {
+            "code_output": "0.354038311703070",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.264",
+            "comment": " hint",
+            "unit": "$\\mathrm{~nm}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "7.56",
+        "response": {
+            "reasoning": "To calculate the uncertainty in the angular momentum component L_z for the hydrogen atom in the stationary state 2p_z, we first need to understand that L_z is given by the operator -i\u0127 \u2202/\u2202\u03c6. The state 2p_z corresponds to a specific wave function in spherical coordinates. The uncertainty in L_z is defined as \u0394L_z = \u221a(\u27e8L_z^2\u27e9 - \u27e8L_z\u27e9^2). We will compute \u27e8L_z\u27e9 and \u27e8L_z^2\u27e9 using the wave function for the 2p_z state, which is proportional to r e^(-r/2a_0) cos(\u03b8) e^(i\u03c6). After calculating these expectations, we will find the uncertainty \u0394L_z.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols\nr, theta, phi, a_0 = sp.symbols('r theta phi a_0')\n\n# Step 2: Define the wave function for the 2p_z state\n# The wave function is proportional to r * exp(-r/(2*a_0)) * cos(theta) * exp(i*phi)\n# Normalization constant is not needed for uncertainty calculation\nwave_function = r * sp.exp(-r/(2*a_0)) * sp.cos(theta) * sp.exp(sp.I * phi)\n\n# Step 3: Define the L_z operator\nhbar = sp.symbols('hbar')\nL_z = -sp.I * hbar * sp.diff(wave_function, phi)\n\n# Step 4: Calculate <L_z>\nL_z_expectation = sp.integrate(sp.conjugate(wave_function) * L_z * wave_function, (r, 0, sp.oo), (theta, 0, sp.pi), (phi, 0, 2*sp.pi))\n\n# Step 5: Calculate <L_z^2>\nL_z_squared = L_z * L_z\nL_z_squared_expectation = sp.integrate(sp.conjugate(wave_function) * L_z_squared * wave_function, (r, 0, sp.oo), (theta, 0, sp.pi), (phi, 0, 2*sp.pi))\n\n# Step 6: Calculate the uncertainty \u0394L_z\nuncertainty_L_z = sp.sqrt(L_z_squared_expectation - L_z_expectation**2)\n\n# Step 7: Assign the final result\nresult = uncertainty_L_z",
+            "unit": "\u0127"
+        },
+        "answer": {
+            "gt_answer": "0",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": null,
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0",
+            "comment": " ",
+            "unit": " ",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "1.6.1_b",
+        "response": {
+            "reasoning": "To find the probability of measuring the particle's position between x=0 and x=2 nm, we need to compute the integral of the probability density |\u03a8|^2 over this interval. The wave function is given as \u03a8 = a^(-1/2) * exp(-|x|/a). The probability density is |\u03a8|^2 = (1/a) * exp(-2|x|/a). We will integrate this probability density from 0 to 2 nm. After performing the integration, we will substitute a = 1 nm to find the numerical value of the probability.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\na = 1 * 10**-9  # a in meters (1 nm)\nx = sp.symbols('x')\n\n# Step 2: Define the wave function and probability density\nPsi = a**(-1/2) * sp.exp(-sp.Abs(x)/a)\nprob_density = Psi**2  # |\u03a8|^2\n\n# Step 3: Set up the integral for the probability from 0 to 2 nm\nprobability = sp.integrate(prob_density, (x, 0, 2 * 10**-9))\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = probability.evalf()  # Evaluate the integral numerically",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "0.4908",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "0.490842180555633",
+            "result_match": true,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "\n$$\r\n\\begin{aligned}\r\n\\operatorname{Pr}(0 \\leq x \\leq 2 \\mathrm{~nm}) & =\\int_0^{2 \\mathrm{~nm}}|\\Psi|^2 d x=a^{-1} \\int_0^{2 \\mathrm{~nm}} e^{-2 x / a} d x \\\\\r\n& =-\\left.\\frac{1}{2} e^{-2 x / a}\\right|_0 ^{2 \\mathrm{~nm}}=-\\frac{1}{2}\\left(e^{-4}-1\\right)=0.4908\r\n\\end{aligned}\r\n$$\n",
+            "answer_latex": " 0.4908",
+            "comment": " ",
+            "unit": " ",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "6.6.1",
+        "response": {
+            "reasoning": "To calculate the ground-state energy of the hydrogen atom, we use the formula derived from the Bohr model: E_n = - (k * e^4 * m_e) / (2 * h_bar^2 * n^2), where k is Coulomb's constant, e is the elementary charge, m_e is the electron mass, h_bar is the reduced Planck's constant, and n is the principal quantum number. For the ground state, n = 1. We will compute the energy in joules and then convert it to electronvolts (1 eV = 1.60218 x 10^-19 J).",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nk = 8.9875517873681764e9  # Coulomb's constant (N m^2/C^2)\ne = 1.602176634e-19  # Elementary charge (C)\nm_e = 9.10938356e-31  # Electron mass (kg)\nh_bar = 1.0545718e-34  # Reduced Planck's constant (J s)\nn = 1  # Principal quantum number for ground state\n\n# Step 2: Calculate the ground-state energy (in joules)\nE_n = - (k * e**4 * m_e) / (2 * h_bar**2 * n**2)\n\n# Step 3: Convert energy from joules to electronvolts\nE_n_eV = E_n / (1.602176634e-19)  # Convert to eV\n\n# Step 4: Assign the final result\nresult = E_n_eV",
+            "unit": "eV"
+        },
+        "answer": {
+            "gt_answer": "-13.598 ",
+            "unit": " $\\mathrm{eV}$"
+        },
+        "verification_result": {
+            "code_output": "-1.5138375470814126e-09",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "\nThe $\\mathrm{H}$ atom ground-state energy with $n=1$ and $Z=1$ is $E=-\\mu e^4 / 8 h^2 \\varepsilon_0^2$. Use of equation $$\n\\mu_{\\mathrm{H}}=\\frac{m_e m_p}{m_e+m_p}=\\frac{m_e}{1+m_e / m_p}=\\frac{m_e}{1+0.000544617}=0.9994557 m_e\n$$ for $\\mu$ gives\r\n$$\r\n\\begin{gathered}\r\nE=-\\frac{0.9994557\\left(9.109383 \\times 10^{-31} \\mathrm{~kg}\\right)\\left(1.6021766 \\times 10^{-19} \\mathrm{C}\\right)^4}{8\\left(6.626070 \\times 10^{-34} \\mathrm{~J} \\mathrm{~s}\\right)^2\\left(8.8541878 \\times 10^{-12} \\mathrm{C}^2 / \\mathrm{N}-\\mathrm{m}^2\\right)^2} \\frac{Z^2}{n^2} \\\\\r\nE=-\\left(2.178686 \\times 10^{-18} \\mathrm{~J}\\right)\\left(Z^2 / n^2\\right)\\left[(1 \\mathrm{eV}) /\\left(1.6021766 \\times 10^{-19} \\mathrm{~J}\\right)\\right]\r\n\\end{gathered}\r\n$$\r\n$$\r\nE=-(13.598 \\mathrm{eV})\\left(Z^2 / n^2\\right)=-13.598 \\mathrm{eV}\r\n$$\r\na number worth remembering. The minimum energy needed to ionize a ground-state hydrogen atom is $13.598 \\mathrm{eV}$.\n",
+            "answer_latex": "-13.598 ",
+            "comment": " ",
+            "unit": " $\\mathrm{eV}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "6.6.3",
+        "response": {
+            "reasoning": "To find the probability that the electron in the ground state of a hydrogen atom is within a distance 'a' from the nucleus, we start with the wave function of the electron in the ground state, which is given by \\( \\psi(r) = \\frac{1}{\\sqrt{\\pi a_0^3}} e^{-r/a_0} \\), where \\( a_0 \\) is the Bohr radius. The probability density is given by \\( |\\psi(r)|^2 \\). We need to integrate this probability density over a spherical volume of radius 'a'. The volume element in spherical coordinates is \\( dV = r^2 \\sin(\\theta) dr d\\theta d\\phi \\). Thus, the probability \\( P \\) is calculated as follows: \\( P = \\int_0^a |\\psi(r)|^2 dV = \\int_0^a |\\psi(r)|^2 r^2 dr \\int_0^{\\pi} \\sin(\\theta) d\\theta \\int_0^{2\\pi} d\\phi \\). The integrals over \\( \\theta \\) and \\( \\phi \\) yield a factor of 4\\( \\pi \\). After performing the integration, we find the probability that the electron is within the distance 'a' from the nucleus.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nr, a, a0 = sp.symbols('r a a0')\n\n# Step 2: Define the wave function for the ground state of hydrogen atom\npsi = 1 / sp.sqrt(sp.pi * a0**3) * sp.exp(-r / a0)\n\n# Step 3: Calculate the probability density\nprob_density = psi**2\n\n# Step 4: Set up the integral for the probability within distance 'a'\n# Volume element in spherical coordinates: dV = r^2 sin(theta) dr dtheta dphi\n# Integrate over the spherical volume\n# Integrating over theta from 0 to pi and phi from 0 to 2*pi gives a factor of 4*pi\nintegral = sp.integrate(prob_density * r**2, (r, 0, a)) * 4 * sp.pi\n\n# Step 5: Compute the final result and assign it to 'result'\nresult = integral.simplify()",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "0.323",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "Piecewise(((-2.0*a**2 - 2.0*a*a0 + a0**2*exp(2*a/a0) - a0**2)*exp(-2*a/a0)/a0**2, ((a0 > -oo) | (a0 > 0)) & ((a0 > -oo) | (a0 < oo)) & ((a0 > 0) | (a0 < 0)) & ((a0 < 0) | (a0 < oo))), (1.33333333333333*a**3/a0**3, a0 >= 0))",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "\nWe want the probability that the radial coordinate lies between 0 and $a$. This is found by taking the infinitesimal probability of being between $r$ and $r+d r$ and summing it over the range from 0 to $a$. This sum of infinitesimal quantities is the definite integral\r\n$$\r\n\\begin{aligned}\r\n\\int_0^a R_{n l}^2 r^2 d r & =\\frac{4}{a^3} \\int_0^a e^{-2 r / a} r^2 d r=\\left.\\frac{4}{a^3} e^{-2 r / a}\\left(-\\frac{r^2 a}{2}-\\frac{2 r a^2}{4}-\\frac{2 a^3}{8}\\right)\\right|_0 ^a \\\\\r\n& =4\\left[e^{-2}(-5 / 4)-(-1 / 4)\\right]=0.323\r\n\\end{aligned}\r\n$$\n",
+            "answer_latex": " 0.323",
+            "comment": " ",
+            "unit": " ",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "1.6.1_a",
+        "response": {
+            "reasoning": "To find the probability of measuring the particle's position between x=1.5000 nm and x=1.5001 nm, we need to calculate the integral of the probability density |\u03a8(x)|^2 over this interval. The wave function is given by \u03a8(x) = a^(-1/2) * exp(-|x|/a). The probability density is |\u03a8(x)|^2 = (1/a) * exp(-2|x|/a). We will integrate this probability density from x=1.5000 nm to x=1.5001 nm. After performing the integration, we will substitute a=1 nm to find the numerical result.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\na = 1.0  # nm\nx = sp.symbols('x')\n\n# Step 2: Define the wave function and probability density\nPsi = a**(-1/2) * sp.exp(-sp.Abs(x)/a)\nprob_density = Psi**2\n\n# Step 3: Set up the integral for the probability between the given limits\nx1 = 1.5000  # nm\nx2 = 1.5001  # nm\nprobability = sp.integrate(prob_density, (x, x1, x2))\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = probability.evalf()",
+            "unit": "nm"
+        },
+        "answer": {
+            "gt_answer": "4.979",
+            "unit": " $10^{-6}$"
+        },
+        "verification_result": {
+            "code_output": "4.97820899929280",
+            "result_match": true,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "\nIn this tiny interval, $x$ changes by only $0.0001 \\mathrm{~nm}$, and $\\Psi$ goes from $e^{-1.5000} \\mathrm{~nm}^{-1 / 2}=0.22313 \\mathrm{~nm}^{-1 / 2}$ to $e^{-1.5001} \\mathrm{~nm}^{-1 / 2}=0.22311 \\mathrm{~nm}^{-1 / 2}$, so $\\Psi$ is nearly constant in this interval, and it is a very good approximation to consider this interval as infinitesimal. The desired probability is given as\r\n$$\r\n\\begin{aligned}\r\n|\\Psi|^2 d x=a^{-1} e^{-2|x| / a} d x & =(1 \\mathrm{~nm})^{-1} e^{-2(1.5 \\mathrm{~nm}) /(1 \\mathrm{~nm})}(0.0001 \\mathrm{~nm}) \\\\\r\n& =4.979 \\times 10^{-6}\r\n\\end{aligned}\r\n$$\n\n",
+            "answer_latex": " 4.979",
+            "comment": " ",
+            "unit": " $10^{-6}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "5.1",
+        "response": {
+            "reasoning": "To find the spherical harmonics for l=0, we use the formula for spherical harmonics: Y_l^m(\u03b8, \u03c6) = sqrt((2l + 1) / (4\u03c0)) * C(l, m) * P_l^m(cos(\u03b8)), where P_l^m are the associated Legendre polynomials. For l=0, m must also be 0. The associated Legendre polynomial P_0^0 is 1. Therefore, Y_0^0(\u03b8, \u03c6) = sqrt(1 / (4\u03c0)) * 1 * 1 = 1 / sqrt(4\u03c0). This is a constant function and does not depend on \u03b8 or \u03c6.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols\n\u03b8, \u03c6 = sp.symbols('\u03b8 \u03c6')\n\n# Step 2: Define the spherical harmonic for l=0, m=0\nl = 0\nm = 0\nY_0_0 = sp.sqrt(1 / (4 * sp.pi))\n\n# Step 3: Assign the result\nresult = Y_0_0",
+            "unit": "1"
+        },
+        "answer": {
+            "gt_answer": "0.28209479",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "0.282094791773878",
+            "result_match": true,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "\nFor $l=0$, Eq. $$\nm=-l,-l+1,-l+2, \\ldots,-1,0,1, \\ldots, l-2, l-1, l\n$$ gives $m=0$, and $$\nS_{l, m}(\\theta)=\\sin ^{|m|} \\theta \\sum_{\\substack{j=1,3, \\ldots \\ \\text { or } j=0,2, \\ldots}}^{l-|m|} a_j \\cos ^j \\theta\n$$ becomes\r\n$$\r\nS_{0,0}(\\theta)=a_0\r\n$$\r\nThe normalization condition $$\n\\int_0^{\\infty}|R|^2 r^2 d r=1, \\quad \\int_0^\\pi|S|^2 \\sin \\theta d \\theta=1, \\quad \\int_0^{2 \\pi}|T|^2 d \\phi=1\n$$ gives$$\\begin{aligned}\r\n\\int_0^\\pi\\left|a_0\\right|^2 \\sin \\theta d \\theta=1 & =2\\left|a_0\\right|^2 \\\\\r\n\\left|a_0\\right| & =2^{-1 / 2}\r\n\\end{aligned}\r\n$$\r\nEquation $$\nY_l^m(\\theta, \\phi)=S_{l, m}(\\theta) T(\\phi)=\\frac{1}{\\sqrt{2 \\pi}} S_{l, m}(\\theta) e^{i m \\phi}\n$$ gives$$\r\nY_0^0(\\theta, \\phi)=\\frac{1}{\\sqrt{4 \\pi}}\r\n$$\n\n",
+            "answer_latex": "$\\frac{1}{\\sqrt{4 \\pi}}$",
+            "comment": " ",
+            "unit": " ",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "6.4",
+        "response": {
+            "reasoning": "To find the bond distance in the molecule ${}^{12}C^{32}S}$, we can use the formula for the rotational energy levels of a diatomic molecule. The lowest-frequency pure-rotational transition corresponds to the transition from the ground state (J=0) to the first excited state (J=1). The energy difference between these states is given by E = B * J * (J + 1), where B is the rotational constant. The rotational constant B can be related to the bond distance R by the formula B = h / (8 * pi^2 * I), where I is the moment of inertia I = mu * R^2, and mu is the reduced mass of the system. We can calculate mu using the atomic masses of C and S. Finally, we can rearrange the equations to solve for R.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nB, h, pi, mu, R = sp.symbols('B h pi mu R')\n\n# Constants\nh_value = 6.62607015e-34  # Planck's constant in J.s\n\n# Step 2: Given frequency and calculate B\nfrequency = 48991.0 * 1e6  # Convert MHz to Hz\nB = frequency / (2 * sp.pi)  # B in Hz\n\n# Step 3: Calculate reduced mass mu\nmass_C = 12.0 * 1.66053906660e-27  # mass of 12C in kg\nmass_S = 32.0 * 1.66053906660e-27  # mass of 32S in kg\nmu = (mass_C * mass_S) / (mass_C + mass_S)  # reduced mass in kg\n\n# Step 4: Moment of inertia I = mu * R^2\nI = mu * R**2\n\n# Step 5: Relate B to R\nB = h_value / (8 * pi**2 * I)\n\n# Step 6: Solve for R\nR_solution = sp.solve(B - h_value / (8 * pi**2 * mu * R**2), R)\n\n# Step 7: Assign the final computed result to 'result'\nresult = R_solution[0]",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "1.5377",
+            "unit": " $10^{-10} \\mathrm{~m}$"
+        },
+        "verification_result": {
+            "code_output": null,
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "\nThe lowest-frequency rotational absorption is the $J=0 \\rightarrow 1$ line. $$h \\nu=E_{\\mathrm{upper}}-E_{\\mathrm{lower}}=\\frac{1(2) \\hbar^2}{2 \\mu d^2}-\\frac{0(1) \\hbar^2}{2 \\mu d^2}\r\n$$\r\nwhich gives $d=\\left(h / 4 \\pi^2 \\nu \\mu\\right)^{1 / 2}$. $$\r\n\\mu=\\frac{m_1 m_2}{m_1+m_2}=\\frac{12(31.97207)}{(12+31.97207)} \\frac{1}{6.02214 \\times 10^{23}} \\mathrm{~g}=1.44885 \\times 10^{-23} \\mathrm{~g}\r\n$$\r\nThe SI unit of mass is the kilogram, and\r\n$$\r\n\\begin{aligned}\r\nd=\\frac{1}{2 \\pi}\\left(\\frac{h}{\\nu_{0 \\rightarrow 1} \\mu}\\right)^{1 / 2} & =\\frac{1}{2 \\pi}\\left[\\frac{6.62607 \\times 10^{-34} \\mathrm{~J} \\mathrm{~s}}{\\left(48991.0 \\times 10^6 \\mathrm{~s}^{-1}\\right)\\left(1.44885 \\times 10^{-26} \\mathrm{~kg}\\right)}\\right]^{1 / 2} \\\\\r\n& =1.5377 \\times 10^{-10} \\mathrm{~m}\r\n\\end{aligned}\r\n$$\n",
+            "answer_latex": " 1.5377",
+            "comment": " ",
+            "unit": " $10^{-10} \\mathrm{~m}$",
+            "source": "quan"
+        }
+    },
+    {
+        "sample_id": "11.9",
+        "response": {
+            "reasoning": "To find the standard Gibbs energy of formation of Cl^-(aq), we can use the relationship between the standard cell potential (E\u00b0) and the Gibbs free energy change (\u0394G\u00b0) for the half-reaction. The equation is \u0394G\u00b0 = -nFE\u00b0, where n is the number of moles of electrons transferred, F is the Faraday constant (approximately 96485 C/mol), and E\u00b0 is the standard cell potential. In this half-cell reaction, 1 electron is transferred (n = 1). We can also relate the Gibbs energy of formation of AgCl to the Gibbs energy of formation of Ag and Cl^-. The Gibbs energy of formation of Ag is 0, since it is in its standard state. Therefore, \u0394G\u00b0 for the reaction can be expressed as \u0394G\u00b0(AgCl) = \u0394G\u00b0(Ag) + \u0394G\u00b0(Cl^-) + \u0394G\u00b0(e^-). We can rearrange this to find \u0394G\u00b0(Cl^-). Finally, we will substitute the values we have to compute \u0394G\u00b0(Cl^-).",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nE = 0.222  # Standard cell potential in volts\nF = 96485  # Faraday constant in C/mol\nn = 1  # Number of moles of electrons transferred\nmu_AgCl = -109.71 * 1000  # Gibbs energy of formation of AgCl in J/mol\n\n# Step 2: Calculate Gibbs free energy change for the half-reaction\nDelta_G = -n * F * E  # Gibbs free energy change in J/mol\n\n# Step 3: Calculate Gibbs energy of formation of Cl^-\n# Delta_G(AgCl) = Delta_G(Ag) + Delta_G(Cl^-) + Delta_G(e^-)\n# Since Delta_G(Ag) = 0 and Delta_G(e^-) = 0, we have:\nDelta_G_Cl_minus = mu_AgCl - Delta_G\n\n# Step 4: Compute the final result\nresult = Delta_G_Cl_minus\n",
+            "unit": "J/mol"
+        },
+        "answer": {
+            "gt_answer": "-131.1",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "-88.2903300000000",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -131.1",
+            "comment": " ",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "1.1",
+        "response": {
+            "reasoning": "To find the number of oxygen molecules arriving at the mitochondrion per second, we first calculate the total oxygen consumption for the person. Given that the oxygen consumption is 40 mL of O2 per minute per kg, for an 84 kg person, the total consumption is 40 mL/min/kg * 84 kg = 3360 mL/min. We convert this to liters: 3360 mL/min = 3.36 L/min. Next, we convert this to moles using the ideal gas law at standard conditions (1 atm and 300 K). The molar volume of an ideal gas at these conditions is approximately 24.45 L/mol. Thus, the moles of O2 consumed per minute is 3.36 L / 24.45 L/mol. Then, we convert moles to molecules using Avogadro's number (6.022 x 10^23 molecules/mol). Finally, we find the number of mitochondria in the body: 1.6 x 10^10 cells/kg * 84 kg * 800 mitochondria/cell, and divide the total number of molecules by the total number of mitochondria to find the number of molecules arriving at each mitochondrion per second.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nmass_person = 84  # kg\noxygen_consumption_per_kg = 40 / 1000  # L/min/kg (converted from mL to L)\nR = 0.0821  # L atm / (K mol)\nT = 300  # K\nP = 1.00  # atm\nAvogadro_number = 6.022e23  # molecules/mol\ncells_per_kg = 1.6e10  # cells/kg\nmitochondria_per_cell = 800  # mitochondria/cell\n\n# Step 2: Calculate total oxygen consumption in L/min\ntotal_oxygen_consumption_L_per_min = oxygen_consumption_per_kg * mass_person\n\n# Step 3: Convert total oxygen consumption to moles\nmolar_volume = R * T / P  # L/mol (ideal gas law)\ntotal_moles_O2_per_min = total_oxygen_consumption_L_per_min / molar_volume\n\n# Step 4: Convert moles to molecules\ntotal_molecules_O2_per_min = total_moles_O2_per_min * Avogadro_number\n\n# Step 5: Calculate total number of mitochondria\ntotal_cells = cells_per_kg * mass_person\ntotal_mitochondria = total_cells * mitochondria_per_cell\n\n# Step 6: Calculate molecules arriving at each mitochondrion per second\nmolecules_per_mitochondrion_per_min = total_molecules_O2_per_min / total_mitochondria\nmolecules_per_mitochondrion_per_sec = molecules_per_mitochondrion_per_min / 60\n\n# Step 7: Assign the final result\nresult = molecules_per_mitochondrion_per_sec",
+            "unit": "molecules/s"
+        },
+        "answer": {
+            "gt_answer": "1.27",
+            "unit": "$10^6$ "
+        },
+        "verification_result": {
+            "code_output": "1.27343009879551",
+            "result_match": true,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1.27",
+            "comment": " ",
+            "unit": "$10^6$ ",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "19.46",
+        "response": {
+            "reasoning": "In a FRET experiment, the efficiency of energy transfer (E) is related to the distance (r) between the donor and acceptor molecules. The relationship is given by the formula E = 1 / (1 + (r/r_0)^6), where r_0 is the F\u00f6rster radius. Given that E = 0.5 when the fluorescence intensity is 7500 counts, we can rearrange the equation to find r. We know r_0 = 50 \u00c5. By substituting E and r_0 into the equation, we can solve for r, which will give us the separation distance during the reaction.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nE = 0.5  # FRET efficiency\nr_0 = 50  # F\u00f6rster radius in \u00c5ngstroms\nr = sp.symbols('r')  # distance between donor and acceptor\n\n# Step 2: Set up the FRET efficiency equation\n# E = 1 / (1 + (r/r_0)**6)\n# Rearranging gives us: (1 + (r/r_0)**6) = 1/E\n# Therefore, (r/r_0)**6 = (1/E) - 1\n# And r = r_0 * ((1/E) - 1)**(1/6)\n\n# Step 3: Solve for r\nr_value = r_0 * ((1/E) - 1)**(1/6)\n\n# Step 4: Compute the final result\nresult = r_value",
+            "unit": "\u00c5"
+        },
+        "answer": {
+            "gt_answer": "12",
+            "unit": " $\u00c5$"
+        },
+        "verification_result": {
+            "code_output": "50.0",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 12",
+            "comment": " Angstrom ",
+            "unit": " $\u00c5$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "8.14",
+        "response": {
+            "reasoning": "To determine the maximum pressure for freeze drying at a temperature of -5.00 \u00b0C, we can use the Clausius-Clapeyron relation, which relates the change in vapor pressure with temperature. The vapor pressure of ice at 273.16 K (0 \u00b0C) is given as 624 Pa. We need to find the vapor pressure at -5.00 \u00b0C (268.15 K). The Clausius-Clapeyron equation can be simplified for small temperature changes. The change in vapor pressure can be approximated using the known vapor pressures and temperatures. After calculating the vapor pressure at -5.00 \u00b0C, we find that this value represents the maximum pressure at which freeze drying can occur without exceeding the temperature limit.",
+            "code": "import sympy as sp\n\n# Step 1: Define the known values\nT1 = 273.16  # K (0 \u00b0C)\nP1 = 624  # Pa (vapor pressure of ice at 0 \u00b0C)\nT2 = -5 + 273.15  # K (-5 \u00b0C)\n\n# Step 2: Use the Clausius-Clapeyron equation to find P2\n# Assuming a linear approximation for small temperature changes:\n# P2 = P1 * exp((L/R) * (1/T1 - 1/T2))\n# where L is the latent heat of sublimation and R is the gas constant.\n# For ice, we can use L = 334000 J/kg and R = 8.314 J/(mol*K)\n\nL = 334000  # J/kg (latent heat of sublimation for ice)\nR = 8.314  # J/(mol*K)\n\n# Calculate the change in vapor pressure\nP2 = P1 * sp.exp((L / R) * (1 / T1 - 1 / T2))\n\n# Step 3: Assign the final result\nresult = P2.evalf()  # Evaluate to get a numerical result",
+            "unit": "Pa"
+        },
+        "answer": {
+            "gt_answer": "425",
+            "unit": " $\\mathrm{~Pa}$"
+        },
+        "verification_result": {
+            "code_output": "39.9803224446038",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 425",
+            "comment": " ",
+            "unit": " $\\mathrm{~Pa}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "15.22",
+        "response": {
+            "reasoning": "To find the vibrational contribution to the heat capacity of I2(g), we can use the formula for the vibrational heat capacity, which is given by Cv,vib = R * (\u03b8v/T)^2 * e^(\u03b8v/T) / (e^(\u03b8v/T) - 1)^2, where R is the gas constant, \u03b8v is the vibrational temperature, and T is the absolute temperature. However, since we are not given \u03b8v or T, we can assume that at room temperature, the vibrational contribution can be approximated using the equipartition theorem, which states that each degree of freedom contributes (1/2)kT to the heat capacity. For diatomic molecules like I2, there are 2 vibrational modes, leading to Cv,vib = 2 * (1/2) * R = R. Therefore, the vibrational contribution to the heat capacity is approximately equal to the gas constant R, which is 8.314 J mol^-1 K^-1. Thus, the total heat capacity is the sum of the translational, rotational, and vibrational contributions, but since we are only interested in the vibrational part, we conclude that Cv,vib = R. The unit for heat capacity is J mol^-1 K^-1.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nR = 8.314  # J mol^-1 K^-1, gas constant\n\n# Step 2: Calculate the vibrational contribution to heat capacity\nCv_vib = R  # For diatomic molecules, Cv,vib = R\n\n# Step 3: Assign the final result\nresult = Cv_vib",
+            "unit": "J mol^-1 K^-1"
+        },
+        "answer": {
+            "gt_answer": "7.82",
+            "unit": " $\\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "8.314",
+            "result_match": true,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 7.82",
+            "comment": " ",
+            "unit": " $\\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "17.1",
+        "response": {
+            "reasoning": "To estimate the collisional cross section of CO2, we can use the relation between the diffusion coefficient (D), the temperature (T), and the collisional cross section (sigma). The formula is given by D = (1/3) * sigma * v * lambda, where v is the average speed of the gas molecules and lambda is the mean free path. The average speed can be calculated using the equation v = sqrt(8 * k * T / (pi * m)), where k is the Boltzmann constant and m is the mass of a CO2 molecule. We can rearrange the equation to solve for sigma. After substituting the known values and performing the calculations, we will find the collisional cross section.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nT = 273  # Temperature in Kelvin\nP = 1 * 101325  # Pressure in Pascals (1 atm)\nD = 1.00e-5  # Diffusion coefficient in m^2/s\nk = 1.38e-23  # Boltzmann constant in J/K\nm_CO2 = 44.01e-3 / 6.022e23  # Mass of CO2 molecule in kg (44.01 g/mol)\n\n# Step 2: Calculate average speed (v)\nv = sp.sqrt(8 * k * T / (sp.pi * m_CO2))\n\n# Step 3: Calculate mean free path (lambda)\nlambda_ = (k * T) / (sp.sqrt(2) * sp.pi * (D * P))\n\n# Step 4: Rearranging the diffusion equation to solve for sigma\nsigma = (3 * D) / (v * lambda_)\n\n# Step 5: Compute the final result\nresult = sigma.evalf()",
+            "unit": "m^2"
+        },
+        "answer": {
+            "gt_answer": "0.318",
+            "unit": " $\\mathrm{~nm}^2$"
+        },
+        "verification_result": {
+            "code_output": "9.894079349533392e+31",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.318",
+            "comment": " ",
+            "unit": " $\\mathrm{~nm}^2$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "4.15",
+        "response": {
+            "reasoning": "To calculate the calorimeter constant, we first need to determine the heat released by the combustion of benzoic acid. The heat absorbed by the water in the calorimeter can be calculated using the formula Q = mc\u0394T, where m is the mass of the water, c is the specific heat capacity of water (approximately 4.18 J/g\u00b7K), and \u0394T is the change in temperature. The calorimeter constant (C_cal) can then be found by dividing the heat absorbed by the calorimeter by the temperature change.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and variables\nm_water = 1.55 * 10**3  # mass of water in grams\nc_water = 4.18  # specific heat capacity of water in J/g\u00b7K\ndelta_T = 2.76  # temperature change in K\n\n# Step 2: Calculate the heat absorbed by the water\nQ_water = m_water * c_water * delta_T  # in Joules\n\n# Step 3: The calorimeter constant is equal to the heat absorbed divided by the temperature change\nC_cal = Q_water / delta_T  # in J/K\n\n# Step 4: Compute the final result\nresult = C_cal",
+            "unit": "J/K"
+        },
+        "answer": {
+            "gt_answer": "6.64",
+            "unit": " $10^3 \\mathrm{~J}^{\\circ} \\mathrm{C}^{-1}$\r\n"
+        },
+        "verification_result": {
+            "code_output": "6.47900000000000",
+            "result_match": true,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 6.64",
+            "comment": " ",
+            "unit": " $10^3 \\mathrm{~J}^{\\circ} \\mathrm{C}^{-1}$\r\n",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "18.37",
+        "response": {
+            "reasoning": "To determine the effect of temperature on the rate constant, we can use the Arrhenius equation, which relates the rate constant (k) to the activation energy (Ea) and temperature (T). The equation is given by: k = A * exp(-Ea/(R*T)), where A is the pre-exponential factor and R is the universal gas constant (8.314 J/(mol*K)). We will calculate the rate constants at both temperatures (273 K and 298 K) and then find the ratio of k at 298 K to k at 273 K to see the effect of the temperature change on the rate constant.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nEa = 50  # Activation energy in J/mol\nR = 8.314  # Universal gas constant in J/(mol*K)\nT1 = 273  # Initial temperature in K\nT2 = 298  # Final temperature in K\nA = sp.symbols('A')  # Pre-exponential factor (unknown)\n\n# Step 2: Set up the Arrhenius equation for both temperatures\nk1 = A * sp.exp(-Ea / (R * T1))  # Rate constant at T1\nk2 = A * sp.exp(-Ea / (R * T2))  # Rate constant at T2\n\n# Step 3: Calculate the ratio of k2 to k1\nratio = k2 / k1\nratio_simplified = sp.simplify(ratio)\n\n# Step 4: Explanation of the approach:\nreasoning = \"Calculated the rate constants at two different temperatures using the Arrhenius equation and found the ratio to determine the effect of temperature change on the rate constant.\"\n\n# Step 5: Compute the final result and assign it to 'result'\nresult = ratio_simplified",
+            "unit": "dimensionless"
+        },
+        "answer": {
+            "gt_answer": "0.15",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "1.00184979009360",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.15",
+            "comment": " ",
+            "unit": " ",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "17.21",
+        "response": {
+            "reasoning": "To solve this problem, we will use the Hagen-Poiseuille equation, which describes the flow rate of a fluid through a cylindrical pipe. The equation is given by Q = (\u03c0 * r^4 * (P1 - P2)) / (8 * \u03b7 * L), where Q is the volumetric flow rate, r is the radius of the tube, P1 and P2 are the pressures at the inlet and outlet, \u03b7 is the dynamic viscosity of the fluid, and L is the length of the tube. We will first calculate the flow rate Q, and then use it to find the time required to pass 200 mL of H2. The viscosity of hydrogen gas at 273 K is approximately 8.76e-6 Pa.s. After calculating the flow rate, we can find the time by dividing the volume of hydrogen by the flow rate.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nr = 0.25 / 2 * 1e-3  # radius in meters\nL = 10e-2  # length in meters\nP1 = 1.05 * 101325  # inlet pressure in Pascals\nP2 = 1.00 * 101325  # outlet pressure in Pascals\neta = 8.76e-6  # dynamic viscosity of H2 in Pa.s\nV = 200e-6  # volume in cubic meters (200 mL)\n\n# Step 2: Calculate the volumetric flow rate Q using Hagen-Poiseuille equation\nQ = (sp.pi * r**4 * (P1 - P2)) / (8 * eta * L)\n\n# Step 3: Calculate the time required to pass the volume V\n# Time = Volume / Flow rate\ntime = V / Q\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = time.evalf()  # evaluate to get a numerical result",
+            "unit": "s"
+        },
+        "answer": {
+            "gt_answer": "22",
+            "unit": " $\\mathrm{~s}$"
+        },
+        "verification_result": {
+            "code_output": "360.701166938549",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 22",
+            "comment": " ",
+            "unit": " $\\mathrm{~s}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "10.23",
+        "response": {
+            "reasoning": "To calculate the Debye-H\u00fcckel screening length, we first need to determine the ionic strength of the solution. The ionic strength (I) is calculated using the formula I = 0.5 * \u03a3 c_i * z_i^2, where c_i is the concentration of each ion and z_i is the charge of each ion. For K3PO4, it dissociates into 3 K+ ions and 1 PO4^3- ion. Therefore, we have: c_K = 3 * 0.0075 m and c_PO4 = 0.0075 m. The charges are z_K = +1 and z_PO4 = -3. After calculating the ionic strength, we can find the Debye-H\u00fcckel parameter kappa (\u03ba) using the formula \u03ba = sqrt((2 * F * I) / (\u03b5 * \u03b50 * k_B * T)), where F is Faraday's constant, \u03b5 is the dielectric constant of water, \u03b50 is the vacuum permittivity, k_B is the Boltzmann constant, and T is the temperature in Kelvin. Finally, the Debye-H\u00fcckel screening length is given by 1 / \u03ba. We will compute these values using Sympy.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nT = 298  # Temperature in Kelvin\nc = 0.0075  # Concentration of K3PO4 in mol/L\nF = 96485  # Faraday's constant in C/mol\nepsilon_0 = 8.854e-12  # Vacuum permittivity in F/m\nepsilon = 78.5  # Dielectric constant of water\nk_B = 1.38e-23  # Boltzmann constant in J/K\n\n# Step 2: Calculate ionic strength\n# K3PO4 dissociates into 3 K+ and 1 PO4^3-\nc_K = 3 * c  # Concentration of K+\nc_PO4 = c  # Concentration of PO4^3-\nI = 0.5 * (c_K * (1)**2 + c_PO4 * (3)**2)  # Ionic strength\n\n# Step 3: Calculate kappa\nkappa = sp.sqrt((2 * F * I) / (epsilon * epsilon_0 * k_B * T))\n\n# Step 4: Calculate Debye-H\u00fcckel screening length\nscreening_length = 1 / kappa\n\n# Step 5: Assign the final result\nresult = screening_length",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "1.4",
+            "unit": " $\\mathrm{~nm}$"
+        },
+        "verification_result": {
+            "code_output": "1.814266607038332e-08",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1.4",
+            "comment": " ",
+            "unit": " $\\mathrm{~nm}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "1.5",
+        "response": {
+            "reasoning": "To find the mole percent of butane in the gas mixture, we first need to determine the number of moles of each component in the gas mixture. We will use the ideal gas law, PV = nRT, to find the total number of moles of gas in the bulb. We will then use the molar masses of ethane (C2H6) and butane (C4H10) to express the mass of the gas in terms of moles. Finally, we will calculate the mole percent of butane based on the number of moles of butane and the total number of moles of gas in the mixture. The steps are as follows: 1. Calculate the total number of moles of gas using the ideal gas law. 2. Set up equations based on the mass of the gas and the molar masses of ethane and butane. 3. Solve for the mole fraction of butane and convert it to mole percent.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP = 97.5e3  # pressure in Pa\nV = 230e-6  # volume in m^3\nT = 23.1 + 273.15  # temperature in K\nR = 8.314  # ideal gas constant in J/(mol*K)\n\n# Step 2: Calculate total number of moles of gas using the ideal gas law\nn_total = P * V / (R * T)\n\n# Step 3: Define molar masses of ethane and butane\nm_ethane = 30.07  # g/mol\nm_butane = 58.12  # g/mol\nmass_total = 0.3554  # total mass of gas in g\n\n# Step 4: Set up equations for moles of ethane and butane\nn_ethane = sp.symbols('n_ethane')\nn_butane = sp.symbols('n_butane')\n\n# Total moles equation\nmoles_eq = sp.Eq(n_total, n_ethane + n_butane)\n\n# Mass equation\nmass_eq = sp.Eq(mass_total, n_ethane * m_ethane + n_butane * m_butane)\n\n# Step 5: Solve the equations\nsolution = sp.solve((moles_eq, mass_eq), (n_ethane, n_butane))\n\n# Step 6: Calculate mole percent of butane\nn_butane_value = solution[n_butane]\npercent_butane = (n_butane_value / n_total) * 100\n\n# Final result assignment\nresult = percent_butane",
+            "unit": "%"
+        },
+        "answer": {
+            "gt_answer": "32",
+            "unit": " %"
+        },
+        "verification_result": {
+            "code_output": "31.9605174705942",
+            "result_match": true,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 32",
+            "comment": " ",
+            "unit": " %",
+            "source": "thermo"
+        }
     }
 ]
