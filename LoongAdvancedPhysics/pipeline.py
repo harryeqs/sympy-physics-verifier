@@ -9,13 +9,11 @@ from verifier import PhysicsVerifier, logger
 from models import ResponseFormat, AnswerFormat, VerificationResult, OutputFormat
 
 import logging
-import concurrent.futures
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 MAX_ATTEMPTS = 5
-TIMEOUT = 300
 
 REASON_AGENT_PROMPT = """
 Task: Solve the given Physics problem using symbolic computation with Sympy and return the response in a JSON format following the specified ResponseFormat.
