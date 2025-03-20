@@ -1,8 +1,10 @@
 from models import ResponseFormat, AnswerFormat, VerificationResult
 from typing import Any, Tuple
 import sympy as sp
+import concurrent.futures
 import re
 import math
+import multiprocessing
 from sympy.parsing.sympy_parser import parse_expr
 from sympy.parsing.latex import parse_latex
 from sympy.physics import units
@@ -28,7 +30,7 @@ class UnitParser:
             'circ': units.degree
             # extend as needed
         }
-        
+
         self.allowed_units = self._load_sympy_units()
         self.allowed_units.update(extra_allowed_units)
         
@@ -205,6 +207,7 @@ class UnitParser:
         factors = sp.Mul.make_args(unit_expr)
         base_units = [factor.base if hasattr(factor, 'is_Pow') and factor.is_Pow else factor for factor in factors]
         return base_units
+    
 
 def is_number(s):
     try:
@@ -297,12 +300,7 @@ class PhysicsVerifier:
         self.unit_parser = UnitParser()
 
     @staticmethod
-    def execute_code(code: str):
-        """
-        Executes the generated code from the response in an isolated namespace.
-        The environment includes sympy and the necessary physics units.
-        The code is expected to define a variable called 'result'.
-        """
+    def safe_exec(code):
         namespace = {}
         try:
             pattern = r'([\w\d_]+)\.evalf\(\)'
@@ -314,11 +312,12 @@ class PhysicsVerifier:
                 code = code.replace(f"{var}.evalf()", safe_evalf)
 
             exec(code, namespace, namespace)
-                
-            if "result" not in namespace:
-                logger.info("The executed code did not define a variable called 'result'.")
         except Exception as e:
-            logger.info(f"Failed to execute code: {e}")
+            logger.info("Failed to execute code:", e)
+            return None
+
+        if "result" not in namespace:
+            logger.info("The executed code did not define a variable called 'result'.")
         
         return namespace.get("result", None)
 
@@ -335,6 +334,22 @@ class PhysicsVerifier:
         except Exception as e:
             logger.error("Failed to compare units:", e)
             return False
+        
+    def execute_code(self, code: str, timeout: int = 300):
+        """
+        Executes the generated code from the response in an isolated namespace.
+        The environment includes sympy and the necessary physics units.
+        The code is expected to define a variable called 'result'.
+        """
+
+        with concurrent.futures.ProcessPoolExecutor() as executor:
+            future = executor.submit(self.safe_exec, code)
+        try:
+            result = future.result(timeout=timeout)
+        except concurrent.futures.TimeoutError:
+            logger.info(f"Execution timed out after {timeout} seconds")
+        
+        return result
         
     def convert_units(self, output, response_unit_expr, answer_unit_expr):
         """
