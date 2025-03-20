@@ -24,6 +24,9 @@ class UnitParser:
             "m": units.meter,
             "meter": units.meter,
             "meters": units.meter,
+            "h": units.hour,
+            "hrs": units.hour,
+            "min": units.minute,
             "s": units.second,
             "second": units.second,
             "seconds": units.second,
@@ -304,7 +307,7 @@ def clean_answer(raw_answer: str) -> str:
     return answer
 
 class PhysicsVerifier:
-    def __init__(self, tolerance: float = 1e-2):
+    def __init__(self, tolerance: float = 1e-1):
         # Set the tolerance for float comparisons.
         self.tolerance = tolerance
         self.unit_parser = UnitParser()

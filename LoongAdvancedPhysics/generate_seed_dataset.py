@@ -7,12 +7,12 @@ import logging
 
 from data_processor import DataProcessor
 
-DATASET_ORIGIN = 'SciBench'
-
 if __name__ == "__main__":
     # Set up logging
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     logger = logging.getLogger(__name__)
+
+    DATASET_ORIGIN = input("Enter the dataset origin (SciBench or OlympiadBench): ")
 
     current_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -35,7 +35,7 @@ if __name__ == "__main__":
     
     output_location = os.path.join(current_path, 'PhysicsDatasets', 'seed_dataset', f'{DATASET_ORIGIN}.json')
 
-    all_problem_ids = [sample['id'] for sample in dataset]
+    all_problem_ids = [str(sample['id']).strip() for sample in dataset]
 
     if not os.path.isfile(output_location):
         # os.mknod(output_location)
@@ -48,6 +48,7 @@ if __name__ == "__main__":
 
         solved_problem_ids = [sample['sample_id'] for sample in solved_dataset]
         unsolved_problem_ids = [str(problem_id).strip() for problem_id in all_problem_ids if problem_id not in solved_problem_ids]
+        print(f"Problems to solve in this run: {unsolved_problem_ids}")
 
     print(f'No. of problem to solve: {len(unsolved_problem_ids)}')
 
