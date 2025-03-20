@@ -208,12 +208,6 @@ class PhysicsCodeGenPipeline():
          verification_outcome = self.verify(structured_response, full_answer)
          logger.info(f'Verification Outcome: Result Match: {verification_outcome.result_match}, Unit Match: {verification_outcome.unit_match}')
 
-         
-         if verification_outcome.result_match and verification_outcome.unit_match:
-            self.generation_summary['successful_generations'] += 1
-         else:
-            self.generation_summary['failed_generations'] += 1
-
          output = OutputFormat(
             sample_id=sample_id,
             response=structured_response,
@@ -222,13 +216,15 @@ class PhysicsCodeGenPipeline():
             metadata=sample['metadata']
          )
 
-         
-         if not verification_outcome.result_match or not verification_outcome.unit_match:
+         if verification_outcome.result_match and verification_outcome.unit_match:
+            self.generation_summary['successful_generations'] += 1
+         else:
+            self.generation_summary['failed_generations'] += 1
             self.failed_samples_ids.append(sample_id)
             failed_outputs.append(output.model_dump())
 
             with open(failed_output_location, 'w') as f:
-               json.dump(outputs, f, indent=4)
+               json.dump(failed_outputs, f, indent=4)
             
             if self.save_right_solution:
                continue

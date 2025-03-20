@@ -366,7 +366,7 @@ class PhysicsVerifier:
         """
         try:
             output_with_unit = output * response_unit_expr
-            
+
             # Get scaling factor and base answer units
             scaling_factor, base_unit = self.unit_parser.detect_scaling_factor(answer_unit_expr)
 
@@ -424,8 +424,8 @@ class PhysicsVerifier:
         if output is None:
             return VerificationResult(code_output=None, result_match=False, unit_match=False)
         
-        response_unit_expr = self.unit_parser.parse_unit(response.unit)
-        answer_unit_expr = self.unit_parser.parse_unit(answer.unit)
+        response_unit_expr = self.unit_parser.parse_unit(response.unit) if response.unit else None
+        answer_unit_expr = self.unit_parser.parse_unit(answer.unit) if answer.unit else None
         logger.info(f'Response unit: {response_unit_expr}')
         logger.info(f'Ground truth unit: {answer_unit_expr}')
 
