@@ -5418,15 +5418,5 @@
         "problemid": " 12.8",
         "unit": " ",
         "source": "thermo"
-    },
-    {
-        "solution": "The information provided for this problem dictates that the $J=4$ rotational energy level was the most populated at the temperature at which the spectrum was taken. To determine the temperature, we first determine the change in occupation number for the rotational energy level, $a_J$, versus $J$ as follows:\r\n$$\r\n\\begin{aligned}\r\na_J & =\\frac{N(2 J+1) e^{-\\beta h c B J(J+1)}}{q_R}=\\frac{N(2 J+1) e^{-\\beta h c B J(J+1)}}{\\left(\\frac{1}{\\beta h c B}\\right)} \\\\\r\n& =N \\beta h c B(2 J+1) e^{-\\beta h c B J(J+1)}\r\n\\end{aligned}\r\n$$\r\nNext, we take the derivative of $a_J$ with respect to $J$ and set the derivative equal to zero to find the maximum of the function:\r\n$$\r\n\\begin{aligned}\r\n\\frac{d a_J}{d J} & =0=\\frac{d}{d J} N \\beta h c B(2 J+1) e^{-\\beta h c B J(J+1)} \\\\\r\n0 & =\\frac{d}{d J}(2 J+1) e^{-\\beta h c B J(J+1)} \\\\\r\n0 & =2 e^{-\\beta h c B J(J+1)}-\\beta h c B(2 J+1)^2 e^{-\\beta h c B J(J+1)} \\\\\r\n0 & =2-\\beta h c B(2 J+1)^2 \\\\\r\n2 & =\\beta h c B(2 J+1)^2=\\frac{h c B}{k T}(2 J+1)^2 \\\\\r\nT & =\\frac{(2 J+1)^2 h c B}{2 k}\r\n\\end{aligned}\r\n$$\r\nSubstitution of $J=4$ into the preceding expression results in the following temperature at which the spectrum was obtained:\r\n$$\r\n\\begin{aligned}\r\nT & =\\frac{(2 J+1)^2 h c B}{2 k} \\\\\r\n& =\\frac{(2(4)+1)^2\\left(6.626 \\times 10^{-34} \\mathrm{~J} \\mathrm{~s}\\right)\\left(3.00 \\times 10^{10} \\mathrm{~cm} \\mathrm{~s}^{-1}\\right)\\left(8.46 \\mathrm{~cm}^{-1}\\right)}{2\\left(1.38 \\times 10^{-23} \\mathrm{~J} \\mathrm{~K}^{-1}\\right)} \\\\\r\n& =4943 \\mathrm{~K}\r\n\\end{aligned}\r\n$$",
-        "problem_text": "In a rotational spectrum of $\\operatorname{HBr}\\left(B=8.46 \\mathrm{~cm}^{-1}\\right)$, the maximum intensity transition in the R-branch corresponds to the $J=4$ to 5 transition. At what temperature was the spectrum obtained?",
-        "answer_latex": "4943 ",
-        "comment": " ",
-        "answer_number": "4943",
-        "problemid": " 14.4",
-        "unit": " $\\mathrm{~K}$",
-        "source": "thermo"
     }
 ]

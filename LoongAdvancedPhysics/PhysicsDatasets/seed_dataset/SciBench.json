@@ -3406,5 +3406,317 @@
             "unit": "$\\mathrm{~J}$",
             "source": "thermo"
         }
+    },
+    {
+        "sample_id": "1.8",
+        "response": {
+            "reasoning": "To find the volume increase necessary for all the water to evaporate, we first need to determine the number of moles of water present in the vessel. Using the molar mass of water (approximately 18.015 g/mol), we can calculate the number of moles of water. Next, we apply the ideal gas law (PV = nRT) to find the volume occupied by the water vapor at the given temperature and vapor pressure. We will convert the vapor pressure from torr to atm for consistency with the ideal gas law. Finally, we will calculate the volume of the vapor and determine the increase in volume from the initial volume of liquid water to the volume of vapor produced.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nm_H2O = 1.15  # mass of water in grams\nM_H2O = 18.015  # molar mass of water in g/mol\nT = 30 + 273.15  # temperature in Kelvin\nP_vapor_torr = 31.82  # vapor pressure in torr\nR = 0.0821  # ideal gas constant in L\u00b7atm/(K\u00b7mol)\n\n# Step 2: Convert vapor pressure from torr to atm\nP_vapor_atm = P_vapor_torr / 760  # 1 atm = 760 torr\n\n# Step 3: Calculate the number of moles of water\nn_H2O = m_H2O / M_H2O  # moles of water\n\n# Step 4: Use the ideal gas law to find the volume of vapor\nV_vapor = (n_H2O * R * T) / P_vapor_atm  # volume in liters\n\n# Step 5: The initial volume of liquid water is negligible compared to vapor volume\n# Therefore, the volume increase is equal to the volume of vapor produced\nvolume_increase = V_vapor\n\n# Step 6: Assign the final computed result to 'result'\nresult = volume_increase",
+            "unit": "L"
+        },
+        "answer": {
+            "gt_answer": "37.9",
+            "unit": "$\\mathrm{~L}$"
+        },
+        "verification_result": {
+            "code_output": "37.94702387649931",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 37.9",
+            "comment": " ",
+            "unit": "$\\mathrm{~L}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "8.7",
+        "response": {
+            "reasoning": "To calculate the work required to expand the cell surface against the surface tension, we first need to determine the change in surface area of the cell. The surface area of a sphere is given by the formula A = 4 * pi * r^2. The initial radius of the cell is r_initial = 20.0 * 10^-6 m, and the final radius after expansion is r_final = 3 * r_initial. The change in surface area (delta_A) is then calculated as A_final - A_initial. The work done (W) against surface tension (gamma) is given by W = gamma * delta_A. The surface tension of water at T = 298.15 K is approximately 0.0728 N/m. We will compute the change in surface area and then the work done.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nr_initial = 20.0 * 10**-6  # initial radius in meters\nfactor = 3  # factor by which the radius increases\ngamma = 0.0728  # surface tension of water in N/m\n\n# Step 2: Calculate the final radius\nr_final = factor * r_initial\n\n# Step 3: Calculate the initial and final surface areas\nA_initial = 4 * sp.pi * r_initial**2\nA_final = 4 * sp.pi * r_final**2\n\n# Step 4: Calculate the change in surface area\ndelta_A = A_final - A_initial\n\n# Step 5: Calculate the work done against surface tension\nW = gamma * delta_A\n\n# Step 6: Assign the final computed result to 'result'\nresult = W.simplify()",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "2.89",
+            "unit": " $10^{-9} \\mathrm{~J}$"
+        },
+        "verification_result": {
+            "code_output": "2.92746169832111",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 2.89",
+            "comment": " ",
+            "unit": " $10^{-9} \\mathrm{~J}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "9.8",
+        "response": {
+            "reasoning": "To calculate the vapor pressure of a solution containing benzene and hexane, we can use Raoult's Law, which states that the vapor pressure of each component in an ideal solution is equal to the vapor pressure of the pure component multiplied by its mole fraction in the solution. Given the vapor pressures of pure benzene (P_benzene = 120 Torr) and pure hexane (P_hexane = 189 Torr), and the mole fraction of benzene (x_benzene = 0.28), we can find the mole fraction of hexane (x_hexane = 1 - x_benzene = 0.72). The total vapor pressure of the solution (P_solution) can be calculated as: P_solution = P_benzene * x_benzene + P_hexane * x_hexane. Substituting the values, we can compute the total vapor pressure.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP_benzene = 120  # Vapor pressure of pure benzene in Torr\nP_hexane = 189   # Vapor pressure of pure hexane in Torr\nx_benzene = 0.28 # Mole fraction of benzene\nx_hexane = 1 - x_benzene  # Mole fraction of hexane\n\n# Step 2: Apply Raoult's Law to calculate the total vapor pressure\nP_solution = P_benzene * x_benzene + P_hexane * x_hexane\n\n# Step 3: Compute the final result\nresult = P_solution",
+            "unit": "Torr"
+        },
+        "answer": {
+            "gt_answer": "170",
+            "unit": " $\\mathrm{Torr}$"
+        },
+        "verification_result": {
+            "code_output": "169.67999999999998",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 170",
+            "comment": " ",
+            "unit": " $\\mathrm{Torr}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "6.12",
+        "response": {
+            "reasoning": "To calculate the standard enthalpy change of the reaction at a different temperature (125.0 \u00b0C), we can use the heat capacity values of the reactants and products. The formula used is: \u0394H_R(T2) = \u0394H_R(T1) + \u222b(C_p(T) dT) from T1 to T2. Here, T1 is 298.15 K and T2 is 398.15 K (125.0 \u00b0C). We will calculate the integral of the heat capacities of the reactants and products over this temperature range and adjust the standard enthalpy accordingly.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nT1 = 298.15  # Initial temperature in K\nT2 = 125 + 273.15  # Final temperature in K (125 \u00b0C)\nDelta_H_R_T1 = 131.28  # Enthalpy change at T1 in kJ/mol\n\n# Step 2: Define heat capacities (C_p) for the substances involved\n# Assuming we have the following values from data tables:\nC_p_C = 5.74  # J/(mol*K) for graphite\nC_p_H2O = 33.58  # J/(mol*K) for water vapor\nC_p_CO = 29.1  # J/(mol*K) for carbon monoxide\nC_p_H2 = 28.84  # J/(mol*K) for hydrogen\n\n# Step 3: Calculate the integral of C_p from T1 to T2 for each substance\n# Convert J/(mol*K) to kJ/(mol*K) for consistency\nC_p_C_kJ = C_p_C / 1000\nC_p_H2O_kJ = C_p_H2O / 1000\nC_p_CO_kJ = C_p_CO / 1000\nC_p_H2_kJ = C_p_H2 / 1000\n\n# Calculate the change in enthalpy due to temperature change\n# \u0394H_R(T2) = \u0394H_R(T1) + \u03a3 C_p * (T2 - T1)\nDelta_H_R_T2 = Delta_H_R_T1 + (C_p_CO_kJ + C_p_H2_kJ - C_p_C_kJ - C_p_H2O_kJ) * (T2 - T1)\n\n# Step 4: Assign the final computed result to 'result'\nresult = Delta_H_R_T2",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "132.9",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "133.142",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 132.9",
+            "comment": " ",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "5.42",
+        "response": {
+            "reasoning": "To find the area of the solar collector needed to produce 1000 W of power, we first need to calculate the Carnot efficiency of the heat engine. The Carnot efficiency is given by the formula: \\( \\eta = 1 - \\frac{T_c}{T_h} \\), where \\( T_c \\) is the temperature of the cold reservoir (298 K) and \\( T_h \\) is the temperature of the hot reservoir in Kelvin. The temperature of the collector is given as 79.5 \u00b0C, which we convert to Kelvin: \\( T_h = 79.5 + 273.15 = 352.65 \\, K \\). Next, we calculate the Carnot efficiency. The power output of the engine is related to the heat absorbed from the hot reservoir by the equation: \\( P = \\eta Q_h \\), where \\( Q_h \\) is the heat absorbed. Rearranging gives us \\( Q_h = \\frac{P}{\\eta} \\). The heat absorbed by the collector can also be expressed in terms of the area of the collector and the solar flux: \\( Q_h = A \\cdot F \\), where \\( F = 2.00 \\, \\mathrm{J} \\, \\mathrm{cm}^{-2} \\, \\mathrm{min}^{-1} = 2.00 \times 10^4 \\, \\mathrm{J} \\, \\mathrm{m}^{-2} \\, \\mathrm{min}^{-1} \\). We convert the solar flux to Watts: \\( F = \\frac{2.00 \\times 10^4}{60} \\, \\mathrm{W/m^2} \\). Finally, we can solve for the area \\( A \\) needed to produce 1000 W of power.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nT_h = 79.5 + 273.15  # Hot reservoir temperature in K\nT_c = 298  # Cold reservoir temperature in K\nP = 1000  # Power output in W\nF = 2.00 * 10**4 / 60  # Solar flux in W/m^2\n\n# Step 2: Calculate Carnot efficiency\neta = 1 - T_c / T_h\n\n# Step 3: Calculate heat absorbed from the hot reservoir\nQ_h = P / eta\n\n# Step 4: Relate heat absorbed to area and solar flux\nA = Q_h / F\n\n# Step 5: Compute the final result\nresult = A",
+            "unit": "m^2"
+        },
+        "answer": {
+            "gt_answer": "19.4",
+            "unit": " $\\mathrm{~m}^2$"
+        },
+        "verification_result": {
+            "code_output": "19.358645928636786",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 19.4",
+            "comment": " ",
+            "unit": " $\\mathrm{~m}^2$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "6.20",
+        "response": {
+            "reasoning": "To calculate the change in Gibbs free energy (\u0394G) for the isothermal expansion of an ideal gas, we can use the formula \u0394G = \u0394H - T\u0394S. For an isothermal process, \u0394H = 0, so \u0394G = -T\u0394S. The change in entropy (\u0394S) for an ideal gas during an isothermal expansion can be calculated using the formula \u0394S = nR ln(P_initial/P_final). Here, n is the number of moles, R is the ideal gas constant, P_initial is the initial pressure, and P_final is the final pressure. We will substitute the values into this equation to find \u0394S, and then calculate \u0394G.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nn = 2.25  # moles of gas\nT = 325  # temperature in K\nR = 8.314  # ideal gas constant in J/(mol*K)\nP_initial = 12.0 * 1e5  # initial pressure in Pa (converted from bar)\nP_final = 2.5 * 1e5  # final pressure in Pa (converted from bar)\n\n# Step 2: Calculate the change in entropy \u0394S\nDelta_S = n * R * sp.ln(P_initial / P_final)\n\n# Step 3: Calculate \u0394G using \u0394G = -T\u0394S\nDelta_G = -T * Delta_S\n\n# Step 4: Assign the final result to 'result'\nresult = Delta_G",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "-9.54",
+            "unit": " $10^3 \\mathrm{~J}$"
+        },
+        "verification_result": {
+            "code_output": "-9.53657694224799",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -9.54",
+            "comment": " ",
+            "unit": " $10^3 \\mathrm{~J}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "9.7",
+        "response": {
+            "reasoning": "To determine the molecular weight of the unknown substance, we can use the formula for osmotic pressure, which is given by the equation: \\( \\Pi = cRT \\), where \\( \\Pi \\) is the osmotic pressure, \\( c \\) is the concentration in mol/m^3, \\( R \\) is the ideal gas constant, and \\( T \\) is the temperature in Kelvin. First, we need to convert the concentration from kg/m^3 to mol/m^3 using the molecular weight (M) of the substance: \\( c = \\frac{31.2}{M} \\). Substituting this into the osmotic pressure equation gives us: \\( \\Pi = \\frac{31.2}{M} RT \\). Rearranging this equation allows us to solve for M: \\( M = \\frac{31.2 RT}{\\Pi} \\). We will use the values: \\( R = 8.314 \\, \\text{J/(mol K)} \\), \\( T = 298 \\, K \\), and \\( \\Pi = 5.30 \\times 10^4 \\, Pa \\). Finally, we will compute M and provide the result in kg/mol.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nR = 8.314  # Ideal gas constant in J/(mol K)\nT = 298  # Temperature in Kelvin\nPi = 5.30e4  # Osmotic pressure in Pa\nconcentration_kg_m3 = 31.2  # Concentration in kg/m^3\n\n# Step 2: Define the molecular weight symbol\nM = sp.symbols('M')\n\n# Step 3: Set up the equation for osmotic pressure\n# Pi = (concentration / M) * R * T\n# Rearranging gives M = (concentration * R * T) / Pi\nmolecular_weight_eq = (concentration_kg_m3 * R * T) / Pi\n\n# Step 4: Solve for M\nresult = molecular_weight_eq\n",
+            "unit": "kg/mol"
+        },
+        "answer": {
+            "gt_answer": "1.45",
+            "unit": " $10^3 \\mathrm{~g} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "1.4584952150943393",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1.45",
+            "comment": " ",
+            "unit": " $10^3 \\mathrm{~g} \\mathrm{~mol}^{-1}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "5.33",
+        "response": {
+            "reasoning": "To find the maximum heat leak that can be tolerated by the refrigerator, we first need to calculate the power output of the motor in watts. Since 1 hp = 746 watts, a 0.25 hp motor will output 0.25 * 746 watts. Next, we can determine the maximum theoretical coefficient of performance (COP) for a refrigerator, which is given by the formula COP = T_c / (T_h - T_c), where T_c is the absolute temperature of the cold reservoir (interior of the refrigerator) and T_h is the absolute temperature of the hot reservoir (room temperature). We convert the temperatures from Celsius to Kelvin by adding 273.15. The actual COP is 50% of the theoretical COP. Finally, we can use the relationship between the heat leak (Q_h), the work input (W), and the COP: Q_h = COP * W. This will give us the maximum heat leak that can be tolerated by the refrigerator in watts.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nhp = 746  # watts per horsepower\nmotor_hp = 0.25  # horsepower\nT_c = 4.50 + 273.15  # cold temperature in Kelvin\nT_h = 38 + 273.15  # hot temperature in Kelvin\n\n# Step 2: Calculate power output of the motor in watts\nW = motor_hp * hp\n\n# Step 3: Calculate the maximum theoretical COP\nCOP_theoretical = T_c / (T_h - T_c)\n\n# Step 4: Actual COP is 50% of the theoretical value\nCOP_actual = 0.5 * COP_theoretical\n\n# Step 5: Calculate the maximum heat leak (Q_h)\nQ_h = COP_actual * W\n\n# Step 6: Assign the final result\nresult = Q_h",
+            "unit": "W"
+        },
+        "answer": {
+            "gt_answer": "773",
+            "unit": " $\\mathrm{~J} \\mathrm{~s}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "772.8615671641791",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 773",
+            "comment": " ",
+            "unit": " $\\mathrm{~J} \\mathrm{~s}^{-1}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "10.13",
+        "response": {
+            "reasoning": "To calculate the ionic strength (I) of a solution, we use the formula: I = 0.5 * \u03a3(c_i * z_i^2), where c_i is the molality of each ion and z_i is the charge of each ion. For K2SO4, it dissociates into 2 K+ ions and 1 SO4^2- ion. For Na3PO4, it dissociates into 3 Na+ ions and 1 PO4^3- ion. For MgCl2, it dissociates into 1 Mg^2+ ion and 2 Cl- ions. We will calculate the contribution of each ion to the ionic strength and sum them up. The final result will be assigned to 'result'.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols for molalities and charges\nK2SO4_m = 0.0750  # molality of K2SO4\nNa3PO4_m = 0.0085  # molality of Na3PO4\nMgCl2_m = 0.0150  # molality of MgCl2\n\n# Step 2: Define the charges of the ions\nK_plus = 1  # charge of K+\nSO4_minus = -2  # charge of SO4^2-\nNa_plus = 1  # charge of Na+\nPO4_minus = -3  # charge of PO4^3-\nMg_plus = 2  # charge of Mg^2+\nCl_minus = -1  # charge of Cl-\n\n# Step 3: Calculate the contributions to ionic strength\nI_K2SO4 = K2SO4_m * (2 * K_plus**2 + SO4_minus**2)\nI_Na3PO4 = Na3PO4_m * (3 * Na_plus**2 + PO4_minus**2)\nI_MgCl2 = MgCl2_m * (Mg_plus**2 + 2 * Cl_minus**2)\n\n# Step 4: Total ionic strength\nionic_strength = 0.5 * (I_K2SO4 + I_Na3PO4 + I_MgCl2)\n\n# Step 5: Assign the final result\nresult = ionic_strength",
+            "unit": "mol/kg"
+        },
+        "answer": {
+            "gt_answer": "0.321",
+            "unit": " $\\mathrm{~mol} \\mathrm{~kg}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "0.32099999999999995",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.321",
+            "comment": " ",
+            "unit": " $\\mathrm{~mol} \\mathrm{~kg}^{-1}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "2.5",
+        "response": {
+            "reasoning": "First, we calculate the total energy required to heat 11.6 kg of ice water from 273 K to 355 K using the formula Q = mc\u0394T, where m is the mass, c is the specific heat capacity, and \u0394T is the change in temperature. The energy required is Q = 11600 g * 4.18 J/g/K * (355 K - 273 K). Next, we find the power output of the horse by dividing the total energy by the time in seconds (2.5 hours = 9000 seconds). This gives us the power in watts. Finally, we use the power to calculate how high the horse can raise a 225 kg weight in 2.5 minutes (150 seconds) using the formula for gravitational potential energy (PE = mgh), where m is the mass, g is the acceleration due to gravity (approximately 9.81 m/s\u00b2), and h is the height. Rearranging gives h = PE/(mg). We substitute the power output multiplied by time for PE to find the height.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nm_ice = 11.6 * 1000  # mass of ice water in grams\nc_water = 4.18  # specific heat capacity in J/g/K\ndelta_T = 355 - 273  # temperature change in K\ntime_hours = 2.5  # time in hours\ntime_seconds = time_hours * 3600  # convert time to seconds\n\n# Step 2: Calculate the energy required to heat the water\nQ = m_ice * c_water * delta_T  # total energy in Joules\n\n# Step 3: Calculate the power output of the horse\npower = Q / time_seconds  # power in Watts\n\n# Step 4: Define mass of the weight and time for lifting\nm_weight = 225  # mass of the weight in kg\ntime_lifting = 2.5 * 60  # time in seconds (2.5 minutes)\n\ng = 9.81  # acceleration due to gravity in m/s^2\n\n# Step 5: Calculate the height the horse can raise the weight\n# Potential energy = power * time_lifting\nPE = power * time_lifting\nh = PE / (m_weight * g)  # height in meters\n\n# Step 6: Assign the final result\nresult = h",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "30",
+            "unit": "$\\mathrm{~m}$"
+        },
+        "verification_result": {
+            "code_output": "30.022395892324536",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 30",
+            "comment": " ",
+            "unit": "$\\mathrm{~m}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "3.5",
+        "response": {
+            "reasoning": "To find the equilibrium temperature of the system, we can use the principle of conservation of energy. The heat lost by the liquid water will be equal to the heat gained by the ice. We start by calculating the heat required to melt the ice and then raise its temperature to the equilibrium temperature. The heat lost by the liquid water will be calculated based on its temperature change. We set the heat gained by the ice equal to the heat lost by the liquid water and solve for the final equilibrium temperature. The specific heat capacities and latent heat of fusion are used in the calculations.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nm_ice = 34.05 / 1000  # mass of ice in kg\nm_water = 185 / 1000  # mass of liquid water in kg\nT_initial_ice = 273  # initial temperature of ice in K\nT_initial_water = 310  # initial temperature of water in K\nL_fusion = 334000  # latent heat of fusion for water in J/kg\nC_p_water = 4186  # specific heat capacity of water in J/(kg*K)\nT_final = sp.symbols('T_final')  # final equilibrium temperature\n\n# Step 2: Set up the energy balance equation\n# Heat gained by ice = Heat lost by water\n# Heat gained by ice = m_ice * L_fusion + m_ice * C_p_water * (T_final - T_initial_ice)\n# Heat lost by water = m_water * C_p_water * (T_initial_water - T_final)\n\nheat_gained_ice = m_ice * L_fusion + m_ice * C_p_water * (T_final - T_initial_ice)\nheat_lost_water = m_water * C_p_water * (T_initial_water - T_final)\n\n# Setting the heat gained equal to the heat lost\nenergy_balance_eq = sp.Eq(heat_gained_ice, heat_lost_water)\n\n# Step 3: Solve for the final temperature\nfinal_temperature_solution = sp.solve(energy_balance_eq, T_final)\n\n# Assign the final result to 'result'\nresult = final_temperature_solution[0]",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "292",
+            "unit": "$\\mathrm{~K}$"
+        },
+        "verification_result": {
+            "code_output": "291.845734518154",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 292",
+            "comment": " ",
+            "unit": "$\\mathrm{~K}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "18.4",
+        "response": {
+            "reasoning": "To determine the age of the fossilized wood, we can use the concept of radioactive decay. The decay of Carbon-14 can be modeled using the formula: N(t) = N0 * (1/2)^(t/T), where N(t) is the remaining quantity of Carbon-14 at time t, N0 is the initial quantity, T is the half-life, and t is the time elapsed. Here, N0 corresponds to 15.3 decay events per minute, and N(t) corresponds to 2.4 decay events per minute. We can rearrange the equation to solve for t, the age of the wood. By substituting the known values into the equation, we can calculate the age of the wood in years.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nN0 = 15.3  # initial decay events per minute\nNt = 2.4   # remaining decay events per minute\nT = 5760   # half-life of Carbon-14 in years\nt = sp.symbols('t')  # time in years\n\n# Step 2: Set up the radioactive decay equation\n# N(t) = N0 * (1/2)^(t/T)\n# Rearranging gives us: t = T * log2(N0/N(t))\n\n# Step 3: Calculate the age of the wood\nage_equation = T * sp.log(N0/Nt, 2)\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = age_equation",
+            "unit": "years"
+        },
+        "answer": {
+            "gt_answer": "4.86",
+            "unit": " $10^{11} \\mathrm{~s}$"
+        },
+        "verification_result": {
+            "code_output": "4.85761113572761",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "The ratio of decay events yields the amount of ${ }^{14} \\mathrm{C}$ present currently versus the amount that was present when the tree died:\r\n$$\r\n\\frac{\\left[{ }^{14} \\mathrm{C}\\right]}{\\left[{ }^{14} \\mathrm{C}\\right]_0}=\\frac{2.40 \\mathrm{~min}^{-1}}{15.3 \\mathrm{~min}^{-1}}=0.157\r\n$$\r\nThe rate constant for isotope decay is related to the half-life as follows:\r\n$$\r\nk=\\frac{\\ln 2}{t_{1 / 2}}=\\frac{\\ln 2}{5760 \\text { years }}=\\frac{\\ln 2}{1.82 \\times 10^{11} \\mathrm{~s}}=3.81 \\times 10^{-12} \\mathrm{~s}^{-1}\r\n$$\r\nWith the rate constant and ratio of isotope concentrations, the age of the fossilized wood is readily determined:\r\n$$\r\n\\begin{aligned}\r\n\\frac{\\left[{ }^{14} \\mathrm{C}\\right]}{\\left[{ }^{14} \\mathrm{C}\\right]_0} & =e^{-k t} \\\\\r\n\\ln \\left(\\frac{\\left[{ }^{14} \\mathrm{C}\\right]}{\\left[{ }^{14} \\mathrm{C}\\right]_0}\\right) & =-k t \\\\\r\n-\\frac{1}{k} \\ln \\left(\\frac{\\left[{ }^{14} \\mathrm{C}\\right]}{\\left[{ }^{14} \\mathrm{C}\\right]_0}\\right) & =-\\frac{1}{3.81 \\times 10^{-12} \\mathrm{~s}} \\ln (0.157)=t \\\\\r\n4.86 \\times 10^{11} \\mathrm{~s} & =t\r\n\\end{aligned}\r\n$$\r\nThis time corresponds to an age of roughly 15,400 years.",
+            "answer_latex": "4.86 ",
+            "comment": " ",
+            "unit": " $10^{11} \\mathrm{~s}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "18.4",
+        "response": {
+            "reasoning": "To determine the age of the fossilized wood, we can use the decay formula for radioactive substances, which is given by N(t) = N0 * (1/2)^(t/T), where N(t) is the remaining quantity at time t, N0 is the initial quantity, T is the half-life, and t is the time elapsed. Here, N0 corresponds to the decay rate of living matter (15.3 decay events per minute) and N(t) corresponds to the decay rate of the fossilized wood (2.4 decay events per minute). We can rearrange the formula to solve for t, the age of the wood. By substituting the known values into the equation, we can find the age of the wood in years.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nN0 = 15.3  # initial decay rate (decay events per minute)\nNt = 2.4   # decay rate of the fossilized wood (decay events per minute)\nT = 5760   # half-life of Carbon-14 (years)\nt = sp.symbols('t')  # time in years\n\n# Step 2: Set up the decay equation\n# N(t) = N0 * (1/2)^(t/T)\n# Rearranging gives us: t = T * log2(N0/N(t))\n\n# Step 3: Solve for t\nage = T * sp.log(N0/Nt, 2)\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = age",
+            "unit": "years"
+        },
+        "answer": {
+            "gt_answer": "4.86",
+            "unit": " $10^{11} \\mathrm{~s}$"
+        },
+        "verification_result": {
+            "code_output": "4.85761113572761",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "The ratio of decay events yields the amount of ${ }^{14} \\mathrm{C}$ present currently versus the amount that was present when the tree died:\r\n$$\r\n\\frac{\\left[{ }^{14} \\mathrm{C}\\right]}{\\left[{ }^{14} \\mathrm{C}\\right]_0}=\\frac{2.40 \\mathrm{~min}^{-1}}{15.3 \\mathrm{~min}^{-1}}=0.157\r\n$$\r\nThe rate constant for isotope decay is related to the half-life as follows:\r\n$$\r\nk=\\frac{\\ln 2}{t_{1 / 2}}=\\frac{\\ln 2}{5760 \\text { years }}=\\frac{\\ln 2}{1.82 \\times 10^{11} \\mathrm{~s}}=3.81 \\times 10^{-12} \\mathrm{~s}^{-1}\r\n$$\r\nWith the rate constant and ratio of isotope concentrations, the age of the fossilized wood is readily determined:\r\n$$\r\n\\begin{aligned}\r\n\\frac{\\left[{ }^{14} \\mathrm{C}\\right]}{\\left[{ }^{14} \\mathrm{C}\\right]_0} & =e^{-k t} \\\\\r\n\\ln \\left(\\frac{\\left[{ }^{14} \\mathrm{C}\\right]}{\\left[{ }^{14} \\mathrm{C}\\right]_0}\\right) & =-k t \\\\\r\n-\\frac{1}{k} \\ln \\left(\\frac{\\left[{ }^{14} \\mathrm{C}\\right]}{\\left[{ }^{14} \\mathrm{C}\\right]_0}\\right) & =-\\frac{1}{3.81 \\times 10^{-12} \\mathrm{~s}} \\ln (0.157)=t \\\\\r\n4.86 \\times 10^{11} \\mathrm{~s} & =t\r\n\\end{aligned}\r\n$$\r\nThis time corresponds to an age of roughly 15,400 years.",
+            "answer_latex": "4.86 ",
+            "comment": " ",
+            "unit": " $10^{11} \\mathrm{~s}$",
+            "source": "thermo"
+        }
     }
 ]

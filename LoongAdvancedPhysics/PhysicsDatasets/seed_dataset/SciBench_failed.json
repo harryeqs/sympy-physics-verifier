@@ -7918,5 +7918,917 @@
             "unit": " %",
             "source": "thermo"
         }
+    },
+    {
+        "sample_id": "13.15",
+        "response": {
+            "reasoning": "We start with the Boltzmann distribution, which relates the populations of two energy levels at thermal equilibrium. The ratio of the populations of the ground state (N_0) and the excited state (N_1) is given by N_0/N_1 = e^(-\u0394E/(kT)), where \u0394E is the energy difference between the states, k is the Boltzmann constant, and T is the temperature in Kelvin. Given that N_0 = 8 * N_1, we can set up the equation 8 = e^(-\u0394E/(kT)). Rearranging gives us T = -\u0394E/(k * ln(8)). We convert \u0394E from cm^-1 to Joules using the conversion factor 1 cm^-1 = 1.986 x 10^-23 J. Finally, we calculate the temperature using the known value of k (1.38 x 10^-23 J/K).",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nk = 1.38e-23  # Boltzmann constant in J/K\nDelta_E_cm = 6000  # energy difference in cm^-1\nDelta_E_J = Delta_E_cm * 1.986e-23  # convert to Joules\n\n# Step 2: Set up the equation based on the population ratio\nN_ratio = 8  # N0/N1 = 8\n\n# Step 3: Solve for temperature T\nT = -Delta_E_J / (k * sp.ln(N_ratio))\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = T.evalf()",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "4152",
+            "unit": " $\\mathrm{~K}$"
+        },
+        "verification_result": {
+            "code_output": "-4152.45268290649",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 4152",
+            "comment": " ",
+            "unit": " $\\mathrm{~K}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "5.14",
+        "response": {
+            "reasoning": "To calculate the standard entropy change (\u0394S\u00b0) for the reaction, we use the formula \u0394S\u00b0 = \u03a3S\u00b0(products) - \u03a3S\u00b0(reactants). We need the standard molar entropies of the substances involved: H2, N2, and NH3. The standard molar entropies can be expressed as S\u00b0 = S\u00b0_0 + C_p * ln(T/T_0) - R * ln(P/P_0), where S\u00b0_0 is the standard entropy at a reference temperature T_0, C_p is the heat capacity, R is the gas constant, and P is the pressure. We will use the heat capacities given and evaluate the entropies at 725 K. After calculating the entropies for each species, we will substitute them into the \u0394S\u00b0 equation to find the final result.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nT = 725  # temperature in K\nR = 8.314  # J/(mol*K), gas constant\n\n# Step 2: Define the heat capacities (C_p) for the gases involved\nC_p_H2 = 28.8  # J/(mol*K) for H2\nC_p_N2 = 29.1  # J/(mol*K) for N2\nC_p_NH3 = 35.1  # J/(mol*K) for NH3\n\n# Step 3: Calculate the standard molar entropies at 725 K\nS_H2 = R * (sp.log(T / 298.15) + C_p_H2 / R * (T - 298.15))\nS_N2 = R * (sp.log(T / 298.15) + C_p_N2 / R * (T - 298.15))\nS_NH3 = R * (sp.log(T / 298.15) + C_p_NH3 / R * (T - 298.15))\n\n# Step 4: Calculate \u0394S\u00b0 for the reaction 3 H2(g) + N2(g) -> 2 NH3(g)\n# \u0394S\u00b0 = \u03a3S\u00b0(products) - \u03a3S\u00b0(reactants)\n\u0394S = 2 * S_NH3 - (3 * S_H2 + S_N2)\n\n# Step 5: Compute the final result\nresult = \u0394S.simplify()",
+            "unit": "J/(mol*K)"
+        },
+        "answer": {
+            "gt_answer": "-191.2",
+            "unit": " $\\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "-19351.0802240904",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -191.2",
+            "comment": " ",
+            "unit": " $\\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "17.15",
+        "response": {
+            "reasoning": "To find the ratio of the collisional cross section of acetylene to nitrogen (N2), we can use the relationship between thermal conductivity (k), collisional cross section (\u03c3), and molecular mass (M) given by the equation: k = (1/3) * \u03c3 * (1/\u221a(2\u03c0M)) * (R*T), where R is the gas constant and T is the temperature. Rearranging this equation allows us to express the ratio of the collisional cross sections in terms of the thermal conductivities and molecular masses of the two gases. After substituting the known values and simplifying, we can find the desired ratio.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nk_C2H2 = 0.01866  # Thermal conductivity of acetylene in J/(K*m*s)\nk_N2 = 0.0240    # Thermal conductivity of nitrogen in J/(K*m*s)\nM_C2H2 = 26.04   # Molar mass of acetylene in g/mol\nM_N2 = 28.02     # Molar mass of nitrogen in g/mol\nR = 8.314        # Universal gas constant in J/(K*mol)\nT = 273          # Temperature in K\n\n# Step 2: Calculate the ratio of collisional cross sections\n# Using the formula: k = (1/3) * \u03c3 * (1/\u221a(2\u03c0M)) * (R*T)\n# Rearranging gives us: \u03c3 = (3k\u221a(2\u03c0M)) / (R*T)\n# Therefore, the ratio \u03c3_C2H2 / \u03c3_N2 = (k_C2H2 / k_N2) * (M_N2 / M_C2H2)\nratio_sigma = (k_C2H2 / k_N2) * (M_N2 / M_C2H2)\n\n# Step 3: Compute the final result\nresult = ratio_sigma\n",
+            "unit": null
+        },
+        "answer": {
+            "gt_answer": "1.33",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "0.83661866359447",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1.33",
+            "comment": " ",
+            "unit": " ",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "18.39",
+        "response": {
+            "reasoning": "The reaction is a first-order decomposition, where the rate of reaction is proportional to the concentration of the reactant. We can use the first-order rate equation: ln([A]0/[A]) = kt, where [A]0 is the initial pressure, [A] is the pressure at time t, k is the rate constant, and t is time. Given that the initial pressure is 1.0 atm and we want to find the time when the pressure is 1.8 atm, we can rearrange the equation to solve for t.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP0 = 1.0  # initial pressure in atm\nP = 1.8   # pressure at time t in atm\nk = 0.0019  # rate constant in s^-1\n\nt = sp.symbols('t')  # time variable\n\n# Step 2: Set up the first-order rate equation\n# ln([A]0/[A]) = kt\n# Rearranging gives us t = (ln([A]0/[A])) / k\n# Calculate the time when pressure is 1.8 atm\nln_ratio = sp.ln(P0 / P)\nresult = ln_ratio / k",
+            "unit": "s"
+        },
+        "answer": {
+            "gt_answer": "269",
+            "unit": " $\\mathrm{~s}$"
+        },
+        "verification_result": {
+            "code_output": "-309.361402580063",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 269",
+            "comment": " ",
+            "unit": " $\\mathrm{~s}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "8.13",
+        "response": {
+            "reasoning": "To determine the pressure required for water to boil at 120 \u00b0C, we can use the steam tables or the Clausius-Clapeyron relation. The saturation pressure of water at 120 \u00b0C can be found using the steam tables, which indicates that the pressure must be higher than the atmospheric pressure to achieve this temperature without boiling. The saturation pressure at 120 \u00b0C is approximately 124.5 kPa. Thus, the autoclave must operate at this pressure to maintain water at 120 \u00b0C without boiling.",
+            "code": "import sympy as sp\n\n# Step 1: Define the temperature in Celsius\nT = 120  # temperature in degrees Celsius\n\n# Step 2: Define the saturation pressure for water at 120 \u00b0C\n# This value is typically found in steam tables. Here we will use the known value.\nP_saturation = 124.5  # kPa\n\n# Step 3: Assign the final result to 'result'\nresult = P_saturation",
+            "unit": "kPa"
+        },
+        "answer": {
+            "gt_answer": "1.95 ",
+            "unit": " $\\mathrm{~atm}$"
+        },
+        "verification_result": {
+            "code_output": "1.2287194670614356",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "1.95 ",
+            "comment": " ",
+            "unit": " $\\mathrm{~atm}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "14.6",
+        "response": {
+            "reasoning": "To find the translational partition function for a gas confined to a two-dimensional area, we use the formula for the partition function Q for a two-dimensional ideal gas: Q = (A / h^2) * (2 * pi * m * k * T) where A is the area, h is Planck's constant, m is the mass of a gas particle, k is Boltzmann's constant, and T is the temperature in Kelvin. We first convert the area from cm^2 to m^2, then calculate the mass of an argon atom, and finally substitute all values into the equation to compute Q.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nA = 1.00e-4  # area in m^2 (1 cm^2 to m^2)\nh = 6.626e-34  # Planck's constant in J*s\nk = 1.38e-23  # Boltzmann's constant in J/K\nT = 298  # temperature in K\nm_Ar = 39.948e-3 / (6.022e23)  # mass of Ar atom in kg (39.948 g/mol)\n\n# Step 2: Calculate the translational partition function Q\nQ = (A / h**2) * (2 * sp.pi * m_Ar * k * T)\n\n# Step 3: Assign the final computed result to 'result'\nresult = Q",
+            "unit": "m^2"
+        },
+        "answer": {
+            "gt_answer": "3.9",
+            "unit": " $10^{17}$"
+        },
+        "verification_result": {
+            "code_output": "3.90415135363864",
+            "result_match": true,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 3.9",
+            "comment": " ",
+            "unit": " $10^{17}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "15.47",
+        "response": {
+            "reasoning": "To determine the equilibrium constant for the dissociation of sodium gas at 298 K, we use the formula for the equilibrium constant K in terms of the dissociation energy and the partition functions of the reactants and products. The dissociation reaction is given by Na2(g) \u21cc 2 Na(g). The equilibrium constant K can be expressed as K = (P_Na^2) / (P_Na2), where P represents the partition functions. The partition function for a diatomic molecule can be calculated using the rotational and vibrational contributions. The vibrational partition function is given by q_vib = (1 - e^(-h\u03bd/kT))^(-1), and the rotational partition function is q_rot = (8\u03c0^2IkT/h^2)^(3/2). We also need to account for the degeneracy of the electronic state. After calculating the partition functions and substituting them into the equilibrium constant expression, we can find the value of K. The final result is dimensionless, as it is a ratio of pressures (or concentrations).",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nB = 0.155  # cm^-1\nnu_tilde = 159  # cm^-1\nDissociation_energy = 70.4 * 1000  # kJ/mol to J/mol\nk = 1.38e-23  # J/K (Boltzmann constant)\nT = 298  # K\nh = 6.626e-34  # J.s (Planck's constant)\nI = 1.0e-46  # Moment of inertia (assumed value for Na2)\n\n# Step 2: Calculate the vibrational partition function for Na2\nq_vib_Na2 = (1 - sp.exp(-h * nu_tilde * 100 * 1e-2 / (k * T)))**(-1)  # Convert cm^-1 to J\n\n# Step 3: Calculate the rotational partition function for Na2\nq_rot_Na2 = (8 * sp.pi**2 * I * k * T / h**2)**(3/2)\n\n# Step 4: Calculate the partition function for Na\nq_vib_Na = 1  # For ground state, vibrational contribution is negligible\nq_rot_Na = (k * T / (h * B))  # Approximation for Na (monatomic)\n\n# Step 5: Calculate the equilibrium constant K\nK = (q_vib_Na**2 * q_rot_Na**2) / (q_vib_Na2 * q_rot_Na2)\n\n# Step 6: Compute the final result\nresult = K.evalf()  # Evaluate the equilibrium constant",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "2.25",
+            "unit": " $10^{-9}$"
+        },
+        "verification_result": {
+            "code_output": "64581024973282.3",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 2.25",
+            "comment": " ",
+            "unit": " $10^{-9}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "8.39",
+        "response": {
+            "reasoning": "To calculate the vapor pressure of formic acid at 298.15 K, we can use the Gibbs free energy change for the phase transition from liquid to gas. The vapor pressure can be found using the equation: \\( \\Delta G = \\Delta G_f^{\\circ}(HCOOH, g) - \\Delta G_f^{\\circ}(HCOOH, l) = -RT \\ln(P) \\), where R is the universal gas constant (8.314 J/(mol K)). Rearranging gives us \\( P = e^{-\\Delta G / RT} \\). We first calculate \\( \\Delta G \\) and then substitute into the equation to find the vapor pressure.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nR = 8.314  # J/(mol K)\nT = 298.15  # K\nDelta_Gf_g = -351.0 * 1000  # converting kJ to J\nDelta_Gf_l = -361.4 * 1000  # converting kJ to J\n\n# Step 2: Calculate the change in Gibbs free energy for the phase transition\nDelta_G = Delta_Gf_g - Delta_Gf_l\n\n# Step 3: Calculate the vapor pressure using the relation P = exp(-Delta_G / (R * T))\nP = sp.exp(-Delta_G / (R * T))\n\n# Step 4: Assign the final computed result to 'result'\nresult = P.evalf()",
+            "unit": "Pa"
+        },
+        "answer": {
+            "gt_answer": "1.51",
+            "unit": " $10^3 \\mathrm{~Pa}$"
+        },
+        "verification_result": {
+            "code_output": "1.50625134074068e-5",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "1.51",
+            "comment": " ",
+            "unit": " $10^3 \\mathrm{~Pa}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "3.6",
+        "response": {
+            "reasoning": "To find the pressure in the sealed vessel when the temperature is raised, we can use the relationship between pressure, volume, and temperature. The change in pressure due to a temperature change in a liquid can be approximated using the formula: P2 = P1 + (P1 * beta_water * (T2 - T1)) - (P1 * kappa_water * (V2 - V1)). Since the vessel is sealed and filled with water, we can ignore the volume change of the vessel itself. Thus, we only need to consider the change in pressure due to the change in temperature of the water. We will calculate the new pressure using the initial pressure, the coefficient of volume expansion for water, and the temperature change.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP1 = 1.00  # initial pressure in bar\nT1 = 13.56  # initial temperature in degrees Celsius\nT2 = 82.0  # final temperature in degrees Celsius\nbeta_water = 2.04e-4  # volume expansion coefficient for water in K^-1\nkappa_water = 4.59e-5  # compressibility of water in bar^-1\n\n# Step 2: Calculate the change in temperature\nDelta_T = T2 - T1\n\n# Step 3: Calculate the new pressure using the formula\nP2 = P1 + (P1 * beta_water * Delta_T)\n\n# Step 4: Assign the final computed result to 'result'\nresult = P2",
+            "unit": "bar"
+        },
+        "answer": {
+            "gt_answer": "93.4",
+            "unit": "$\\mathrm{~bar}$"
+        },
+        "verification_result": {
+            "code_output": "1.01396176",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 93.4",
+            "comment": " ",
+            "unit": "$\\mathrm{~bar}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "12.32",
+        "response": {
+            "reasoning": "To find the average height \\( \\langle h \\rangle \\) of methane molecules in the atmosphere, we start with the given probability distribution function \\( P(h) = e^{-\\frac{mgh}{kT}} \\). The average height can be calculated using the formula: \\( \\langle h \\rangle = \\frac{\\int_0^{\\infty} h P(h) dh}{\\int_0^{\\infty} P(h) dh} \\). We first compute the normalization constant \\( \\int_0^{\\infty} P(h) dh \\) and then the numerator \\( \\int_0^{\\infty} h P(h) dh \\). After evaluating these integrals, we can find \\( \\langle h \\rangle \\). The mass of methane \\( \\mathrm{CH}_4 \\) is approximately \\( 16 \\times 10^{-3} \\) kg/mol, and we convert this to per-particle mass using Avogadro's number. The final result will be in meters.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nm = 16e-3 / 6.022e23  # mass of CH4 in kg (per particle)\ng = 9.81  # acceleration due to gravity in m/s^2\nk = 1.38e-23  # Boltzmann constant in J/K\nT = sp.symbols('T')  # temperature in K\n\n# Step 2: Define the probability distribution function\nh = sp.symbols('h')\nP_h = sp.exp(-m * g * h / (k * T))\n\n# Step 3: Calculate the normalization constant\nnormalization = sp.integrate(P_h, (h, 0, sp.oo))\n\n# Step 4: Calculate the numerator for average height\nnumerator = sp.integrate(h * P_h, (h, 0, sp.oo))\n\n# Step 5: Calculate the average height \\langle h \\rangle\naverage_height = numerator / normalization\n\n# Step 6: Assign the final computed result to 'result'\nresult = average_height",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "1.6",
+            "unit": " $10^4 \\mathrm{~m}$"
+        },
+        "verification_result": {
+            "code_output": "Piecewise((0.0188872684215846/T, Abs(arg(T)) < pi/2), (1/Integral(exp(-0.0188872684215846*h/T), (h, 0, oo)), True))*Piecewise((2803.24912383451*T**2, Abs(arg(T)) < pi/2), (Integral(h*exp(-0.0188872684215846*h/T), (h, 0, oo)), True))",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1.6",
+            "comment": " ",
+            "unit": " $10^4 \\mathrm{~m}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "4.33",
+        "response": {
+            "reasoning": "To determine how much emergency rations the camper must consume to compensate for a reduction in body temperature of 3.5 K, we first calculate the total heat loss due to the temperature drop. The heat lost can be calculated using the formula: Q = mc\u0394T, where m is the mass of the camper, c is the specific heat capacity of water (approximately 4184 J/kg\u00b7K), and \u0394T is the change in temperature. After calculating the total heat loss, we will then determine the energy provided by the emergency rations based on their composition (58% sucrose, 31% fat, and 11% protein) and their respective caloric values. Finally, we will calculate the total mass of the emergency rations needed to provide the required energy to compensate for the heat loss.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nm_camp = 67  # mass of the camper in kg\nc_water = 4184  # specific heat capacity of water in J/(kg*K)\nDelta_T = 3.5  # temperature change in K\n\n# Step 2: Calculate the total heat loss (Q)\nQ = m_camp * c_water * Delta_T\n\n# Step 3: Define the energy content of the rations\n# Energy values in J/g\nenergy_sucrose = 16  # sucrose energy content in J/g\nenergy_fat = 37  # fat energy content in J/g\nenergy_protein = 17  # protein energy content in J/g\n\n# Step 4: Define the composition of the rations\npercentage_sucrose = 0.58\npercentage_fat = 0.31\npercentage_protein = 0.11\n\n# Step 5: Calculate the total energy per gram of rations\nenergy_per_gram = (percentage_sucrose * energy_sucrose + \n                   percentage_fat * energy_fat + \n                   percentage_protein * energy_protein)\n\n# Step 6: Calculate the total mass of rations needed to compensate for heat loss\nmass_rations_needed = Q / (energy_per_gram * 1000)  # converting J/g to J/kg\n\n# Step 7: Assign the final computed result to 'result'\nresult = mass_rations_needed\n",
+            "unit": "kg"
+        },
+        "answer": {
+            "gt_answer": "49",
+            "unit": " $\\mathrm{~g}$"
+        },
+        "verification_result": {
+            "code_output": "43375.24314765694",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 49",
+            "comment": " ",
+            "unit": " $\\mathrm{~g}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "15.45",
+        "response": {
+            "reasoning": "To determine the molar standard Gibbs energy for the diatomic molecule Cl2, we start by calculating the partition function for the rotational and vibrational states. The vibrational partition function is given by q_vib = 1 / (1 - exp(-h * nu / (k * T))), where h is Planck's constant, nu is the vibrational frequency, k is Boltzmann's constant, and T is the temperature in Kelvin. The rotational partition function is q_rot = (T / B) for a non-degenerate ground electronic state. The total partition function is the product of the vibrational and rotational partition functions. The Helmholtz free energy A can be calculated from the partition function, and the Gibbs energy G can be derived from A. Finally, we express G in terms of molar quantities. The calculations involve substituting the given values and constants to find the Gibbs energy.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nh = 6.62607015e-34  # Planck's constant in J.s\nk = 1.380649e-23    # Boltzmann's constant in J/K\nT = 298.15          # Temperature in Kelvin\nnu = 560e-2        # Vibrational frequency in cm^-1 to m^-1\nB = 0.244e-2       # Rotational constant in cm^-1 to m^-1\n\n# Step 2: Convert nu and B to SI units (m^-1)\nnu_m = nu * 100  # Convert cm^-1 to m^-1\nB_m = B * 100    # Convert cm^-1 to m^-1\n\n# Step 3: Calculate the vibrational partition function\nq_vib = 1 / (1 - sp.exp(-h * nu_m / (k * T)))\n\n# Step 4: Calculate the rotational partition function\nq_rot = T / B_m\n\n# Step 5: Total partition function\nq_total = q_vib * q_rot\n\n# Step 6: Helmholtz free energy A\nA = -k * T * sp.log(q_total)\n\n# Step 7: Gibbs energy G\nG = A + T * (sp.diff(A, T))\n\n# Step 8: Convert G to molar Gibbs energy (per mole)\nG_molar = G * 6.022e23  # Multiply by Avogadro's number\n\n# Step 9: Assign the final computed result to 'result'\nresult = G_molar",
+            "unit": "J/mol"
+        },
+        "answer": {
+            "gt_answer": "-57.2",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": null,
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -57.2",
+            "comment": " ",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "10.6",
+        "response": {
+            "reasoning": "To calculate the mean ionic activity of a solution, we use the formula: mean ionic activity = concentration * mean activity coefficient. Here, the concentration of Na3PO4 is given as 0.0350 molal, and the mean activity coefficient is 0.685. The mean ionic activity is calculated by multiplying these two values together.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols for concentration and activity coefficient\nC, gamma = sp.symbols('C gamma')\n\n# Step 2: Given values\nC_value = 0.0350  # molal concentration of Na3PO4\ngamma_value = 0.685  # mean activity coefficient\n\n# Step 3: Calculate mean ionic activity\nmean_ionic_activity = C * gamma\nmean_ionic_activity_value = mean_ionic_activity.subs({C: C_value, gamma: gamma_value})\n\n# Step 4: Assign the final computed result to 'result'\nresult = mean_ionic_activity_value",
+            "unit": "mol/kg"
+        },
+        "answer": {
+            "gt_answer": "0.0547",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "0.0239750000000000",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.0547",
+            "comment": " ",
+            "unit": " ",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "8.43",
+        "response": {
+            "reasoning": "To find the equilibrium temperature at a pressure of 350 bar for the transition between gray and white tin, we can use the Clapeyron equation, which relates the change in pressure to the change in temperature and the change in volume during a phase transition. The equation is given by: dP/dT = \u0394S/\u0394V, where \u0394S is the change in entropy and \u0394V is the change in volume. First, we calculate \u0394S = S_white - S_gray and \u0394V = V_white - V_gray. The volume can be calculated from the density and molar mass of tin. After calculating these values, we can integrate the Clapeyron equation to find the new equilibrium temperature at the given pressure.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP1, P2 = 1 * 1e5, 350 * 1e5  # pressures in Pascals (1 bar = 1e5 Pa)\nT1 = 18 + 273.15  # initial temperature in Kelvin\nS_gray = 44.14  # J K^-1 mol^-1\nS_white = 51.18  # J K^-1 mol^-1\nrho_gray = 5750  # kg m^-3\nrho_white = 7280  # kg m^-3\nM_Sn = 118.71  # molar mass of tin in g/mol\n\n# Step 2: Calculate change in entropy and change in volume\nDelta_S = S_white - S_gray  # J K^-1 mol^-1\nDelta_V = (M_Sn / rho_white) - (M_Sn / rho_gray)  # m^3/mol\n\n# Step 3: Use Clapeyron equation to find dT\n# dP/dT = Delta_S / Delta_V\n# Rearranging gives dT = Delta_V / Delta_S * dP\n# We can integrate this from P1 to P2\n# dP = P2 - P1\nDelta_P = P2 - P1\n\n# Calculate dT\ndT = Delta_V / Delta_S * Delta_P\n\n# New temperature at P2\nT2 = T1 + dT\n\n# Step 4: Assign the final computed result to 'result'\nresult = T2.evalf() - 273.15  # Convert back to Celsius",
+            "unit": "\u00b0C"
+        },
+        "answer": {
+            "gt_answer": "-3.5",
+            "unit": " $^{\\circ} \\mathrm{C}$"
+        },
+        "verification_result": {
+            "code_output": "-21218.44729808236",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -3.5",
+            "comment": " ",
+            "unit": " $^{\\circ} \\mathrm{C}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "9.22",
+        "response": {
+            "reasoning": "To calculate the change in volume relative to the pure components when preparing a solution, we first need to determine the number of moles of ethanol and water in the solution. Given the total volume of the solution (2.50 L) and the mole fraction of ethanol (x_ethanol = 0.35), we can find the moles of each component. We then use the partial molar volumes of ethanol and water to calculate the expected volume of the solution based on the pure components. Finally, we compare this with the actual volume of the solution to find the change in volume. The calculations involve using the formulas for moles and volume, and the final result will be expressed in liters.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nV_solution = 2.50  # Total volume of the solution in L\nx_ethanol = 0.35  # Mole fraction of ethanol\nV_ethanol_partial = 55.2 * 10**-3  # Partial molar volume of ethanol in L/mol\nV_water_partial = 17.8 * 10**-3  # Partial molar volume of water in L/mol\n\ndensity_ethanol = 789  # kg/m^3\n\ndensity_water = 997  # kg/m^3\n\n# Step 2: Calculate the number of moles of ethanol and water\n# Let n_total be the total number of moles in the solution\n# x_ethanol = n_ethanol / n_total => n_ethanol = x_ethanol * n_total\n# x_water = 1 - x_ethanol => n_water = (1 - x_ethanol) * n_total\n\n# Assume n_total = 1 mol for simplicity\nn_total = 1  # total moles\nn_ethanol = x_ethanol * n_total\nn_water = (1 - x_ethanol) * n_total\n\n# Step 3: Calculate the expected volume based on partial molar volumes\nV_expected = n_ethanol * V_ethanol_partial + n_water * V_water_partial\n\n# Step 4: Calculate the change in volume relative to the pure components\nchange_in_volume = V_solution - V_expected\n\n# Step 5: Assign the final result\nresult = change_in_volume",
+            "unit": "L"
+        },
+        "answer": {
+            "gt_answer": "-0.10",
+            "unit": " $\\mathrm{~L}$"
+        },
+        "verification_result": {
+            "code_output": "2.46911",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -0.10",
+            "comment": " ",
+            "unit": " $\\mathrm{~L}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "16.15",
+        "response": {
+            "reasoning": "To find the fraction of nitrogen molecules with speeds between 200 m/s and 300 m/s at 298 K, we can use the Maxwell-Boltzmann distribution of speeds. The probability density function for the speed of gas molecules is given by: f(v) = (m / (2 * pi * k * T))^(3/2) * 4 * pi * v^2 * exp(-mv^2 / (2kT)), where m is the mass of a nitrogen molecule, k is the Boltzmann constant, and T is the temperature in Kelvin. We will integrate this function from 200 m/s to 300 m/s to find the fraction of molecules within this speed range. The mass of a nitrogen molecule can be calculated from its molar mass (28 g/mol) converted to kg. After calculating the integral, we will divide by the total probability (which is 1) to find the fraction.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nT = 298  # temperature in Kelvin\nk = 1.38e-23  # Boltzmann constant in J/K\nmolar_mass_N2 = 28e-3  # molar mass in kg/mol\nm = molar_mass_N2 / 6.022e23  # mass of one nitrogen molecule in kg\n\n# Step 2: Define the speed range\nv1 = 200  # lower speed limit in m/s\nv2 = 300  # upper speed limit in m/s\n\n# Step 3: Define the Maxwell-Boltzmann speed distribution function\nv = sp.symbols('v')\nf_v = (m / (2 * sp.pi * k * T))**(3/2) * 4 * sp.pi * v**2 * sp.exp(-m * v**2 / (2 * k * T))\n\n# Step 4: Integrate the distribution function from v1 to v2 to find the fraction\nintegral = sp.integrate(f_v, (v, v1, v2))\n\n# Step 5: The total probability is 1, so the fraction is just the integral value\nfraction = integral\n\n# Step 6: Assign the final result to 'result'\nresult = fraction",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "0.132",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "0.132248114217908",
+            "result_match": true,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.132",
+            "comment": " ",
+            "unit": " ",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "8.25",
+        "response": {
+            "reasoning": "To find the boiling point of water at a specific elevation, we can use the Clausius-Clapeyron equation, which relates the change in vapor pressure with temperature to the enthalpy of vaporization. The equation is given by: \n\n\\[ \\frac{dP}{dT} = \\frac{\\Delta H_{vaporization}}{T \\Delta V} \\] \n\nFor water, we can assume that the change in volume (\\(\\Delta V\\)) is negligible compared to the volume of the vapor, allowing us to simplify the equation. We can integrate this equation to find the boiling point at the lower pressure. \n\nWe know that at the normal boiling point (373.12 K), the vapor pressure of water is 760 Torr. We can set up the equation to find the new boiling point (T_b) at the pressure of 253 Torr. Using the known values, we can rearrange the equation and solve for T_b. \n\nFinally, we will calculate the boiling point using the given values and the derived equation.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nT_b, T_0 = sp.symbols('T_b T_0')  # T_b = boiling point at 253 Torr, T_0 = normal boiling point\nP_b, P_0 = 253, 760  # P_b = pressure at Mt. Everest, P_0 = normal pressure in Torr\nDelta_H_vaporization = 40.656 * 1000  # converting kJ/mol to J/mol\nR = 8.314  # J/(mol*K), universal gas constant\n\n# Step 2: Set up the Clausius-Clapeyron equation\n# Rearranging the equation to find T_b:\n# ln(P_b / P_0) = -Delta_H_vaporization / R * (1/T_b - 1/T_0)\n# We can rearrange this to solve for T_b\n# ln(P_b / P_0) * (-R / Delta_H_vaporization) + 1/T_0 = 1/T_b\n\n# Step 3: Solve for T_b\nT_0_value = 373.12  # normal boiling point in K\nln_ratio = sp.ln(P_b / P_0)\nT_b_expr = (1 / T_0_value) + (R / Delta_H_vaporization) * ln_ratio\nT_b = 1 / T_b_expr\n\n# Step 4: Compute the final result\nresult = T_b.evalf()  # evaluate the expression to get a numerical result",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "344",
+            "unit": " $\\mathrm{~K}$"
+        },
+        "verification_result": {
+            "code_output": "407.303512580186",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "344",
+            "comment": " ",
+            "unit": " $\\mathrm{~K}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "9.24",
+        "response": {
+            "reasoning": "To find the mole fraction of A in the solution, we can use Raoult's Law, which states that the vapor pressure of each component in an ideal solution is proportional to its mole fraction in the solution. The total vapor pressure (P_total) can be expressed as: P_total = P_A * X_A + P_B * X_B, where P_A and P_B are the vapor pressures of pure components A and B, respectively, and X_A and X_B are the mole fractions of A and B in the solution. We also know that X_A + X_B = 1. Given the mole fraction of A in the vapor (Y_A = 0.610), we can relate it to the mole fractions in the solution using the formula: Y_A = (P_A * X_A) / P_total. We can express P_total in terms of the mole fractions and the pure component pressures. By substituting the known values and solving for X_A, we can find the mole fraction of A in the solution.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP_A = 151  # Vapor pressure of pure A in Torr\nP_B = 84.3  # Vapor pressure of pure B in Torr\nY_A = 0.610  # Mole fraction of A in the vapor\nX_A, X_B = sp.symbols('X_A X_B')  # Mole fractions in the solution\n\n# Step 2: Set up the equations using Raoult's Law\nX_B = 1 - X_A  # Since X_A + X_B = 1\nP_total = P_A * X_A + P_B * X_B  # Total vapor pressure\n\n# Using the relationship of mole fraction in vapor and solution\nY_A = (P_A * X_A) / P_total\n\n# Step 3: Substitute X_B and solve for X_A\nP_total_eq = P_A * X_A + P_B * (1 - X_A)  # Substitute X_B\nY_A_eq = (P_A * X_A) / P_total_eq\n\n# Rearranging the equation to solve for X_A\nequation = sp.Eq(Y_A, (P_A * X_A) / (P_A * X_A + P_B * (1 - X_A)))\nX_A_solution = sp.solve(equation, X_A)[0]  # Solve for X_A\n\n# Step 4: Assign the final result\nresult = X_A_solution",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "0.466",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": null,
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.466",
+            "comment": " ",
+            "unit": " ",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "2.4",
+        "response": {
+            "reasoning": "To determine how much rations the hiker must consume to avoid a reduction in body temperature, we first calculate the total heat loss due to the temperature drop. The heat loss (Q) can be calculated using the formula Q = mc\u0394T, where m is the mass of the hiker, c is the specific heat capacity of water (approximately 4.186 kJ/kg\u00b7K), and \u0394T is the change in temperature. After calculating the heat loss, we can find out how many grams of rations are needed by dividing the total heat loss by the heat released per gram of rations.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nm_hiker = 51  # mass of the hiker in kg\nc_water = 4.186  # specific heat capacity of water in kJ/kg\u00b7K\nDelta_T = 2.5  # temperature change in K\nheat_per_gram = 35  # heat released per gram of rations in kJ\n\n# Step 2: Calculate total heat loss\nQ = m_hiker * c_water * Delta_T  # total heat loss in kJ\n\n# Step 3: Calculate the amount of rations needed\n# Convert heat_per_gram to kJ/g for consistency\nheat_per_gram_kJ = heat_per_gram / 1000  # convert to kJ/g\nrations_needed = Q / heat_per_gram_kJ  # in grams\n\n# Step 4: Assign the final result to 'result'\nresult = rations_needed",
+            "unit": "g"
+        },
+        "answer": {
+            "gt_answer": "15",
+            "unit": "$\\mathrm{~g}$"
+        },
+        "verification_result": {
+            "code_output": "15248.999999999996",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 15",
+            "comment": " ",
+            "unit": "$\\mathrm{~g}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "6.30",
+        "response": {
+            "reasoning": "To calculate the degree of dissociation (alpha) of N2O4, we start with the reaction N2O4(g) \u21cc 2 NO2(g). Let the initial concentration of N2O4 be C. At equilibrium, if alpha is the degree of dissociation, the concentration of N2O4 will be C(1-alpha) and the concentration of NO2 will be 2C*alpha. The total pressure is given as 1.50 bar, and we can use the ideal gas law to relate the concentrations to the total pressure. The equilibrium constant Kp can be expressed in terms of the partial pressures of the gases involved. We can derive an expression for Kp in terms of alpha and solve for alpha. As for the effect of temperature on the degree of dissociation, since the reaction is endothermic (\u0394H > 0), increasing the temperature will favor the formation of products (NO2) and thus increase the degree of dissociation.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols\nC, alpha, P_total = sp.symbols('C alpha P_total')\n\n# Step 2: Set up the equilibrium expressions\n# Initial concentration of N2O4 = C\n# At equilibrium:\n# Concentration of N2O4 = C(1-alpha)\n# Concentration of NO2 = 2C*alpha\n\n# Total moles at equilibrium = (1-alpha) + 2*alpha = 1 + alpha\n# Using the total pressure P_total = 1.50 bar\n# We can express the partial pressures:\nP_N2O4 = (C * (1 - alpha)) / (1 + alpha) * P_total\nP_NO2 = (2 * C * alpha) / (1 + alpha) * P_total\n\n# Step 3: Write the expression for Kp\nKp = P_NO2**2 / P_N2O4\n\n# Substitute the expressions for partial pressures\nKp_expr = ((2 * C * alpha / (1 + alpha)) * P_total)**2 / ((C * (1 - alpha) / (1 + alpha)) * P_total)\nKp_expr = (4 * C**2 * alpha**2 * P_total) / (C * (1 - alpha) * P_total)\nKp_expr = 4 * C * alpha**2 / (1 - alpha)\n\n# Step 4: Solve for alpha given Kp and P_total\n# Assuming Kp is known or can be calculated, we can solve for alpha\n# For this example, we will assume Kp = 0.5 (this value would be determined experimentally)\nKp_value = 0.5\nalpha_solution = sp.solve(sp.Eq(Kp_expr, Kp_value), alpha)\n\n# Final result assignment\nresult = alpha_solution[0]",
+            "unit": "dimensionless"
+        },
+        "answer": {
+            "gt_answer": "0.241",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "0.0625*(-5.65685424949238*(C + 0.03125)**0.5 - 1.0)/C",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.241",
+            "comment": " ",
+            "unit": " ",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "16.30",
+        "response": {
+            "reasoning": "To determine the total collisional frequency for CO2 at 1 atm and 298 K, we can use the formula for the collisional frequency, which is given by: nu = (1/4) * n * sigma * v, where n is the number density of the gas, sigma is the collision cross-section, and v is the average speed of the gas molecules. We first calculate the number density (n) using the ideal gas law, then compute the average speed (v) using the formula v = sqrt(3 * k * T / m), where k is the Boltzmann constant, T is the temperature, and m is the mass of a CO2 molecule. Finally, we substitute these values into the collisional frequency formula to get the result.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nT = 298  # Temperature in Kelvin\nP = 1 * 101325  # Pressure in Pascals (1 atm)\nk = 1.38e-23  # Boltzmann constant in J/K\nm_CO2 = 44.01e-3 / 6.022e23  # Mass of CO2 molecule in kg (molar mass / Avogadro's number)\nsigma = 3.8e-20  # Collision cross-section for CO2 in m^2\n\n# Step 2: Calculate number density (n) using ideal gas law n = P / (k * T)\nn = P / (k * T)\n\n# Step 3: Calculate average speed (v) using v = sqrt(3 * k * T / m)\nv = sp.sqrt(3 * k * T / m_CO2)\n\n# Step 4: Calculate collisional frequency nu = (1/4) * n * sigma * v\nnu = (1/4) * n * sigma * v\n\n# Step 5: Compute the final result\nresult = nu",
+            "unit": "s^-1"
+        },
+        "answer": {
+            "gt_answer": "8.44",
+            "unit": " $10^{34} \\mathrm{~m}^{-3} \\mathrm{~s}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "9.61718258056053e-27",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 8.44",
+            "comment": " ",
+            "unit": " $10^{34} \\mathrm{~m}^{-3} \\mathrm{~s}^{-1}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "7.4",
+        "response": {
+            "reasoning": "In an adiabatic expansion, the relationship between the initial and final states can be described using the formula for an ideal gas. For one mole of an ideal gas undergoing an adiabatic process, we can use the equation T1 * V1^(\u03b3-1) = T2 * V2^(\u03b3-1), where \u03b3 (gamma) is the heat capacity ratio (C_p/C_v). For monatomic gases like Argon, \u03b3 = 5/3. We can rearrange this equation to solve for the final temperature T2. After substituting the known values (T1 = 310 K, V1 = 8.5 L, V2 = 82.0 L), we can compute T2.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nT1, T2, V1, V2, gamma = sp.symbols('T1 T2 V1 V2 gamma')\n\n# Given values\nT1_value = 310  # Initial temperature in K\nV1_value = 8.5  # Initial volume in L\nV2_value = 82.0  # Final volume in L\ngamma_value = 5/3  # Heat capacity ratio for monatomic gas\n\n# Step 2: Set up the equation for adiabatic process\n# T1 * V1^(gamma - 1) = T2 * V2^(gamma - 1)\nequation = sp.Eq(T1 * V1**(gamma - 1), T2 * V2**(gamma - 1))\n\n# Step 3: Solve for T2\nT2_solution = sp.solve(equation.subs({T1: T1_value, V1: V1_value, V2: V2_value, gamma: gamma_value}), T2)[0]\n\n# Step 4: Assign the final result to 'result'\nresult = T2_solution",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "310",
+            "unit": "$\\mathrm{~K}$"
+        },
+        "verification_result": {
+            "code_output": "68.4066636477377",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 310",
+            "comment": " ",
+            "unit": "$\\mathrm{~K}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "4.34",
+        "response": {
+            "reasoning": "To find out how many energy bars the hiker needs to consume, we first calculate the work done against gravity to ascend the Burj Khalifa. The work done (W) is given by W = m * g * h, where m is the mass (60 kg), g is the acceleration due to gravity (approximately 9.81 m/s\u00b2), and h is the height (828 m). After calculating the total work done, we consider the efficiency of the body (25%) in converting the energy from the bars into work. Therefore, the energy required from the bars is W / efficiency. Finally, we divide this energy requirement by the energy produced by one bar (1.08 x 10^3 kJ) to find the number of bars needed.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nm = 60  # mass in kg\nh = 828  # height in meters\ng = 9.81  # acceleration due to gravity in m/s^2\nefficiency = 0.25  # efficiency of energy conversion\nenergy_per_bar = 1.08 * 10**3  # energy produced by one bar in kJ\n\n# Step 2: Calculate the work done to ascend the height\nwork_done = m * g * h  # in Joules\n\n# Step 3: Calculate the energy required from the bars considering efficiency\nenergy_required = work_done / efficiency  # in Joules\n\n# Step 4: Convert energy required from Joules to kJ\nenergy_required_kJ = energy_required / 1000  # convert to kJ\n\n# Step 5: Calculate the number of bars needed\nnumber_of_bars = energy_required_kJ / energy_per_bar\n\n# Step 6: Assign the final result\nresult = sp.ceiling(number_of_bars)  # round up to the nearest whole number",
+            "unit": "bars"
+        },
+        "answer": {
+            "gt_answer": "1.8",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "2",
+            "result_match": true,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1.8",
+            "comment": " ",
+            "unit": " ",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "18.14",
+        "response": {
+            "reasoning": "To find the number of disintegrations in 1 minute for a 10 mg sample of Uranium-238, we first need to calculate the number of atoms in the sample. We use the molar mass of Uranium-238, which is approximately 238 g/mol. The number of moles in 10 mg (0.01 g) is calculated using the formula: moles = mass (g) / molar mass (g/mol). Then, we can find the number of atoms by multiplying the number of moles by Avogadro's number (approximately 6.022 x 10^23 atoms/mol). Next, we calculate the decay constant (lambda) using the half-life formula: lambda = ln(2) / half-life. Finally, we can find the activity (disintegrations per second) using the formula: activity = lambda * N, where N is the number of atoms. We convert the activity from disintegrations per second to disintegrations per minute by multiplying by 60 seconds.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nhalf_life = 4.5e9  # half-life in years\nmass_sample = 10e-3  # mass in kg (10 mg)\nmolar_mass = 238e-3  # molar mass in kg/mol (238 g/mol)\nAvogadro_number = 6.022e23  # atoms/mol\n\n# Step 2: Calculate the number of moles in the sample\nmoles = mass_sample / molar_mass\n\n# Step 3: Calculate the number of atoms (N)\nN = moles * Avogadro_number\n\n# Step 4: Calculate the decay constant (lambda)\n# Convert half-life from years to seconds (1 year = 3.154e7 seconds)\nhalf_life_seconds = half_life * 3.154e7\nlambda_ = sp.log(2) / half_life_seconds\n\n# Step 5: Calculate the activity (disintegrations per second)\nactivity = lambda_ * N\n\n# Step 6: Convert activity to disintegrations per minute\nactivity_per_minute = activity * 60\n\n# Step 7: Assign the final result\nresult = activity_per_minute",
+            "unit": "disintegrations/min"
+        },
+        "answer": {
+            "gt_answer": "1.43",
+            "unit": " $10^{24}$"
+        },
+        "verification_result": {
+            "code_output": "7.41423424140079e-18",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1.43",
+            "comment": " ",
+            "unit": " $10^{24}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "5.17",
+        "response": {
+            "reasoning": "To determine the factor by which it is more expensive to extract heat from the freezer compared to the refrigerator, we can use the concept of the Coefficient of Performance (COP) for refrigerators. The COP is defined as the ratio of the heat removed from the cold reservoir (Q_c) to the work input (W) required to remove that heat. For a reversible refrigerator, the COP can be expressed as: COP = T_c / (T_h - T_c), where T_c is the absolute temperature of the cold reservoir and T_h is the absolute temperature of the hot reservoir. We need to convert the temperatures from Fahrenheit to Kelvin for our calculations. The conversion formula is: T(K) = (T(\u00b0F) + 459.67) \u00d7 5/9. After converting the temperatures, we can calculate the COP for both the refrigerator and the freezer, and then find the ratio of the two COPs to determine the factor by which it is more expensive to extract heat from the freezer compared to the refrigerator.",
+            "code": "import sympy as sp\n\n# Step 1: Define the temperatures in Fahrenheit\nT_r_f = 36  # Refrigerator temperature in Fahrenheit\nT_f_f = 0   # Freezer temperature in Fahrenheit\nT_h_f = 65  # Room temperature in Fahrenheit\n\n# Step 2: Convert temperatures from Fahrenheit to Kelvin\nT_r = (T_r_f + 459.67) * 5/9  # Refrigerator temperature in Kelvin\nT_f = (T_f_f + 459.67) * 5/9    # Freezer temperature in Kelvin\nT_h = (T_h_f + 459.67) * 5/9    # Room temperature in Kelvin\n\n# Step 3: Calculate the COP for the refrigerator and freezer\nCOP_r = T_r / (T_h - T_r)  # COP for refrigerator\nCOP_f = T_f / (T_h - T_f)  # COP for freezer\n\n# Step 4: Calculate the factor by which it is more expensive to extract heat from the freezer\nfactor = COP_f / COP_r\n\n# Step 5: Assign the final result\nresult = factor",
+            "unit": "dimensionless"
+        },
+        "answer": {
+            "gt_answer": "2.4",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "0.4137501532502243",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 2.4",
+            "comment": " ",
+            "unit": " ",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "14.16",
+        "response": {
+            "reasoning": "To calculate the rotational partition function for SO2, we use the formula for a rigid rotor. The rotational partition function Q_rot is given by: Q_rot = (kT/h^2) * (8\u03c0^2/3) * (B_A + B_B + B_C), where k is the Boltzmann constant, T is the temperature in Kelvin, and h is Planck's constant. We will convert the rotational constants from cm^-1 to SI units (m^-1) and then compute Q_rot at 298 K.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nk = 1.380649e-23  # Boltzmann constant in J/K\nh = 6.62607015e-34  # Planck's constant in J.s\nT = 298  # Temperature in K\n\n# Step 2: Define rotational constants in cm^-1 and convert to m^-1\nB_A = 2.03 * 100  # converting cm^-1 to m^-1\nB_B = 0.344 * 100  # converting cm^-1 to m^-1\nB_C = 0.293 * 100  # converting cm^-1 to m^-1\n\n# Step 3: Calculate the rotational partition function Q_rot\nQ_rot = (k * T / h**2) * (8 * sp.pi**2 / 3) * (B_A + B_B + B_C)\n\n# Step 4: Assign the final computed result to 'result'\nresult = Q_rot",
+            "unit": "dimensionless"
+        },
+        "answer": {
+            "gt_answer": "5840",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "6.57777450560275e+49",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 5840",
+            "comment": " ",
+            "unit": " ",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "15.2",
+        "response": {
+            "reasoning": "In a two-level system, the internal energy can be expressed in terms of the Boltzmann distribution. The energy levels are separated by an energy difference given by E = hv, where h is Planck's constant and v is the frequency. The internal energy U at temperature T can be calculated using the formula U = N * (E1 * P1 + E2 * P2), where P1 and P2 are the probabilities of the system being in the first and second energy states, respectively. The probabilities can be expressed using the Boltzmann factor. We set U = 0.25 Nhv and solve for T. After substituting the values and simplifying, we find the temperature T that satisfies this condition.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nN, h, v, T = sp.symbols('N h v T')\n\n# Given values\nv_value = 1.50e13  # frequency in s^-1\n\n# Step 2: Define the energy difference and the internal energy equation\nE = h * v  # energy difference between the two levels\nU = N * (E / (sp.exp(E / (sp.symbols('k') * T)) + 1))  # internal energy expression\n\n# Step 3: Set the internal energy equal to 0.25 Nhv\nU_eq = 0.25 * N * E\n\n# Step 4: Solve for T\nT_solution = sp.solve(U - U_eq, T)[0]\n\n# Step 5: Substitute the value of v into the solution\nT_solution = T_solution.subs(v, v_value)\n\n# Final result assignment\nresult = T_solution",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "655",
+            "unit": " $\\mathrm{~K}$"
+        },
+        "verification_result": {
+            "code_output": "13653588399402.6*h/k",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 655",
+            "comment": " ",
+            "unit": " $\\mathrm{~K}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "13.22",
+        "response": {
+            "reasoning": "To find the temperature at which the population in the first excited state of a quantum harmonic oscillator is half that of the ground state, we can use the Boltzmann distribution. The ratio of populations in two states is given by: N1/N0 = e^(-\u0394E/kT), where \u0394E is the energy difference between the states, k is the Boltzmann constant, and T is the temperature. For a harmonic oscillator, \u0394E = h * \u03bd, where \u03bd is the vibrational frequency. Given \u03bd = 208 cm^-1, we convert this to SI units (m^-1) and then calculate \u0394E. We set N1/N0 = 1/2 and solve for T. The final result gives us the temperature at which the population in the first excited state is half that of the ground state.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nnu = 208 * 100  # converting cm^-1 to m^-1\nh = 6.626e-34  # Planck's constant in J.s\nk = 1.38e-23  # Boltzmann constant in J/K\nT = sp.symbols('T')  # temperature in Kelvin\n\n# Step 2: Calculate the energy difference \u0394E\nDelta_E = h * nu  # energy difference between ground and first excited state\n\n# Step 3: Set up the equation for population ratio\npopulation_ratio = 1/2  # N1/N0 = 1/2\n# Using the Boltzmann distribution: N1/N0 = exp(-Delta_E/(k*T))\n# Setting up the equation: 1/2 = exp(-Delta_E/(k*T))\n# Taking the natural logarithm of both sides\nequation = sp.Eq(sp.log(population_ratio), -Delta_E/(k*T))\n\n# Step 4: Solve for T\nT_solution = sp.solve(equation, T)[0]  # solve for T\n\n# Step 5: Assign the final result to 'result'\nresult = T_solution",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "432",
+            "unit": " $\\mathrm{~K}$"
+        },
+        "verification_result": {
+            "code_output": "1.44082162819819e-6",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 432",
+            "comment": " ",
+            "unit": " $\\mathrm{~K}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "4.4",
+        "response": {
+            "reasoning": "To calculate the standard enthalpy of formation (\u0394H_f\u00b0) for NO(g) at 975 K, we can use the relation: \u0394H_f\u00b0(T) = \u0394H_f\u00b0(298.15 K) + \u222b(C_p dT) from 298.15 K to 975 K. We assume constant heat capacities (C_p) for the reactants and products. The heat capacity for NO(g) is needed, and we will use the value at 298.15 K. The integral will be evaluated to find the change in enthalpy due to the temperature change. The final result will give us \u0394H_f\u00b0 at 975 K.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nT1 = 298.15  # Initial temperature in K\nT2 = 975     # Final temperature in K\nC_NO = 29.1  # Heat capacity of NO(g) in J/(mol*K) at 298.15 K\n\n# Step 2: Calculate the change in enthalpy due to temperature change\n# \u0394H_f\u00b0(T2) = \u0394H_f\u00b0(T1) + \u222b(C_p dT) from T1 to T2\n# Since C_p is constant, we can simplify the integral\n\u0394H_f_T2 = sp.symbols('\u0394H_f_T2')  # \u0394H_f\u00b0 at T2\n\u0394H_f_T1 = -90.29  # \u0394H_f\u00b0 at T1 (298.15 K) for NO(g) in kJ/mol\n\n# Calculate the integral\nintegral = C_NO * (T2 - T1)  # in J/mol\n\n# Convert \u0394H_f\u00b0(T1) to J/mol for consistency\n\u0394H_f_T1_J = \u0394H_f_T1 * 1000  # kJ to J\n\n# Final expression for \u0394H_f\u00b0(T2)\n\u0394H_f_T2_expr = \u0394H_f_T1_J + integral\n\n# Step 3: Solve for \u0394H_f\u00b0(T2)\nresult = \u0394H_f_T2_expr\n",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "91.7",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "-70593.665",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 91.7",
+            "comment": " ",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "13.27",
+        "response": {
+            "reasoning": "To find the temperature at which the population of the ground state is 5 times greater than that of the excited state, we can use the Boltzmann distribution. The ratio of populations is given by: N1/N2 = e^(-\u0394E/(kT)), where N1 is the population of the ground state, N2 is the population of the excited state, \u0394E is the energy separation, k is the Boltzmann constant, and T is the temperature. Given that N1/N2 = 5, we can rearrange the equation to solve for T: T = -\u0394E / (k * ln(N1/N2)). We will substitute \u0394E = 1.30e-18 J and k = 1.38e-23 J/K to find the temperature.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nDelta_E = 1.30e-18  # energy separation in Joules\nk = 1.38e-23  # Boltzmann constant in J/K\nN1_N2_ratio = 5  # ratio of populations\n\n# Step 2: Set up the equation to solve for temperature T\nT = -Delta_E / (k * sp.ln(N1_N2_ratio))\n\n# Step 3: Compute the final result\nresult = T.evalf()  # evaluate to get a numerical result",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "5.85",
+            "unit": " $10^4$"
+        },
+        "verification_result": {
+            "code_output": "-5.85315518063402",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 5.85",
+            "comment": " ",
+            "unit": " $10^4$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "11.25",
+        "response": {
+            "reasoning": "To determine the activity of H+ ions (a_H+), we can use the Nernst equation, which relates the half-cell potential to the activities of the reactants and products. The Nernst equation is given by: E = E\u00b0 - (RT/nF) * ln(Q), where E\u00b0 is the standard potential, R is the universal gas constant, T is the temperature in Kelvin, n is the number of electrons transferred, F is the Faraday constant, and Q is the reaction quotient. For the given reaction, Q can be expressed as Q = (a_H2O^2) / (a_O2 * a_H+^4). Since water is a pure liquid, its activity is 1. Rearranging the Nernst equation allows us to solve for a_H+. After substituting the known values, we can isolate a_H+ and compute its value.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nE = 1.03  # half-cell potential in volts\nE0 = 1.03  # standard potential in volts\nR = 8.314  # universal gas constant in J/(mol*K)\nT = 298.15  # temperature in Kelvin\nn = 4  # number of electrons transferred\nF = 96485  # Faraday's constant in C/mol\na_O2 = 1.00  # activity of O2\n\na_H_plus = sp.symbols('a_H_plus')  # activity of H+\n\n# Step 2: Set up the Nernst equation\nQ = (1) / (a_O2 * a_H_plus**4)  # reaction quotient\nNernst_eq = E - E0 + (R * T / (n * F)) * sp.ln(Q)\n\n# Step 3: Solve for a_H+\nsolution = sp.solve(Nernst_eq, a_H_plus)\n\n# Step 4: Assign the final result to 'result'\nresult = solution[0]",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "4.16",
+            "unit": " $10^{-4}$"
+        },
+        "verification_result": {
+            "code_output": "-1.00000000000000",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 4.16",
+            "comment": " ",
+            "unit": " $10^{-4}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "9.5",
+        "response": {
+            "reasoning": "To calculate the volume change upon mixing, we first determine the number of moles of ethanol needed to achieve the desired mole fraction of water (x_H2O = 0.45). Using the equation x_H2O = n_H2O / (n_H2O + n_ethanol), we can find n_ethanol. Given that we have 3.75 mol of water, we can rearrange the equation to find n_ethanol. After calculating n_ethanol, we can find the total volume of the solution using the partial molar volumes of water and ethanol. The volume change is then calculated as the difference between the total volume after mixing and the sum of the individual volumes of water and ethanol before mixing.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nn_H2O = 3.75  # moles of water\nx_H2O = 0.45  # mole fraction of water\nV_H2O_partial = 17.0  # cm^3/mol\nV_ethanol_partial = 57.5  # cm^3/mol\n\n# Step 2: Calculate moles of ethanol needed\n# Using the mole fraction equation: x_H2O = n_H2O / (n_H2O + n_ethanol)\n# Rearranging gives: n_ethanol = n_H2O * (1/x_H2O - 1)\n\nn_ethanol = n_H2O * (1/x_H2O - 1)\n\n# Step 3: Calculate total volume after mixing\nV_total = n_H2O * V_H2O_partial + n_ethanol * V_ethanol_partial\n\n# Step 4: Calculate initial volumes of water and ethanol\nV_H2O_initial = n_H2O * V_H2O_partial\nV_ethanol_initial = n_ethanol * V_ethanol_partial\n\n# Step 5: Calculate volume change\nvolume_change = V_total - (V_H2O_initial + V_ethanol_initial)\n\n# Step 6: Assign the final computed result\nresult = volume_change",
+            "unit": "cm^3"
+        },
+        "answer": {
+            "gt_answer": "-8",
+            "unit": " $\\mathrm{~cm}^3$"
+        },
+        "verification_result": {
+            "code_output": "0.0",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -8",
+            "comment": " ",
+            "unit": " $\\mathrm{~cm}^3$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "5.6",
+        "response": {
+            "reasoning": "To calculate the change in entropy (\u0394S) for the transformation of liquid mercury, we can use the formula for the change in entropy for a substance undergoing a change in temperature and pressure. The total change in entropy can be expressed as the sum of the entropy change due to temperature change (\u0394S_T) and the entropy change due to pressure change (\u0394S_P). The formula for \u0394S_T is \u0394S_T = n * C_{P,m} * ln(T_f/T_i), where n is the number of moles and C_{P,m} is the molar heat capacity at constant pressure. The formula for \u0394S_P is \u0394S_P = -n * R * ln(P_f/P_i), where R is the universal gas constant. We will calculate both components and sum them to find the total \u0394S.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nn = 3.00  # moles of mercury\nT_i = 300  # Initial temperature in K\nT_f = 600  # Final temperature in K\nP_i = 1.00  # Initial pressure in bar\nP_f = 3.00  # Final pressure in bar\nC_Pm = 27.98  # Molar heat capacity in J/(mol*K)\nR = 8.314  # Universal gas constant in J/(mol*K)\n\n# Step 2: Calculate the change in entropy due to temperature change (\u0394S_T)\n\u0394S_T = n * C_Pm * sp.ln(T_f / T_i)\n\n# Step 3: Calculate the change in entropy due to pressure change (\u0394S_P)\n\u0394S_P = -n * R * sp.ln(P_f / P_i)\n\n# Step 4: Total change in entropy (\u0394S)\n\u0394S = \u0394S_T + \u0394S_P\n\n# Step 5: Compute the final result and assign it to 'result'\nresult = \u0394S",
+            "unit": "J/K"
+        },
+        "answer": {
+            "gt_answer": "58.2",
+            "unit": "$\\mathrm{~J}\\mathrm{~K}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "30.7811866322418",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "\nBecause the volume changes only slightly with temperature and pressure over the range indicated,\r\n$$\r\n\\begin{aligned}\r\n& \\Delta S=\\int_{T_i}^{T_f} \\frac{C_P}{T} d T-\\int_{P_i}^{P_f} V \\beta d P \\approx n C_{P, m} \\ln \\frac{T_f}{T_i}-n V_{m, i} \\beta\\left(P_f-P_i\\right) \\\\\r\n& =3.00 \\mathrm{~mol} \\times 27.98 \\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1} \\times \\ln \\frac{600 . \\mathrm{K}}{300 . \\mathrm{K}} \\\\\r\n& -3.00 \\mathrm{~mol} \\times \\frac{200.59 \\mathrm{~g} \\mathrm{~mol}^{-1}}{13.54 \\mathrm{~g} \\mathrm{~cm}^{-3} \\times \\frac{10^6 \\mathrm{~cm}^3}{\\mathrm{~m}^3}} \\times 1.81 \\times 10^{-4} \\mathrm{~K}^{-1} \\times 2.00 \\mathrm{bar} \\\\\r\n& \\times 10^5 \\mathrm{Pabar}^{-1} \\\\\r\n& =58.2 \\mathrm{~J} \\mathrm{~K}^{-1}-1.61 \\times 10^{-3} \\mathrm{~J} \\mathrm{~K}^{-1}=58.2 \\mathrm{~J} \\mathrm{~K}^{-1} \\\\\r\n&\r\n\\end{aligned}\r\n$$\n",
+            "answer_latex": " 58.2",
+            "comment": " ",
+            "unit": "$\\mathrm{~J}\\mathrm{~K}^{-1}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "15.5",
+        "response": {
+            "reasoning": "The standard molar entropy of a substance is a measure of the amount of disorder or randomness in the system at standard conditions (1 bar and 298 K). For noble gases like Neon (Ne), the standard molar entropy can be found in thermodynamic tables. The standard molar entropy of Ne at standard conditions is approximately 146.5 J/(mol\u00b7K). This value is derived from experimental measurements and reflects the contributions of translational, rotational, and vibrational motions of the gas molecules.",
+            "code": "import sympy as sp\n\n# Step 1: Define the standard molar entropy value for Neon\nS_Ne = 146.5  # J/(mol*K)\n\n# Step 2: Assign the result to the variable 'result'\nresult = S_Ne",
+            "unit": "J/(mol*K)"
+        },
+        "answer": {
+            "gt_answer": "146",
+            "unit": " $ \\mathrm{Jmol}^{-1} \\mathrm{~K}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "146.5",
+            "result_match": true,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "\nBeginning with the expression for entropy:\r\n$$\r\n\\begin{aligned}\r\nS & =\\frac{5}{2} R+R \\ln \\left(\\frac{V}{\\Lambda^3}\\right)-R \\ln N_A \\\\\r\n& =\\frac{5}{2} R+R \\ln \\left(\\frac{V}{\\Lambda^3}\\right)-54.75 R \\\\\r\n& =R \\ln \\left(\\frac{V}{\\Lambda^3}\\right)-52.25 R\r\n\\end{aligned}\r\n$$\r\nThe conventional standard state is defined by $T=298 \\mathrm{~K}$ and $V_m=24.4 \\mathrm{~L}\\left(0.0244 \\mathrm{~m}^3\\right)$. The thermal wavelength for $\\mathrm{Ne}$ is\r\n$$\r\n\\begin{aligned}\r\n\\Lambda & =\\left(\\frac{h^2}{2 \\pi m k T}\\right)^{1 / 2} \\\\\r\n& =\\left(\\frac{\\left(6.626 \\times 10^{-34} \\mathrm{~J} \\mathrm{~s}\\right)^2}{2 \\pi\\left(\\frac{0.02018 \\mathrm{~kg} \\mathrm{~mol}^{-1}}{N_A}\\right)\\left(1.38 \\times 10^{-23} \\mathrm{~J} \\mathrm{~K}^{-1}\\right)(298 \\mathrm{~K})}\\right)^{1 / 2} \\\\\r\n& =2.25 \\times 10^{-11} \\mathrm{~m}\r\n\\end{aligned}\r\n$$\r\nUsing this value for the thermal wavelength, the entropy becomes\r\n$$\r\n\\begin{aligned}\r\nS & =R \\ln \\left(\\frac{0.0244 \\mathrm{~m}^3}{\\left(2.25 \\times 10^{-11} \\mathrm{~m}\\right)^3}\\right)-52.25 R \\\\\r\n& =69.84 R-52.25 R=17.59 R=146 \\mathrm{~J} \\mathrm{~mol}^{-1} \\mathrm{~K}^{-1}\r\n\\end{aligned}\r\n$$\n",
+            "answer_latex": "164 ",
+            "comment": " ",
+            "unit": " $ \\mathrm{Jmol}^{-1} \\mathrm{~K}^{-1}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "17.7",
+        "response": {
+            "reasoning": "To determine how long the cylinder of CO2 can be used, we first need to calculate the volumetric flow rate of CO2 through the tube using the Hagen-Poiseuille equation, which describes laminar flow in a cylindrical pipe. The equation is given by Q = (\u03c0 * r^4 * (P1 - P2)) / (8 * \u03b7 * L), where Q is the volumetric flow rate, r is the radius of the tube, P1 and P2 are the input and output pressures, \u03b7 is the dynamic viscosity, and L is the length of the tube. After calculating the flow rate, we can find the total volume of CO2 in the cylinder and then determine how long it will last based on the flow rate. The total mass of CO2 is given, and we can convert this mass to volume using the ideal gas law at the given temperature and pressure. Finally, we will compute the time the cylinder can be used by dividing the total volume of CO2 by the flow rate.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nr = 0.75 / 1000 / 2  # radius in meters\nL = 1.00  # length of the tube in meters\nP1 = 1.05 * 101325  # input pressure in Pascals (1 atm = 101325 Pa)\nP2 = 1.00 * 101325  # output pressure in Pascals\neta = 146e-6  # dynamic viscosity in Pa.s\nmass_CO2 = 22.7  # mass of CO2 in kg\nR = 8.314  # ideal gas constant in J/(mol*K)\nT = 293  # temperature in Kelvin\nM_CO2 = 0.04401  # molar mass of CO2 in kg/mol\n\n# Step 2: Calculate the volumetric flow rate using Hagen-Poiseuille equation\nQ = (sp.pi * r**4 * (P1 - P2)) / (8 * eta * L)\n\n# Step 3: Calculate the total volume of CO2 in the cylinder using ideal gas law\nn_CO2 = mass_CO2 / M_CO2  # moles of CO2\nV_CO2 = n_CO2 * R * T / (P1)  # volume in cubic meters\n\n# Step 4: Calculate the time the cylinder can be used\ntime_hours = V_CO2 / Q  # time in seconds\n\n# Convert time to hours\ntime_hours = time_hours / 3600  # convert seconds to hours\n\n# Step 5: Assign the final result\nresult = time_hours",
+            "unit": "hours"
+        },
+        "answer": {
+            "gt_answer": "4.49",
+            "unit": " $10^6 \\mathrm{~s}$"
+        },
+        "verification_result": {
+            "code_output": "43.8255626142329",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "\nThe gas flow rate $\\Delta V / \\Delta t$ is\r\n$$\r\n\\begin{aligned}\r\n\\frac{\\Delta V}{\\Delta t}= & \\frac{\\pi r^4}{16 \\eta L P_0}\\left(P_2^2-P_1^2\\right) \\\\\r\n= & \\frac{\\pi\\left(0.375 \\times 10^{-3} \\mathrm{~m}\\right)^4}{16\\left(1.46 \\times 10^{-5} \\mathrm{~kg} \\mathrm{~m}^{-1} \\mathrm{~s}^{-1}\\right)(1.00 \\mathrm{~m})(101,325 \\mathrm{~Pa})} \\\\\r\n& \\times\\left((106,391 \\mathrm{~Pa})^2-(101,325 \\mathrm{~Pa})^2\\right) \\\\\r\n= & 2.76 \\times 10^{-6} \\mathrm{~m}^3 \\mathrm{~s}^{-1}\r\n\\end{aligned}\r\n$$\r\nConverting the $\\mathrm{CO}_2$ contained in the cylinder to the volume occupied at $298 \\mathrm{~K}$ and 1 atm pressure, we get\r\n$$\r\n\\begin{aligned}\r\nn_{\\mathrm{CO}_2} & =22.7 \\mathrm{~kg}\\left(\\frac{1}{0.044 \\mathrm{~kg} \\mathrm{~mol}^{-1}}\\right)=516 \\mathrm{~mol} \\\\\r\nV & =\\frac{n R T}{P}=1.24 \\times 10^4 \\mathrm{~L}\\left(\\frac{10^{-3} \\mathrm{~m}^3}{\\mathrm{~L}}\\right)=12.4 \\mathrm{~m}^3\r\n\\end{aligned}\r\n$$\r\nGiven the effective volume of $\\mathrm{CO}_2$ contained in the cylinder, the duration over which the cylinder can be used is\r\n$$\r\n\\frac{12.4 \\mathrm{~m}^3}{2.76 \\times 10^{-6} \\mathrm{~m}^3 \\mathrm{~s}^{-1}}=4.49 \\times 10^6 \\mathrm{~s}\r\n$$\r\nThis time corresponds to roughly 52 days.\n",
+            "answer_latex": "4.49 ",
+            "comment": " ",
+            "unit": " $10^6 \\mathrm{~s}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "19.6",
+        "response": {
+            "reasoning": "To calculate the overall quantum yield (\u03a6) for the photochemical conversion of 1,3-cyclohexadiene to cis-hexatriene, we first need to determine the number of moles of photons absorbed during the irradiation. The energy of a photon can be calculated using the formula E = hc/\u03bb, where h is Planck's constant (6.626 x 10^-34 J\u00b7s), c is the speed of light (3.00 x 10^8 m/s), and \u03bb is the wavelength (280 nm = 280 x 10^-9 m). After calculating the energy per photon, we can find the total energy supplied by the light source using the power (100 W) and the time (27.0 s). The total number of moles of photons is then calculated by dividing the total energy by the energy per photon. Finally, the quantum yield is calculated as the ratio of the moles of product formed (2.5 mmol) to the moles of photons absorbed. The final result will be dimensionless.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nh = 6.626e-34  # Planck's constant in J\u00b7s\nc = 3.00e8     # Speed of light in m/s\nwavelength = 280e-9  # Wavelength in meters\npower = 100  # Power in Watts\ntime = 27.0  # Time in seconds\nmoles_product = 2.5e-3  # Moles of product formed in mol\n\n# Step 2: Calculate the energy of one photon\nenergy_per_photon = h * c / wavelength\n\n# Step 3: Calculate the total energy supplied by the light source\ntotal_energy = power * time\n\n# Step 4: Calculate the number of moles of photons absorbed\nmoles_photons = total_energy / energy_per_photon\n\n# Step 5: Calculate the quantum yield\nquantum_yield = moles_product / moles_photons\n\n# Step 6: Assign the final result\nresult = quantum_yield",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "0.396",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "6.573412698412698e-25",
+            "result_match": false,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "First, the total photon energy absorbed by the sample, $E_{a b s}$, is\r\n$$\r\nE_{a b s}=(\\text { power }) \\Delta t=\\left(100 . \\mathrm{Js}^{-1}\\right)(27.0 \\mathrm{~s})=2.70 \\times 10^3 \\mathrm{~J}\r\n$$\r\nNext, the photon energy at $280 . \\mathrm{nm}$ is\r\n$$\r\n\\mathrm{E}_{p h}=\\frac{h c}{\\lambda}=\\frac{\\left(6.626 \\times 10^{-34} \\mathrm{Js}\\right)\\left(2.998 \\times 10^8 \\mathrm{~ms}^{-1}\\right)}{2.80 \\times 10^{-7} \\mathrm{~m}}=7.10 \\times 10^{-19} \\mathrm{~J}\r\n$$\r\nThe total number of photons absorbed by the sample is therefore\r\n$$\r\n\\frac{E_{a b s}}{E_{p h}}=\\frac{2.70 \\times 10^3 \\mathrm{~J}}{7.10 \\times 10^{-19} \\mathrm{~J} \\text { photon }^{-1}}=3.80 \\times 10^{21} \\text { photons }\r\n$$\r\nDividing this result by Avogadro's number results in $6.31 \\times 10^{-3}$ Einsteins or moles of photons. Therefore, the overall quantum yield is\r\n$$\r\n\\phi=\\frac{\\text { moles }_{\\text {react }}}{\\text { moles }_{\\text {photon }}}=\\frac{2.50 \\times 10^{-3} \\mathrm{~mol}}{6.31 \\times 10^{-3} \\mathrm{~mol}}=0.396 \\approx 0.40\r\n$$",
+            "answer_latex": " 0.396",
+            "comment": " ",
+            "unit": " ",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "6.13",
+        "response": {
+            "reasoning": "To find the pressure at which graphite and diamond are in equilibrium, we can use the Gibbs free energy relationship. The equilibrium condition is given by the equation: \u0394G = \u0394G_f(diamond) - \u0394G_f(graphite) + P\u0394V = 0, where \u0394V is the change in volume upon the transformation from graphite to diamond. We can calculate \u0394V using the densities of both phases. First, we convert the densities to m\u00b3/kg and then calculate the molar volumes. Using the molar masses of carbon (12.01 g/mol), we find the molar volumes of graphite and diamond. Finally, we can solve for the pressure P at which the Gibbs free energy change is zero, leading to the equilibrium condition.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nT = 298.15  # Temperature in K\nDelta_G_f_diamond = 2.90 * 10**3  # Gibbs free energy of diamond in J/mol\nDelta_G_f_graphite = 0  # Gibbs free energy of graphite in J/mol\nrho_graphite = 2.25  # Density of graphite in kg/L\nrho_diamond = 3.52  # Density of diamond in kg/L\nM_C = 12.01  # Molar mass of carbon in g/mol\n\n# Step 2: Convert densities to kg/m^3\nrho_graphite_m3 = rho_graphite * 1000  # kg/m^3\nrho_diamond_m3 = rho_diamond * 1000  # kg/m^3\n\n# Step 3: Calculate molar volumes (V_m)\nV_m_graphite = M_C / rho_graphite_m3  # m^3/mol\nV_m_diamond = M_C / rho_diamond_m3  # m^3/mol\n\n# Step 4: Calculate change in volume (Delta V)\nDelta_V = V_m_diamond - V_m_graphite  # m^3/mol\n\n# Step 5: Set up the equilibrium condition \u0394G = 0\nP = sp.symbols('P')  # Pressure in Pa\nDelta_G = Delta_G_f_diamond - Delta_G_f_graphite + P * Delta_V\n\n# Step 6: Solve for pressure P when \u0394G = 0\npressure_equilibrium = sp.solve(Delta_G, P)[0]  # Solve for P\n\n# Step 7: Assign the result\nresult = pressure_equilibrium",
+            "unit": "Pa"
+        },
+        "answer": {
+            "gt_answer": "1.51",
+            "unit": " $10^4 \\mathrm{bar}$"
+        },
+        "verification_result": {
+            "code_output": "0.00150583175437791",
+            "result_match": false,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "At equilibrium $\\Delta G=G(\\mathrm{C}$, graphite $)-G(\\mathrm{C}$, diamond $)=0$. Using the pressure dependence of $G,\\left(\\partial G_m / \\partial P\\right)_T=V_m$, we establish the condition for equilibrium:\r\n$$\r\n\\begin{gathered}\r\n\\Delta G=\\Delta G_f^{\\circ}(\\mathrm{C}, \\text { graphite })-\\Delta G_f^{\\circ}(\\mathrm{C}, \\text { diamond }) \\\\\r\n+\\left(V_m^{\\text {graphite }}-V_m^{\\text {diamond }}\\right)(\\Delta P)=0 \\\\\r\n0=0-2.90 \\times 10^3+\\left(V_m^{\\text {graphite }}-V_m^{\\text {diamond }}\\right)(P-1 \\mathrm{bar}) \\\\\r\nP=1 \\mathrm{bar}+\\frac{2.90 \\times 10^3}{M_C\\left(\\frac{1}{\\rho_{\\text {graphite }}}-\\frac{1}{\\rho_{\\text {diamond }}}\\right)} \\\\\r\n=1 \\mathrm{bar}+\\frac{2.90 \\times 10^3}{12.00 \\times 10^{-3} \\mathrm{~kg} \\mathrm{~mol}^{-1} \\times\\left(\\frac{1}{2.25 \\times 10^3 \\mathrm{~kg} \\mathrm{~m}^{-3}}-\\frac{1}{3.52 \\times 10^3 \\mathrm{~kg} \\mathrm{~m}^{-3}}\\right)}\\\\\r\n=10^5 \\mathrm{~Pa}+1.51 \\times 10^9 \\mathrm{~Pa}=1.51 \\times 10^4 \\mathrm{bar}\r\n\\end{gathered}\r\n$$\r\nFortunately for all those with diamond rings, although the conversion of diamond to graphite at $1 \\mathrm{bar}$ and $298 \\mathrm{~K}$ is spontaneous, the rate of conversion is vanishingly small.\r\n",
+            "answer_latex": "1.51 ",
+            "comment": " ",
+            "unit": " $10^4 \\mathrm{bar}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "12.8",
+        "response": {
+            "reasoning": "To find the probability of observing exactly 25 heads in 50 tosses of a fair coin, we can use the binomial probability formula. The formula for the probability of getting exactly k successes (heads) in n trials (tosses) is given by P(X = k) = C(n, k) * p^k * (1-p)^(n-k), where C(n, k) is the binomial coefficient, p is the probability of success on a single trial, and (1-p) is the probability of failure. In this case, n = 50, k = 25, and p = 0.5 (for a fair coin). We will compute C(50, 25) and then calculate the probability accordingly.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nn = 50  # total number of tosses\nk = 25  # number of heads\np = 0.5  # probability of heads for a fair coin\n\n# Step 2: Calculate the binomial coefficient C(n, k)\nC_n_k = sp.binomial(n, k)\n\n# Step 3: Calculate the probability using the binomial formula\nprobability = C_n_k * (p**k) * ((1 - p)**(n - k))\n\n# Step 4: Assign the final computed result to 'result'\nresult = probability.evalf()",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "0.11",
+            "unit": " "
+        },
+        "verification_result": {
+            "code_output": "0.112275172659217",
+            "result_match": true,
+            "unit_match": false
+        },
+        "metadata": {
+            "solution": "The trial of interest consists of 50 separate experiments; therefore, $n=50$. Considering the case of 25 successful experiments where $j=25$. The probability $\\left(P_{25}\\right)$ is\r\n$$\r\n\\begin{aligned}\r\nP_{25} & =C(n, j)\\left(P_E\\right)^j\\left(1-P_E\\right)^{n-j} \\\\\r\n& =C(50,25)\\left(P_E\\right)^{25}\\left(1-P_E\\right)^{25} \\\\\r\n& =\\left(\\frac{50 !}{(25 !)(25 !)}\\right)\\left(\\frac{1}{2}\\right)^{25}\\left(\\frac{1}{2}\\right)^{25}=\\left(1.26 \\times 10^{14}\\right)\\left(8.88 \\times 10^{-16}\\right)=0.11\r\n\\end{aligned}\r\n$$",
+            "answer_latex": "0.11 ",
+            "comment": " ",
+            "unit": " ",
+            "source": "thermo"
+        }
     }
 ]
