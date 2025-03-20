@@ -20,7 +20,6 @@ Task: Solve the given Physics problem using symbolic computation with Sympy and 
 
 ResponseFormat Structure:
 {
-    "reasoning": <explanation as a string>,
     "code": <complete Sympy code as a string>,
     "unit": <unit as a string or None>
 }
@@ -31,6 +30,7 @@ Instructions:
 
 2. **Define Symbols and Constants:**
    - Define all the necessary symbolic variables (e.g., `x, y, t`) and any physical constants that are required for the problem.
+   - **Ensure that every variable used in your code is defined.** There should be no undefined symbols.
 
 3. **Set Up the Problem:**
    - Write the Sympy code to set up the equations that describe the Physics problem.
@@ -47,12 +47,8 @@ Instructions:
      ```
    - This is mandatory because the output will be extracted and compared with the ground truth.
 
-6. **Reasoning Explanation:**
-   - In a plain text explanation (assigned to the "reasoning" field in the JSON output), provide a clear and concise description of the solution steps.
-   - Include any relevant details about the physics concepts and units used. If no specific unit applies, set `"unit"` to `None`.
-
-7. **Output JSON Structure:**
-   - Ensure your final answer is a valid JSON object with three keys: `"reasoning"`, `"code"`, and `"unit"`.
+6. **Output JSON Structure:**
+   - Ensure your final answer is a valid JSON object with two keys: `"code"` and `"unit"`.
    - Follow the structure exactly, so that it can be automatically parsed and validated.
 
 Example Code Template:
@@ -69,18 +65,15 @@ g = sp.symbols('g')  # gravitational constant, if applicable
 # Step 3: Solve the equations symbolically
 # final_result = sp.solve([...], ...)
 
-# Step 4: Explanation of the approach:
-reasoning = "Step 1: Imported sympy and defined symbols. Step 2: Set up the equation based on Newton's laws. Step 3: Solved the equation symbolically to compute the required physical quantity. Units (if any) are specified accordingly."
-
-# Step 5: Compute the final result and assign it to 'result'
+# Step 4: Compute the final result and assign it to 'result'
 result = final_result  # final computed value
 
 -----------------------------------------------------------
 Return the output as a JSON object with keys:
-   - "reasoning": Detailed explanation of the steps as a string.
    - "code": The complete Sympy code as a string.
    - "unit": A string representing the unit (e.g., "m", "s", "kg") if applicable, otherwise None.
 """
+
 
 class PhysicsCodeGenPipeline():
    """
@@ -100,7 +93,7 @@ class PhysicsCodeGenPipeline():
       Initialize the pipeline with the reason model and the dataset.
 
       Args:
-          reason_model (BaseModelBackend): The model used for reasoning and code generation.
+          reason_model (BaseModelBackend): The model used for code generation.
           dataset (dict): The dataset containing physics problems and solutions.
           output_location: The file path for the output.
           num: number of samples to generate.
@@ -147,7 +140,7 @@ class PhysicsCodeGenPipeline():
       A method to verify the correctness of the generated code using PythonVerifier.
 
       Args:
-          response (ResponseFormat): The response format containing the reasoning and code sections.
+          response (ResponseFormat): The response format containing the code and the units.
           gt_answer (str): The ground truth answer to compare against.
       """
       return self.verifier.verify(response, answer)
