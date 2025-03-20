@@ -4741,16 +4741,6 @@
     },
     {
         "solution": "",
-        "problem_text": "For an ensemble consisting of a mole of particles having two energy levels separated by $1000 . \\mathrm{cm}^{-1}$, at what temperature will the internal energy equal $3.00 \\mathrm{~kJ}$ ?",
-        "answer_latex": " 1310",
-        "comment": " ",
-        "answer_number": "1310",
-        "problemid": " 15.4",
-        "unit": " $\\mathrm{~K}$",
-        "source": "thermo"
-    },
-    {
-        "solution": "",
         "problem_text": "A muscle fiber contracts by $3.5 \\mathrm{~cm}$ and in doing so lifts a weight. Calculate the work performed by the fiber. Assume the muscle fiber obeys Hooke's law $F=-k x$ with a force constant $k$ of $750 . \\mathrm{N} \\mathrm{m}^{-1}$.",
         "answer_latex": " 0.46",
         "comment": " ",

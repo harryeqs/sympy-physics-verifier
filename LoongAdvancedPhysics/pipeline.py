@@ -9,11 +9,13 @@ from verifier import PhysicsVerifier, logger
 from models import ResponseFormat, AnswerFormat, VerificationResult, OutputFormat
 
 import logging
+import concurrent.futures
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 MAX_ATTEMPTS = 5
+TIMEOUT = 300
 
 REASON_AGENT_PROMPT = """
 Task: Solve the given Physics problem using symbolic computation with Sympy and return the response in a JSON format following the specified ResponseFormat.
@@ -176,7 +178,7 @@ class PhysicsCodeGenPipeline():
 
       outputs = self.initialize_output_list(self.output_location)
       failed_outputs = self.initialize_output_list(failed_output_location)
-      
+
       for sample in self.dataset:
          sample_id = str(sample['id']).strip()
          question = sample['question']
@@ -200,6 +202,7 @@ class PhysicsCodeGenPipeline():
                   self.failed_samples_ids.append(sample_id)
 
          logger.info(f'==========Verifying Question {sample_id}==========')
+
          verification_outcome = self.verify(structured_response, full_answer)
          logger.info(f'Verification Outcome: Result Match: {verification_outcome.result_match}, Unit Match: {verification_outcome.unit_match}')
 
