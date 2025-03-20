@@ -74,7 +74,7 @@ class PhysicsCodeGenPipeline():
          output_location: str, 
          num: Union[int, None] = None,
          sample: bool = False,
-         problem_ids: Union[int, None] = None,
+         problem_ids: Union[List[int], None] = None,
          save_right_solution: bool = False,
          ):
       """
