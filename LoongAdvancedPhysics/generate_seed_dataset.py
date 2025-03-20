@@ -1,11 +1,9 @@
 from pipeline import PhysicsCodeGenPipeline
 from camel.models import DeepSeekModel, OpenAIModel
 from camel.types import ModelType
-from typing import Dict, Literal
 import os
 import json
 import logging
-import argparse
 
 from data_processor import DataProcessor
 
@@ -49,7 +47,7 @@ if __name__ == "__main__":
             solved_dataset = json.load(f)
 
         solved_problem_ids = [sample['sample_id'] for sample in solved_dataset]
-        unsolved_problem_ids = [problem_id.strip() for problem_id in all_problem_ids if problem_id not in solved_problem_ids]
+        unsolved_problem_ids = [str(problem_id).strip() for problem_id in all_problem_ids if problem_id not in solved_problem_ids]
 
     print(f'No. of problem to solve: {len(unsolved_problem_ids)}')
 

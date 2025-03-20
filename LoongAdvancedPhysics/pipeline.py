@@ -93,7 +93,7 @@ class PhysicsCodeGenPipeline():
       if problem_ids is not None:
          self.dataset = []
          for data in dataset:
-            data_id = data['id'].strip()
+            data_id = str(data['id']).strip()
             if data_id in problem_ids:
                self.dataset.append(data)
       else:
@@ -177,9 +177,10 @@ class PhysicsCodeGenPipeline():
             metadata=sample['metadata']
          )
 
-         if self.save_right_solution:
-            if not verification_outcome.result_match and verification_outcome.unit_match:
-               self.failed_sample_ids.append(sample_id)
+         
+         if not verification_outcome.result_match or not verification_outcome.unit_match:
+            self.failed_samples_ids.append(sample_id)
+            if self.save_right_solution:
                continue
 
          outputs.append(output.model_dump())
@@ -191,6 +192,5 @@ class PhysicsCodeGenPipeline():
       logger.info(f"Total Samples: {self.generation_summary['total_samples']}")
       logger.info(f"Successful Generations: {self.generation_summary['successful_generations']}")
       logger.info(f"Failed Generations: {self.generation_summary['failed_generations']}")
-      logger.info(f"Success Rate: {self.generation_summary['successful_generations'] / self.generation_summary['total_samples'] * 100:.2f}%")
-      logger.info(f"Failed Sample IDs: {self.failed_sample_ids}")
+      logger.info(f"Failed Sample IDs: {self.failed_samples_ids}")
       logger.info(f"======================================")
