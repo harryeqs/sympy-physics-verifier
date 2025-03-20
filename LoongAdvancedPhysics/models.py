@@ -2,7 +2,6 @@ from pydantic import BaseModel
 from typing import Union, Any, Dict
 
 class ResponseFormat(BaseModel):
-   reasoning: str
    code: str
    unit: Union[str, None] = None
 
