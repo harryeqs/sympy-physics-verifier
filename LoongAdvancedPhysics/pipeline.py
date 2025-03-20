@@ -124,6 +124,8 @@ class PhysicsCodeGenPipeline():
          else:
             self.dataset = dataset
 
+      print(f'len(self.dataset): {len(self.dataset)}')
+
       # Initialize the reasoning agent
       self.reason_agent = ChatAgent(
          model=reason_model,
@@ -152,20 +154,32 @@ class PhysicsCodeGenPipeline():
       """
       return self.verifier.verify(response, answer)
       
-
-   def run(self):
+   @staticmethod
+   def initialize_output_list(output_location):
       """
-      Run the pipeline on the dataset and sequentially update the JSON array output.
+      Load existing output if it exists, otherwise initialize an empty list.
       """
-      # Load existing output if it exists, otherwise initialize an empty list.
-      if os.path.exists(self.output_location):
+      if os.path.exists(output_location):
          try:
-            with open(self.output_location, 'r') as f:
+            with open(output_location, 'r') as f:
                outputs = json.load(f)
          except json.JSONDecodeError:
             outputs = []
       else:
          outputs = []
+      return outputs
+
+   def run(self):
+      """
+      Run the pipeline on the dataset and sequentially update the JSON array output.
+      """
+      dataset_origin = os.path.split(self.output_location)[-1].replace('.json', '')
+      failed_output_location = os.path.join(*os.path.split(self.output_location)[:-1], f'{dataset_origin}_failed.json')
+
+      print('failed_output_location:', failed_output_location)
+
+      outputs = self.initialize_output_list(self.output_location)
+      failed_outputs = self.initialize_output_list(failed_output_location)
 
       print(len(self.dataset))
       for sample in self.dataset:
@@ -211,6 +225,11 @@ class PhysicsCodeGenPipeline():
          
          if not verification_outcome.result_match or not verification_outcome.unit_match:
             self.failed_samples_ids.append(sample_id)
+            failed_outputs.append(output.model_dump())
+
+            with open(failed_output_location, 'w') as f:
+               json.dump(outputs, f, indent=4)
+            
             if self.save_right_solution:
                continue
 

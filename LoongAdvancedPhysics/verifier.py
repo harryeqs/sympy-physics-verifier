@@ -364,9 +364,9 @@ class PhysicsVerifier:
         Returns:
             (converted_output, converted_unit): The converted value and unit
         """
-        output_with_unit = output * response_unit_expr
-
         try:
+            output_with_unit = output * response_unit_expr
+            
             # Get scaling factor and base answer units
             scaling_factor, base_unit = self.unit_parser.detect_scaling_factor(answer_unit_expr)
 
