@@ -4,7 +4,7 @@ import time
 import os
 from camel.agents import ChatAgent
 from camel.models import BaseModelBackend
-from typing import List, Dict, Union
+from typing import List, Dict, Union, Literal
 from verifier import PhysicsVerifier, logger
 from models import ResponseFormat, AnswerFormat, VerificationResult, OutputFormat
 
@@ -74,7 +74,8 @@ class PhysicsCodeGenPipeline():
          output_location: str, 
          num: Union[int, None] = None,
          sample: bool = False,
-         problem_ids: Union[int, None] = None,
+         problem_ids: Union[List[int], None] = None,
+         save_right_solution: bool = False,
          ):
       """
       Initialize the pipeline with the reason model and the dataset.
@@ -82,12 +83,17 @@ class PhysicsCodeGenPipeline():
       Args:
           reason_model (BaseModelBackend): The model used for reasoning and code generation.
           dataset (dict): The dataset containing physics problems and solutions.
+          output_location: The file path for the output.
+          num: number of samples to generate.
+          sample: wether or not randomly sample from the dataset.
+          problem_ids: the problem ids for the problems to run.
+          save_right_solution: wether or not to only save correct llm solutions.
       """
       # Set limit
       if problem_ids is not None:
          self.dataset = []
          for data in dataset:
-            data_id = data['id'].replace(' ', '')
+            data_id = data['id'].strip()
             if data_id in problem_ids:
                self.dataset.append(data)
       else:
@@ -107,11 +113,15 @@ class PhysicsCodeGenPipeline():
       
       self.verifier = PhysicsVerifier()
       self.output_location = output_location
+      self.save_right_solution = save_right_solution
+
       self.generation_summary = {
          'total_samples': len(self.dataset),
          'successful_generations': 0,
          'failed_generations': 0
       }
+
+      self.failed_samples_ids = []
       
    def verify(self, response: ResponseFormat, answer: AnswerFormat) -> VerificationResult:
       """
@@ -137,7 +147,8 @@ class PhysicsCodeGenPipeline():
             outputs = []
       else:
          outputs = []
-      
+
+      print(len(self.dataset))
       for sample in self.dataset:
          sample_id = sample['id']
          question = sample['question']
@@ -149,7 +160,7 @@ class PhysicsCodeGenPipeline():
          raw_response = self.reason_agent.step(question, response_format=ResponseFormat)
          structured_response = ResponseFormat.model_validate(raw_response.msgs[0].parsed)
 
-         logger.info(f'=====Verifying Question {sample_id}=====')
+         logger.info(f'==========Verifying Question {sample_id}==========')
          verification_outcome = self.verify(structured_response, full_answer)
          logger.info(f'Verification Outcome: Result Match: {verification_outcome.result_match}, Unit Match: {verification_outcome.unit_match}')
          
@@ -166,10 +177,20 @@ class PhysicsCodeGenPipeline():
             metadata=sample['metadata']
          )
 
+         if self.save_right_solution:
+            if not verification_outcome.result_match and verification_outcome.unit_match:
+               self.failed_sample_ids.append(sample_id)
+               continue
+
          outputs.append(output.model_dump())
 
          with open(self.output_location, 'w') as f:
             json.dump(outputs, f, indent=4)
-
       
-      logger.info(f"Generation Summary: {self.generation_summary}")
+      logger.info(f"==========Seed Dataset Generation Summary==========")
+      logger.info(f"Total Samples: {self.generation_summary['total_samples']}")
+      logger.info(f"Successful Generations: {self.generation_summary['successful_generations']}")
+      logger.info(f"Failed Generations: {self.generation_summary['failed_generations']}")
+      logger.info(f"Success Rate: {self.generation_summary['successful_generations'] / self.generation_summary['total_samples'] * 100:.2f}%")
+      logger.info(f"Failed Sample IDs: {self.failed_sample_ids}")
+      logger.info(f"======================================")
