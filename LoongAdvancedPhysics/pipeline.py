@@ -120,6 +120,8 @@ class PhysicsCodeGenPipeline():
          'successful_generations': 0,
          'failed_generations': 0
       }
+
+      self.failed_samples_ids = []
       
    def verify(self, response: ResponseFormat, answer: AnswerFormat) -> VerificationResult:
       """
@@ -158,7 +160,7 @@ class PhysicsCodeGenPipeline():
          raw_response = self.reason_agent.step(question, response_format=ResponseFormat)
          structured_response = ResponseFormat.model_validate(raw_response.msgs[0].parsed)
 
-         logger.info(f'=====Verifying Question {sample_id}=====')
+         logger.info(f'==========Verifying Question {sample_id}==========')
          verification_outcome = self.verify(structured_response, full_answer)
          logger.info(f'Verification Outcome: Result Match: {verification_outcome.result_match}, Unit Match: {verification_outcome.unit_match}')
          
@@ -177,6 +179,7 @@ class PhysicsCodeGenPipeline():
 
          if self.save_right_solution:
             if not verification_outcome.result_match and verification_outcome.unit_match:
+               self.failed_sample_ids.append(sample_id)
                continue
 
          outputs.append(output.model_dump())
@@ -184,4 +187,10 @@ class PhysicsCodeGenPipeline():
          with open(self.output_location, 'w') as f:
             json.dump(outputs, f, indent=4)
       
-      logger.info(f"Generation Summary: {self.generation_summary}")
+      logger.info(f"==========Seed Dataset Generation Summary==========")
+      logger.info(f"Total Samples: {self.generation_summary['total_samples']}")
+      logger.info(f"Successful Generations: {self.generation_summary['successful_generations']}")
+      logger.info(f"Failed Generations: {self.generation_summary['failed_generations']}")
+      logger.info(f"Success Rate: {self.generation_summary['successful_generations'] / self.generation_summary['total_samples'] * 100:.2f}%")
+      logger.info(f"Failed Sample IDs: {self.failed_sample_ids}")
+      logger.info(f"======================================")
