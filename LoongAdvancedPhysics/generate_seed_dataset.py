@@ -75,6 +75,10 @@ if __name__ == "__main__":
     if not RERUN_FAILED_SAMPLES:
         print(f'No. of failed problems: {len(failed_problem_ids)}')
         unsolved_problem_ids = [str(problem_id).strip() for problem_id in unsolved_problem_ids if problem_id not in failed_problem_ids]
+    else:
+        print('Rerun failed samples. Reset all failed problems.')
+        with open(failed_output_location, 'w') as f:
+            f.write("")
     
     print(f"Problems to solve in this run: {unsolved_problem_ids}")
     print(f'No. of problem to solve: {len(unsolved_problem_ids)}')

@@ -1,0 +1,1730 @@
+[
+    {
+        "sample_id": "e1.17(a)(a)",
+        "response": {
+            "reasoning": "To find the pressure exerted by the ethane gas, we can use the Ideal Gas Law, which is given by the equation PV = nRT. Here, P is the pressure, V is the volume, n is the number of moles, R is the ideal gas constant, and T is the temperature in Kelvin. We first convert the temperature from Celsius to Kelvin by adding 273.15. Then we substitute the values into the equation to solve for P.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP, V, n, R, T = sp.symbols('P V n R T')\n\n# Step 2: Define the known values\nn_value = 10.0  # moles of C2H6\nd_value = 4.860  # volume in dm^3\nT_value = 27 + 273.15  # temperature in Kelvin\nR_value = 0.0821  # ideal gas constant in dm^3/(mol*K)\n\n# Step 3: Set up the Ideal Gas Law equation\n# P * V = n * R * T\n# We need to solve for P\nV = d_value\nn = n_value\nR = R_value\nT = T_value\nP_eq = sp.Eq(P * V, n * R * T)\n\n# Step 4: Solve for P\nP_solution = sp.solve(P_eq, P)[0]\n\n# Step 5: Compute the final result\nresult = P_solution.subs({V: d_value, n: n_value, R: R_value, T: T_value})",
+            "unit": "atm"
+        },
+        "answer": {
+            "gt_answer": "50.7",
+            "unit": "$\\mathrm{atm}$ "
+        },
+        "verification_result": {
+            "code_output": "50.7043518518519",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 50.7",
+            "comment": " ",
+            "unit": "$\\mathrm{atm}$ ",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e3.1(a)(b)",
+        "response": {
+            "reasoning": "To calculate the change in entropy (\u0394S) when energy is transferred reversibly and isothermally, we can use the formula \u0394S = Q/T, where Q is the heat transferred and T is the absolute temperature in Kelvin. Here, Q = 25 kJ = 25000 J and the temperature T = 100 \u00b0C = 373.15 K. We substitute these values into the formula to find the change in entropy.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nQ = 25000  # heat transferred in Joules (25 kJ)\nT = 373.15  # temperature in Kelvin (100 \u00b0C)\n\n# Step 2: Calculate the change in entropy using the formula \u0394S = Q/T\n\u0394S = Q / T\n\n# Step 3: Assign the final computed value to 'result'\nresult = \u0394S",
+            "unit": "J/K"
+        },
+        "answer": {
+            "gt_answer": "67",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1}$ "
+        },
+        "verification_result": {
+            "code_output": "66.99718611818304",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 67",
+            "comment": " ",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1}$ ",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e2.9(a)",
+        "response": {
+            "reasoning": "To find the final temperature of the argon gas after a reversible adiabatic expansion, we can use the adiabatic process equation for an ideal gas, which is given by T1 * V1^(\u03b3-1) = T2 * V2^(\u03b3-1), where \u03b3 (gamma) is the heat capacity ratio (C_p/C_v). For argon, a monatomic ideal gas, \u03b3 = 5/3. We know the initial temperature (T1 = 273.15 K), initial volume (V1 = 1.0 dm^3), and final volume (V2 = 3.0 dm^3). We will rearrange the equation to solve for the final temperature T2. After substituting the known values, we can compute T2 symbolically using Sympy.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nT1 = 273.15  # Initial temperature in K\nV1 = 1.0     # Initial volume in dm^3\nV2 = 3.0     # Final volume in dm^3\ngamma = 5/3  # Heat capacity ratio for argon\n\n# Step 2: Set up the adiabatic process equation\n# T1 * V1^(gamma - 1) = T2 * V2^(gamma - 1)\nT2 = T1 * (V1 / V2)**(gamma - 1)\n\n# Step 3: Compute the final temperature\nresult = T2\n",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "131",
+            "unit": " $\\mathrm{K}$"
+        },
+        "verification_result": {
+            "code_output": "131.3168233764895",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "131",
+            "comment": " ",
+            "unit": " $\\mathrm{K}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e3.1(a)(a)",
+        "response": {
+            "reasoning": "To calculate the change in entropy (\u0394S) when heat is transferred reversibly and isothermally, we use the formula \u0394S = Q/T, where Q is the heat transferred and T is the absolute temperature in Kelvin. Here, Q = 25 kJ = 25000 J and the temperature T = 0\u00b0C = 273.15 K. Substituting these values into the formula gives us the change in entropy.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nQ = 25000  # heat transferred in Joules\nT = 273.15  # temperature in Kelvin\n\n# Step 2: Calculate change in entropy using the formula \u0394S = Q/T\nDelta_S = Q / T\n\n# Step 3: Assign the final computed result to 'result'\nresult = Delta_S",
+            "unit": "J/K"
+        },
+        "answer": {
+            "gt_answer": "92",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "91.52480322167308",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 92",
+            "comment": " ",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e1.18(a)(c)",
+        "response": {
+            "reasoning": "To calculate the total pressure of the gas mixture, we can use the Ideal Gas Law, which states that PV = nRT. Here, P is the pressure, V is the volume, n is the number of moles of gas, R is the ideal gas constant, and T is the temperature in Kelvin. We have a total of 3.0 moles of gas (2.0 mol of H2 and 1.0 mol of N2) in a volume of 22.4 dm^3 at a temperature of 273.15 K. We will use R = 0.0821 L\u00b7atm/(K\u00b7mol) for the calculations. First, we convert the volume from dm^3 to L (1 dm^3 = 1 L), then we can substitute the values into the Ideal Gas Law to find the total pressure.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP, V, n, R, T = sp.symbols('P V n R T')\nR_value = 0.0821  # Ideal gas constant in L\u00b7atm/(K\u00b7mol)\nV_value = 22.4  # Volume in L (22.4 dm^3 = 22.4 L)\nT_value = 273.15  # Temperature in K\nn_value = 2.0 + 1.0  # Total moles of gas (H2 + N2)\n\n# Step 2: Set up the Ideal Gas Law equation\n# PV = nRT => P = nRT / V\nP_expr = (n * R * T) / V\n\n# Step 3: Substitute the known values into the equation\nP_value = P_expr.subs({n: n_value, R: R_value, V: V_value, T: T_value})\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = P_value",
+            "unit": "atm"
+        },
+        "answer": {
+            "gt_answer": "3.0",
+            "unit": "$\\mathrm{atm}$ "
+        },
+        "verification_result": {
+            "code_output": "3.00343058035714",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 3.0",
+            "comment": " ",
+            "unit": "$\\mathrm{atm}$ ",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e2.32(a)",
+        "response": {
+            "reasoning": "To calculate the thermal expansion coefficient, \\( \\alpha \\), we use the formula \\( \\alpha = \\frac{1}{V} \\frac{dV}{dT} \\). First, we need to compute the volume \\( V \\) at 320 K using the provided equation. Then, we differentiate the volume equation with respect to temperature \\( T \\) to find \\( \\frac{dV}{dT} \\). Finally, we substitute the values into the formula for \\( \\alpha \\).",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols\nT = sp.symbols('T')\nV_prime = sp.symbols('V_prime')  # Volume at 300 K\n\n# Step 2: Define the volume equation\nV = V_prime * (0.75 + 3.9e-4 * (T) + 1.48e-6 * (T)**2)\n\n# Step 3: Differentiate V with respect to T\nV_diff = sp.diff(V, T)\n\n# Step 4: Calculate V at T = 320 K\nV_at_320K = V.subs(T, 320)\n\n# Step 5: Calculate dV/dT at T = 320 K\nV_diff_at_320K = V_diff.subs(T, 320)\n\n# Step 6: Calculate the expansion coefficient alpha\nalpha = (1 / V_at_320K) * V_diff_at_320K\n\n# Step 7: Final result assignment\nresult = alpha",
+            "unit": "1/K"
+        },
+        "answer": {
+            "gt_answer": "0.00131",
+            "unit": "$\\mathrm{~K}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "0.00130286685269771",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "$1.31 \\times 10^{-3}$",
+            "comment": " ",
+            "unit": "$\\mathrm{~K}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e1.17(a)(b)",
+        "response": {
+            "reasoning": "To find the pressure exerted by ethane using the van der Waals equation, we first need to define the van der Waals constants for ethane. The van der Waals equation is given by: (P + a(n/V)^2)(V - nb) = nRT. Here, 'P' is the pressure, 'n' is the number of moles, 'V' is the volume, 'T' is the temperature in Kelvin, 'R' is the ideal gas constant, and 'a' and 'b' are the van der Waals constants for the gas. For ethane, a = 5.56 L^2 atm/mol^2 and b = 0.0638 L/mol. We convert the volume from dm^3 to L (1 dm^3 = 1 L) and the temperature from Celsius to Kelvin. After substituting the values into the van der Waals equation, we can solve for the pressure 'P'.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP, n, V, T, R = sp.symbols('P n V T R')\na = 5.56  # L^2 atm/mol^2 for ethane\nb = 0.0638  # L/mol for ethane\nn_value = 10.0  # moles of C2H6\ntemperature_C = 27  # Celsius\nvolume_dm3 = 4.860  # volume in dm^3\n\n# Step 2: Convert temperature to Kelvin and volume to L\nT_value = temperature_C + 273.15  # Convert to Kelvin\nV_value = volume_dm3  # Volume in L\nR_value = 0.0821  # L atm / (K mol)\n\n# Step 3: Set up the van der Waals equation\n# (P + a(n/V)^2)(V - nb) = nRT\n# Rearranging to solve for P:\nP_eq = (n_value * R_value * T_value) / (V_value - n_value * b) - a * (n_value / V_value)**2\n\n# Step 4: Compute the pressure\nresult = P_eq",
+            "unit": "atm"
+        },
+        "answer": {
+            "gt_answer": "35.2",
+            "unit": "$\\mathrm{atm}$ "
+        },
+        "verification_result": {
+            "code_output": "34.82667749625821",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 35.2",
+            "comment": " ",
+            "unit": "$\\mathrm{atm}$ ",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "p2.17(a)",
+        "response": {
+            "reasoning": "To compute the standard enthalpy change for the reaction SiH4(g) \u2192 SiH2(g) + H2(g), we can use the standard enthalpies of formation (\u0394fH\u00b0) of the reactants and products. The standard enthalpy change for a reaction can be calculated using the formula: \u0394H\u00b0 = \u03a3(\u0394fH\u00b0 products) - \u03a3(\u0394fH\u00b0 reactants). Here, the products are SiH2 and H2, and the reactant is SiH4. The standard enthalpy of formation for H2 is 0 kJ/mol since it is in its elemental form. Therefore, we have: \u0394H\u00b0 = [\u0394fH\u00b0(SiH2) + \u0394fH\u00b0(H2)] - [\u0394fH\u00b0(SiH4)]. Substituting the values: \u0394H\u00b0 = [274 kJ/mol + 0 kJ/mol] - [34.3 kJ/mol]. This simplifies to \u0394H\u00b0 = 274 kJ/mol - 34.3 kJ/mol = 239.7 kJ/mol. Thus, the standard enthalpy change for the reaction is +239.7 kJ/mol.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nDelta_f_H_SiH2 = 274  # kJ/mol for SiH2\nDelta_f_H_SiH4 = 34.3  # kJ/mol for SiH4\nDelta_f_H_H2 = 0  # kJ/mol for H2 (elemental state)\n\n# Step 2: Calculate the standard enthalpy change for the reaction\n# Reaction: SiH4(g) -> SiH2(g) + H2(g)\n# \u0394H\u00b0 = \u03a3(\u0394fH\u00b0 products) - \u03a3(\u0394fH\u00b0 reactants)\nDelta_H_reaction = (Delta_f_H_SiH2 + Delta_f_H_H2) - Delta_f_H_SiH4\n\n# Step 3: Assign the final computed result to 'result'\nresult = Delta_H_reaction",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "240",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "239.7",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 240",
+            "comment": " ",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e2.5(a)(a)",
+        "response": {
+            "reasoning": "To calculate the work done during the isothermal expansion of a gas, we use the formula for work done by a gas expanding against a constant external pressure: W = -P_ext * \u0394V, where P_ext is the external pressure and \u0394V is the change in volume. In this case, the external pressure is given as 200 Torr, and the change in volume \u0394V is 3.3 dm\u00b3. We need to convert the pressure from Torr to atm for consistency in units, using the conversion 1 atm = 760 Torr. After calculating the work done, we will express it in Joules, where 1 L\u00b7atm = 101.325 J.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP_ext_torr = 200  # external pressure in Torr\nDelta_V_dm3 = 3.3  # change in volume in dm\u00b3\n\n# Step 2: Convert pressure from Torr to atm\nP_ext_atm = P_ext_torr / 760  # converting Torr to atm\n\n# Step 3: Calculate work done using the formula W = -P_ext * \u0394V\n# Convert \u0394V from dm\u00b3 to L (1 dm\u00b3 = 1 L)\nDelta_V_L = Delta_V_dm3  # in L\n\n# Work done in L\u00b7atm\nW_L_atm = -P_ext_atm * Delta_V_L\n\n# Step 4: Convert work done to Joules (1 L\u00b7atm = 101.325 J)\nW_Joules = W_L_atm * 101.325\n\n# Final result assignment\nresult = W_Joules",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "-88",
+            "unit": "$\\mathrm{J}$ "
+        },
+        "verification_result": {
+            "code_output": "-87.99276315789473",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "$-88$",
+            "comment": " ",
+            "unit": "$\\mathrm{J}$ ",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e3.14(a)",
+        "response": {
+            "reasoning": "To calculate the maximum non-expansion work per mole from the combustion of methane, we can use the Gibbs free energy change (\u0394G) for the reaction. The combustion of methane (CH4) can be represented as: CH4 + 2 O2 -> CO2 + 2 H2O. The Gibbs free energy change for this reaction at 298.15 K can be calculated using standard Gibbs free energies of formation for the reactants and products. The maximum non-expansion work is equal to the negative of the Gibbs free energy change for the reaction.",
+            "code": "import sympy as sp\n\n# Step 1: Define the standard Gibbs free energies of formation (in kJ/mol)\nG_CH4 = -50.8  # for CH4\nG_O2 = 0       # for O2 (element in standard state)\nG_CO2 = -394.4 # for CO2\nG_H2O = -237.1  # for H2O (liquid)\n\n# Step 2: Calculate the Gibbs free energy change for the reaction\n# Reaction: CH4 + 2 O2 -> CO2 + 2 H2O\n# \u0394G = \u03a3G_products - \u03a3G_reactants\n\u0394G = (G_CO2 + 2 * G_H2O) - (G_CH4 + 2 * G_O2)\n\n# Step 3: Calculate the maximum non-expansion work (W_max = -\u0394G)\nW_max = -\u0394G\n\n# Step 4: Assign the final computed result to 'result'\nresult = W_max",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "817.90",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "817.8",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 817.90",
+            "comment": " ",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "p2.17(b)",
+        "response": {
+            "reasoning": "To compute the standard enthalpy change for the reaction Si2H6(g) \u2192 SiH2(g) + SiH4(g), we use the standard enthalpy of formation values provided. The enthalpy change for the reaction (\u0394H\u00b0) can be calculated using the formula: \u0394H\u00b0 = \u03a3\u0394H\u00b0f(products) - \u03a3\u0394H\u00b0f(reactants). Here, the products are SiH2 and SiH4, and the reactant is Si2H6. We substitute the given values: \u0394H\u00b0f(SiH2) = +274 kJ/mol, \u0394H\u00b0f(SiH4) = +34.3 kJ/mol, and \u0394H\u00b0f(Si2H6) = +80.3 kJ/mol. Thus, \u0394H\u00b0 = [\u0394H\u00b0f(SiH2) + \u0394H\u00b0f(SiH4)] - \u0394H\u00b0f(Si2H6).",
+            "code": "import sympy as sp\n\n# Step 1: Define the standard enthalpy of formation values\nDelta_Hf_SiH2 = 274  # kJ/mol\nDelta_Hf_SiH4 = 34.3  # kJ/mol\nDelta_Hf_Si2H6 = 80.3  # kJ/mol\n\n# Step 2: Calculate the standard enthalpy change for the reaction\nDelta_H_reaction = (Delta_Hf_SiH2 + Delta_Hf_SiH4) - Delta_Hf_Si2H6\n\n# Step 3: Assign the result to 'result'\nresult = Delta_H_reaction",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "228",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "228.0",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 228",
+            "comment": " ",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e1.2(a)(b)",
+        "response": {
+            "reasoning": "To find the original pressure of the gas before the isothermal compression, we can use the ideal gas law and the fact that for an isothermal process, the product of pressure and volume remains constant (PV = constant). Given the final pressure (P2 = 5.04 bar) and final volume (V2 = 4.65 dm^3), we can find the original pressure (P1) using the equation P1 * V1 = P2 * V2. The original volume (V1) can be calculated as V1 = V2 + change in volume = 4.65 dm^3 + 2.20 dm^3. We will convert the final pressure from bar to atm (1 bar = 0.986923 atm) to find the original pressure in atm.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP1, P2, V1, V2 = sp.symbols('P1 P2 V1 V2')\nchange_in_volume = 2.20  # dm^3\nV2_value = 4.65  # dm^3\nP2_value = 5.04  # bar\n\n# Step 2: Calculate original volume V1\nV1_value = V2_value + change_in_volume\n\n# Step 3: Set up the equation based on the isothermal process (P1 * V1 = P2 * V2)\nequation = sp.Eq(P1 * V1_value, P2_value * V2_value)\n\n# Step 4: Solve for P1\nP1_solution = sp.solve(equation, P1)[0]\n\n# Step 5: Convert P1 from bar to atm (1 bar = 0.986923 atm)\nP1_atm = P1_solution * 0.986923\nresult = P1_atm",
+            "unit": "atm"
+        },
+        "answer": {
+            "gt_answer": "3.38",
+            "unit": "$\\mathrm{atm}$ "
+        },
+        "verification_result": {
+            "code_output": "3.37657334715328",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 3.38",
+            "comment": " ",
+            "unit": "$\\mathrm{atm}$ ",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e3.13(a)(b)",
+        "response": {
+            "reasoning": "To calculate the total change in entropy for the isothermal irreversible expansion of nitrogen gas, we can use the formula for the change in entropy for an ideal gas during an isothermal process. The change in entropy (\u0394S) for an ideal gas expanding from volume V1 to V2 at constant temperature T is given by \u0394S = nR ln(V2/V1), where n is the number of moles, R is the ideal gas constant, and V2/V1 is the ratio of the final to initial volumes. Given that the mass of nitrogen is 14 g, we first convert this to moles using the molar mass of nitrogen (approximately 28 g/mol). Therefore, n = 14 g / 28 g/mol = 0.5 mol. The volume doubles, so V2/V1 = 2. We can now substitute these values into the entropy change formula. The ideal gas constant R is approximately 8.314 J/(mol K). Finally, we will compute the total change in entropy and return it in the specified JSON format.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nR = 8.314  # Ideal gas constant in J/(mol K)\nmass_N2 = 14  # mass of nitrogen in grams\nmolar_mass_N2 = 28  # molar mass of nitrogen in g/mol\nT = 298.15  # temperature in K\n\n# Step 2: Calculate the number of moles of nitrogen gas\nn = mass_N2 / molar_mass_N2  # in moles\n\n# Step 3: Set up the change in entropy formula for isothermal expansion\nV1 = 1  # initial volume (arbitrary unit)\nV2 = 2 * V1  # final volume (volume doubles)\n\n# Change in entropy calculation\nDelta_S = n * R * sp.ln(V2 / V1)\n\n# Step 4: Compute the final result\nresult = Delta_S.evalf()  # evaluate to get a numerical value",
+            "unit": "J/K"
+        },
+        "answer": {
+            "gt_answer": "+2.9",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "2.88141282958769",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " +2.9",
+            "comment": " ",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e1.2(a)(a)",
+        "response": {
+            "reasoning": "To find the original pressure of the gas before compression, we can use the ideal gas law and the fact that the process is isothermal. For an isothermal process, the product of pressure and volume remains constant (PV = constant). We know the final pressure (P2 = 5.04 bar) and final volume (V2 = 4.65 dm^3). The change in volume is given as \u0394V = 2.20 dm^3, which means the original volume (V1) can be calculated as V1 = V2 + \u0394V. Once we have V1, we can use the relationship P1 * V1 = P2 * V2 to find the original pressure (P1).",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols\nP1, V1, P2, V2 = sp.symbols('P1 V1 P2 V2')\n\n# Step 2: Given values\nP2_value = 5.04  # final pressure in bar\nV2_value = 4.65  # final volume in dm^3\nDelta_V = 2.20   # change in volume in dm^3\n\n# Calculate original volume V1\nV1_value = V2_value + Delta_V\n\n# Step 3: Set up the equation based on the isothermal process (P1 * V1 = P2 * V2)\n# Rearranging gives us P1 = (P2 * V2) / V1\nP1_expr = (P2 * V2) / V1\n\n# Substitute known values into the equation\nP1_value = P1_expr.subs({P2: P2_value, V2: V2_value, V1: V1_value})\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = P1_value",
+            "unit": "bar"
+        },
+        "answer": {
+            "gt_answer": "3.42",
+            "unit": "$ \\mathrm{bar}$"
+        },
+        "verification_result": {
+            "code_output": "3.42131386861314",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 3.42",
+            "comment": " ",
+            "unit": "$ \\mathrm{bar}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e2.2(a)",
+        "response": {
+            "reasoning": "To calculate the work done by the system during the expansion against an external pressure, we can use the formula for work done by a gas during expansion: W = -P_ext * \u0394V, where P_ext is the external pressure and \u0394V is the change in volume. First, we need to convert the cross-sectional area from cm\u00b2 to m\u00b2 and the external pressure from atm to Pa. The area is 100 cm\u00b2 = 0.01 m\u00b2 and the pressure is 1.0 atm = 101325 Pa. The change in volume \u0394V can be calculated as the area multiplied by the distance the piston moves: \u0394V = A * d = 0.01 m\u00b2 * 0.1 m = 0.001 m\u00b3. Substituting these values into the work formula gives us W = -101325 Pa * 0.001 m\u00b3 = -101.325 J. The negative sign indicates that work is done by the system.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nA = 100 * 10**-4  # Area in m\u00b2 (100 cm\u00b2 to m\u00b2)\nd = 10 * 10**-2  # Distance in m (10 cm to m)\nP_ext = 1.0 * 101325  # External pressure in Pa (1 atm to Pa)\n\n# Step 2: Calculate the change in volume\nDelta_V = A * d  # Change in volume in m\u00b3\n\n# Step 3: Calculate the work done by the system\nW = -P_ext * Delta_V  # Work done in Joules\n\n# Step 4: Assign the final result to 'result'\nresult = W",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "-100",
+            "unit": "$\\mathrm{J}$"
+        },
+        "verification_result": {
+            "code_output": "-101.325",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "$-1.0 \\times 10^2$",
+            "comment": " ",
+            "unit": "$\\mathrm{J}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e1.1(a)(a)",
+        "response": {
+            "reasoning": "To find the pressure exerted by the xenon gas, we can use the Ideal Gas Law, which is given by the equation PV = nRT. Here, P is the pressure, V is the volume, n is the number of moles of gas, R is the ideal gas constant, and T is the temperature in Kelvin. First, we need to convert the mass of xenon to moles using its molar mass (approximately 131.29 g/mol). Then, we convert the temperature from Celsius to Kelvin by adding 273.15. Finally, we can rearrange the Ideal Gas Law to solve for pressure P = nRT/V.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nmass_xenon = 131  # mass of xenon in grams\ntemperature_C = 25  # temperature in Celsius\nvolume_dm3 = 1.0  # volume in dm^3\nmolar_mass_xenon = 131.29  # molar mass of xenon in g/mol\nR = 0.0821  # ideal gas constant in L\u00b7atm/(K\u00b7mol)\n\n# Step 2: Convert mass to moles\nn = mass_xenon / molar_mass_xenon  # number of moles\n\n# Step 3: Convert temperature to Kelvin\ntemperature_K = temperature_C + 273.15\n\n# Step 4: Convert volume from dm^3 to L (1 dm^3 = 1 L)\nvolume_L = volume_dm3  # volume in L\n\n# Step 5: Use Ideal Gas Law to calculate pressure\nP = n * R * temperature_K / volume_L  # pressure in atm\n\n# Step 6: Assign the final result to 'result'\nresult = P",
+            "unit": "atm"
+        },
+        "answer": {
+            "gt_answer": "24",
+            "unit": "$\\mathrm{atm}$"
+        },
+        "verification_result": {
+            "code_output": "24.42404650011425",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 24",
+            "comment": " ",
+            "unit": "$\\mathrm{atm}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "p1.5(b)",
+        "response": {
+            "reasoning": "To find the pressure at 100.00 \u00b0C using the ideal gas law, we can use the relationship between pressure and temperature for a constant volume gas. According to Gay-Lussac's law, the pressure of a gas is directly proportional to its absolute temperature when the volume is held constant. We can express this relationship as P1/T1 = P2/T2, where P1 is the initial pressure, T1 is the initial temperature, P2 is the final pressure, and T2 is the final temperature. We know P1 = 6.69 kPa at T1 = 273.16 K, and we want to find P2 at T2 = 100.00 \u00b0C, which is 373.15 K in absolute temperature. Rearranging the equation gives us P2 = P1 * (T2/T1). Substituting the known values will yield the final pressure.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP1 = 6.69  # initial pressure in kPa\nT1 = 273.16  # initial temperature in K\nT2 = 100 + 273.15  # final temperature in K (converted from Celsius)\n\n# Step 2: Calculate final pressure using the proportionality of pressure and temperature\nP2 = P1 * (T2 / T1)\n\n# Step 3: Assign the final result to 'result'\nresult = P2",
+            "unit": "kPa"
+        },
+        "answer": {
+            "gt_answer": "9.14",
+            "unit": "$\\mathrm{kPa}$ "
+        },
+        "verification_result": {
+            "code_output": "9.138869160931321",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 9.14",
+            "comment": " ",
+            "unit": "$\\mathrm{kPa}$ ",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "p1.5(a)",
+        "response": {
+            "reasoning": "To find the change of pressure that indicates a change of 1.00 K, we can use the ideal gas law, which states that for a constant volume, the pressure of a gas is directly proportional to its temperature. We can express this relationship as P/T = constant. Given that the pressure at the triple point (273.16 K) is 6.69 kPa, we can find the change in pressure for a 1 K change in temperature by calculating the slope of the line in the P-T graph. The change in pressure (dP) for a change in temperature (dT) can be expressed as dP = (P2 - P1) / (T2 - T1). Here, P1 = 6.69 kPa at T1 = 273.16 K and T2 = 274.16 K. We can calculate P2 using the proportionality constant and then find dP.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP1 = 6.69  # pressure at triple point in kPa\nT1 = 273.16  # temperature at triple point in K\nT2 = T1 + 1  # temperature after 1 K increase\n\n# Step 2: Use the ideal gas law relationship P/T = constant\n# We can express the change in pressure as follows:\nP2 = P1 * (T2 / T1)  # new pressure at T2\n\n# Step 3: Calculate the change in pressure\nchange_in_pressure = P2 - P1\n\n# Step 4: Assign the final computed result to 'result'\nresult = change_in_pressure",
+            "unit": "kPa"
+        },
+        "answer": {
+            "gt_answer": "0.0245",
+            "unit": "$\\mathrm{kPa}$ "
+        },
+        "verification_result": {
+            "code_output": "0.024491140723385207",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.0245",
+            "comment": " ",
+            "unit": "$\\mathrm{kPa}$ ",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e1.14(a)(b)",
+        "response": {
+            "reasoning": "The van der Waals parameter 'b' represents the volume occupied by one mole of a gas at standard conditions. The given value is in dm^3/mol. To convert this to SI base units, we need to convert dm^3 to m^3. Since 1 dm^3 is equal to 0.001 m^3, we can convert the value as follows: b = 0.0226 dm^3/mol * 0.001 m^3/dm^3 = 0.0000226 m^3/mol. Thus, the SI base unit for 'b' is m^3/mol.",
+            "code": "import sympy as sp\n\n# Step 1: Define the given value in dm^3/mol\nb_dm3_per_mol = 0.0226  # in dm^3/mol\n\n# Step 2: Convert dm^3 to m^3 (1 dm^3 = 0.001 m^3)\nconversion_factor = 0.001  # m^3/dm^3\nb_m3_per_mol = b_dm3_per_mol * conversion_factor  # in m^3/mol\n\n# Step 3: Assign the final result\nresult = b_m3_per_mol",
+            "unit": "m^3/mol"
+        },
+        "answer": {
+            "gt_answer": "0.0000226",
+            "unit": " $\\mathrm{~m}^3 \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "2.26e-05",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 2.26 \\times 10^{-5} ",
+            "comment": " ",
+            "unit": " $\\mathrm{~m}^3 \\mathrm{~mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e3.17(a)",
+        "response": {
+            "reasoning": "To find the change in entropy (Delta S) for the process, we can use the relationship between Gibbs free energy (Delta G), temperature (T), and entropy (Delta S). The Gibbs free energy change is related to entropy change by the equation: Delta G = Delta H - T * Delta S. For a constant pressure process, we can also express Delta G as a function of temperature. Given the expression for Delta G, we can differentiate it with respect to temperature to find Delta S. The derivative of Delta G with respect to T gives us -Delta S. Thus, we will differentiate the given expression for Delta G and evaluate it at T = 298.15 K to find Delta S.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols\nT = sp.symbols('T')\n\n# Step 2: Define the expression for Delta G\nDelta_G = -85.40 + 36.5 * (T)\n\n# Step 3: Differentiate Delta G with respect to T to find Delta S\nDelta_S = -sp.diff(Delta_G, T)\n\n# Step 4: Evaluate Delta S at T = 298.15 K\nDelta_S_value = Delta_S.subs(T, 298.15)\n\n# Step 5: Assign the final computed value to 'result'\nresult = Delta_S_value",
+            "unit": "J/K"
+        },
+        "answer": {
+            "gt_answer": "-36.5",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "-36.5000000000000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -36.5",
+            "comment": " ",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "p3.37",
+        "response": {
+            "reasoning": "To estimate the additional non-expansion work that can be obtained by raising the temperature from 298 K to 310 K (37 \u00b0C), we can use the Gibbs free energy change. The change in Gibbs free energy (\u0394G) at a new temperature can be calculated using the equation \u0394G(T) = \u0394H - T\u0394S. We know \u0394H (enthalpy change) and \u0394G at 298 K, and we can find \u0394S (entropy change) using the relation \u0394G = \u0394H - T\u0394S at 298 K. After calculating \u0394S, we can then find \u0394G at 310 K and determine the additional non-expansion work as \u0394G(310 K) - \u0394G(298 K).",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nT1 = 298  # Initial temperature in K\nT2 = 310  # Final temperature in K (37 \u00b0C)\nDelta_H = -5797  # Standard enthalpy of combustion in kJ/mol\nDelta_G_298 = -6333  # Standard Gibbs energy at 298 K in kJ/mol\n\n# Step 2: Calculate the entropy change (Delta_S) using the relation at T1\nDelta_S = (Delta_H - Delta_G_298) / T1\n\n# Step 3: Calculate the Gibbs free energy at T2\nDelta_G_310 = Delta_H - T2 * Delta_S\n\n# Step 4: Calculate the additional non-expansion work\nadditional_work = Delta_G_310 - Delta_G_298\n\n# Step 5: Assign the final computed result to 'result'\nresult = additional_work",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "-21",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "-21.583892617449237",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -21",
+            "comment": " ",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e3.5(a)(b)",
+        "response": {
+            "reasoning": "To calculate the total entropy change (\u0394S_tot) when two copper blocks are brought into thermal contact, we first need to find the final equilibrium temperature (T_f) of the system. We use the principle of conservation of energy, where the heat lost by the hot block equals the heat gained by the cold block. The specific heat capacity (c) is given in J/(g\u00b7K), so we convert the mass of the blocks from kg to g. After finding T_f, we calculate the entropy change for each block using \u0394S = m * c * ln(T_f/T_initial) and sum these changes to find \u0394S_tot. The final result will be expressed in J/K.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nm = 10.0 * 1000  # mass in grams (10 kg to grams)\nc = 0.385  # specific heat capacity in J/(g*K)\nT_hot_initial = 100 + 273.15  # initial temperature of hot block in K\nT_cold_initial = 0 + 273.15  # initial temperature of cold block in K\n\n# Step 2: Calculate final equilibrium temperature (T_f)\n# Heat lost by hot block = Heat gained by cold block\n# m * c * (T_hot_initial - T_f) = m * c * (T_f - T_cold_initial)\nT_f = sp.symbols('T_f')\nequation = sp.Eq(m * c * (T_hot_initial - T_f), m * c * (T_f - T_cold_initial))\nT_f_solution = sp.solve(equation, T_f)[0]\n\n# Step 3: Calculate entropy changes\n# \u0394S_hot = m * c * ln(T_f / T_hot_initial)\n# \u0394S_cold = m * c * ln(T_f / T_cold_initial)\nDelta_S_hot = m * c * sp.ln(T_f_solution / T_hot_initial)\nDelta_S_cold = m * c * sp.ln(T_f_solution / T_cold_initial)\n\n# Total entropy change\nDelta_S_tot = Delta_S_hot + Delta_S_cold\n\n# Step 4: Assign the final computed result to 'result'\nresult = Delta_S_tot.simplify()",
+            "unit": "J/K"
+        },
+        "answer": {
+            "gt_answer": "+93.4",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "93.2918332449406",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " +93.4",
+            "comment": " ",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e2.18(a)",
+        "response": {
+            "reasoning": "To calculate the standard enthalpy of combustion of ethylbenzene, we can use Hess's law and the standard enthalpy of formation. The combustion reaction of ethylbenzene (C8H10) can be represented as: C8H10 + 10 O2 -> 8 CO2 + 5 H2O. The standard enthalpy of combustion is calculated using the formula: \u0394H_comb = \u03a3\u0394H_f(products) - \u03a3\u0394H_f(reactants). The standard enthalpy of formation of CO2 is -393.5 kJ/mol and for H2O is -241.8 kJ/mol. We will calculate the total enthalpy of formation for the products and subtract the enthalpy of formation of ethylbenzene to find the enthalpy of combustion.",
+            "code": "import sympy as sp\n\n# Step 1: Define the standard enthalpy of formation values\nDeltaH_f_C8H10 = -12.5  # kJ/mol for ethylbenzene\nDeltaH_f_CO2 = -393.5    # kJ/mol for carbon dioxide\nDeltaH_f_H2O = -241.8     # kJ/mol for water\n\n# Step 2: Calculate the total enthalpy of formation for products\n# 8 moles of CO2 and 5 moles of H2O\nDeltaH_f_products = 8 * DeltaH_f_CO2 + 5 * DeltaH_f_H2O\n\n# Step 3: Calculate the standard enthalpy of combustion\nDeltaH_comb = DeltaH_f_products - DeltaH_f_C8H10\n\n# Step 4: Assign the result\nresult = DeltaH_comb",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "-4564.7",
+            "unit": " $\\mathrm{kJ} \\mathrm{mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "-4344.5",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -4564.7",
+            "comment": " ",
+            "unit": " $\\mathrm{kJ} \\mathrm{mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e2.1(a)(a)",
+        "response": {
+            "reasoning": "To calculate the work done against gravity when a person climbs a height, we use the formula W = m * g * h, where W is the work done, m is the mass of the person, g is the acceleration due to gravity (approximately 9.81 m/s\u00b2), and h is the height climbed. In this case, we have m = 65 kg, g = 9.81 m/s\u00b2, and h = 4.0 m. By substituting these values into the equation, we can find the work done.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nm = 65  # mass in kg\nh = 4.0  # height in meters\ng = 9.81  # acceleration due to gravity in m/s^2\n\n# Step 2: Set up the equation for work done against gravity\nW = m * g * h\n\n# Step 3: Calculate the work done\nresult = W",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "2600",
+            "unit": "$\\mathrm{J}$"
+        },
+        "verification_result": {
+            "code_output": "2550.6",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "$2.6 \\times 10^3$",
+            "comment": " ",
+            "unit": "$\\mathrm{J}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e2.1(a)(b)",
+        "response": {
+            "reasoning": "To calculate the work done in lifting a person against gravity, we use the formula: Work = m * g * h, where m is the mass of the person, g is the acceleration due to gravity, and h is the height climbed. Here, m = 65 kg, g = 1.60 m/s^2, and h = 4.0 m. Substituting these values into the formula gives us the total work done.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nm = 65  # mass of the person in kg\nh = 4.0  # height in meters\n\ng = 1.60  # acceleration due to gravity on the Moon in m/s^2\n\n# Step 2: Calculate the work done using the formula Work = m * g * h\nwork = m * g * h\n\n# Step 3: Assign the final computed result to 'result'\nresult = work",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "420",
+            "unit": " $\\mathrm{J}$"
+        },
+        "verification_result": {
+            "code_output": "416.0",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "$4.2 \\times 10^2$",
+            "comment": " ",
+            "unit": " $\\mathrm{J}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "20.1",
+        "response": {
+            "reasoning": "To find the mean speed of nitrogen molecules at a given temperature, we use the formula for the mean speed of gas molecules, which is derived from the kinetic theory of gases. The formula is given by: \\( \\bar{c} = \\sqrt{\\frac{8kT}{\\pi m}} \\), where \\( k \\) is the Boltzmann constant, \\( T \\) is the absolute temperature in Kelvin, and \\( m \\) is the mass of a nitrogen molecule. First, we convert the temperature from Celsius to Kelvin by adding 273.15. The mass of a nitrogen molecule can be calculated from its molar mass (approximately 28 g/mol) converted to kg. After substituting the values into the formula, we can compute the mean speed.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nk = 1.38e-23  # Boltzmann constant in J/K\nT = 25 + 273.15  # Temperature in Kelvin\nmolar_mass_N2 = 28e-3  # Molar mass of N2 in kg/mol\nm = molar_mass_N2 / 6.022e23  # Mass of one N2 molecule in kg\n\n# Step 2: Calculate mean speed using the formula\nmean_speed = sp.sqrt((8 * k * T) / (sp.pi * m))\n\n# Step 3: Compute the final result\nresult = mean_speed.evalf()  # Evaluate to get a numerical result",
+            "unit": "m/s"
+        },
+        "answer": {
+            "gt_answer": "475",
+            "unit": " $\\mathrm{~m} \\mathrm{~s}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "474.699054949334",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "The integral required is\r\n$$\r\n\\begin{aligned}\r\n\\bar{c} & =4 \\pi\\left(\\frac{M}{2 \\pi R T}\\right)^{3 / 2} \\int_0^{\\infty} v^3 \\mathrm{e}^{-M v^2 / 2 R T} \\mathrm{~d} v \\\\\r\n& =4 \\pi\\left(\\frac{M}{2 \\pi R T}\\right)^{3 / 2} \\times \\frac{1}{2}\\left(\\frac{2 R T}{M}\\right)^2=\\left(\\frac{8 R T}{\\pi M}\\right)^{1 / 2}\r\n\\end{aligned}\r\n$$\r\nwhere we have used the standard result from tables of integrals (or software) that\r\n$$\r\n\\int_0^{\\infty} x^3 \\mathrm{e}^{-a x^2} \\mathrm{~d} x=\\frac{1}{2 a^2}\r\n$$\r\nSubstitution of the data then gives\r\n$$\r\n\\bar{c}=\\left(\\frac{8 \\times\\left(8.3141 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}\\right) \\times(298 \\mathrm{~K})}{\\pi \\times\\left(28.02 \\times 10^{-3} \\mathrm{~kg} \\mathrm{~mol}^{-1}\\right)}\\right)^{1 / 2}=475 \\mathrm{~m} \\mathrm{~s}^{-1}\r\n$$\r\nwhere we have used $1 \\mathrm{~J}=1 \\mathrm{~kg} \\mathrm{~m}^2 \\mathrm{~s}^{-2}$.\r\n",
+            "answer_latex": " 475",
+            "comment": " ",
+            "unit": " $\\mathrm{~m} \\mathrm{~s}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "19.1",
+        "response": {
+            "reasoning": "To calculate the separation of the {123} planes in an orthorhombic unit cell, we use the formula for the interplanar spacing d_hkl, which is given by: d_hkl = (1 / sqrt(h^2/a^2 + k^2/b^2 + l^2/c^2)). Here, h, k, l are the Miller indices of the planes, and a, b, c are the lattice parameters. For the {123} planes, h=1, k=2, l=3. We substitute the values of a, b, and c into the formula to find the separation.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\na = 0.82  # nm\nb = 0.94  # nm\nc = 0.75  # nm\nh, k, l = 1, 2, 3  # Miller indices for {123} planes\n\n# Step 2: Calculate the interplanar spacing d_hkl\nd_hkl = 1 / sp.sqrt(h**2 / a**2 + k**2 / b**2 + l**2 / c**2)\n\n# Step 3: Compute the final result\nd_hkl_value = d_hkl.evalf()  # Evaluate to a numerical value\n\n# Step 4: Assign the final result to 'result'\nresult = d_hkl_value",
+            "unit": "nm"
+        },
+        "answer": {
+            "gt_answer": "0.21",
+            "unit": " $\\mathrm{~nm}$"
+        },
+        "verification_result": {
+            "code_output": "0.213132208950588",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "\nFor the first part, simply substitute the information into eqn $$\n\\frac{1}{d_{h k l}^2}=\\frac{h^2}{a^2}+\\frac{k^2}{b^2}+\\frac{l^2}{c^2}\n$$. For the second part, instead of repeating the calculation, note that, if all three Miller indices are multiplied by $n$, then their separation is reduced by that factor:\r\n$$\r\n\\frac{1}{d_{n h, n k, n l}^2}=\\frac{(n h)^2}{a^2}+\\frac{(n k)^2}{b^2}+\\frac{(n l)^2}{c^2}=n^2\\left(\\frac{h^2}{a^2}+\\frac{k^2}{b^2}+\\frac{l^2}{c^2}\\right)=\\frac{n^2}{d_{h k l}^2}\r\n$$\r\nwhich implies that\r\n$$\r\nd_{n h, n k, n l}=\\frac{d_{h k l}}{n}\r\n$$\r\nAnswer Substituting the indices into eqn $$\n\\frac{1}{d_{h k l}^2}=\\frac{h^2}{a^2}+\\frac{k^2}{b^2}+\\frac{l^2}{c^2}\n$$ gives\r\n$$\r\n\\frac{1}{d_{123}^2}=\\frac{1^2}{(0.82 \\mathrm{~nm})^2}+\\frac{2^2}{(0.94 \\mathrm{~nm})^2}+\\frac{3^2}{(0.75 \\mathrm{~nm})^2}=0.22 \\mathrm{~nm}^{-2}\r\n$$\r\nHence, $d_{123}=0.21 \\mathrm{~nm}$.\n",
+            "answer_latex": " 0.21",
+            "comment": " ",
+            "unit": " $\\mathrm{~nm}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "12.1",
+        "response": {
+            "reasoning": "To calculate the moment of inertia of an H2O molecule around the axis defined by the bisector of the HOH angle, we first need to determine the positions of the hydrogen atoms relative to the oxygen atom. The bond angle is given as 104.5 degrees, and the bond length is 95.7 pm. We can place the oxygen atom at the origin and calculate the coordinates of the hydrogen atoms using trigonometric functions. The moment of inertia is calculated using the formula I = \u03a3 m_i r_i^2, where m_i is the mass of each atom and r_i is the distance from the axis of rotation to the atom. The masses of the hydrogen and oxygen atoms are approximately 1.008 u and 16.00 u, respectively. After calculating the distances and substituting the values, we can compute the moment of inertia.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nangle = 104.5 * sp.pi / 180  # Convert angle to radians\nbond_length = 95.7e-12  # Bond length in meters (pm to m)\n\n# Step 2: Define masses of atoms (in kg)\nm_H = 1.008 * 1.66053906660e-27  # Mass of hydrogen in kg\nm_O = 16.00 * 1.66053906660e-27  # Mass of oxygen in kg\n\n# Step 3: Calculate coordinates of hydrogen atoms\n# Oxygen atom at origin (0, 0, 0)\nO = sp.Matrix([0, 0, 0])\nH1 = sp.Matrix([bond_length * sp.sin(angle / 2), 0, bond_length * sp.cos(angle / 2)])\nH2 = sp.Matrix([-bond_length * sp.sin(angle / 2), 0, bond_length * sp.cos(angle / 2)])\n\n# Step 4: Calculate the distances from the axis defined by the bisector of the HOH angle\n# The bisector is along the y-axis, so we need the x-coordinates for the moment of inertia\nr_H1 = H1[0]  # x-coordinate of H1\nr_H2 = H2[0]  # x-coordinate of H2\n\n# Step 5: Calculate the moment of inertia I = m_H * r_H1^2 + m_H * r_H2^2 + m_O * 0^2\nI = m_H * r_H1**2 + m_H * r_H2**2\n\n# Step 6: Compute the final result\nresult = I.evalf()",
+            "unit": "kg*m^2"
+        },
+        "answer": {
+            "gt_answer": "1.91",
+            "unit": " $10^{-47} \\mathrm{~kg} \\mathrm{~m}^2$"
+        },
+        "verification_result": {
+            "code_output": "1.91679436955740",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "\n$$\r\nI=\\sum_i m_i x_i^2=m_{\\mathrm{H}} x_{\\mathrm{H}}^2+0+m_{\\mathrm{H}} x_{\\mathrm{H}}^2=2 m_{\\mathrm{H}} x_{\\mathrm{H}}^2\r\n$$\r\nIf the bond angle of the molecule is denoted $2 \\phi$ and the bond length is $R$, trigonometry gives $x_{\\mathrm{H}}=R \\sin \\phi$. It follows that\r\n$$\r\nI=2 m_{\\mathrm{H}} R^2 \\sin ^2 \\phi\r\n$$\r\nSubstitution of the data gives\r\n$$\r\n\\begin{aligned}\r\nI & =2 \\times\\left(1.67 \\times 10^{-27} \\mathrm{~kg}\\right) \\times\\left(9.57 \\times 10^{-11} \\mathrm{~m}\\right)^2 \\times \\sin ^2\\left(\\frac{1}{2} \\times 104.5^{\\circ}\\right) \\\\\r\n& =1.91 \\times 10^{-47} \\mathrm{~kg} \\mathrm{~m}^2\r\n\\end{aligned}\r\n$$\r\nNote that the mass of the $\\mathrm{O}$ atom makes no contribution to the moment of inertia for this mode of rotation as the atom is immobile while the $\\mathrm{H}$ atoms circulate around it.\n",
+            "answer_latex": " 1.91",
+            "comment": " ",
+            "unit": " $10^{-47} \\mathrm{~kg} \\mathrm{~m}^2$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "7.2",
+        "response": {
+            "reasoning": "To estimate the wavelength of electrons accelerated through a potential difference, we can use the de Broglie wavelength formula, which is given by \\( \\lambda = \\frac{h}{p} \\), where \\( h \\) is Planck's constant and \\( p \\) is the momentum of the electron. The momentum can be calculated using the kinetic energy gained by the electron when it is accelerated through a potential difference \\( V \\). The kinetic energy \\( KE \\) is given by \\( KE = eV \\), where \\( e \\) is the charge of the electron. For an electron accelerated through \\( 40 \\mathrm{kV} \\), the kinetic energy is \\( KE = e \\cdot 40,000 \\mathrm{V} \\). The momentum \\( p \\) can be related to kinetic energy by the equation \\( p = \\sqrt{2m_e KE} \\), where \\( m_e \\) is the mass of the electron. After calculating the momentum, we can substitute it back into the de Broglie wavelength formula to find the wavelength. The final result will be in meters.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nV = 40000  # potential difference in volts\nm_e = 9.10938356e-31  # mass of electron in kg\nh = 6.62607015e-34  # Planck's constant in J.s\ne = 1.602176634e-19  # charge of electron in coulombs\n\n# Step 2: Calculate kinetic energy gained by the electron\nKE = e * V  # kinetic energy in joules\n\n# Step 3: Calculate momentum of the electron\np = sp.sqrt(2 * m_e * KE)  # momentum in kg.m/s\n\n# Step 4: Calculate de Broglie wavelength\nlambda_ = h / p  # wavelength in meters\n\n# Step 5: Assign the final result\nresult = lambda_",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "6.1",
+            "unit": " $10^{-12} \\mathrm{~m}$"
+        },
+        "verification_result": {
+            "code_output": "6.13212987841726",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": " The expression $p^2 / 2 m_{\\mathrm{e}}=e \\Delta \\phi$ solves to $p=\\left(2 m_{\\mathrm{e}} e \\Delta \\phi\\right)^{1 / 2}$; then, from the de Broglie relation $\\lambda=h / p$,\r\n$$\r\n\\lambda=\\frac{h}{\\left(2 m_{\\mathrm{e}} e \\Delta \\phi\\right)^{1 / 2}}\r\n$$\r\nSubstitution of the data and the fundamental constants (from inside the front cover) gives\r\n$$\r\n\\begin{aligned}\r\n\\lambda & =\\frac{6.626 \\times 10^{-34} \\mathrm{~J} \\mathrm{~s}}{\\left\\{2 \\times\\left(9.109 \\times 10^{-31} \\mathrm{~kg}\\right) \\times\\left(1.602 \\times 10^{-19} \\mathrm{C}\\right) \\times\\left(4.0 \\times 10^4 \\mathrm{~V}\\right)\\right\\}^{1 / 2}} \\\\\r\n& =6.1 \\times 10^{-12} \\mathrm{~m}\r\n\\end{aligned}\r\n$$\r\n",
+            "answer_latex": " 6.1",
+            "comment": " ",
+            "unit": " $10^{-12} \\mathrm{~m}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "1.2",
+        "response": {
+            "reasoning": "To find the pressure exerted by nitrogen at the working temperature of 500 K, we can use the ideal gas law, which states that P1/T1 = P2/T2 for a constant volume process. Here, P1 is the initial pressure (100 atm) and T1 is the initial temperature (300 K). We need to find P2 at the final temperature T2 (500 K). Rearranging the equation gives us P2 = P1 * (T2 / T1). Substituting the values, we find P2 = 100 atm * (500 K / 300 K).",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP1 = 100  # initial pressure in atm\nT1 = 300  # initial temperature in K\nT2 = 500  # final temperature in K\n\n# Step 2: Use the ideal gas law relation for constant volume\nP2 = P1 * (T2 / T1)  # final pressure calculation\n\n# Step 3: Assign the final result to 'result'\nresult = P2",
+            "unit": "atm"
+        },
+        "answer": {
+            "gt_answer": "167",
+            "unit": " $\\mathrm{atm}$"
+        },
+        "verification_result": {
+            "code_output": "166.66666666666669",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "Cancellation of the volumes (because $V_1=V_2$ ) and amounts (because $\\left.n_1=n_2\\right)$ on each side of the combined gas law results in\r\n$$\r\n\\frac{p_1}{T_1}=\\frac{p_2}{T_2}\r\n$$\r\nwhich can be rearranged into\r\n$$\r\np_2=\\frac{T_2}{T_1} \\times p_1\r\n$$\r\nSubstitution of the data then gives\r\n$$\r\np_2=\\frac{500 \\mathrm{~K}}{300 \\mathrm{~K}} \\times(100 \\mathrm{~atm})=167 \\mathrm{~atm}\r\n$$\r\n",
+            "answer_latex": " 167",
+            "comment": " ",
+            "unit": " $\\mathrm{atm}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "6.4.9(b)",
+        "response": {
+            "reasoning": "We start by using Hooke's Law, which states that the force required to stretch or compress a spring is proportional to the distance it is stretched or compressed from its natural length. The work done on the spring can be expressed as W = (1/2) * k * x^2, where k is the spring constant and x is the displacement from the natural length. We know that 2 J of work is done to stretch the spring from 30 cm to 42 cm, which is a displacement of 12 cm (0.12 m). We can use this information to find the spring constant k. After finding k, we can then use Hooke's Law to find out how far the spring will stretch when a force of 30 N is applied. The force exerted by the spring is given by F = k * x, where x is the new displacement from the natural length. We can solve for x using the known force and the spring constant k.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols\nk, x = sp.symbols('k x')\nW = 2  # Work done in Joules\nx1 = 0.12  # Displacement from natural length in meters (42 cm - 30 cm)\n\n# Step 2: Set up the equation for work done on the spring\nwork_eq = sp.Eq(W, (1/2) * k * x1**2)\n\n# Step 3: Solve for the spring constant k\nk_value = sp.solve(work_eq, k)[0]\n\n# Step 4: Use Hooke's Law to find the displacement for a force of 30 N\nF = 30  # Force in Newtons\nforce_eq = sp.Eq(F, k_value * x)\n\n# Step 5: Solve for x\nx_solution = sp.solve(force_eq, x)[0]\n\n# Final result assignment\nresult = x_solution",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "10.8",
+            "unit": " $\\mathrm{cm}$"
+        },
+        "verification_result": {
+            "code_output": "10.8",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 10.8",
+            "comment": " ",
+            "unit": " $\\mathrm{cm}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "12.3.49",
+        "response": {
+            "reasoning": "To find the work done by a force when moving an object along a straight path, we can use the formula: Work = Force \u00b7 Displacement. First, we calculate the displacement vector by subtracting the initial position from the final position. The displacement vector is given by: (6-0) i + (12-10) j + (20-8) k = 6 i + 2 j + 12 k. Next, we compute the dot product of the force vector F = 8 i - 6 j + 9 k with the displacement vector. The dot product is calculated as: (8*6) + (-6*2) + (9*12). Finally, we sum these products to find the total work done, which will be in joules (J).",
+            "code": "import sympy as sp\n\n# Step 1: Define the force vector and the initial and final positions\nF = sp.Matrix([8, -6, 9])  # Force vector in newtons\ninitial_position = sp.Matrix([0, 10, 8])  # Initial position (0, 10, 8)\nfinal_position = sp.Matrix([6, 12, 20])  # Final position (6, 12, 20)\n\n# Step 2: Calculate the displacement vector\ndisplacement = final_position - initial_position  # Displacement vector\n\n# Step 3: Calculate the work done using the dot product\nwork_done = F.dot(displacement)  # Work = Force \u00b7 Displacement\n\n# Step 4: Assign the final computed value to 'result'\nresult = work_done",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "144",
+            "unit": " $\\mathrm{J}$"
+        },
+        "verification_result": {
+            "code_output": "144",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 144",
+            "comment": " ",
+            "unit": " $\\mathrm{J}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "6.4.17",
+        "response": {
+            "reasoning": "To calculate the work done in lifting the bucket and the water, we first need to express the total weight being lifted as a function of height. The bucket has a constant mass of 10 kg, and the mass of the water decreases linearly from 36 kg to 0 kg over the height of 12 m. The rope also contributes to the weight, with its mass being 0.8 kg/m. We can express the total weight as a function of height, W(h) = (10 + (36 - 3h) + 0.8h)g, where g is the acceleration due to gravity. The work done is then the integral of this weight function from 0 to 12 m. We will compute this integral to find the total work done in lifting the bucket and the water. The final result will be in Joules (J).",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\ng = 9.81  # acceleration due to gravity in m/s^2\nh = sp.symbols('h')  # height variable\n\n# Constants\ntotal_mass_bucket = 10  # kg\ninitial_mass_water = 36  # kg\nmass_per_meter_rope = 0.8  # kg/m\nheight_total = 12  # m\n\n# Step 2: Define the weight function as a function of height\n# Water leaks at a constant rate, so at height h, the mass of water is:\n# mass_water = initial_mass_water - (initial_mass_water / height_total) * h\nmass_water = initial_mass_water - (initial_mass_water / height_total) * h\n\n# The mass of the rope lifted is:\n# mass_rope = mass_per_meter_rope * h\nmass_rope = mass_per_meter_rope * h\n\n# Total weight being lifted at height h\nweight = (total_mass_bucket + mass_water + mass_rope) * g\n\n# Step 3: Set up the integral for work done\nwork_done = sp.integrate(weight, (h, 0, height_total))\n\n# Step 4: Compute the final result\nresult = work_done",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "3857",
+            "unit": " $\\mathrm{J}$"
+        },
+        "verification_result": {
+            "code_output": "3861.21600000000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 3857",
+            "comment": " ",
+            "unit": " $\\mathrm{J}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "10.6.27",
+        "response": {
+            "reasoning": "To find the maximum distance from Halley's comet to the sun, we first need to determine the semi-major axis (a) and the semi-minor axis (b) of the ellipse. The semi-major axis is half the length of the major axis, which is 36.18 AU, giving us a = 18.09 AU. The eccentricity (e) is given as 0.97. We can find the semi-minor axis using the relationship b = a * sqrt(1 - e^2). The maximum distance from the comet to the sun occurs at the aphelion, which is given by the formula r_aphelion = a * (1 + e). Substituting the values we calculated will yield the maximum distance.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nAU = 36.18 / 2  # semi-major axis in AU\neccentricity = 0.97  # eccentricity of the orbit\n\n# Step 2: Calculate semi-minor axis\nsemi_minor_axis = AU * sp.sqrt(1 - eccentricity**2)\n\n# Step 3: Calculate maximum distance (aphelion)\nmax_distance = AU * (1 + eccentricity)\n\n# Step 4: Assign the final result\nresult = max_distance",
+            "unit": "AU"
+        },
+        "answer": {
+            "gt_answer": "35.64",
+            "unit": " $\\mathrm{AU}$"
+        },
+        "verification_result": {
+            "code_output": "35.637299999999996",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 35.64",
+            "comment": " ",
+            "unit": " $\\mathrm{AU}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "2.1.5(a)",
+        "response": {
+            "reasoning": "To find the average velocity of the ball over the time interval from t=2 to t=2.5 seconds, we first need to evaluate the height function y at these two points. The average velocity is calculated as the change in height divided by the change in time. We compute y(2) and y(2.5), then use the formula for average velocity: (y(2.5) - y(2)) / (2.5 - 2).",
+            "code": "import sympy as sp\n\n# Step 1: Define the symbol for time\n\nt = sp.symbols('t')\n\n# Step 2: Define the height function based on the problem statement\ny = 40*t - 16*t**2\n\n# Step 3: Calculate the height at t=2 and t=2.5\ny_at_2 = y.subs(t, 2)\ny_at_2_5 = y.subs(t, 2.5)\n\n# Step 4: Calculate the average velocity\ndelta_y = y_at_2_5 - y_at_2\ndelta_t = 2.5 - 2\naverage_velocity = delta_y / delta_t\n\n# Step 5: Assign the final computed value to 'result'\nresult = average_velocity",
+            "unit": "ft/s"
+        },
+        "answer": {
+            "gt_answer": "-32",
+            "unit": "$\\mathrm{ft} / \\mathrm{s}$"
+        },
+        "verification_result": {
+            "code_output": "-32.0000000000000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -32",
+            "comment": " ",
+            "unit": "$\\mathrm{ft} / \\mathrm{s}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "6.2.43",
+        "response": {
+            "reasoning": "To estimate the volume of the liver using the Midpoint Rule, we first recognize that the cross-sectional areas are given at equally spaced intervals of 1.5 cm. The total length of the liver is 15 cm, which corresponds to 10 cross-sections. The Midpoint Rule involves taking the average of the areas at each interval to approximate the volume. We calculate the midpoints of each interval and multiply each area by the width of the interval (1.5 cm) to find the volume contribution from each section. Finally, we sum these contributions to get the total estimated volume.",
+            "code": "import sympy as sp\n\n# Step 1: Define the cross-sectional areas and the spacing\nareas = [0, 18, 58, 79, 94, 106, 117, 128, 63, 39, 0]  # areas in cm^2\nspacing = 1.5  # cm\n\n# Step 2: Calculate the volume using the Midpoint Rule\n# Since we have 10 intervals, we will take the areas at indices 1 to 9 (midpoints)\nmidpoint_areas = areas[1:10]  # areas at midpoints\n\n# Step 3: Calculate the total volume\nvolume = sum(midpoint_areas) * spacing\n\n# Step 4: Assign the final computed value to 'result'\nresult = volume",
+            "unit": "cm^3"
+        },
+        "answer": {
+            "gt_answer": "1110",
+            "unit": " $\\mathrm{cm}^3$"
+        },
+        "verification_result": {
+            "code_output": "1053.0",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1110",
+            "comment": " ",
+            "unit": " $\\mathrm{cm}^3$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "9.RP.11(a)",
+        "response": {
+            "reasoning": "To determine how long it will take for the pile of bauxite ore to reach the top of the silo, we first need to calculate the volume of the conical pile of ore at a height of 60 ft. The radius of the cone at this height is 1.5 times the height, which gives us a radius of 90 ft. The volume of a cone is given by the formula V = (1/3) * \u03c0 * r^2 * h. We can calculate the current volume of the pile and then find the volume of the pile when it reaches the height of 100 ft. The difference in volume will tell us how much more volume is needed. Given the conveyor rate of 60,000\u03c0 ft\u00b3/h, we can then calculate the time required to fill this volume. Finally, we will express the time in hours. The calculations will be performed using Sympy for symbolic computation.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols\nh_current = 60  # current height of the pile in ft\nh_target = 100  # target height of the silo in ft\nr_ratio = 1.5   # radius to height ratio\nconveyor_rate = 60000 * sp.pi  # conveyor rate in ft^3/h\n\n# Step 2: Calculate the radius at the current height\nr_current = r_ratio * h_current\n\n# Step 3: Calculate the volume of the cone at the current height\nV_current = (1/3) * sp.pi * r_current**2 * h_current\n\n# Step 4: Calculate the radius at the target height\nr_target = r_ratio * h_target\n\n# Step 5: Calculate the volume of the cone at the target height\nV_target = (1/3) * sp.pi * r_target**2 * h_target\n\n# Step 6: Calculate the additional volume needed to reach the target height\nV_needed = V_target - V_current\n\n# Step 7: Calculate the time required to fill the additional volume\ntime_needed = V_needed / conveyor_rate\n\n# Step 8: Assign the final result\nresult = time_needed",
+            "unit": "h"
+        },
+        "answer": {
+            "gt_answer": "9.8",
+            "unit": " $\\mathrm{h}$"
+        },
+        "verification_result": {
+            "code_output": "9.80000000000000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 9.8",
+            "comment": " Review Plus Problem",
+            "unit": " $\\mathrm{h}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "14.4.33",
+        "response": {
+            "reasoning": "To estimate the maximum error in the area of the rectangle using differentials, we start by defining the area A of the rectangle as A = length * width. The differential dA, which represents the change in area, can be expressed as dA = (\u2202A/\u2202length) * d(length) + (\u2202A/\u2202width) * d(width). The partial derivatives are \u2202A/\u2202length = width and \u2202A/\u2202width = length. Given the measurements and their maximum errors, we can substitute these values into the differential equation to find the maximum error in the area.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols for length, width, and area\nL, W, A = sp.symbols('L W A')\n\n# Step 2: Define the area of the rectangle\nA = L * W\n\n# Step 3: Calculate the partial derivatives\npartial_L = sp.diff(A, L)\npartial_W = sp.diff(A, W)\n\n# Step 4: Define the measurements and errors\nlength = 30  # cm\nwidth = 24   # cm\nerror_length = 0.1  # cm\nerror_width = 0.1   # cm\n\n# Step 5: Compute the differential dA\ndA = partial_L * error_length + partial_W * error_width\n\n# Substitute the values into dA\nmax_error_area = dA.subs({L: length, W: width})\n\n# Step 6: Assign the final computed result to 'result'\nresult = max_error_area",
+            "unit": "cm^2"
+        },
+        "answer": {
+            "gt_answer": "5.4",
+            "unit": " $\\mathrm{cm^2}$"
+        },
+        "verification_result": {
+            "code_output": "5.40000000000000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 5.4",
+            "comment": " ",
+            "unit": " $\\mathrm{cm^2}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "11.2.69(a)",
+        "response": {
+            "reasoning": "The problem involves calculating the amount of drug in the body after taking multiple doses, considering that a certain percentage of the drug remains in the body after each dose. Initially, the patient takes 150 mg of the drug. After each day, 5% of the drug remains in the body, which means 95% is eliminated. Therefore, after each dose, we can calculate the remaining drug using the formula: remaining_drug = previous_drug * 0.05 + new_dose. After three doses, we will compute the total amount of drug in the body step by step.",
+            "code": "import sympy as sp\n\n# Step 1: Define the symbols and constants\ninitial_dose = 150  # mg\nremaining_fraction = 0.05  # 5% remains in the body\n\n# Step 2: Calculate the amount of drug in the body after each dose\n# After the first dose\nfirst_dose = initial_dose\n# After the second dose\nsecond_dose = first_dose * remaining_fraction + initial_dose\n# After the third dose\nthird_dose = second_dose * remaining_fraction + initial_dose\n\n# Final result\nresult = third_dose",
+            "unit": "mg"
+        },
+        "answer": {
+            "gt_answer": "157.875",
+            "unit": " $\\mathrm{mg}$"
+        },
+        "verification_result": {
+            "code_output": "157.875",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 157.875",
+            "comment": " ",
+            "unit": " $\\mathrm{mg}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "D.89",
+        "response": {
+            "reasoning": "To find the area of triangle ABC given two sides and the included angle, we can use the formula: Area = 0.5 * a * b * sin(C), where a and b are the lengths of the sides and C is the included angle. Here, |AB| = 10 cm, |BC| = 3 cm, and angle ABC = 107 degrees. We will convert the angle to radians for the sine function, compute the area, and round it to five decimal places.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nAB = 10  # length of side AB in cm\nBC = 3   # length of side BC in cm\nangle_ABC = 107  # angle ABC in degrees\n\n# Step 2: Convert angle from degrees to radians\nangle_ABC_rad = sp.rad(angle_ABC)\n\n# Step 3: Calculate the area using the formula Area = 0.5 * a * b * sin(C)\narea = 0.5 * AB * BC * sp.sin(angle_ABC_rad)\n\n# Step 4: Compute the final result and round it to five decimal places\nresult = round(area.evalf(), 5)",
+            "unit": "cm^2"
+        },
+        "answer": {
+            "gt_answer": "14.34457",
+            "unit": " $\\mathrm{cm^2}$"
+        },
+        "verification_result": {
+            "code_output": "14.34457",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 14.34457",
+            "comment": " ",
+            "unit": " $\\mathrm{cm^2}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "8.1.37",
+        "response": {
+            "reasoning": "To find the distance traveled by the prey, we need to calculate the horizontal distance it travels while falling to the ground. The equation of the trajectory is given by y = 180 - (x^2 / 45). We first find the horizontal distance x when the prey hits the ground (y = 0). Setting y to 0 gives us the equation 0 = 180 - (x^2 / 45), which we can solve for x. Once we find the value of x, we can calculate the total distance traveled using the Pythagorean theorem, considering both the horizontal distance and the vertical distance fallen. The vertical distance is simply the initial height of 180 m. Finally, we compute the distance and round it to the nearest tenth of a meter.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols\nx = sp.symbols('x')\n\n# Step 2: Set up the equation for when the prey hits the ground (y = 0)\ny = 180 - (x**2 / 45)\n\n# Solve for x when y = 0\nx_hit_ground = sp.solve(y, x)\n\n# Step 3: Calculate the horizontal distance (only the positive root is relevant)\nhorizontal_distance = x_hit_ground[1]  # positive root\n\n# Step 4: Calculate the total distance traveled using Pythagorean theorem\nvertical_distance = 180  # height from which it was dropped\n\n# Total distance traveled (d = sqrt(horizontal_distance^2 + vertical_distance^2))\ntotal_distance = sp.sqrt(horizontal_distance**2 + vertical_distance**2)\n\n# Step 5: Compute the final result and assign it to 'result'\nresult = total_distance.evalf()  # evaluate to get a numerical result",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "209.1",
+            "unit": " $\\mathrm{m}$"
+        },
+        "verification_result": {
+            "code_output": "201.246117974981",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 209.1",
+            "comment": " ",
+            "unit": " $\\mathrm{m}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "2.7.13",
+        "response": {
+            "reasoning": "To find the velocity of the ball at time t=2 seconds, we first need to determine the velocity function, which is the derivative of the height function y with respect to time t. The height function is given by y = 40t - 16t^2. Taking the derivative, we get the velocity function v(t) = dy/dt = 40 - 32t. We then substitute t=2 into this velocity function to find the velocity at that specific time.",
+            "code": "import sympy as sp\n\n# Step 1: Define the symbol for time\n\nt = sp.symbols('t')\n\n# Step 2: Define the height function based on the problem statement\ny = 40*t - 16*t**2\n\n# Step 3: Compute the derivative to find the velocity function\nv = sp.diff(y, t)\n\n# Step 4: Substitute t=2 into the velocity function to find the velocity at that time\nvelocity_at_t_2 = v.subs(t, 2)\n\n# Step 5: Assign the final computed value to 'result'\nresult = velocity_at_t_2",
+            "unit": "ft/s"
+        },
+        "answer": {
+            "gt_answer": "-24",
+            "unit": " $\\mathrm{ft} / \\mathrm{s}$"
+        },
+        "verification_result": {
+            "code_output": "-24",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -24",
+            "comment": " ",
+            "unit": " $\\mathrm{ft} / \\mathrm{s}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "12.2.35",
+        "response": {
+            "reasoning": "To find the speed of the woman relative to the surface of the water, we can use vector addition. The woman's velocity vector is directed west at 3 mi/h, while the ship's velocity vector is directed north at 22 mi/h. We can represent these velocities as vectors: the woman's velocity vector is (-3, 0) and the ship's velocity vector is (0, 22). The resultant velocity vector can be found by adding these two vectors. The magnitude of the resultant vector gives us the speed of the woman relative to the water. We use the Pythagorean theorem to calculate the magnitude: speed = sqrt((-3)^2 + (22)^2).",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols for the velocities\nv_woman = -3  # velocity of the woman in mi/h (west direction)\nv_ship = 22   # velocity of the ship in mi/h (north direction)\n\n# Step 2: Calculate the resultant velocity using Pythagorean theorem\nresultant_speed = sp.sqrt(v_woman**2 + v_ship**2)\n\n# Step 3: Assign the final computed result to 'result'\nresult = resultant_speed",
+            "unit": "mi/h"
+        },
+        "answer": {
+            "gt_answer": "22.2036033112",
+            "unit": " $\\mathrm{mi}/\\mathrm{h}$"
+        },
+        "verification_result": {
+            "code_output": "22.2036033111745",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " $\\sqrt{493}$",
+            "comment": " ",
+            "unit": " $\\mathrm{mi}/\\mathrm{h}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "13.4.31",
+        "response": {
+            "reasoning": "To find the speed at which the ball lands, we first need to analyze the motion of the ball in both the x and y directions. The initial velocity vector is given as (50, 0, 80) ft/s. The acceleration vector is (-4, 0, -32) ft/s\u00b2. We can use the kinematic equations to find the final velocities in both the x and z directions. The final speed can then be calculated using the Pythagorean theorem. The final velocity in the x direction (v_x) remains constant since there is no acceleration in that direction. The final velocity in the z direction (v_z) can be calculated using the equation v_z = v_{z0} + a_z * t, where v_{z0} is the initial z velocity and a_z is the z component of acceleration. The time of flight can be determined by analyzing the vertical motion under the influence of gravity. Finally, we combine the final velocities to find the resultant speed.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nv_x0 = 50  # initial velocity in x direction (ft/s)\nv_z0 = 80  # initial velocity in z direction (ft/s)\na_y = -4   # acceleration in y direction (ft/s^2)\na_z = -32  # acceleration in z direction (ft/s^2)\n\n# Step 2: Calculate the time of flight until the ball lands\n# The ball lands when it returns to z = 0\n# Using the equation: z = z0 + v_z0 * t + 0.5 * a_z * t^2 = 0\n# 0 = 80 * t - 16 * t^2 (since a_z = -32 ft/s^2, 0.5 * a_z = -16)\n# Rearranging gives us: 16 * t^2 - 80 * t = 0\n# Factoring out t gives us: t(16t - 80) = 0\n# Thus, t = 0 (initial time) or t = 80/16 = 5 seconds\n\nt = 80 / 16  # time of flight (s)\n\n# Step 3: Calculate final velocities\nv_x = v_x0  # final velocity in x direction remains constant\nv_z = v_z0 + a_z * t  # final velocity in z direction\n\n# Step 4: Calculate the resultant speed\nspeed = sp.sqrt(v_x**2 + v_z**2)\n\n# Step 5: Compute the final result and assign it to 'result'\nresult = speed",
+            "unit": "ft/s"
+        },
+        "answer": {
+            "gt_answer": "96.4365076099",
+            "unit": " $\\mathrm{ft}/\\mathrm{s}$"
+        },
+        "verification_result": {
+            "code_output": "94.3398113205660",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " $10\\sqrt{93}$",
+            "comment": " ",
+            "unit": " $\\mathrm{ft}/\\mathrm{s}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "6.5.19",
+        "response": {
+            "reasoning": "To find the average density of the rod, we first need to calculate the total mass of the rod by integrating the linear density function over its length. The linear density is given as 12/sqrt(x+1) kg/m, where x ranges from 0 to 8 m. The total mass can be found using the integral of the linear density function from 0 to 8. After calculating the total mass, we divide it by the length of the rod (8 m) to find the average density. The average density is thus the total mass divided by the length of the rod.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols\nx = sp.symbols('x')\n\n# Step 2: Define the linear density function\nlinear_density = 12 / sp.sqrt(x + 1)\n\n# Step 3: Calculate the total mass by integrating the linear density from 0 to 8\nmass = sp.integrate(linear_density, (x, 0, 8))\n\n# Step 4: Calculate the average density (mass/length)\nlength = 8  # length of the rod in meters\naverage_density = mass / length\n\n# Step 5: Assign the final result to 'result'\nresult = average_density",
+            "unit": "kg/m"
+        },
+        "answer": {
+            "gt_answer": "6",
+            "unit": " $\\mathrm{~kg} / \\mathrm{m}$"
+        },
+        "verification_result": {
+            "code_output": "6",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 6",
+            "comment": " ",
+            "unit": " $\\mathrm{~kg} / \\mathrm{m}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "6.2.53",
+        "response": {
+            "reasoning": "To find the volume of a tetrahedron with three mutually perpendicular edges, we can use the formula for the volume of a tetrahedron given by V = (1/6) * base_area * height. In this case, we can consider the three edges as forming a right-angled triangular base. The area of the triangular base can be calculated using the lengths of the edges. The volume can then be computed directly using the lengths of the edges. Here, the edges are 3 cm, 4 cm, and 5 cm, which correspond to the height, base, and depth respectively.",
+            "code": "import sympy as sp\n\n# Step 1: Define the lengths of the edges\nl1 = 3  # length of edge 1 in cm\nl2 = 4  # length of edge 2 in cm\nl3 = 5  # length of edge 3 in cm\n\n# Step 2: Calculate the volume of the tetrahedron\n# Volume formula for a tetrahedron with perpendicular edges\nvolume = (1/6) * l1 * l2 * l3\n\n# Step 3: Assign the final computed result to 'result'\nresult = volume",
+            "unit": "cm^3"
+        },
+        "answer": {
+            "gt_answer": "10",
+            "unit": " $\\mathrm{cm}^3$"
+        },
+        "verification_result": {
+            "code_output": "10.0",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 10",
+            "comment": " ",
+            "unit": " $\\mathrm{cm}^3$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "13.4.23(c)",
+        "response": {
+            "reasoning": "To find the speed at impact of a projectile, we can use the principle of conservation of energy or kinematic equations. The initial speed is given as 200 m/s at an angle of 60 degrees. The vertical and horizontal components of the initial velocity can be calculated using trigonometric functions. The vertical component will determine the maximum height and the time of flight, while the horizontal component remains constant. At the point of impact, the vertical speed will be equal in magnitude to the initial vertical speed but in the opposite direction. The final speed can be calculated using the Pythagorean theorem, combining the horizontal and vertical components at impact.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nv0 = 200  # initial speed in m/s\nangle = 60  # angle in degrees\n\ng = 9.81  # acceleration due to gravity in m/s^2\n\n# Step 2: Calculate the components of the initial velocity\nangle_rad = sp.rad(angle)  # convert angle to radians\nv0_x = v0 * sp.cos(angle_rad)  # horizontal component\nv0_y = v0 * sp.sin(angle_rad)  # vertical component\n\n# Step 3: Calculate the vertical speed at impact (which is equal to -v0_y)\nv_y_impact = -v0_y\n\n# Step 4: The speed at impact is the resultant of the horizontal and vertical components\nv_impact = sp.sqrt(v0_x**2 + v_y_impact**2)\n\n# Step 5: Assign the final computed result to 'result'\nresult = v_impact",
+            "unit": "m/s"
+        },
+        "answer": {
+            "gt_answer": "200",
+            "unit": " $\\mathrm{m}/\\mathrm{s}$"
+        },
+        "verification_result": {
+            "code_output": "200",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 200",
+            "comment": " ",
+            "unit": " $\\mathrm{m}/\\mathrm{s}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "6.R.27",
+        "response": {
+            "reasoning": "To find the work done in stretching the spring, we first need to determine the spring constant k using Hooke's Law, which states that the force F required to stretch or compress a spring is proportional to the displacement x from its natural length: F = kx. Given that a force of 30 N stretches the spring from 12 cm to 15 cm (a displacement of 3 cm or 0.03 m), we can calculate k. After finding k, we can compute the work done in stretching the spring from 12 cm to 20 cm (a displacement of 8 cm or 0.08 m) using the work formula W = (1/2)kx^2, where x is the total displacement from the natural length. Thus, we calculate the work done in stretching the spring from its natural length to the new length.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nF = 30  # force in Newtons\nx1 = 3 / 100  # initial displacement in meters (3 cm)\nL0 = 12 / 100  # natural length in meters (12 cm)\nL1 = 15 / 100  # stretched length in meters (15 cm)\nL2 = 20 / 100  # final stretched length in meters (20 cm)\n\n# Step 2: Calculate the spring constant k using Hooke's Law\nk = F / x1  # k = F/x\n\n# Step 3: Calculate the work done in stretching from 12 cm to 20 cm\nx2 = L2 - L0  # total displacement from natural length to 20 cm\nwork_done = (1/2) * k * x2**2  # W = (1/2)kx^2\n\n# Step 4: Assign the final result\nresult = work_done.evalf()  # evaluate to get a numerical value",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "3.2",
+            "unit": " $\\mathrm{J}$"
+        },
+        "verification_result": {
+            "code_output": "3.2000000000000015",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 3.2",
+            "comment": " review problem",
+            "unit": " $\\mathrm{J}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "14.4.5",
+        "response": {
+            "reasoning": "To estimate the maximum error in the volume of the cone using differentials, we start with the formula for the volume of a cone, V = (1/3) * \u03c0 * r^2 * h, where r is the radius and h is the height. We then compute the differential dV to find how changes in r and h affect V. The differentials are given by dV = (\u2202V/\u2202r) * dr + (\u2202V/\u2202h) * dh. We calculate the partial derivatives of V with respect to r and h, substitute the values for r, h, dr, and dh, and then compute dV to find the maximum error in the volume.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols\nr, h = sp.symbols('r h')\n\n# Step 2: Define the volume of the cone\nV = (1/3) * sp.pi * r**2 * h\n\n# Step 3: Compute the partial derivatives\npartial_r = sp.diff(V, r)\npartial_h = sp.diff(V, h)\n\n# Step 4: Define the values and possible errors\ndr = 0.1  # error in radius\n\n# Given values\nr_value = 10  # cm\nh_value = 25  # cm\n\n# Calculate the partial derivatives at the given values\npartial_r_value = partial_r.subs({r: r_value, h: h_value})\npartial_h_value = partial_h.subs({r: r_value, h: h_value})\n\n# Step 5: Calculate dV using the differentials\ndV = partial_r_value * dr + partial_h_value * 0.1  # dh = 0.1 cm\n\n# Step 6: Compute the maximum error in volume\nresult = dV.evalf()",
+            "unit": "cm^3"
+        },
+        "answer": {
+            "gt_answer": "62.8318530718",
+            "unit": " $\\mathrm{~cm}^3$"
+        },
+        "verification_result": {
+            "code_output": "62.8318530717959",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "The volume $V$ of a cone with base radius $r$ and height $h$ is $V=\\pi r^2 h / 3$. So the differential of $V$ is\r\n$$\r\nd V=\\frac{\\partial V}{\\partial r} d r+\\frac{\\partial V}{\\partial h} d h=\\frac{2 \\pi r h}{3} d r+\\frac{\\pi r^2}{3} d h\r\n$$\r\nSince each error is at most $0.1 \\mathrm{~cm}$, we have $|\\Delta r| \\leqslant 0.1,|\\Delta h| \\leqslant 0.1$. To estimate the largest error in the volume we take the largest error in the measurement of $r$ and of $h$. Therefore we take $d r=0.1$ and $d h=0.1$ along with $r=10, h=25$. This gives\r\n$$\r\nd V=\\frac{500 \\pi}{3}(0.1)+\\frac{100 \\pi}{3}(0.1)=20 \\pi\r\n$$\r\nThus the maximum error in the calculated volume is about $20 \\pi \\mathrm{cm}^3 \\approx 63 \\mathrm{~cm}^3$.\r\n",
+            "answer_latex": " $20\\pi$",
+            "comment": "with solution ",
+            "unit": " $\\mathrm{~cm}^3$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "6.4.3",
+        "response": {
+            "reasoning": "To find the work done in stretching the spring from 15 cm to 18 cm, we first need to determine the spring constant (k) using Hooke's Law, which states that the force required to stretch or compress a spring is proportional to the distance it is stretched from its natural length. The formula is F = k * x, where F is the force, k is the spring constant, and x is the displacement from the natural length. Given that a force of 40 N is required to stretch the spring from 10 cm (0.1 m) to 15 cm (0.15 m), the displacement x is 0.15 m - 0.1 m = 0.05 m. Thus, we can calculate k as k = F / x = 40 N / 0.05 m = 800 N/m. Next, we calculate the work done in stretching the spring from 15 cm to 18 cm. The displacement for this stretch is from 0.15 m to 0.18 m, which is 0.03 m. The work done on the spring can be calculated using the integral of the force over the displacement: W = \u222b F dx from x1 to x2 = \u222b kx dx from 0.15 m to 0.18 m. Evaluating this integral gives us the work done.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nF = 40  # Force in Newtons\nx1 = 0.15  # Initial length in meters (15 cm)\nx2 = 0.18  # Final length in meters (18 cm)\nk = F / (x1 - 0.1)  # Spring constant calculation (natural length is 0.1 m)\n\n# Step 2: Set up the work done calculation using the integral of force\n# Work done W = \u222b F dx = \u222b k * (x - 0.1) dx from x1 to x2\nx = sp.symbols('x')\nwork_done = sp.integrate(k * (x - 0.1), (x, x1, x2))\n\n# Step 3: Compute the final result\nresult = work_done.evalf()  # Evaluate the integral to get a numerical result",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "1.56",
+            "unit": " $\\mathrm{~J}$"
+        },
+        "verification_result": {
+            "code_output": "1.56000000000000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "According to Hooke's Law, the force required to hold the spring stretched $x$ meters beyond its natural length is $f(x)=k x$. When the spring is stretched from $10 \\mathrm{~cm}$ to $15 \\mathrm{~cm}$, the amount stretched is $5 \\mathrm{~cm}=0.05 \\mathrm{~m}$. This means that $f(0.05)=40$, so\r\n$$\r\n0.05 k=40 \\quad k=\\frac{40}{0.05}=800\r\n$$\r\nThus $f(x)=800 x$ and the work done in stretching the spring from $15 \\mathrm{~cm}$ to $18 \\mathrm{~cm}$ is\r\n$$\r\n\\begin{aligned}\r\nW & \\left.=\\int_{0.05}^{0.08} 800 x d x=800 \\frac{x^2}{2}\\right]_{0.05}^{0.08} \\\\\r\n& =400\\left[(0.08)^2-(0.05)^2\\right]=1.56 \\mathrm{~J}\r\n\\end{aligned}\r\n$$",
+            "answer_latex": " 1.56",
+            "comment": " with equation",
+            "unit": " $\\mathrm{~J}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "1-38",
+        "response": {
+            "reasoning": "To calculate the de Broglie wavelength of an electron with a given kinetic energy, we can use the formula: \\( \\lambda = \\frac{h}{p} \\), where \\( h \\) is Planck's constant and \\( p \\) is the momentum of the electron. The momentum can be expressed in terms of kinetic energy as \\( p = \\sqrt{2mK} \\), where \\( m \\) is the mass of the electron and \\( K \\) is the kinetic energy. First, we convert the kinetic energy from electronvolts to joules (1 eV = 1.602 x 10^-19 J). Then we substitute the values into the equations to find the wavelength. The final result will be in meters.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nK = 100 * 1.602e-19  # Kinetic energy in joules (100 eV)\nh = 6.626e-34  # Planck's constant in J.s\nm = 9.109e-31  # Mass of electron in kg\n\n# Step 2: Calculate momentum using kinetic energy\np = sp.sqrt(2 * m * K)\n\n# Step 3: Calculate de Broglie wavelength\nlambda_de_broglie = h / p\n\n# Step 4: Assign the final result to 'result'\nresult = lambda_de_broglie",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "0.123",
+            "unit": "nm "
+        },
+        "verification_result": {
+            "code_output": "0.122650642280104",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.123",
+            "comment": " ",
+            "unit": "nm ",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "1-18",
+        "response": {
+            "reasoning": "To find the work function of potassium metal, we can use the equation relating the work function (phi) to the threshold wavelength (lambda) of the metal. The work function is given by the formula: phi = h * c / lambda, where h is Planck's constant (6.626 x 10^-34 J\u00b7s) and c is the speed of light (3.00 x 10^8 m/s). First, we need to convert the threshold wavelength from nanometers to meters. 564 nm is equal to 564 x 10^-9 m. We then substitute the values into the formula to calculate the work function in joules.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nh = 6.626e-34  # Planck's constant in J\u00b7s\nc = 3.00e8     # Speed of light in m/s\nlambda_nm = 564  # Threshold wavelength in nm\n\n# Convert wavelength from nm to m\nlambda_m = lambda_nm * 1e-9  # Convert nm to m\n\n# Step 2: Calculate work function using the formula phi = h * c / lambda\nphi = h * c / lambda_m\n\n# Step 3: Assign the final computed value to 'result'\nresult = phi",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "3.52",
+            "unit": "$10^{-19} \\mathrm{~J}$"
+        },
+        "verification_result": {
+            "code_output": "3.52446808510638",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 3.52",
+            "comment": " Only the first part, the work function is taken",
+            "unit": "$10^{-19} \\mathrm{~J}$",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "1-49",
+        "response": {
+            "reasoning": "To determine the minimum lifetime for the pion to be considered a real particle, we can use the relationship given in the problem, which states that the lifetime \\( \\Delta t \\leq \\frac{h}{m c^2} \\). Here, \\( h \\) is Planck's constant, \\( m \\) is the mass of the particle, and \\( c \\) is the speed of light. We will substitute the known values for \\( h \\), \\( m \\), and \\( c \\) to calculate the minimum lifetime. The values are: \\( h \\approx 6.626 \\times 10^{-34} \\, \\text{Js} \\), \\( m = 2.5 \\times 10^{-28} \\, \\text{kg} \\), and \\( c \\approx 3.00 \\times 10^8 \\, \\text{m/s} \\). After calculating \\( m c^2 \\), we will find \\( \\Delta t \\) by dividing \\( h \\) by this product.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nh = 6.626e-34  # Planck's constant in Js\nm = 2.5e-28   # mass of the pion in kg\nc = 3.00e8    # speed of light in m/s\n\n# Step 2: Calculate mc^2\nmc2 = m * c**2\n\n# Step 3: Calculate the minimum lifetime \\Delta t\nDelta_t = h / mc2\n\n# Step 4: Assign the final result\nresult = Delta_t",
+            "unit": "s"
+        },
+        "answer": {
+            "gt_answer": "2.9",
+            "unit": "$10^{-23} \\mathrm{~s}$ "
+        },
+        "verification_result": {
+            "code_output": "2.94488888888889",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 2.9",
+            "comment": " ",
+            "unit": "$10^{-23} \\mathrm{~s}$ ",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "1-17",
+        "response": {
+            "reasoning": "To find the temperature at which the wavelength of maximum emission (lambda_max) for a blackbody radiator is 550 nm, we can use Wien's displacement law, which states that lambda_max * T = b, where b is Wien's displacement constant (approximately 2898 \u03bcm\u00b7K). We rearrange this equation to solve for T: T = b / lambda_max. We convert lambda_max from nm to meters for consistency in units. Finally, we compute the temperature in Kelvin.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nlambda_max_nm = 550  # wavelength in nanometers\nb = 2898e-6  # Wien's displacement constant in meters Kelvin\n\n# Step 2: Convert lambda_max to meters\nlambda_max_m = lambda_max_nm * 1e-9  # convert nm to m\n\n# Step 3: Calculate temperature using Wien's law\nT = b / lambda_max_m\n\n# Step 4: Assign the final result to 'result'\nresult = T",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "5300",
+            "unit": " $\\mathrm{~K}$\r\n"
+        },
+        "verification_result": {
+            "code_output": "5269.090909090909",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 5300",
+            "comment": " ",
+            "unit": " $\\mathrm{~K}$\r\n",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "1-40",
+        "response": {
+            "reasoning": "To find the potential through which a proton must fall to achieve a specific de Broglie wavelength, we start with the de Broglie wavelength formula: \\( \\lambda = \\frac{h}{p} \\), where \\( h \\) is Planck's constant and \\( p \\) is the momentum of the proton. The momentum can be expressed in terms of kinetic energy (KE) as \\( p = \\sqrt{2mK} \\). The kinetic energy gained by the proton when falling through a potential \\( V \\) is given by \\( KE = qV \\), where \\( q \\) is the charge of the proton. Setting these equations together, we can solve for the potential \\( V \\).",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nh = 6.62607015e-34  # Planck's constant in J.s\nm = 1.6726219e-27   # mass of proton in kg\nq = 1.602176634e-19  # charge of proton in C\nlambda_ = 1.0e-10    # de Broglie wavelength in meters\n\n# Step 2: Set up the equation for de Broglie wavelength\n# p = h / lambda\n# p = sqrt(2 * m * KE) = sqrt(2 * m * q * V)\n# Equating the two expressions for momentum:\n# h / lambda = sqrt(2 * m * q * V)\n\nV = sp.symbols('V')\n# Squaring both sides to eliminate the square root\nmomentum_eq = (h / lambda_)**2 - 2 * m * q * V\n\n# Step 3: Solve for V\npotential_solution = sp.solve(momentum_eq, V)\n\n# Step 4: Assign the final result to 'result'\nresult = potential_solution[0]",
+            "unit": "V"
+        },
+        "answer": {
+            "gt_answer": "0.082",
+            "unit": "V "
+        },
+        "verification_result": {
+            "code_output": "0.0819169720213110",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.082",
+            "comment": " ",
+            "unit": "V ",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "1-15",
+        "response": {
+            "reasoning": "To calculate the frequency of light emitted by the helium-neon laser, we can use the relationship between the speed of light (c), wavelength (\u03bb), and frequency (f). The formula is given by: f = c / \u03bb. Here, c is the speed of light (approximately 3 x 10^8 m/s) and \u03bb is the wavelength in meters. We first convert the wavelength from nanometers to meters (632.8 nm = 632.8 x 10^-9 m) and then substitute these values into the formula to find the frequency.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nc = 3 * 10**8  # speed of light in m/s\nwavelength_nm = 632.8  # wavelength in nm\nwavelength_m = wavelength_nm * 10**-9  # convert wavelength to meters\n\n# Step 2: Calculate frequency using the formula f = c / \u03bb\nfrequency = c / wavelength_m\n\n# Step 3: Assign the final result to 'result'\nresult = frequency",
+            "unit": "Hz"
+        },
+        "answer": {
+            "gt_answer": "4.738",
+            "unit": "$10^{14} \\mathrm{~Hz}$ "
+        },
+        "verification_result": {
+            "code_output": "4.74083438685209",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 4.738",
+            "comment": " just the first part is taken: frequency of light",
+            "unit": "$10^{14} \\mathrm{~Hz}$ ",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "1-50",
+        "response": {
+            "reasoning": "To find the uncertainty in energy (\u0394E) given the uncertainty principle for energy and time (\u0394E \u0394t \u2265 h), we can rearrange the equation to solve for \u0394E. Given that the lifetime of the excited state (\u0394t) is 10^-9 seconds, we can substitute this value into the equation. The Planck constant (h) is approximately 6.626 x 10^-34 J\u00b7s. Thus, \u0394E can be calculated as \u0394E = h / \u0394t. After substituting the values, we can compute the uncertainty in energy.",
+            "code": "import sympy as sp\n\n# Step 1: Define the symbols and constants\nh = 6.626e-34  # Planck's constant in J\u00b7s\nDelta_t = 10**-9  # lifetime in seconds\n\n# Step 2: Calculate the uncertainty in energy using the uncertainty principle\nDelta_E = h / Delta_t\n\n# Step 3: Assign the result to 'result'\nresult = Delta_E",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "7",
+            "unit": " $10^{-25} \\mathrm{~J}$"
+        },
+        "verification_result": {
+            "code_output": "6.62600000000000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 7",
+            "comment": " ",
+            "unit": " $10^{-25} \\mathrm{~J}$",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "1-42",
+        "response": {
+            "reasoning": "To find the temperature needed for neutrons to have a de Broglie wavelength of 50 pm, we start with the de Broglie wavelength formula, which is given by \\( \\lambda = \\frac{h}{p} \\), where \\( h \\) is Planck's constant and \\( p \\) is the momentum of the neutron. The momentum can be expressed in terms of the speed of the neutron as \\( p = mv_n \\). Substituting the expression for the speed of the neutron, we have \\( p = m \\sqrt{\\frac{3 k_B T}{m}} = \\sqrt{3 m k_B T} \\). Thus, the de Broglie wavelength becomes \\( \\lambda = \\frac{h}{\\sqrt{3 m k_B T}} \\). Rearranging this equation allows us to solve for the temperature \\( T \\). After substituting the known values for \\( h \\), \\( k_B \\), and \\( m \\), we can compute the required temperature. The final result will be in Kelvin (K).",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nh = sp.symbols('h')  # Planck's constant\nk_B = sp.symbols('k_B')  # Boltzmann's constant\nm = sp.symbols('m')  # mass of a neutron\nt = sp.symbols('T')  # temperature\nlambda_de_broglie = 50e-12  # de Broglie wavelength in meters (50 pm)\n\n# Step 2: Set up the equation for de Broglie wavelength\n# lambda = h / sqrt(3 * m * k_B * T)\n# Rearranging gives us T = h^2 / (3 * m * k_B * lambda^2)\nT_expr = h**2 / (3 * m * k_B * lambda_de_broglie**2)\n\n# Step 3: Substitute known values for h, k_B, and m\nh_value = 6.62607015e-34  # Planck's constant in J.s\nk_B_value = 1.380649e-23  # Boltzmann's constant in J/K\nm_value = 1.675e-27  # mass of neutron in kg\n\n# Calculate the temperature\nT_value = T_expr.subs({h: h_value, k_B: k_B_value, m: m_value})\n\n# Step 4: Assign the final computed result to 'result'\nresult = T_value.evalf()",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "2500",
+            "unit": "$\\mathrm{K}$ "
+        },
+        "verification_result": {
+            "code_output": "2531.35293699711",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 2500",
+            "comment": " ",
+            "unit": "$\\mathrm{K}$ ",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "1-8",
+        "response": {
+            "reasoning": "To find the wavelength corresponding to the maximum intensity of radiation emitted by a black body at a given temperature, we can use Wien's displacement law. This law states that the wavelength of maximum emission (lambda_max) is inversely proportional to the temperature (T) of the black body. The formula is given by: lambda_max = b / T, where b is Wien's displacement constant, approximately equal to 2.898 x 10^-3 m*K. For a temperature of 10^7 K, we can substitute this value into the equation to find lambda_max.",
+            "code": "import sympy as sp\n\n# Step 1: Define the symbols and constants\nT = 10**7  # Temperature in Kelvin\nb = 2.898e-3  # Wien's displacement constant in m*K\n\n# Step 2: Calculate lambda_max using Wien's displacement law\nlambda_max = b / T\n\n# Step 3: Assign the final computed value to 'result'\nresult = lambda_max",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "3",
+            "unit": " $10^{-10} \\mathrm{~m}$\r\n"
+        },
+        "verification_result": {
+            "code_output": "2.89800000000000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 3",
+            "comment": " ",
+            "unit": " $10^{-10} \\mathrm{~m}$\r\n",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "1-45",
+        "response": {
+            "reasoning": "To find the distance between the slits (d), we can use the formula for the distance between the interference fringes in a double-slit experiment, which is given by: \\( y = \\frac{\\lambda L}{d} \\), where \\( y \\) is the distance between the fringes, \\( \\lambda \\) is the wavelength of the light, and \\( L \\) is the distance from the slits to the screen. Rearranging this formula gives us: \\( d = \\frac{\\lambda L}{y} \\). We know the wavelength \\( \\lambda = 694.3 \\mathrm{~nm} = 694.3 \\times 10^{-9} \\mathrm{~m} \\), the distance to the screen \\( L = 3.00 \\mathrm{~m} \\), and the distance between the bands \\( y = 1.50 \\mathrm{~cm} = 0.0150 \\mathrm{~m} \\). Plugging these values into the rearranged formula will give us the distance between the slits.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nlambda_ = 694.3e-9  # wavelength in meters\nL = 3.00  # distance to the screen in meters\ny = 1.50e-2  # distance between the bands in meters\n\nd = sp.symbols('d')  # distance between the slits\n\n# Step 2: Set up the equation based on the interference formula\nequation = sp.Eq(d, (lambda_ * L) / y)\n\n# Step 3: Solve for d\ndistance_between_slits = sp.solve(equation, d)[0]\n\n# Step 4: Assign the final result to 'result'\nresult = distance_between_slits",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "0.139",
+            "unit": "mm "
+        },
+        "verification_result": {
+            "code_output": "0.138860000000000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0.139",
+            "comment": " ",
+            "unit": "mm ",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "1-11",
+        "response": {
+            "reasoning": "To calculate the energy of a photon, we use the formula E = h * c / \u03bb, where E is the energy, h is Planck's constant (6.626 x 10^-34 J\u00b7s), c is the speed of light (approximately 3.00 x 10^8 m/s), and \u03bb is the wavelength in meters. Given that the wavelength is 100 pm (picometers), we convert this to meters (100 pm = 100 x 10^-12 m). We then substitute the values into the equation to find the energy of the photon.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nh = 6.626e-34  # Planck's constant in J\u00b7s\nc = 3.00e8     # Speed of light in m/s\nlambda_pm = 100e-12  # Wavelength in meters (100 pm)\n\n# Step 2: Calculate the energy of the photon\nE = h * c / lambda_pm\n\n# Step 3: Assign the result to 'result'\nresult = E",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "2",
+            "unit": " $10^{-15} \\mathrm{~J}$"
+        },
+        "verification_result": {
+            "code_output": "1.98780000000000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 2",
+            "comment": " ",
+            "unit": " $10^{-15} \\mathrm{~J}$",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "1-44",
+        "response": {
+            "reasoning": "To find the distance between the central maximum and the first maximum in a double-slit interference pattern, we can use the formula for the position of the maxima: y = (m * \u03bb * L) / d, where m is the order of the maximum (m=1 for the first maximum), \u03bb is the wavelength of the light, L is the distance from the slits to the detector, and d is the separation between the slits. We substitute the values: \u03bb = 600 nm = 600 * 10^-9 m, L = 2.00 m, and d = 0.10 mm = 0.10 * 10^-3 m. After calculating, we find the distance y for the first maximum.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nlambda_ = 600e-9  # Wavelength in meters\nL = 2.00  # Distance to the detector in meters\nd = 0.10e-3  # Slit separation in meters\nm = 1  # First maximum\n\n# Step 2: Calculate the distance to the first maximum using the formula y = (m * \u03bb * L) / d\ny = (m * lambda_ * L) / d\n\n# Step 3: Compute the result\nresult = y\n",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "12",
+            "unit": " mm"
+        },
+        "verification_result": {
+            "code_output": "12.0000000000000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 12",
+            "comment": " ",
+            "unit": " mm",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "1-7",
+        "response": {
+            "reasoning": "To estimate the surface temperature of Sirius, we can use Wien's displacement law, which states that the wavelength at which the emission of a blackbody spectrum is maximized (lambda_max) is inversely proportional to the temperature (T) of the blackbody. The formula is given by: T = b / lambda_max, where b is Wien's displacement constant (approximately 2898 \u00b5m\u00b7K). We first convert lambda_max from nanometers to meters for consistency in units, then calculate the temperature.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nlambda_max_nm = 260  # wavelength in nanometers\nlambda_max_m = lambda_max_nm * 1e-9  # convert to meters\nb = 2898e-6  # Wien's displacement constant in meters*K\n\n# Step 2: Calculate the temperature using Wien's law\nT = b / lambda_max_m\n\n# Step 3: Assign the final result to 'result'\nresult = T",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "11000",
+            "unit": " $\\mathrm{~K}$\r\n"
+        },
+        "verification_result": {
+            "code_output": "11146.153846153846",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "11000",
+            "comment": " ",
+            "unit": " $\\mathrm{~K}$\r\n",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "5-13",
+        "response": {
+            "reasoning": "To calculate the force constant of the diatomic molecule H127I, we can use the relation between the wavenumber of the vibrational transition and the force constant. The wavenumber (in cm^-1) is related to the force constant (k) and the reduced mass (mu) of the molecule by the formula: \\( \nu = \\frac{1}{2\\pi c} \\sqrt{\\frac{k}{\\mu}} \\), where \\( \\nu \\) is the wavenumber, c is the speed of light, and \\( \\mu \\) is the reduced mass. First, we need to calculate the reduced mass of H127I, which is given by \\( \\mu = \\frac{m_H m_I}{m_H + m_I} \\). The mass of H is approximately 1 amu and the mass of I is approximately 127 amu. Then we can rearrange the formula to solve for k: \\( k = (2\\pi c \\nu)^2 \\mu \\). After substituting the values, we can find the force constant k.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nc = 2.99792458e10  # speed of light in cm/s\nnu = 2309  # wavenumber in cm^-1\nm_H = 1.00784  # mass of H in amu\nm_I = 126.90447  # mass of I in amu\n\n# Step 2: Calculate reduced mass in kg (1 amu = 1.66053906660e-27 kg)\nmu = (m_H * m_I) / (m_H + m_I) * 1.66053906660e-27  # in kg\n\n# Step 3: Calculate force constant k\nk = (2 * sp.pi * c * nu)**2 * mu\n\n# Step 4: Assign the final computed result to 'result'\nresult = k",
+            "unit": "N/m"
+        },
+        "answer": {
+            "gt_answer": "313",
+            "unit": " $ \\mathrm{~N} \\cdot \\mathrm{m}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "314.090119302697",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "313",
+            "comment": " ",
+            "unit": " $ \\mathrm{~N} \\cdot \\mathrm{m}^{-1}$",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "1.1_3",
+        "response": {
+            "reasoning": "The threshold frequency, v_0, can be calculated using the formula v_0 = W/h, where W is the work function and h is Planck's constant. The work function for sodium is given as 2.28 eV. To convert this to joules, we use the conversion factor 1 eV = 1.602 x 10^-19 J. Planck's constant h is approximately 6.626 x 10^-34 J\u00b7s. Thus, we first convert the work function to joules and then calculate the threshold frequency.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nW_eV = 2.28  # work function in eV\nh = 6.626e-34  # Planck's constant in J\u00b7s\nconversion_factor = 1.602e-19  # conversion from eV to J\n\n# Step 2: Convert work function from eV to J\nW_J = W_eV * conversion_factor\n\n# Step 3: Calculate threshold frequency\nv_0 = W_J / h\n\n# Step 4: Assign the result to 'result'\nresult = v_0",
+            "unit": "Hz"
+        },
+        "answer": {
+            "gt_answer": "5.51",
+            "unit": "$10^{14}\\mathrm{~Hz}$"
+        },
+        "verification_result": {
+            "code_output": "5.51246604286145",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "\nWe must first convert $\\phi$ from electron volts to joules.\r\n$$\r\n\\begin{aligned}\r\n\\phi & =2.28 \\mathrm{eV}=(2.28 \\mathrm{eV})\\left(1.602 \\times 10^{-19} \\mathrm{~J} \\cdot \\mathrm{eV}^{-1}\\right) \\\\\r\n& =3.65 \\times 10^{-19} \\mathrm{~J}\r\n\\end{aligned}\r\n$$\r\nUsing Equation $h v_0=\\phi$, we have\r\n$$\r\nv_0=\\frac{3.65 \\times 10^{-19} \\mathrm{~J}}{6.626 \\times 10^{-34} \\mathrm{~J} \\cdot \\mathrm{s}}=5.51 \\times 10^{14} \\mathrm{~Hz}$$\n",
+            "answer_latex": " 5.51",
+            "comment": " ",
+            "unit": "$10^{14}\\mathrm{~Hz}$",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "1.1_11",
+        "response": {
+            "reasoning": "To calculate the de Broglie wavelength of an electron, we use the formula \\( \\lambda = \\frac{h}{p} \\), where \\( h \\) is Planck's constant and \\( p \\) is the momentum of the electron. The momentum \\( p \\) can be calculated using \\( p = mv \\), where \\( m \\) is the mass of the electron and \\( v \\) is its velocity. Given that the speed of light \\( c \\) is approximately \\( 3.00 \\times 10^8 \\, \\text{m/s} \\), the velocity of the electron at \\( 1.00 \\% \\) of the speed of light is \\( v = 0.01c \\). The mass of the electron is approximately \\( 9.11 \\times 10^{-31} \\, \\text{kg} \\). After calculating the momentum and substituting it into the de Broglie wavelength formula, we can find the wavelength. The final result will be in meters.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants and symbols\nh = 6.62607015e-34  # Planck's constant in J*s\nm_e = 9.11e-31      # mass of electron in kg\nc = 3.00e8          # speed of light in m/s\n\n# Step 2: Define the speed of the electron\nv = 0.01 * c  # speed of electron at 1.00% of speed of light\n\n# Step 3: Calculate momentum p = mv\np = m_e * v\n\n# Step 4: Calculate de Broglie wavelength \\( \\lambda = \\frac{h}{p} \\)\nlambda_de_broglie = h / p\n\n# Step 5: Assign the final result\nresult = lambda_de_broglie",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "243",
+            "unit": " $\\mathrm{pm}$"
+        },
+        "verification_result": {
+            "code_output": "242.446767288694",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "The mass of an electron is $9.109 \\times 10^{-31} \\mathrm{~kg}$. One percent of the speed of light is\r\n$$\r\nv=(0.0100)\\left(2.998 \\times 10^8 \\mathrm{~m} \\cdot \\mathrm{s}^{-1}\\right)=2.998 \\times 10^6 \\mathrm{~m} \\cdot \\mathrm{s}^{-1}\r\n$$\r\nThe momentum of the electron is given by\r\n$$\r\n\\begin{aligned}\r\np=m_{\\mathrm{e}} v & =\\left(9.109 \\times 10^{-31} \\mathrm{~kg}\\right)\\left(2.998 \\times 10^6 \\mathrm{~m} \\cdot \\mathrm{s}^{-1}\\right) \\\\\r\n& =2.73 \\times 10^{-24} \\mathrm{~kg} \\cdot \\mathrm{m} \\cdot \\mathrm{s}^{-1}\r\n\\end{aligned}\r\n$$\r\nThe de Broglie wavelength of this electron is\r\n$$\r\n\\begin{aligned}\r\n\\lambda=\\frac{h}{p} & =\\frac{6.626 \\times 10^{-34} \\mathrm{~J} \\cdot \\mathrm{s}}{2.73 \\times 10^{-24} \\mathrm{~kg} \\cdot \\mathrm{m} \\cdot \\mathrm{s}^{-1}}=2.43 \\times 10^{-10} \\mathrm{~m} \\\\\r\n& =243 \\mathrm{pm}\r\n\\end{aligned}\r\n$$\r\nThis wavelength is of atomic dimensions.\r\n",
+            "answer_latex": " 243",
+            "comment": " ",
+            "unit": " $\\mathrm{pm}$",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "9.9_1",
+        "response": {
+            "reasoning": "To express 1 E_h in electron volts, we start with the formula for E_h in atomic units. We need to substitute the constants: m_e (electron mass), e (elementary charge), epsilon_0 (vacuum permittivity), and hbar (reduced Planck's constant) with their respective values in SI units. After substituting these values, we will calculate the numerical value of E_h in joules and then convert it to electron volts using the conversion factor 1 eV = 1.602176634 x 10^-19 J.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nm_e = 9.10938356e-31  # mass of electron in kg\n\ne = 1.602176634e-19  # elementary charge in C\n\nepsilon_0 = 8.854187817e-12  # vacuum permittivity in F/m\n\n# Reduced Planck's constant\nhbar = 1.0545718e-34  # in J.s\n\n# Step 2: Calculate E_h in joules\nE_h = (m_e * e**4) / (16 * sp.pi**2 * epsilon_0**2 * hbar**2)\n\n# Step 3: Convert E_h from joules to electron volts\nE_h_eV = E_h / (1.602176634e-19)  # converting to eV\n\n# Step 4: Assign the final result\nresult = E_h_eV.evalf()",
+            "unit": "eV"
+        },
+        "answer": {
+            "gt_answer": "27.211",
+            "unit": " $\\mathrm{eV}$"
+        },
+        "verification_result": {
+            "code_output": "27.2113867079265",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "\nTo find $1 E_{\\mathrm{h}}$ expressed in joules, we substitute the SI values of $m_{\\mathrm{e}}, e$, $4 \\pi \\epsilon_0$, and $\\hbar$ into the above equation. Using these values from Table $$$\n\\begin{array}{lll}\n\\hline \\text { Property } & \\text { Atomic unit } & \\text { SI equivalent } \\\\\n\\hline \\text { Mass } & \\text { Mass of an electron, } m_{\\mathrm{e}} & 9.1094 \\times 10^{-31} \\mathrm{~kg} \\\\\n\\text { Charge } & \\text { Charge on a proton, } e & 1.6022 \\times 10^{-19} \\mathrm{C} \\\\\n\\text { Angular momentum } & \\text { Planck constant divided by } 2 \\pi, \\hbar & 1.0546 \\times 10^{-34} \\mathrm{~J} \\cdot \\mathrm{s} \\\\\n\\text { Length } & \\text { Bohr radius, } a_0=\\frac{4 \\pi \\epsilon_0 \\hbar^2}{m_{\\mathrm{e}} e^2} & 5.2918 \\times 10^{-11} \\mathrm{~m} \\\\\n\\text { Energy } & \\frac{m_{\\mathrm{e}} e^4}{16 \\pi^2 \\epsilon_0^2 \\hbar^2}=\\frac{e^2}{4 \\pi \\epsilon_0 a_0}=E_{\\mathrm{h}} & 4.3597 \\times 10^{-18} \\mathrm{~J} \\\\\n\\text { Permittivity } & \\kappa_0=4 \\pi \\epsilon_0 & 1.1127 \\times 10^{-10} \\mathrm{C}^2 \\cdot \\mathrm{J}^{-1} \\cdot \\mathrm{m}^{-1} \\\\\n\\hline\n\\end{array}\n$$, we find\r\nAtomic and Molecular Calculations Are Expressed in Atomic Units\r\n$$\r\n\\begin{aligned}\r\n1 E_{\\mathrm{h}} & =\\frac{\\left(9.1094 \\times 10^{-31} \\mathrm{~kg}\\right)\\left(1.6022 \\times 10^{-19} \\mathrm{C}\\right)^4}{\\left(1.1127 \\times 10^{-10} \\mathrm{C}^2 \\cdot \\mathrm{J}^{-1} \\cdot \\mathrm{m}^{-1}\\right)^2\\left(1.0546 \\times 10^{-34} \\mathrm{~J} \\cdot \\mathrm{s}\\right)^2} \\\\\r\n& =4.3597 \\times 10^{-18} \\mathrm{~J}\r\n\\end{aligned}\r\n$$\r\nIf we multiply this result by the Avogadro constant, we obtain\r\n$$\r\n1 E_{\\mathrm{h}}=2625.5 \\mathrm{~kJ} \\cdot \\mathrm{mol}^{-1}\r\n$$\r\nTo express $1 E_{\\mathrm{h}}$ in wave numbers $\\left(\\mathrm{cm}^{-1}\\right)$, we use the fact that $1 E_{\\mathrm{h}}=4.3597 \\times 10^{-18} \\mathrm{~J}$ along with the equation\r\n$$\r\n\\begin{aligned}\r\n\\tilde{v} & =\\frac{1}{\\lambda}=\\frac{h v}{h c}=\\frac{E}{c h}=\\frac{4.3597 \\times 10^{-18} \\mathrm{~J}}{\\left(2.9979 \\times 10^8 \\mathrm{~m} \\cdot \\mathrm{s}^{-1}\\right)\\left(6.6261 \\times 10^{-34} \\mathrm{~J} \\cdot \\mathrm{s}\\right)} \\\\\r\n& =2.1947 \\times 10^7 \\mathrm{~m}^{-1}=2.1947 \\times 10^5 \\mathrm{~cm}^{-1}\r\n\\end{aligned}\r\n$$\r\nso that we can write\r\n$$\r\n1 E_{\\mathrm{h}}=2.1947 \\times 10^5 \\mathrm{~cm}^{-1}\r\n$$\r\nLast, to express $1 E_{\\mathrm{h}}$ in terms of electron volts, we use the conversion factor\r\n$$\r\n1 \\mathrm{eV}=1.6022 \\times 10^{-19} \\mathrm{~J}\r\n$$\r\nUsing the value of $1 E_{\\mathrm{h}}$ in joules obtained previously, we have\r\n$$\r\n\\begin{aligned}\r\n1 E_{\\mathrm{h}} & =\\left(4.3597 \\times 10^{-18} \\mathrm{~J}\\right)\\left(\\frac{1 \\mathrm{eV}}{1.6022 \\times 10^{-19} \\mathrm{~J}}\\right) \\\\\r\n& =27.211 \\mathrm{eV}\r\n\\end{aligned}\r\n$$\n",
+            "answer_latex": "27.211 ",
+            "comment": " ",
+            "unit": " $\\mathrm{eV}$",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "Problem 8.28",
+        "response": {
+            "reasoning": "To calculate the minimum escape velocity from the moon, we use the formula for escape velocity, which is given by v = sqrt(2 * G * M / R), where G is the gravitational constant, M is the mass of the moon, and R is the radius of the moon. The values are: G = 6.67430e-11 m^3 kg^-1 s^-2, M (mass of the moon) = 7.34767309e22 kg, and R (radius of the moon) = 1.7374e6 m. Plugging these values into the formula allows us to compute the escape velocity.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nG = 6.67430e-11  # gravitational constant in m^3 kg^-1 s^-2\nM = 7.34767309e22  # mass of the moon in kg\nR = 1.7374e6  # radius of the moon in meters\n\n# Step 2: Calculate escape velocity using the formula v = sqrt(2 * G * M / R)\nescape_velocity = sp.sqrt(2 * G * M / R)\n\n# Step 3: Compute the final result\nresult = escape_velocity.evalf()  # evaluate to a numerical value",
+            "unit": "m/s"
+        },
+        "answer": {
+            "gt_answer": "2380",
+            "unit": "$\\mathrm{~m} / \\mathrm{s}$ "
+        },
+        "verification_result": {
+            "code_output": "2375.98045546183",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 2380",
+            "comment": " ",
+            "unit": "$\\mathrm{~m} / \\mathrm{s}$ ",
+            "source": "class"
+        }
+    },
+    {
+        "sample_id": "Problem 9.60",
+        "response": {
+            "reasoning": "To determine when the rocket will lift off, we need to calculate the time it takes for the thrust generated by the rocket to equal the gravitational force acting on it. The thrust (T) produced by the rocket can be calculated using the formula T = \\dot{m} * v_e, where \\dot{m} is the mass flow rate of the fuel and v_e is the exhaust velocity. The gravitational force (F_g) acting on the rocket is given by F_g = m * g, where m is the initial mass of the rocket and g is the acceleration due to gravity (approximately 9.81 m/s\u00b2). We will set the thrust equal to the gravitational force to find the time at which the rocket will lift off. The mass of the rocket decreases over time as fuel is burned, which we will account for in our calculations.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nm_initial = 7 * 10**4  # initial mass of the rocket in kg\nburn_rate = 250  # fuel burn rate in kg/s\nv_e = 2500  # exhaust velocity in m/s\ng = 9.81  # acceleration due to gravity in m/s^2\nt = sp.symbols('t')  # time in seconds\n\n# Step 2: Define the mass of the rocket as a function of time\nm_t = m_initial - burn_rate * t  # mass of the rocket at time t\n\n# Step 3: Calculate thrust and gravitational force\nthrust = burn_rate * v_e  # thrust produced by the rocket\nF_g = m_t * g  # gravitational force acting on the rocket\n\n# Step 4: Set thrust equal to gravitational force to find lift-off time\nlift_off_eq = sp.Eq(thrust, F_g)\n\n# Step 5: Solve for time t when the rocket will lift off\nlift_off_time = sp.solve(lift_off_eq, t)[0]  # solve for t\n\n# Step 6: Assign the final computed result to 'result'\nresult = lift_off_time",
+            "unit": "s"
+        },
+        "answer": {
+            "gt_answer": "25",
+            "unit": "$\\mathrm{~s}$ "
+        },
+        "verification_result": {
+            "code_output": "25.1580020387360",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "25",
+            "comment": " ",
+            "unit": "$\\mathrm{~s}$ ",
+            "source": "class"
+        }
+    },
+    {
+        "sample_id": "Problem 9.42",
+        "response": {
+            "reasoning": "To find the velocity at which the steel ball bounces off the plate, we first need to decompose the initial velocity into components. The initial velocity of the ball is 5 m/s at an angle of 30 degrees from the normal. We can calculate the normal and tangential components of the velocity. The normal component (v_n) is given by v_n = v * cos(theta) and the tangential component (v_t) is given by v_t = v * sin(theta). After the collision, the normal component will change due to the coefficient of restitution (e) which is 0.8. The new normal component after the collision is given by v_n' = -e * v_n. The tangential component remains unchanged. Finally, we can combine these components to find the magnitude of the new velocity after the bounce.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nv = 5  # initial velocity in m/s\nangle = 30  # angle in degrees\ncoefficient_of_restitution = 0.8  # e\n\n# Step 2: Convert angle to radians for calculations\nangle_rad = sp.rad(angle)\n\n# Step 3: Calculate the components of the initial velocity\nv_n = v * sp.cos(angle_rad)  # normal component\nv_t = v * sp.sin(angle_rad)  # tangential component\n\n# Step 4: Calculate the new normal component after the collision\nv_n_prime = -coefficient_of_restitution * v_n\n\n# Step 5: The new velocity components after the collision\nv_new = sp.sqrt(v_n_prime**2 + v_t**2)  # magnitude of new velocity\n\n# Step 6: Assign the final computed result to 'result'\nresult = v_new",
+            "unit": "m/s"
+        },
+        "answer": {
+            "gt_answer": "4.3",
+            "unit": "$\\mathrm{~m} / \\mathrm{s}$ "
+        },
+        "verification_result": {
+            "code_output": "4.27200187265877",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " $4.3$",
+            "comment": " ",
+            "unit": "$\\mathrm{~m} / \\mathrm{s}$ ",
+            "source": "class"
+        }
+    },
+    {
+        "sample_id": "Problem 8.24",
+        "response": {
+            "reasoning": "To find the height of the satellite above Earth when it has rotated 90 degrees from perigee, we first need to calculate the semi-major axis and the semi-minor axis of the elliptical orbit. The perigee (closest point to Earth) is 300 km and the apogee (farthest point from Earth) is 3500 km above the Earth's surface. The radius of the Earth is approximately 6371 km. The semi-major axis 'a' is the average of the perigee and apogee distances from the center of the Earth, while the semi-minor axis 'b' can be calculated using the relationship between the axes of an ellipse. After determining these values, we can use the equation of the ellipse to find the height of the satellite at 90 degrees from the perigee. The final height is calculated by subtracting the Earth's radius from the calculated distance from the center of the Earth.",
+            "code": "import sympy as sp\n\n# Step 1: Define constants\nR_earth = 6371  # Earth's radius in km\nperigee = 300  # Perigee height in km\napogee = 3500  # Apogee height in km\n\n# Step 2: Calculate distances from the center of the Earth\nr_perigee = R_earth + perigee  # Distance from center of Earth at perigee\nr_apogee = R_earth + apogee  # Distance from center of Earth at apogee\n\n# Step 3: Calculate semi-major axis 'a' and semi-minor axis 'b'\na = (r_perigee + r_apogee) / 2  # Semi-major axis\nb = sp.sqrt(r_perigee * r_apogee)  # Semi-minor axis (using the geometric mean)\n\n# Step 4: Calculate the height at 90 degrees from perigee\n# At 90 degrees, x = 0, we need to find y from the ellipse equation:\n# (x^2 / a^2) + (y^2 / b^2) = 1\nx = 0\n# Therefore, y^2 = b^2 * (1 - (x^2 / a^2)) = b^2\ny = sp.sqrt(b**2)\n\n# Step 5: Calculate the height above Earth's surface\nheight_above_surface = y - R_earth\n\n# Step 6: Assign the final result\nresult = height_above_surface",
+            "unit": "km"
+        },
+        "answer": {
+            "gt_answer": "1590",
+            "unit": "$\\mathrm{~km}$ "
+        },
+        "verification_result": {
+            "code_output": "1743.76684816021",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "1590",
+            "comment": " ",
+            "unit": "$\\mathrm{~km}$ ",
+            "source": "class"
+        }
+    },
+    {
+        "sample_id": "Problem 2.54",
+        "response": {
+            "reasoning": "To find the terminal velocity of the potato, we start by analyzing the forces acting on it. The gravitational force acting on the potato is given by F_gravity = m * g, where m is the mass of the potato (0.5 kg) and g is the acceleration due to gravity (approximately 9.81 m/s\u00b2). The air resistance force is given by F_resistance = -k * m * v, where k is the drag coefficient (0.01 s\u207b\u00b9) and v is the velocity of the potato. At terminal velocity, the net force acting on the potato is zero, meaning the gravitational force equals the air resistance force: m * g = k * m * v_terminal. We can solve for the terminal velocity (v_terminal) by rearranging this equation: v_terminal = g / k. Substituting the values, we find the terminal velocity.",
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nm = 0.5  # mass of the potato in kg\nk = 0.01  # drag coefficient in s^-1\ng = 9.81  # acceleration due to gravity in m/s^2\n\n# Step 2: Set up the equation for terminal velocity\n# At terminal velocity, m * g = k * m * v_terminal\nv_terminal = g / k\n\n# Step 3: Assign the computed terminal velocity to 'result'\nresult = v_terminal",
+            "unit": "m/s"
+        },
+        "answer": {
+            "gt_answer": "1000",
+            "unit": "$\\mathrm{~m} / \\mathrm{s}$  "
+        },
+        "verification_result": {
+            "code_output": "981.0",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1000",
+            "comment": " ",
+            "unit": "$\\mathrm{~m} / \\mathrm{s}$  ",
+            "source": "class"
+        }
+    }
+]

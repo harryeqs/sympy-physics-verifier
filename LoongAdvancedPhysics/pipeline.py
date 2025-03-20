@@ -124,8 +124,6 @@ class PhysicsCodeGenPipeline():
          else:
             self.dataset = dataset
 
-      print(f'len(self.dataset): {len(self.dataset)}')
-
       # Initialize the reasoning agent
       self.reason_agent = ChatAgent(
          model=reason_model,
@@ -176,12 +174,9 @@ class PhysicsCodeGenPipeline():
       dataset_origin = os.path.split(self.output_location)[-1].replace('.json', '')
       failed_output_location = os.path.join(*os.path.split(self.output_location)[:-1], f'{dataset_origin}_failed.json')
 
-      print('failed_output_location:', failed_output_location)
-
       outputs = self.initialize_output_list(self.output_location)
       failed_outputs = self.initialize_output_list(failed_output_location)
-
-      print(len(self.dataset))
+      
       for sample in self.dataset:
          sample_id = str(sample['id']).strip()
          question = sample['question']

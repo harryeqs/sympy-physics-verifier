@@ -20,47 +20,31 @@ class UnitParser:
 
     def __init__(self):
         # Base unit dictionary
-        self.allowed_units = {
-            "m": units.meter,
-            "meter": units.meter,
-            "meters": units.meter,
-            "h": units.hour,
-            "hrs": units.hour,
-            "min": units.minute,
-            "s": units.second,
-            "second": units.second,
-            "seconds": units.second,
-            "day": units.day,
-            "days": units.day,
-            "kg": units.kilogram,
-            "kilogram": units.kilogram,
-            "kilograms": units.kilogram,
-            "N": units.newton,
-            "newton": units.newton,
-            "J": units.joule,
-            "joule": units.joule,
-            "joules": units.joule,
-            "Joule": units.joule,
-            "Joules": units.joule,
-            "circ": units.degree,
-            "degree": units.degree,
-            "degrees": units.degree,
-            "radian": units.radian,
-            "radians": units.radian,
-            "K": units.kelvin,
-            "kelvin": units.kelvin,
-            "g": units.gram,
-            "gram": units.gram,
-            "grams": units.gram,
-            "cm": units.centimeter,
-            "km": units.kilometer,
-            "kilometer": units.kilometer,
-            "centimeter": units.centimeter,
+        extra_allowed_units = {
+            'hrs': units.hour, 
+            'min': units.minute, 
+            'Joule': units.joule, 
+            'Joules': units.joule, 
+            'circ': units.degree
             # extend as needed
         }
         
+        self.allowed_units = self._load_sympy_units()
+        self.allowed_units.update(extra_allowed_units)
+        
         # Add SI prefixed units
         self._add_si_prefixes()
+
+    @staticmethod
+    def _load_sympy_units():
+        sympy_units = {}
+
+        for attr_name in dir(units):
+            unit_obj = getattr(units, attr_name)
+            if isinstance(unit_obj, units.Quantity):
+                sympy_units[attr_name] = unit_obj
+
+        return sympy_units
     
     def _add_si_prefixes(self):
         """Add SI prefixed units (like km, MHz, etc.) to the allowed units."""
