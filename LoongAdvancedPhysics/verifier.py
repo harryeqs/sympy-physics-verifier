@@ -28,6 +28,7 @@ class UnitParser:
             'Joule': units.joule, 
             'Joules': units.joule, 
             'circ': units.degree,
+            "Omega": units.ohm,,
             '%': units.Unit('percent'),
         }
 
@@ -157,6 +158,19 @@ class UnitParser:
 
         unit_str = unit_str.replace('^', '**').strip()
         return unit_str
+    
+    @staticmethod
+    def unit_is_none(unit_str: str) -> bool:
+        if unit_str is None:
+            return True
+        
+        if isinstance(unit_str, str):
+            unit_str = unit_str.strip().lower()
+
+            if unit_str == 'none' or unit_str == '':
+                return True
+            
+        return False
     
     @staticmethod
     def extract_value_and_unit(expr):
@@ -298,6 +312,7 @@ class PhysicsVerifier:
         # Set the tolerance for float comparisons.
         self.tolerance = tolerance
         self.unit_parser = UnitParser()
+        self.error_msg = None
 
     def safe_exec(self, code):
         namespace = {}
@@ -410,7 +425,6 @@ class PhysicsVerifier:
         Returns:
             A tuple (result_match: bool, unit_match: bool)
         """
-        self.error_msg = None
 
         if answer.unit == "dimensionless":
             answer.unit = None
@@ -425,8 +439,13 @@ class PhysicsVerifier:
         if output is None:
             return VerificationResult(code_output=None, result_match=False, unit_match=False, error=self.error_msg)
         
-        response_unit_expr = self.unit_parser.parse_unit(response.unit) if response.unit else None
-        answer_unit_expr = self.unit_parser.parse_unit(answer.unit) if answer.unit else None
+        if self.unit_parser.unit_is_none(answer.unit) and self.unit_parser.unit_is_none(response.unit):
+            response_unit_expr = None
+            answer_unit_expr = None
+        else:
+            response_unit_expr = self.unit_parser.parse_unit(response.unit.strip())
+            answer_unit_expr = self.unit_parser.parse_unit(answer.unit.strip())
+
         logger.info(f'Response unit: {response_unit_expr}')
         logger.info(f'Ground truth unit: {answer_unit_expr}')
 
@@ -481,14 +500,15 @@ class PhysicsVerifier:
                 self.error_msg = f"Failed to compare symbolic expressions: {e}"
                 result_match = False
 
-        if not answer.unit:
+        if self.unit_parser.unit_is_none(answer.unit):
             # If the answer is dimensionless, the reponse should also be dimensionless
-            unit_match = response_unit_expr is None
+            unit_match = self.unit_parser.unit_is_none(answer.unit)
         elif response_unit_expr is None or answer_unit_expr is None:
             unit_match = False
         else:
             unit_match = self.verify_unit(response_unit_expr, answer_unit_expr)
-        
+
+        print("self.error_msg:", self.error_msg)
         return VerificationResult(code_output=str(output), result_match=result_match, unit_match=unit_match, error=self.error_msg)
 
 
