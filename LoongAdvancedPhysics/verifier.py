@@ -28,7 +28,7 @@ class UnitParser:
             'Joule': units.joule, 
             'Joules': units.joule, 
             'circ': units.degree,
-            "Omega": units.ohm,,
+            "Omega": units.ohm,
             '%': units.Unit('percent'),
         }
 
