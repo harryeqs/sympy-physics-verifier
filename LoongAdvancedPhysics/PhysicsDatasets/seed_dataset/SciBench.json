@@ -4362,5 +4362,101 @@
             "unit": "$\\mathrm{~g}$",
             "source": "thermo"
         }
+    },
+    {
+        "sample_id": "e2.21(a)",
+        "response": {
+            "code": "import sympy as sp\n\n# Define symbols for the enthalpies of formation (in kJ/mol)\nhAg, hCl, hAgCl = sp.symbols('hAg hCl hAgCl')\n\n# Expression for the standard enthalpy change of solution:\n# AgCl(s) -> Ag+(aq) + Cl-(aq)\n# \u0394H_solution = \u0394Hf[Ag+(aq)] + \u0394Hf[Cl-(aq)] - \u0394Hf[AgCl(s)]\nenthalpy_solution_expr = hAg + hCl - hAgCl\n\n# Standard enthalpies of formation (in kJ/mol) at 298.15 K:\n# Values chosen from typical literature data\n# Ag+(aq): +105.3 kJ/mol, Cl-(aq): -167.2 kJ/mol, AgCl(s): -127.1 kJ/mol\nvalues = {hAg: 105.3, hCl: -167.2, hAgCl: -127.1}\n\n# Substitute the values into the expression\nenthalpy_solution_value = enthalpy_solution_expr.subs(values)\n\n# Evaluate the numerical value\nresult = sp.N(enthalpy_solution_value)\n",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "+65.49",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "65.2000000000000",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " +65.49",
+            "comment": " ",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e3.19(a)",
+        "response": {
+            "code": "import sympy as sp\n\n# Define symbols for universal gas constant R and temperature T\n# Define pressures P1 (initial) and P2 (final)\nR, T, P1, P2 = sp.symbols('R T P1 P2')\n\n# Given constant values\nR_val = 8.314  # J/(mol*K)\nT_val = 313.15  # K (40\u00b0C in Kelvin)\nP1_val = 1.8  # atm\nP2_val = 29.5  # atm\n\n# For an ideal gas, the change in chemical potential at constant T is given by:\n# Delta_mu = R * T * ln(P2/P1)\nDelta_mu = R * T * sp.log(P2/P1)\n\n# Substitute the given numerical values\nDelta_mu_numeric = Delta_mu.subs({R: R_val, T: T_val, P1: P1_val, P2: P2_val})\n\n# Evaluate the expression numerically\nresult = sp.N(Delta_mu_numeric)\n",
+            "unit": "J/mol"
+        },
+        "answer": {
+            "gt_answer": "+7.3",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "7.28103884971277",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " +7.3",
+            "comment": " ",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e3.2(a)",
+        "response": {
+            "code": "import sympy as sp\n\n# Define symbols\nT1, T2, S1, R = sp.symbols('T1 T2 S1 R')\n\n# Given values (in SI units)\nT1_val = 298.15  # Initial temperature in Kelvin\nT2_val = 500     # Final temperature in Kelvin\nS1_val = 146.22  # Molar entropy at T1 in Joules per Kelvin per mole\nR_val = 8.314    # Ideal gas constant in Joules per Kelvin per mole\n\n# For a monatomic ideal gas like Neon, the molar heat capacity at constant volume is Cv = (3/2)*R\nCv = (3/sp.Integer(2)) * R\n\n# At constant volume, the change in molar entropy is given by Delta_S = Cv*log(T2/T1)\nDelta_S = Cv * sp.log(T2/T1)\n\n# The final molar entropy at T2 is S2 = S1 + Delta_S\nS2 = S1 + Delta_S\n\n# Substitute the given numerical values into S2\nS2_numeric = S2.subs({T1: T1_val, T2: T2_val, S1: S1_val, R: R_val})\n\n# Evaluate the numerical value\nresult = sp.N(S2_numeric)  # Expected value ~152.67\n",
+            "unit": "J/(K*mol)"
+        },
+        "answer": {
+            "gt_answer": "152.67",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "152.667648955561",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 152.67",
+            "comment": " ",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1} \\mathrm{~mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "p2.45(a)",
+        "response": {
+            "code": "import sympy as sp\n\n# Define the symbols\np, T = sp.symbols('p T')\n\n# Given constants\n# (dH/dp)_T is given as -3.29e3 J/MPa and C_p,m = 110.0 J/K/mol\n# Note: 1 MPa = 10 bar\n\ndHdp_val = -3.29e3  # in J/MPa/mol\nCp_val = 110.0       # in J/K/mol\n\n# The Joule-Thomson coefficient mu is defined as dT/dp at constant enthalpy\n# At constant H: dH = Cp*dT + (dH/dp)_T dp = 0, so dT/dp = - (dH/dp)_T / Cp\nmu_MPa = -dHdp_val / Cp_val  # in K/MPa\n\n# Compute numerical value\nmu_MPa_value = mu_MPa\n\n# Convert mu to K/bar: 1 MPa = 10 bar, so divide by 10\nmu_bar = mu_MPa_value/10  # in K/bar\n\n# assign the final result to the variable 'result'\nresult = mu_bar\n",
+            "unit": "K/bar"
+        },
+        "answer": {
+            "gt_answer": "29.9",
+            "unit": "$\\mathrm{K} \\mathrm{MPa}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "29.9090909090909",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 29.9",
+            "comment": " ",
+            "unit": "$\\mathrm{K} \\mathrm{MPa}^{-1}$",
+            "source": "atkins"
+        }
     }
 ]

@@ -186,7 +186,7 @@
         "comment": " ",
         "answer_number": "6.2",
         "problemid": "  e1.9(a)",
-        "unit": "$\\text{kg}$ ",
+        "unit": "$kg$ ",
         "source": "atkins"
     },
     {
@@ -1006,7 +1006,7 @@
         "comment": " ",
         "answer_number": "22",
         "problemid": " e2.11(a)",
-        "unit": "$\\text{kPA}$",
+        "unit": "$\\text{kPa}$",
         "source": "atkins"
     },
     {
