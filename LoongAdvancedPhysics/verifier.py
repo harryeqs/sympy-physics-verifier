@@ -73,7 +73,7 @@ class UnitParser:
         """
         if not unit_str or unit_str == "dimensionless":
             return None
-            
+
         if "$" in unit_str or "\\" in unit_str:
             # Likely a LaTeX formatted string
             return self.parse_unit_with_latex(unit_str)
@@ -443,8 +443,8 @@ class PhysicsVerifier:
             response_unit_expr = None
             answer_unit_expr = None
         else:
-            response_unit_expr = self.unit_parser.parse_unit(response.unit.strip())
-            answer_unit_expr = self.unit_parser.parse_unit(answer.unit.strip())
+            response_unit_expr = self.unit_parser.parse_unit(response.unit)
+            answer_unit_expr = self.unit_parser.parse_unit(answer.unit)
 
         logger.info(f'Response unit: {response_unit_expr}')
         logger.info(f'Ground truth unit: {answer_unit_expr}')

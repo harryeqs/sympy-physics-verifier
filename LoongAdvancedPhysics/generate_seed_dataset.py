@@ -50,7 +50,7 @@ if __name__ == "__main__":
     reason_model = OpenAIModel(
         model_type=ModelType.O3_MINI,
         model_config_dict={
-            "temperature": 0.2,
+            "temperature": 0.4,
         }
     )
 
