@@ -64,7 +64,7 @@ class PhysicsCodeGenPipeline():
          num: Union[int, None] = None,
          sample: bool = False,
          problem_ids: Union[List[int], None] = None,
-         max_attempts: int = 2,
+         max_attempts: int = 3,
          save_right_solution: bool = False,
          ):
       """
@@ -149,7 +149,10 @@ class PhysicsCodeGenPipeline():
       outputs = self.initialize_output_list(self.output_location)
       failed_outputs = self.initialize_output_list(failed_output_location)
 
+      sample_count = 0
+
       for sample in self.dataset:
+         sample_count += 1
          sample_id = str(sample['id']).strip()
          question = sample['question']
          gt_answer = sample['gt_answer']
@@ -165,8 +168,8 @@ class PhysicsCodeGenPipeline():
          while attempts < self.max_attempts:
 
             prompt_message = question + (f"\n\nPlease improve the solution based on the following feedback:\n{feedback}" if feedback else "")
+            logger.info(f'==========Generating Code for Question {sample_id} ({sample_count}/{len(self.dataset)}): Attempt {attempts + 1}==========')
 
-            logger.info(f'==========Generating Code for Question {sample_id}: Attempt {attempts + 1}==========')
             try:
                raw_response = self.reason_agent.step(prompt_message, response_format=ResponseFormat)
                structured_response = ResponseFormat.model_validate(raw_response.msgs[0].parsed)
@@ -177,7 +180,7 @@ class PhysicsCodeGenPipeline():
                   verification_outcome = None
                   break
 
-            logger.info(f'==========Verifying Question {sample_id}==========')
+            logger.info(f'==========Verifying Question {sample_id} ({sample_count}/{len(self.dataset)})==========')
             verification_outcome = self.verify(structured_response, full_answer)
             logger.info(f'Verification Outcome: Result Match: {verification_outcome.result_match}, Unit Match: {verification_outcome.unit_match}')
 
@@ -188,20 +191,22 @@ class PhysicsCodeGenPipeline():
                feedback = f"""
 The code output does not match the expected answer or have errors. Please review the code and try again.
 Expected answer:
-- Answer: {gt_answer}
-- Unit: {unit}
-Your answer: 
-- Code Output: {verification_outcome.code_output}
-- Unit: {structured_response.unit}
+   - Answer: {gt_answer}
+   - Unit: {unit}
+Your previous answer: 
+   - Code: {structured_response.code}
+   - Code Output: {verification_outcome.code_output}
+   - Unit: {structured_response.unit}
 Verification details: 
-- Result match: {verification_outcome.result_match},
-- Unit match: {verification_outcome.unit_match}
+   - Result match: {verification_outcome.result_match},
+   - Unit match: {verification_outcome.unit_match}
 Error message: {verification_outcome.error}
-
+               """
+               if sample["solution"]:
+                  feedback += f"""
 Please refer to this solution when generating the code:
 {sample['solution']}
-         """
-               
+         """   
          
          # Post-attempts handling
          output = OutputFormat(

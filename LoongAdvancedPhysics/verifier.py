@@ -73,7 +73,7 @@ class UnitParser:
         """
         if not unit_str or unit_str == "dimensionless":
             return None
-            
+
         if "$" in unit_str or "\\" in unit_str:
             # Likely a LaTeX formatted string
             return self.parse_unit_with_latex(unit_str)
