@@ -165,9 +165,8 @@ class PhysicsCodeGenPipeline():
          while attempts < self.max_attempts:
 
             prompt_message = question + (f"\n\nPlease improve the solution based on the following feedback:\n{feedback}" if feedback else "")
-            print(prompt_message)
 
-            logger.info(f'==========Generating Code for Question {sample_id}==========')
+            logger.info(f'==========Generating Code for Question {sample_id}: Attempt {attempts + 1}==========')
             try:
                raw_response = self.reason_agent.step(prompt_message, response_format=ResponseFormat)
                structured_response = ResponseFormat.model_validate(raw_response.msgs[0].parsed)
@@ -187,6 +186,7 @@ class PhysicsCodeGenPipeline():
             else:
                attempts += 1
                feedback = f"""
+The code output does not match the expected answer or have errors. Please review the code and try again.
 Expected answer:
 - Answer: {gt_answer}
 - Unit: {unit}
@@ -197,6 +197,9 @@ Verification details:
 - Result match: {verification_outcome.result_match},
 - Unit match: {verification_outcome.unit_match}
 Error message: {verification_outcome.error}
+
+Please refer to this solution when generating the code:
+{sample['solution']}
          """
                
          

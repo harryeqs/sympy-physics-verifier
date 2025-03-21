@@ -27,8 +27,8 @@ class UnitParser:
             'min': units.minute, 
             'Joule': units.joule, 
             'Joules': units.joule, 
-            'circ': units.degree
-            # extend as needed
+            'circ': units.degree,
+            '%': units.Unit('percent'),
         }
 
         self.allowed_units = self._load_sympy_units()
@@ -294,7 +294,7 @@ def clean_answer(raw_answer: str) -> str:
     return answer
 
 class PhysicsVerifier:
-    def __init__(self, tolerance: float = 1e-1):
+    def __init__(self, tolerance: float = 1e-2):
         # Set the tolerance for float comparisons.
         self.tolerance = tolerance
         self.unit_parser = UnitParser()
