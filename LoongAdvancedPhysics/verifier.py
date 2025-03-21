@@ -444,7 +444,7 @@ class PhysicsVerifier:
             answer_unit_expr = None
         else:
             response_unit_expr = self.unit_parser.parse_unit(response.unit.strip())
-            answer_unit_expr = self.unit_parser.parse_unit(answer.unit.strip())
+            answer_unit_expr = (self.unit_parser.parse_unit(answer.unit.strip()) if answer.unit else None)
 
         logger.info(f'Response unit: {response_unit_expr}')
         logger.info(f'Ground truth unit: {answer_unit_expr}')
