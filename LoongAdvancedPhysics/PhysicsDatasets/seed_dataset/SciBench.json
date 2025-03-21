@@ -3718,5 +3718,649 @@
             "unit": " $10^{11} \\mathrm{~s}$",
             "source": "thermo"
         }
+    },
+    {
+        "sample_id": "e2.24(a)",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nDelta_U = -1373 * 10**3  # Convert kJ/mol to J/mol\nR = 8.314  # J/(mol*K)\nT = 298.15  # Temperature in K\n\n# Step 2: Calculate the change in enthalpy using the relation\n# Delta_r H = Delta_r U + Delta_n R T\n# where Delta_n is the change in the number of moles of gas\n\n# For the reaction:\n# C2H5OH(l) + 3 O2(g) -> 2 CO2(g) + 3 H2O(g)\n# Reactants: 3 moles of O2 (g)\n# Products: 2 moles of CO2 (g) + 3 moles of H2O (g) = 5 moles of gas\n\nDelta_n = 5 - 3  # Change in moles of gas\n\n# Calculate Delta_r H\nDelta_H = Delta_U + Delta_n * R * T\n\n# Step 3: Compute the final result and assign it to 'result'\nresult = Delta_H  # final computed value",
+            "unit": "J/mol"
+        },
+        "answer": {
+            "gt_answer": "-1368",
+            "unit": "$\\mathrm{~kJ} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "-1368.04236180000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -1368",
+            "comment": " ",
+            "unit": "$\\mathrm{~kJ} \\mathrm{~mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e1.11(a)",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nR = 8.314  # J/(mol*K), universal gas constant\nM = sp.symbols('M')  # molar mass in kg/mol\nP = 20 * 10**3  # pressure in Pa\nT = 330  # temperature in K\ndensity = 1.23  # density in kg/m^3\n\n# Step 2: Use the ideal gas law relation to find molar mass\n# The ideal gas law is given by: P = (density * R * T) / M\n# Rearranging gives us: M = (density * R * T) / P\nmolar_mass_eq = (density * R * T) / P\n\n# Step 3: Solve for molar mass\nresult = molar_mass_eq\n\n# Final result assignment\nresult = result",
+            "unit": "kg/mol"
+        },
+        "answer": {
+            "gt_answer": "169",
+            "unit": " $\\mathrm{g} \\mathrm{mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "168.73263",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 169",
+            "comment": " ",
+            "unit": " $\\mathrm{g} \\mathrm{mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e3.7(a)(a)",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nH_vaporization = 29.4 * 10**3  # Enthalpy of vaporization in J/mol\nT_boiling = 334.88  # Boiling point in K\n\n# Step 2: Calculate the entropy of vaporization using the formula \u0394S = \u0394H / T\n# where \u0394S is the entropy change, \u0394H is the enthalpy change, and T is the temperature\nS_vaporization = H_vaporization / T_boiling  # Entropy of vaporization in J/(mol*K)\n\n# Step 3: Compute the final result and assign it to 'result'\nresult = S_vaporization",
+            "unit": "J/(mol*K)"
+        },
+        "answer": {
+            "gt_answer": "+87.8",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "87.79264214046823",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " +87.8",
+            "comment": " ",
+            "unit": "$\\mathrm{J} \\mathrm{K}^{-1} \\mathrm{~mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e3.22(a)",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nP1, P2, R, T = sp.symbols('P1 P2 R T')\n\n# Constants\nR_value = 8.314  # J/(mol*K), universal gas constant\nT_value = 298.15  # K, temperature\n\n# Step 2: Set up the Gibbs energy change equation for an ideal gas\n# The change in molar Gibbs energy (\u0394G) for an ideal gas is given by:\n# \u0394G = RT ln(P2/P1)\n# where P1 is the initial pressure and P2 is the final pressure.\nP1_value = 1.0  # atm\nP2_value = 100.0  # atm\n\n# Step 3: Calculate the change in molar Gibbs energy\n# Substitute the values into the equation\n\u0394G = R_value * T_value * sp.log(P2_value / P1_value)\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = \u0394G",
+            "unit": "J/mol"
+        },
+        "answer": {
+            "gt_answer": "+11",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "11.4153838157778",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " +11",
+            "comment": " ",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "e3.20(a)",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nT = 200  # Temperature in K\nP = 50 * 1e5  # Pressure in Pa (50 bar)\nphi = 0.72  # Fugacity coefficient\nR = 8.314  # Universal gas constant in J/(mol*K)\n\n# Step 2: Calculate the difference in molar Gibbs energy\n# The formula for the difference in molar Gibbs energy from a perfect gas is:\n# delta_G = RT * ln(phi)\n# where phi is the fugacity coefficient\n\n# Calculate the difference in Gibbs energy\ndelta_G = R * T * sp.ln(phi)\n\n# Step 3: Assign the final result to 'result'\nresult = delta_G",
+            "unit": "J/mol"
+        },
+        "answer": {
+            "gt_answer": "-0.55",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "-0.546236562561102",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -0.55",
+            "comment": " ",
+            "unit": "$\\mathrm{kJ} \\mathrm{mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "2.2",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nU_change = 0.21  # change in molar internal energy in kJ/mol\nP = 1.0  # pressure in bar\nR = 8.314  # ideal gas constant in J/(mol*K)\n\n# Convert pressure from bar to Pa (1 bar = 100000 Pa)\nP_Pa = P * 100000  # pressure in Pa\n\n# Densities of the polymorphs in g/cm^3\nrho_calcite = 2.71  # g/cm^3\nrho_aragonite = 2.93  # g/cm^3\n\n# Convert densities to kg/m^3\nrho_calcite_kg_m3 = rho_calcite * 1000  # kg/m^3\nrho_aragonite_kg_m3 = rho_aragonite * 1000  # kg/m^3\n\n# Step 2: Calculate the molar volume for each polymorph\n# Molar mass of CaCO3 (in g/mol)\nmolar_mass_CaCO3 = 100.09  # g/mol\n\n# Molar volume = molar mass / density\nV_calcite = molar_mass_CaCO3 / rho_calcite  # in cm^3/mol\nV_aragonite = molar_mass_CaCO3 / rho_aragonite  # in cm^3/mol\n\n# Convert molar volumes to m^3/mol (1 cm^3 = 1e-6 m^3)\nV_calcite_m3 = V_calcite * 1e-6  # m^3/mol\nV_aragonite_m3 = V_aragonite * 1e-6  # m^3/mol\n\n# Step 3: Calculate the difference in molar enthalpy and internal energy\n# Enthalpy change (delta H) = delta U + P * delta V\n# where delta V = V_aragonite - V_calcite\ndelta_V = V_aragonite_m3 - V_calcite_m3\n\n# Calculate the change in enthalpy\ndelta_H = U_change + (P_Pa * delta_V) / 1000  # converting J to kJ\n\n# Step 4: Calculate the difference between molar enthalpy and internal energy changes\nenthalpy_internal_energy_difference = delta_H - U_change\n\n# Final result assignment\nresult = enthalpy_internal_energy_difference",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "-0.28",
+            "unit": " $\\mathrm{~Pa} \\mathrm{~m}^3 \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "-0.2773169779479445",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "The change in enthalpy when the transition occurs is\r\n$$\r\n\\begin{aligned}\r\n\\Delta H_{\\mathrm{m}} & =H_{\\mathrm{m}}(\\text { aragonite })-H_{\\mathrm{m}}(\\text { calcite }) \\\\\r\n& =\\left\\{U_{\\mathrm{m}}(\\mathrm{a})+p V_{\\mathrm{m}}(\\mathrm{a})\\right\\}-\\left\\{U_{\\mathrm{m}}(\\mathrm{c})+p V_{\\mathrm{m}}(\\mathrm{c})\\right\\} \\\\\r\n& =\\Delta U_{\\mathrm{m}}+p\\left\\{V_{\\mathrm{m}}(\\mathrm{a})-V_{\\mathrm{m}}(\\mathrm{c})\\right\\}\r\n\\end{aligned}\r\n$$\r\nwhere a denotes aragonite and c calcite. It follows by substituting $V_{\\mathrm{m}}=M / \\rho$ that\r\n$$\r\n\\Delta H_{\\mathrm{m}}-\\Delta U_{\\mathrm{m}}=p M\\left(\\frac{1}{\\rho(\\mathrm{a})}-\\frac{1}{\\rho(\\mathrm{c})}\\right)\r\n$$\r\nSubstitution of the data, using $M=100 \\mathrm{~g} \\mathrm{~mol}^{-1}$, gives\r\n$$\r\n\\begin{aligned}\r\n\\Delta H_{\\mathrm{m}}-\\Delta U_{\\mathrm{m}} & =\\left(1.0 \\times 10^5 \\mathrm{~Pa}\\right) \\times\\left(100 \\mathrm{~g} \\mathrm{~mol}^{-1}\\right) \\times\\left(\\frac{1}{2.93 \\mathrm{~g} \\mathrm{~cm}^{-3}}-\\frac{1}{2.71 \\mathrm{~g} \\mathrm{~cm}^{-3}}\\right) \\\\\r\n& =-2.8 \\times 10^5 \\mathrm{~Pa} \\mathrm{~cm}{ }^3 \\mathrm{~mol}^{-1}=-0.28 \\mathrm{~Pa} \\mathrm{~m}^3 \\mathrm{~mol}^{-1}\r\n\\end{aligned}\r\n$$",
+            "answer_latex": " -0.28",
+            "comment": " ",
+            "unit": " $\\mathrm{~Pa} \\mathrm{~m}^3 \\mathrm{~mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "2.6",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nT1 = 298  # Initial temperature in K\nT2 = 373  # Final temperature in K (100 degrees C)\n\n# Molar heat capacities at constant pressure (in J K^-1 mol^-1)\nC_H2O = 33.58  # for H2O(g)\nC_H2 = 28.82   # for H2(g)\nC_O2 = 29.36   # for O2(g)\n\n# Step 2: Calculate the change in enthalpy due to temperature change\n# Using the formula: \u0394H = C_p * \u0394T\n# \u0394T = T2 - T1\nDelta_T = T2 - T1\n\n# Enthalpy change for each component\nDelta_H_H2O = C_H2O * Delta_T\nDelta_H_H2 = C_H2 * Delta_T\nDelta_H_O2 = C_O2 * Delta_T\n\n# Step 3: Calculate the total change in enthalpy\n# The reaction for formation of H2O(g) is:\n# H2(g) + 0.5 O2(g) -> H2O(g)\n# Therefore, we need to consider the stoichiometry:\n# \u0394H_total = \u0394H_H2O - (\u0394H_H2 + 0.5 * \u0394H_O2)\nDelta_H_total = Delta_H_H2O - (Delta_H_H2 + 0.5 * Delta_H_O2)\n\n# Step 4: Calculate the new enthalpy of formation at T2\nHf_H2O_T2 = -241.82 * 1000 + Delta_H_total  # Convert kJ to J\n\n# Final result assignment\nresult = Hf_H2O_T2 / 1000  # Convert back to kJ/mol\n",
+            "unit": "kJ/mol"
+        },
+        "answer": {
+            "gt_answer": "-242.6",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "-242.564",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "The reaction is $\\mathrm{H}_2(\\mathrm{~g})+\\frac{1}{2} \\mathrm{O}_2(\\mathrm{~g}) \\rightarrow \\mathrm{H}_2 \\mathrm{O}(\\mathrm{g})$, so\r\n$$\r\n\\Delta_{\\mathrm{r}} C_p^{\\ominus}=C_{p, \\mathrm{~m}}^{\\ominus}\\left(\\mathrm{H}_2 \\mathrm{O}, \\mathrm{g}\\right)-\\left\\{C_{p, \\mathrm{~m}}^{\\ominus}\\left(\\mathrm{H}_2, \\mathrm{~g}\\right)+\\frac{1}{2} C_{p, \\mathrm{~m}}^{\\ominus}\\left(\\mathrm{O}_2, \\mathrm{~g}\\right)\\right\\}=-9.92 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}\r\n$$\r\nIt then follows that\r\n$$\r\n\\Delta_{\\mathrm{r}} H^{\\ominus}(373 \\mathrm{~K})=-241.82 \\mathrm{~kJ} \\mathrm{~mol}^{-1}+(75 \\mathrm{~K}) \\times\\left(-9.92 \\mathrm{~J} \\mathrm{~K}^{-1} \\mathrm{~mol}^{-1}\\right)=-242.6 \\mathrm{~kJ} \\mathrm{~mol}^{-1}\r\n$$\r\n",
+            "answer_latex": "-242.6 ",
+            "comment": " ",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$",
+            "source": "atkins"
+        }
+    },
+    {
+        "sample_id": "16.7.43",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nx, y, z = sp.symbols('x y z')\n\n# Given density of the fluid\nrho = 870  # kg/m^3\n\n# Step 2: Define the velocity vector\nv = sp.Matrix([z, y**2, x**2])  # velocity vector components\n\n# Step 3: Calculate the divergence of the velocity field\n# The divergence in 3D is given by: div(v) = d(v_x)/dx + d(v_y)/dy + d(v_z)/dz\ndiv_v = sp.diff(v[0], x) + sp.diff(v[1], y) + sp.diff(v[2], z)\n\n# Step 4: Set up the surface integral for the flow rate through the cylinder\n# The cylinder is defined by x^2 + y^2 = 4, 0 <= z <= 1\n# The outward normal vector on the curved surface of the cylinder is (x/r, y/r, 0) where r = 2\nr = 2\nn = sp.Matrix([x/r, y/r, 0])  # normal vector on the surface\n\n# Step 5: Calculate the flow rate through the cylinder surface\n# The flow rate is given by the surface integral of the velocity dot normal vector\nflow_rate = sp.integrate(v.dot(n) * rho, (z, 0, 1), (y, -sp.sqrt(4 - x**2), sp.sqrt(4 - x**2)), (x, -2, 2))\n\n# Step 6: Compute the final result and assign it to 'result'\nresult = flow_rate\n",
+            "unit": "kg/s"
+        },
+        "answer": {
+            "gt_answer": "0",
+            "unit": " $\\mathrm{kg}/\\mathrm{s}$"
+        },
+        "verification_result": {
+            "code_output": "0",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 0",
+            "comment": " ",
+            "unit": " $\\mathrm{kg}/\\mathrm{s}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "8.4.17",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols\n\nt = sp.symbols('t')\nC = 6  # amount of dye in mg\n\n# Step 2: Define the concentration function\nc_t = 20 * t * sp.exp(-0.6 * t)  # concentration in mg/L\n\n# Step 3: Calculate the cardiac output using the dye dilution method\n# Cardiac output (CO) = amount of dye / integral of concentration over time\nintegral_concentration = sp.integrate(c_t, (t, 0, 10))  # integrate c(t) from 0 to 10 seconds\nCO = C / integral_concentration  # cardiac output in L/s\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = CO",
+            "unit": "L/s"
+        },
+        "answer": {
+            "gt_answer": "6.6",
+            "unit": " $\\mathrm{L}/\\mathrm{min}$"
+        },
+        "verification_result": {
+            "code_output": "6.594421557527028",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 6.6",
+            "comment": " ",
+            "unit": " $\\mathrm{L}/\\mathrm{min}$",
+            "source": "calculus"
+        }
+    },
+    {
+        "sample_id": "1-14",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nT = 288  # Mean temperature of the earth's surface in Kelvin\n\n# Step 2: Set up the problem using Wien's displacement law\n# The maximum wavelength (lambda_max) is given by the formula: lambda_max = b / T\n# where b is Wien's displacement constant, approximately 2898 micrometers * Kelvin\nb = 2898 * 1e-6  # Convert micrometers to meters\n\n# Step 3: Calculate the maximum wavelength\nlambda_max = b / T\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = lambda_max",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "1.01",
+            "unit": " 10^{-5} \\mathrm{~m}"
+        },
+        "verification_result": {
+            "code_output": "1.00625000000000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 1.01",
+            "comment": " ",
+            "unit": " 10^{-5} \\mathrm{~m}",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "6.6_2",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nI = sp.symbols('I')  # moment of inertia\nh = 6.62607015e-34  # Planck's constant in J.s\nc = 3e10  # speed of light in cm/s\nnu = 6.26e11  # frequency separation in Hz\n\n# Step 2: Set up the moment of inertia for a diatomic molecule\n# The moment of inertia I = mu * r^2, where mu is the reduced mass and r is the bond length\nm_H = 1.00784  # mass of Hydrogen in amu\nm_Cl = 34.96885  # mass of Chlorine in amu\namu_to_kg = 1.66053906660e-27  # conversion factor from amu to kg\n\n# Calculate reduced mass mu in kg\nmu = (m_H * m_Cl) / (m_H + m_Cl) * amu_to_kg\n\n# The frequency of rotation is given by nu = h / (4 * pi^2 * I)\n# Rearranging gives us I = h / (4 * pi^2 * nu)\nI = h / (4 * sp.pi**2 * nu)\n\n# Step 3: Solve for bond length r\n# I = mu * r^2 => r = sqrt(I / mu)\nr_squared = I / mu\nr = sp.sqrt(r_squared)\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = r",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "129",
+            "unit": " $\\mathrm{pm}$"
+        },
+        "verification_result": {
+            "code_output": "128.38389942474936",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "\nAccording to Equation $$\n\\begin{aligned}\n&v_{\\mathrm{obs}}=2 B(J+1) \\quad J=0,1,2, \\ldots\\\\\n&B=\\frac{h}{8 \\pi^2 I}\n\\end{aligned}\n$$, the spacing of the lines in the microwave spectrum of $\\mathrm{H}^{35} \\mathrm{Cl}$ is given by\r\n$$\r\n2 B=\\frac{h}{4 \\pi^2 I}\r\n$$\r\n\r\n$$\r\n\\frac{h}{4 \\pi^2 I}=6.26 \\times 10^{11} \\mathrm{~Hz}\r\n$$\r\nSolving this equation for $I$, we have\r\n$$\r\nI=\\frac{6.626 \\times 10^{-34} \\mathrm{~J} \\cdot \\mathrm{s}}{4 \\pi^2\\left(6.26 \\times 10^{11} \\mathrm{~s}^{-1}\\right)}=2.68 \\times 10^{-47} \\mathrm{~kg} \\cdot \\mathrm{m}^2\r\n$$\r\nThe reduced mass of $\\mathrm{H}^{35} \\mathrm{Cl}$ is\r\n$$\r\n\\mu=\\frac{(1.00 \\mathrm{amu})(35.0 \\mathrm{amu})}{36.0 \\mathrm{amu}}\\left(1.661 \\times 10^{-27} \\mathrm{~kg} \\cdot \\mathrm{amu}^{-1}\\right)=1.66 \\times 10^{-27} \\mathrm{~kg}\r\n$$\r\nUsing the fact that $I=\\mu l^2$, we obtain\r\n$$\r\nl=\\left(\\frac{2.68 \\times 10^{-47} \\mathrm{~kg} \\cdot \\mathrm{m}^2}{1.661 \\times 10^{-27} \\mathrm{~kg}}\\right)^{1 / 2}=1.29 \\times 10^{-10} \\mathrm{~m}=129 \\mathrm{pm}\r\n$$\n",
+            "answer_latex": " 129",
+            "comment": " ",
+            "unit": " $\\mathrm{pm}$",
+            "source": "chemmc"
+        }
+    },
+    {
+        "sample_id": "Problem 2.6",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nv = 160 * 1000 / 3600  # speed in m/s (convert km/hr to m/s)\nh = 80  # height in meters\nx = 30  # distance behind the cattle in meters\n\nt = sp.symbols('t')  # time variable\n\n# Step 2: Set up the Physics problem\n# The time it takes for the bales to fall to the ground can be calculated using the equation:\n# h = 0.5 * g * t^2, where g is the acceleration due to gravity (approximately 9.81 m/s^2)\n\ng = 9.81  # acceleration due to gravity in m/s^2\n# Solve for time t\nfall_time = sp.solve(h - 0.5 * g * t**2, t)\n\n# We take the positive root since time cannot be negative\nfall_time = fall_time[1]  # positive root\n\n# Step 3: Calculate the horizontal distance traveled by the bales during the fall time\n# Distance = speed * time\nhorizontal_distance = v * fall_time\n\n# Step 4: Calculate the distance from the plane to the point where the bales should be released\n# The bales should be released horizontal_distance + x behind the cattle\nrelease_distance = horizontal_distance + x\n\n# Final result assignment\nresult = release_distance  # final computed value",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "210",
+            "unit": "$\\mathrm{~m}$ "
+        },
+        "verification_result": {
+            "code_output": "209.491120834187",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 210",
+            "comment": " ",
+            "unit": "$\\mathrm{~m}$ ",
+            "source": "class"
+        }
+    },
+    {
+        "sample_id": "Problem 3.44",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nA0, A, t, omega_n, omega_d, zeta = sp.symbols('A0 A t omega_n omega_d zeta')\n\n# Step 2: Set up the Physics problem\n# The amplitude of a damped harmonic oscillator is given by:\n# A(t) = A0 * e^(-zeta * omega_n * t)\n# After 4 cycles, the time t = 4 * (2 * pi / omega_n)\n# We know that A = A0 / e, thus:\n# A0 * e^(-zeta * omega_n * t) = A0 / e\n# This simplifies to:\n# e^(-zeta * omega_n * t) = 1 / e\n# Taking natural logarithm on both sides gives:\n# -zeta * omega_n * t = -1\n\n# Step 3: Substitute t and solve for zeta\ncycles = 4\nperiod = 2 * sp.pi / omega_n\n# Total time for 4 cycles\nt_total = cycles * period\n# Substitute into the equation\nequation = sp.Eq(-zeta * omega_n * t_total, -1)\n# Solve for zeta\nzeta_solution = sp.solve(equation, zeta)[0]\n\n# Step 4: The ratio of the frequency of the damped oscillator to its natural frequency is given by:\n# omega_d = omega_n * sqrt(1 - zeta^2)\n# We need to find the ratio omega_d / omega_n = sqrt(1 - zeta^2)\nratio = sp.sqrt(1 - zeta_solution**2)\n\n# Final result assignment\nresult = ratio",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "0.9992093669",
+            "unit": ""
+        },
+        "verification_result": {
+            "code_output": "0.999208114711639",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " $\\frac{8 \\pi}{\\sqrt{64 \\pi^2+1}}$",
+            "comment": " ",
+            "unit": "",
+            "source": "class"
+        }
+    },
+    {
+        "sample_id": "Problem 8.42",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nm = 10000  # mass of the spacecraft in kg\nR_earth = 6371e3  # radius of Earth in meters\nh_initial = 200e3  # initial height in meters\nh_final = 35786e3  # final height for synchronous orbit in meters\nG = 6.67430e-11  # gravitational constant in m^3 kg^-1 s^-2\nM_earth = 5.972e24  # mass of Earth in kg\n\ng_initial = G * M_earth / (R_earth + h_initial)**2  # gravitational acceleration at initial orbit\ng_final = G * M_earth / (R_earth + h_final)**2  # gravitational acceleration at final orbit\n\n# Step 2: Calculate the gravitational potential energy at initial and final orbits\nU_initial = -G * M_earth * m / (R_earth + h_initial)  # potential energy at initial orbit\nU_final = -G * M_earth * m / (R_earth + h_final)  # potential energy at final orbit\n\n# Step 3: Calculate the kinetic energy at initial and final orbits\nv_initial = sp.sqrt(g_initial * (R_earth + h_initial))  # velocity at initial orbit\nv_final = sp.sqrt(g_final * (R_earth + h_final))  # velocity at final orbit\nK_initial = 0.5 * m * v_initial**2  # kinetic energy at initial orbit\nK_final = 0.5 * m * v_final**2  # kinetic energy at final orbit\n\n# Step 4: Calculate the total mechanical energy at initial and final orbits\nE_initial = U_initial + K_initial  # total energy at initial orbit\nE_final = U_final + K_final  # total energy at final orbit\n\n# Step 5: Calculate the minimum energy required to move to synchronous orbit\nminimum_energy = E_final - E_initial  # energy required to move to synchronous orbit\n\n# Step 6: Assign the final computed result to 'result'\nresult = minimum_energy",
+            "unit": "J"
+        },
+        "answer": {
+            "gt_answer": "2.57",
+            "unit": "$10^{11} \\mathrm{~J}$ "
+        },
+        "verification_result": {
+            "code_output": "2.56019789683069",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 2.57",
+            "comment": " ",
+            "unit": "$10^{11} \\mathrm{~J}$ ",
+            "source": "class"
+        }
+    },
+    {
+        "sample_id": "Problem 2.30",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nh, t_fall, t_sound = sp.symbols('h t_fall t_sound')\n\n# Given values\nspeed_of_sound = 331  # m/s\nsplash_time = 4.021  # seconds\n\n# Step 2: Set up the equations\n# The total time is the sum of the time it takes for the balloon to fall and the time it takes for the sound to travel back\n# t_fall + t_sound = splash_time\n# The time it takes for the balloon to fall can be calculated using the equation of motion: h = 0.5 * g * t_fall^2\n# where g is the acceleration due to gravity (approximately 9.81 m/s^2)\n\ng = 9.81  # m/s^2\n\nt_sound = splash_time - t_fall\n\n# Using the equation of motion for the fall\nh_eq = 0.5 * g * t_fall**2\n\n# The distance sound travels is equal to speed_of_sound * t_sound\nsound_distance_eq = speed_of_sound * t_sound\n\n# Setting the two equations equal to each other\n# h = sound_distance_eq\n# h = 0.5 * g * t_fall^2\n# Therefore, we can set them equal: speed_of_sound * (splash_time - t_fall) = 0.5 * g * t_fall**2\n\n# Step 3: Solve the equations symbolically\n# Rearranging the equation to solve for t_fall\nequation = sp.Eq(speed_of_sound * (splash_time - t_fall), 0.5 * g * t_fall**2)\n\n# Solve for t_fall\nt_fall_solution = sp.solve(equation, t_fall)\n\n# Since we have two solutions, we take the positive one\n# Calculate height using the positive t_fall\nh_value = 0.5 * g * t_fall_solution[1]**2\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = h_value\n",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "71",
+            "unit": "$\\mathrm{~m}$ "
+        },
+        "verification_result": {
+            "code_output": "71.0634948415475",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 71",
+            "comment": " ",
+            "unit": "$\\mathrm{~m}$ ",
+            "source": "class"
+        }
+    },
+    {
+        "sample_id": "Problem 2.26",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nm = 2  # mass of the block in kg\nv_initial = 4  # initial speed in m/s\nk = 6  # spring constant in N/m\nx = sp.symbols('x')  # compression of the spring in meters\n\n# Step 2: Set up the energy conservation equation\n# Initial kinetic energy = Final potential energy in the spring\n# (1/2) * m * v_initial^2 = (1/2) * k * x^2\nkinetic_energy_initial = (1/2) * m * v_initial**2\npotential_energy_spring = (1/2) * k * x**2\n\n# Set the equation for energy conservation\nenergy_equation = sp.Eq(kinetic_energy_initial, potential_energy_spring)\n\n# Step 3: Solve the equation for x (compression of the spring)\ncompression_solution = sp.solve(energy_equation, x)\n\n# Since compression cannot be negative, we take the positive root\nmax_compression = [sol for sol in compression_solution if sol >= 0][0]\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = max_compression",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "2.3",
+            "unit": "$\\mathrm{~m}$ "
+        },
+        "verification_result": {
+            "code_output": "2.30940107675850",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 2.3",
+            "comment": " ",
+            "unit": "$\\mathrm{~m}$ ",
+            "source": "class"
+        }
+    },
+    {
+        "sample_id": "9.34 B.",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nu1, v1, v2, theta1, theta2 = sp.symbols('u1 v1 v2 theta1 theta2')\n\n# Given values\nv1 = u1 / sp.sqrt(2)\n# The first ball moves off at 45 degrees\ntheta1 = 45 * sp.pi / 180  # converting degrees to radians\n\n# Step 2: Using conservation of momentum in x and y directions\n# Momentum conservation in x-direction:\n# u1 = v1 * cos(theta1) + v2 * cos(theta2)\n# Momentum conservation in y-direction:\n# 0 = v1 * sin(theta1) - v2 * sin(theta2)\n\n# Set up the equations\n# Since v2 = v1 in this case, we can substitute v2 with v1\nv2 = v1\n\n# Equation 1: x-direction\nmomentum_x = u1 - v1 * sp.cos(theta1) - v2 * sp.cos(theta2)\n\n# Equation 2: y-direction\nmomentum_y = v1 * sp.sin(theta1) - v2 * sp.sin(theta2)\n\n# Substitute v2 into the equations\nmomentum_x = u1 - v1 * sp.cos(theta1) - v1 * sp.cos(theta2)\n\n# Solve for theta2 using the y-direction equation\n# Rearranging the y-direction equation:\n# v1 * sin(theta1) = v2 * sin(theta2)\n# sin(theta2) = (v1 * sin(theta1)) / v2\nsin_theta2 = (v1 * sp.sin(theta1)) / v2\n\n# Since v2 = v1, we can simplify this to:\nsin_theta2 = sp.sin(theta1)\n\n# Now we can find theta2\ntheta2 = sp.asin(sin_theta2)\n\n# Convert theta2 back to degrees\ntheta2_degrees = theta2 * 180 / sp.pi\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = theta2_degrees",
+            "unit": "degrees"
+        },
+        "answer": {
+            "gt_answer": "45",
+            "unit": "$^\\circ$"
+        },
+        "verification_result": {
+            "code_output": "45",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": null,
+            "answer_latex": "45 ",
+            "comment": " ",
+            "unit": "$^\\circ$",
+            "source": "class"
+        }
+    },
+    {
+        "sample_id": "Question 21.19",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nq, q3, L, x3 = sp.symbols('q q3 L x3')\n\n# Given values\nL_value = 9.00  # cm\nL = L_value / 100  # Convert to meters\n\n# Step 2: Set up the forces acting on particle 3\n# Particle 1 is at x = 0 and particle 2 is at x = L\n# The force on particle 3 due to particle 1\nF1 = (1 / (x3**2)) * (q * q3)\n# The force on particle 3 due to particle 2\nF2 = (1 / ((L - x3)**2)) * (4 * q * q3)\n\n# Step 3: Set the forces equal for equilibrium (F1 = F2)\n# This means the net force on particle 3 must be zero\nequation = sp.Eq(F1, F2)\n\n# Step 4: Solve the equation for x3\nsolution = sp.solve(equation, x3)\n\n# Since x3 must be between 0 and L, we will take the valid solution\nvalid_solution = [s.evalf() for s in solution if 0 < s < L]\n\n# Assign the final result to 'result'\nresult = valid_solution[0] if valid_solution else None",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "3.00",
+            "unit": "$\\mathrm{~cm}$"
+        },
+        "verification_result": {
+            "code_output": "3.0",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " $3.00$",
+            "comment": " ",
+            "unit": "$\\mathrm{~cm}$",
+            "source": "fund"
+        }
+    },
+    {
+        "sample_id": "Question 23.45",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nr = sp.symbols('r')  # distance from the center\nQ_inner = 4.00e-8  # charge on the inner shell in C\nQ_outer = 2.00e-8  # charge on the outer shell in C\nR_inner = 0.10  # radius of the inner shell in m\nR_outer = 0.15  # radius of the outer shell in m\n\n# Step 2: Set up the electric field calculation\n# According to Gauss's law, the electric field E at a distance r from the center is given by:\n# E = (1/(4 * pi * epsilon_0)) * (Q_enc / r^2)\n# where Q_enc is the enclosed charge\n\n# The point at r = 12.0 cm is between the inner and outer shells\n# The enclosed charge at r = 12.0 cm is just the charge on the inner shell\nQ_enc = Q_inner\n\n# Step 3: Calculate the electric field at r = 12.0 cm\nepsilon_0 = 8.854e-12  # permittivity of free space in F/m\nE = (1 / (4 * sp.pi * epsilon_0)) * (Q_enc / r**2)\n\n# Substitute r = 0.12 m (12.0 cm)\nE_at_12cm = E.subs(r, 0.12)\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = E_at_12cm",
+            "unit": "N/C"
+        },
+        "answer": {
+            "gt_answer": "2.50",
+            "unit": "$10^4 \\mathrm{~N} / \\mathrm{C}$ "
+        },
+        "verification_result": {
+            "code_output": "2.49659512166339",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " $2.50$",
+            "comment": " ",
+            "unit": "$10^4 \\mathrm{~N} / \\mathrm{C}$ ",
+            "source": "fund"
+        }
+    },
+    {
+        "sample_id": "Question 22.43",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nE = 2.00e4  # electric field in N/C\nm_e = 9.11e-31  # mass of electron in kg\nq_e = 1.60e-19  # charge of electron in C\n\n# Step 2: Calculate the force on the electron using F = qE\nF = q_e * E\n\n# Step 3: Calculate the acceleration using Newton's second law, a = F/m\na = F / m_e\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = a",
+            "unit": "m/s**2"
+        },
+        "answer": {
+            "gt_answer": "3.51",
+            "unit": "$10^{15} \\mathrm{~m} / \\mathrm{s}^2$ "
+        },
+        "verification_result": {
+            "code_output": "3.51262349066959",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " $3.51$",
+            "comment": " ",
+            "unit": "$10^{15} \\mathrm{~m} / \\mathrm{s}^2$ ",
+            "source": "fund"
+        }
+    },
+    {
+        "sample_id": "Question 22.45",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nr = 25e-9  # distance from the dipole center in meters\np = 3.6e-29  # dipole moment in C*m\nk = 8.99e9  # Coulomb's constant in N*m^2/C^2\n\n# Step 2: Set up the equation for the electrostatic force on an electron due to a dipole\n# The formula for the force on a charge due to a dipole at a distance r along the axis is:\n# F = (1/(4 * pi * epsilon_0)) * (2 * p * e) / r^3\n# where e is the charge of the electron (approximately 1.6e-19 C)\n\n# Charge of the electron\nq = 1.6e-19  # charge of the electron in C\n\n# Calculate the force\nF = (k * (2 * p * q)) / r**3\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = F",
+            "unit": "N"
+        },
+        "answer": {
+            "gt_answer": "6.6",
+            "unit": "$10^{-15} \\mathrm{~N}$ "
+        },
+        "verification_result": {
+            "code_output": "6.62814720000000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " $6.6$",
+            "comment": " ",
+            "unit": "$10^{-15} \\mathrm{~N}$ ",
+            "source": "fund"
+        }
+    },
+    {
+        "sample_id": "Question 23.19",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nD = 1.3  # diameter of the satellite in meters\nQ = 2.4e-6  # charge accumulated in coulombs\n\n# Step 2: Calculate the radius of the satellite\nr = D / 2  # radius in meters\n\n# Step 3: Calculate the surface area of the sphere\nA = 4 * sp.pi * r**2  # surface area of a sphere\n\n# Step 4: Calculate the surface charge density\nsigma = Q / A  # surface charge density in C/m^2\n\n# Step 5: Compute the final result and assign it to 'result'\nresult = sigma",
+            "unit": "C/m**2"
+        },
+        "answer": {
+            "gt_answer": "4.5",
+            "unit": "$10^{-7} \\mathrm{C} / \\mathrm{m}^2 $ "
+        },
+        "verification_result": {
+            "code_output": "4.52037708189999",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " $4.5$",
+            "comment": " ",
+            "unit": "$10^{-7} \\mathrm{C} / \\mathrm{m}^2 $ ",
+            "source": "fund"
+        }
+    },
+    {
+        "sample_id": "36.1",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nP, V, n, T = sp.symbols('P V n T')\nR = 0.08314  # L\u00b7bar/(K\u00b7mol), ideal gas constant in appropriate units\nb = 0.0427  # L/mol, van der Waals constant for CO2\nA = 3.59  # L^2\u00b7bar/mol^2, van der Waals constant for CO2\n\n# Step 2: Set up the van der Waals equation\n# (P + A/n^2)(V - nb) = nRT\n# For 1 mole of gas (n = 1), the equation simplifies to:\nP = (R*T)/(V - b) - A/V**2\n\n# Given values\nT_value = 500  # K\nP_value = 100  # atm, convert to bar (1 atm = 1.01325 bar)\nP_value_bar = P_value * 1.01325  # Convert atm to bar\n\n# Step 3: Substitute known values into the equation and solve for V\nV = sp.symbols('V')\nequation = sp.Eq(P_value_bar, (R*T_value)/(V - b) - A/V**2)\n\n# Solve the equation for V\nvolume_solution = sp.solve(equation, V)\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = volume_solution[0]  # Taking the first solution (positive volume)",
+            "unit": "L/mol"
+        },
+        "answer": {
+            "gt_answer": "0.366",
+            "unit": "$\\mathrm{dm}^3 \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "0.3678207894060262",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "\nFor van der Waals gas of $\\mathrm{CO}_2$ , $a=3.610 \\mathrm{dm}^6$ atm $\\mathrm{mol}^{-2}$ and $b=4.29 \\times 10^{-2} \\mathrm{dm}^3 \\mathrm{~mol}^{-1}$. Under the stated conditions, $R T / p=0.410 \\mathrm{dm}^3 \\mathrm{~mol}^{-1}$. The coefficients in the equation for $V_{\\mathrm{m}}$ are therefore\r\n$$\r\n\\begin{aligned}\r\nb+R T / p & =0.453 \\mathrm{dm}^3 \\mathrm{~mol}^{-1} \\\\\r\na / p & =3.61 \\times 10^{-2}\\left(\\mathrm{dm}^3 \\mathrm{~mol}^{-1}\\right)^2 \\\\\r\na b / p & =1.55 \\times 10^{-3}\\left(\\mathrm{dm}^3 \\mathrm{~mol}^{-1}\\right)^3\r\n\\end{aligned}\r\n$$\r\nTherefore, on writing $x=V_{\\mathrm{m}} /\\left(\\mathrm{dm}^3 \\mathrm{~mol}^{-1}\\right)$, the equation to solve is\r\n$$\r\nx^3-0.453 x^2+\\left(3.61 \\times 10^{-2}\\right) x-\\left(1.55 \\times 10^{-3}\\right)=0\r\n$$\r\nThe acceptable root is $x=0.366$, which implies that $V_{\\mathrm{m}}=0.366$ $\\mathrm{dm}^3 \\mathrm{~mol}^{-1}$. The molar volume of a perfect gas under these conditions is $0.410 \\mathrm{dm}^3 \\mathrm{~mol}^{-1}$.\n",
+            "answer_latex": " 0.366",
+            "comment": " with solution",
+            "unit": "$\\mathrm{dm}^3 \\mathrm{~mol}^{-1}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "37.4",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nT = 373  # Temperature in Kelvin\nk_B = 1.380649e-23  # Boltzmann constant in J/K\nm_n = 1.675e-27  # Mass of a neutron in kg\n\n# Step 2: Calculate the average kinetic energy of a neutron at thermal equilibrium\n# Kinetic energy (KE) = (3/2) * k_B * T for 3D, but we consider 1D here\nKE_1D = (1/2) * k_B * T\n\n# Step 3: Relate kinetic energy to momentum and wavelength\n# KE = p^2 / (2m) => p = sqrt(2 * m * KE)\np = sp.sqrt(2 * m_n * KE_1D)\n\n# Step 4: Use de Broglie wavelength formula: lambda = h / p\nh = 6.62607015e-34  # Planck's constant in J*s\nwavelength = h / p\n\n# Step 5: Compute the final result and assign it to 'result'\nresult = wavelength.simplify()",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "226",
+            "unit": "$\\mathrm{pm}$"
+        },
+        "verification_result": {
+            "code_output": "225.60699789665622",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "From the equipartition principle, we know that the mean translational kinetic energy of a neutron at a temperature $T$ travelling in the $x$-direction is $E_{\\mathrm{k}}=\\frac{1}{2} k T$. The kinetic energy is also equal to $p^2 / 2 m$, where $p$ is the momentum of the neutron and $m$ is its mass. Hence, $p=(m k T)^{1 / 2}$. It follows from the de Broglie relation $\\lambda=h / p$ that the neutron's wavelength is\r\n$$\r\n\\lambda=\\frac{h}{(m k T)^{1 / 2}}\r\n$$\r\nTherefore, at $373 \\mathrm{~K}$,\r\n$$\r\n\\begin{aligned}\r\n\\lambda & =\\frac{6.626 \\times 10^{-34} \\mathrm{~J} \\mathrm{~s}}{\\left\\{\\left(1.675 \\times 10^{-27} \\mathrm{~kg}\\right) \\times\\left(1.381 \\times 10^{-23} \\mathrm{~J} \\mathrm{~K}^{-1}\\right) \\times(373 \\mathrm{~K})\\right\\}^{1 / 2}} \\\\\r\n& =\\frac{6.626 \\times 10^{-34}}{\\left(1.675 \\times 10^{-27} \\times 1.381 \\times 10^{-23} \\times 373\\right)^{1 / 2}} \\frac{\\mathrm{kg} \\mathrm{m}^2 \\mathrm{~s}^{-1}}{\\left(\\mathrm{~kg}^2 \\mathrm{~m}^2 \\mathrm{~s}^{-2}\\right)^{1 / 2}} \\\\\r\n& =2.26 \\times 10^{-10} \\mathrm{~m}=226 \\mathrm{pm}\r\n\\end{aligned}\r\n$$\r\nwhere we have used $1 \\mathrm{~J}=1 \\mathrm{~kg} \\mathrm{~m}^2 \\mathrm{~s}^{-2}$.",
+            "answer_latex": " 226",
+            "comment": " with solution",
+            "unit": "$\\mathrm{pm}$",
+            "source": "matter"
+        }
+    },
+    {
+        "sample_id": "11.9",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nmu_AgCl = -109.71 * 1000  # Convert kJ/mol to J/mol\nE_standard = 0.222  # Standard electrode potential in V\nF = 96485  # Faraday's constant in C/mol\n\n# Step 2: Calculate the standard Gibbs energy change (delta G) using the relation:\n# delta G = -nFE\n# For the half-cell reaction, n (number of moles of electrons transferred) = 1\nn = 1\ndelta_G = -n * F * E_standard\n\n# Step 3: The Gibbs energy of formation of Cl- can be calculated as:\n# mu(Cl-) = mu(AgCl) + delta_G\nmu_Cl_minus = mu_AgCl + delta_G\n\n# Step 4: Assign the final computed result to 'result'\nresult = mu_Cl_minus",
+            "unit": "J/mol"
+        },
+        "answer": {
+            "gt_answer": "-131.1",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$"
+        },
+        "verification_result": {
+            "code_output": "-131.129670000000",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " -131.1",
+            "comment": " ",
+            "unit": " $\\mathrm{~kJ} \\mathrm{~mol}^{-1}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "8.39",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nT = 298.15  # Temperature in Kelvin\nR = 8.314  # Universal gas constant in J/(mol*K)\nDelta_Gf_g = -351.0 * 1000  # Gibbs free energy of formation for gas in J/mol\nDelta_Gf_l = -361.4 * 1000  # Gibbs free energy of formation for liquid in J/mol\n\n# Step 2: Calculate the change in Gibbs free energy for the phase transition\nDelta_G_transition = Delta_Gf_g - Delta_Gf_l\n\n# Step 3: Use the Gibbs free energy relation to find the vapor pressure\n# Delta_G = -RT ln(P/P0), where P0 is the standard pressure (1 atm)\n# Rearranging gives P = P0 * exp(-Delta_G/(RT))\nP0 = 101325  # Standard pressure in Pa\nP = P0 * sp.exp(-Delta_G_transition / (R * T))\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = P",
+            "unit": "Pa"
+        },
+        "answer": {
+            "gt_answer": "1.51",
+            "unit": " $10^3 \\mathrm{~Pa}$"
+        },
+        "verification_result": {
+            "code_output": "1.52620917100549",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "1.51",
+            "comment": " ",
+            "unit": " $10^3 \\mathrm{~Pa}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "8.25",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and constants\nP1, P2, T1, T2, delta_H = sp.symbols('P1 P2 T1 T2 delta_H')\nR = 8.314  # J/(mol*K)\n\n# Given values\nP1 = 1 * 760  # Normal boiling point pressure in Torr to Pa\nT1 = 373.12  # Normal boiling point in K\nP2 = 253  # Pressure on Mt. Everest in Torr\ndelta_H = 40.656 * 1000  # Vaporization enthalpy in J/mol\n\n# Step 2: Use the Clausius-Clapeyron equation\n# ln(P2/P1) = -delta_H/R * (1/T2 - 1/T1)\n# Rearranging to find T2:\n# 1/T2 = 1/T1 - R * ln(P2/P1) / delta_H\n# T2 = 1 / (1/T1 - R * ln(P2/P1) / delta_H)\n\n# Calculate T2\nT2_expr = 1 / (1/T1 - R * sp.ln(P2/P1) / delta_H)\nT2 = sp.simplify(T2_expr)\n\n# Step 3: Solve for T2\nresult = T2\n",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "344",
+            "unit": " $\\mathrm{~K}$"
+        },
+        "verification_result": {
+            "code_output": "344.230017991387",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": "344",
+            "comment": " ",
+            "unit": " $\\mathrm{~K}$",
+            "source": "thermo"
+        }
+    },
+    {
+        "sample_id": "2.4",
+        "response": {
+            "code": "import sympy as sp\n\n# Step 1: Define symbols and physical constants\nmass_hiker = 51  # mass of the hiker in kg\nchange_temp = 2.5  # change in temperature in K\nheat_per_gram = 35 * 10**3  # heat released per gram of rations in J\n\n# Step 2: Set up the Physics problem\n# Heat lost by the hiker (Q) can be calculated using the formula Q = mc\u0394T\n# where m is the mass, c is the specific heat capacity (for water, c = 4184 J/(kg*K))\n\nc_water = 4184  # specific heat capacity of water in J/(kg*K)\nQ = mass_hiker * c_water * change_temp  # total heat loss in J\n\n# Step 3: Calculate the amount of rations needed\n# Each gram of rations provides heat_per_gram J, so we need to find the mass of rations (m_rations)\n# Q = m_rations * heat_per_gram\n# Rearranging gives m_rations = Q / heat_per_gram\nm_rations = Q / heat_per_gram\n\n# Step 4: Compute the final result and assign it to 'result'\nresult = m_rations / 1000  # converting grams to kilograms\n",
+            "unit": "kg"
+        },
+        "answer": {
+            "gt_answer": "15",
+            "unit": "$\\mathrm{~g}$"
+        },
+        "verification_result": {
+            "code_output": "15.241714285714286",
+            "result_match": true,
+            "unit_match": true
+        },
+        "metadata": {
+            "solution": "",
+            "answer_latex": " 15",
+            "comment": " ",
+            "unit": "$\\mathrm{~g}$",
+            "source": "thermo"
+        }
     }
 ]
