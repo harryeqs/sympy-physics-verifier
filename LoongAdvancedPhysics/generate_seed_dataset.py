@@ -48,7 +48,7 @@ if __name__ == "__main__":
     dataset = physics_data_processor.preprocess_dataset()
 
     reason_model = OpenAIModel(
-        model_type=ModelType.GPT_4O_MINI,
+        model_type=ModelType.O3_MINI,
         model_config_dict={
             "temperature": 0.2,
         }

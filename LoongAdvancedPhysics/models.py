@@ -13,11 +13,12 @@ class VerificationResult(BaseModel):
    code_output: Union[str, None]
    result_match: bool
    unit_match: bool
+   error: Union[str, None]
 
 class OutputFormat(BaseModel):
    sample_id: str
    response: ResponseFormat
    answer: AnswerFormat
-   verification_result: VerificationResult
+   verification_result: Union[VerificationResult, None]
    metadata: Dict
    

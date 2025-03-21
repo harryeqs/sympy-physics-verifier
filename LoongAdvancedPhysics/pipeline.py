@@ -13,67 +13,44 @@ import logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-MAX_ATTEMPTS = 5
-
 REASON_AGENT_PROMPT = """
-Task: Solve the given Physics problem using symbolic computation with Sympy and return the response in a JSON format following the specified ResponseFormat.
+Task: Solve the given physics problem using symbolic computation with Sympy. The solution must be self-contained, executable, and free of syntax errors. Do not include any special characters (e.g., Greek letters) and do not print the result; only assign it to the variable `result`.
 
-ResponseFormat Structure:
+Output Format (JSON):
 {
-    "code": <complete Sympy code as a string>,
-    "unit": <unit as a string or None>
+    "code": "<complete Sympy code as a string>",
+    "unit": "<unit as a string or None>"
 }
 
 Instructions:
-1. **Import Libraries:**
-   - Begin by importing Sympy (e.g., `import sympy as sp`).
+1. Import Sympy:
+   import sympy as sp
 
-2. **Define Symbols and Constants:**
-   - Define all the necessary symbolic variables (e.g., `x, y, t`) and any physical constants that are required for the problem.
-   - **Ensure that every variable used in your code is defined.** There should be no undefined symbols.
+2. Define all symbols using sp.symbols(). For example:
+   x, y, t = sp.symbols('x, y, t')
 
-3. **Set Up the Problem:**
-   - Write the Sympy code to set up the equations that describe the Physics problem.
-   - Include comments in your code that explain each step clearly.
+3. Define constants (e.g., g = 9.81 for gravity).
 
-4. **Solve the Problem:**
-   - Use appropriate Sympy functions to solve the equations symbolically.
-   - Ensure that all the steps necessary to reach the solution are included.
+4. Set up the problem:
+   - Use comments to explain each step.
+   - Formulate equations using sp.Eq() if needed.
+   - Ensure SI units or appropriate conversions.
 
-5. **Final Result Assignment:**
-   - The very last line of your code must assign the final computed result to a variable named `result`:
-     ```python
+5. Solve the problem:
+   - Use sp.solve() for symbolic solving.
+   - Use sp.N() for numerical evaluation if necessary.
+
+6. Final Result:
+   - The last line must assign the final value to `result`:
      result = <computed_value>
-     ```
-   - This is mandatory because the output will be extracted and compared with the ground truth.
+   - Do not print or output the result.
 
-6. **Output JSON Structure:**
-   - Ensure your final answer is a valid JSON object with two keys: `"code"` and `"unit"`.
-   - Follow the structure exactly, so that it can be automatically parsed and validated.
+7. Syntax Check:
+   - Ensure matching parentheses and proper string quotes.
+   - Verify the code can run without syntax errors.
 
-Example Code Template:
------------------------------------------------------------
-import sympy as sp
-
-# Step 1: Define symbols and physical constants
-x, y, t = sp.symbols('x y t')
-g = sp.symbols('g')  # gravitational constant, if applicable
-
-# Step 2: Set up the Physics problem (e.g., equations of motion)
-# [Insert problem-specific equations and logic here]
-
-# Step 3: Solve the equations symbolically
-# final_result = sp.solve([...], ...)
-
-# Step 4: Compute the final result and assign it to 'result'
-result = final_result  # final computed value
-
------------------------------------------------------------
-Return the output as a JSON object with keys:
-   - "code": The complete Sympy code as a string.
-   - "unit": A string representing the unit (e.g., "m", "s", "kg") if applicable, otherwise None.
+Return the final output as a JSON object with the keys "code" and "unit".
 """
-
 
 class PhysicsCodeGenPipeline():
    """
@@ -87,6 +64,7 @@ class PhysicsCodeGenPipeline():
          num: Union[int, None] = None,
          sample: bool = False,
          problem_ids: Union[List[int], None] = None,
+         max_attempts: int = 2,
          save_right_solution: bool = False,
          ):
       """
@@ -134,6 +112,7 @@ class PhysicsCodeGenPipeline():
       }
 
       self.failed_samples_ids = []
+      self.max_attempts = max_attempts
       
    def verify(self, response: ResponseFormat, answer: AnswerFormat) -> VerificationResult:
       """
@@ -178,35 +157,60 @@ class PhysicsCodeGenPipeline():
 
          full_answer = AnswerFormat(gt_answer=gt_answer, unit=unit) # Create the full answer format including both the numerical answer and unit
          
+         # Reset the reasoning agent on each new question
+         self.reason_agent.reset()
          attempts = 0
+         feedback = ""
    
-         while attempts < 5:
-            self.reason_agent.reset()
+         while attempts < self.max_attempts:
+
+            prompt_message = question + (f"\n\nPlease improve the solution based on the following feedback:\n{feedback}" if feedback else "")
+            print(prompt_message)
+
+            logger.info(f'==========Generating Code for Question {sample_id}==========')
             try:
-               raw_response = self.reason_agent.step(question, response_format=ResponseFormat)
+               raw_response = self.reason_agent.step(prompt_message, response_format=ResponseFormat)
                structured_response = ResponseFormat.model_validate(raw_response.msgs[0].parsed)
-               break
             except Exception as e:
-               logger.info(f'Failed to generate or verify Question {sample_id} with error {e}, retrying with attempt {attempts} out of {MAX_ATTEMPTS}')
+               logger.info(f'Failed to generate or verify Question {sample_id} with error {e}, retrying with attempt {attempts} out of {self.max_attempts}')
                attempts += 1
-               if attempts == 5:
-                  self.failed_samples_ids.append(sample_id)
+               if attempts == self.max_attempts:
+                  verification_outcome = None
+                  break
 
-         logger.info(f'==========Verifying Question {sample_id}==========')
+            logger.info(f'==========Verifying Question {sample_id}==========')
+            verification_outcome = self.verify(structured_response, full_answer)
+            logger.info(f'Verification Outcome: Result Match: {verification_outcome.result_match}, Unit Match: {verification_outcome.unit_match}')
 
-         verification_outcome = self.verify(structured_response, full_answer)
-         logger.info(f'Verification Outcome: Result Match: {verification_outcome.result_match}, Unit Match: {verification_outcome.unit_match}')
-
+            if verification_outcome.result_match and verification_outcome.unit_match:
+               break # Exit the loop if the response is correct
+            else:
+               attempts += 1
+               feedback = f"""
+Expected answer:
+- Answer: {gt_answer}
+- Unit: {unit}
+Your answer: 
+- Code Output: {verification_outcome.code_output}
+- Unit: {structured_response.unit}
+Verification details: 
+- Result match: {verification_outcome.result_match},
+- Unit match: {verification_outcome.unit_match}
+Error message: {verification_outcome.error}
+         """
+               
+         
+         # Post-attempts handling
          output = OutputFormat(
-            sample_id=sample_id,
-            response=structured_response,
-            answer=full_answer,
-            verification_result=verification_outcome,
-            metadata=sample['metadata']
-         )
-
+               sample_id=sample_id,
+               response=structured_response,
+               answer=full_answer,
+               verification_result=verification_outcome,
+               metadata=sample['metadata']
+            )
+         
          if verification_outcome.result_match and verification_outcome.unit_match:
-            self.generation_summary['successful_generations'] += 1
+               self.generation_summary['successful_generations'] += 1
          else:
             self.generation_summary['failed_generations'] += 1
             self.failed_samples_ids.append(sample_id)

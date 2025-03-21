@@ -299,8 +299,7 @@ class PhysicsVerifier:
         self.tolerance = tolerance
         self.unit_parser = UnitParser()
 
-    @staticmethod
-    def safe_exec(code):
+    def safe_exec(self, code):
         namespace = {}
         try:
             pattern = r'([\w\d_]+)\.evalf\(\)'
@@ -313,11 +312,12 @@ class PhysicsVerifier:
 
             exec(code, namespace, namespace)
         except Exception as e:
-            logger.info("Failed to execute llm generated code.")
+            logger.info(f"Failed to execute llm generated code. Error: {e}")
+            self.error_msg = f"Failed to execute code: {e}"
             return None
 
         if "result" not in namespace:
-            logger.info("The executed code did not define a variable called 'result'.")
+            logger.error("The executed code did not define a variable called 'result'.")
         
         return namespace.get("result", None)
 
@@ -347,7 +347,8 @@ class PhysicsVerifier:
         try:
             result = future.result(timeout=timeout)
         except concurrent.futures.TimeoutError:
-            logger.info(f"Execution timed out after {timeout} seconds")
+            logger.error(f"Execution timed out after {timeout} seconds")
+            self.error_msg = f"Execution timed out after {timeout} seconds"
         
         return result
         
@@ -409,6 +410,7 @@ class PhysicsVerifier:
         Returns:
             A tuple (result_match: bool, unit_match: bool)
         """
+        self.error_msg = None
 
         if answer.unit == "dimensionless":
             answer.unit = None
@@ -421,7 +423,7 @@ class PhysicsVerifier:
         output = self.execute_code(cleaned_code)
 
         if output is None:
-            return VerificationResult(code_output=None, result_match=False, unit_match=False)
+            return VerificationResult(code_output=None, result_match=False, unit_match=False, error=self.error_msg)
         
         response_unit_expr = self.unit_parser.parse_unit(response.unit) if response.unit else None
         answer_unit_expr = self.unit_parser.parse_unit(answer.unit) if answer.unit else None
@@ -476,6 +478,7 @@ class PhysicsVerifier:
                 result_match = sp.simplify(output - gt_expr) == 0
             except Exception as e:
                 logger.error(f"Failed to compare symbolic expressions: {e}")
+                self.error_msg = f"Failed to compare symbolic expressions: {e}"
                 result_match = False
 
         if not answer.unit:
@@ -486,7 +489,7 @@ class PhysicsVerifier:
         else:
             unit_match = self.verify_unit(response_unit_expr, answer_unit_expr)
         
-        return VerificationResult(code_output=str(output), result_match=result_match, unit_match=unit_match)
+        return VerificationResult(code_output=str(output), result_match=result_match, unit_match=unit_match, error=self.error_msg)
 
 
 # Example usage:
