@@ -165,9 +165,9 @@ class UnitParser:
             return True
         
         if isinstance(unit_str, str):
-            unit_str = unit_str.strip()
+            unit_str = unit_str.strip().lower()
 
-            if unit_str == '':
+            if unit_str == 'none' or unit_str == '':
                 return True
             
         return False
