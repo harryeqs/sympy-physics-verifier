@@ -20,6 +20,7 @@ class DataProcessor():
                 "question": data.get("context") + '\n' + data.get("question"),
                 "gt_answer": data.get("final_answer")[0],
                 "unit": data.get("unit"),
+                "solution": data.get("solution")[0],
                 "metadata": {}
             }
             
@@ -32,6 +33,7 @@ class DataProcessor():
                 "question": data.get("problem_text"),
                 "gt_answer": data.get("answer_number"),
                 "unit": data.get("unit"),
+                "solution": data.get("solution"),
                 "metadata": {}
             }
             
