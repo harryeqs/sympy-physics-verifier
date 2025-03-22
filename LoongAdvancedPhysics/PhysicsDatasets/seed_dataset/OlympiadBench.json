@@ -1982,5 +1982,37 @@
             "subject": "Physics",
             "language": "English"
         }
+    },
+    {
+        "sample_id": "861",
+        "response": {
+            "code": "import sympy as sp\n\n# Declare the symbol for the angle theta (in radians)\ntheta = sp.symbols('theta', real=True)\n\n# For one ladder pivoting freely about its base,\n# using energy conservation we have (theta_dot)^2 = (3*g/L)*(1-cos(theta))\n# and the moment equation when the contact point accelerations coincide yields: \n# cos(theta)*theta_ddot = sin(theta)*(theta_dot)^2.\n# For a uniform rod pivoting about one end, theta_ddot = (3*g/(2*L))*sin(theta).\n# Equate these (dividing both sides by L and 3*g which are positive constants):\n# (3*g/(2*L))*sin(theta) = tan(theta)*(3*g/L)*(1-cos(theta))\n# Cancel common factors to obtain:\n# 1/2 = (1-cos(theta))/cos(theta)\n# This equation can be solved for theta when the contact force vanishes.\n\n# Define the equation\neq = sp.Eq(sp.Rational(1,2), (1 - sp.cos(theta)) / sp.cos(theta))\n\n# Solve for theta\nsolutions = sp.solve(eq, theta)\n\n# Among the solutions, choose the one in (0, pi/2) (physically relevant, i.e. ladder not horizontal)\ntheta_sol = [sol for sol in solutions if sol.is_real and (sol > 0) and (sol < sp.pi/2)][0]\n\n# For a ladder of length L = 1 m, by geometry, the horizontal distance between the foot of the ladders A and D is given by:\n# AD = 2 * L * sin(theta). (Since by symmetry the top contact point has x-coordinate L*sin(theta) for the left ladder,\n# and the base separation must be twice that.)\n\nL = 1  # meter\nAD = 2 * L * sp.sin(theta_sol)\n\n# Simplify the expression\nresult = sp.simplify(AD)\n\n# The result is the distance in meters.\n",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "$\\frac{2\\sqrt{5}}{3}$",
+            "unit": "m"
+        },
+        "verification_result": {
+            "code_output": "2*sqrt(5)/3",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": [
+                "The center of mass of both of the ladders moves in a circle, centered at the point on the ground directly beneath $B / C$. So we find when the required normal force between the two ladders is 0 . That is, when the total net force on one of the ladders is when the two ladders lose contact. Let $2 r=\\ell$. Now by conservation of energy,\n$$\n\\frac{1}{2} m v^{2}+\\frac{1}{2} \\frac{m r^{2}}{3} \\frac{v^{2}}{r^{2}}=m g r(1-\\cos \\theta)\n$$\n\nwhere $\\theta$ is defined as the angle the ladder makes witht he vertical. So we have\n\n$$\nv^{2}\\left(1+\\frac{1}{3}\\right)=2 g r(1-\\cos \\theta) \\Longrightarrow v^{2}=\\frac{3}{2} g r(1-\\cos \\theta)\n$$\n\nSo the centripetal acceleration is\n\n$$\na_{c}=\\frac{v^{2}}{r}=\\frac{3}{2} g(1-\\cos \\theta)\n$$\n\n\n\nAnd the tangential acceleration is\n\n$$\n\\frac{d v}{d t}=\\sqrt{\\frac{3 g r}{2}} \\frac{\\sin \\theta}{2 \\sqrt{1-\\cos \\theta}} \\frac{d \\theta}{d t}\n$$\n\nAnd $\\frac{d \\theta}{d t}=\\frac{v}{r}$, so\n\n$$\na_{\\theta}=\\frac{d v}{d t}=\\frac{3 g}{2} \\frac{\\sin \\theta}{2}\n$$\n\nNow for the total acceleration to be vertical, we need\n\n$$\na_{c} \\tan \\theta=a_{\\theta} \\text {, }\n$$\n\nso\n\n$$\n1-\\cos \\theta=\\frac{\\cos \\theta}{2}\n$$\n\nThis simplifies to\n\n$$\n2=3 \\cos \\theta\n$$\n\nSo the distance between the two ends is $4 r \\sin \\theta=4 r \\sqrt{1-\\frac{4}{9}}=\\frac{4 r \\sqrt{5}}{3}$."
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": "m",
+            "answer_type": "Numerical",
+            "error": "1e-1",
+            "question_type": "Open-ended",
+            "subfield": "Mechanics",
+            "subject": "Physics",
+            "language": "English"
+        }
     }
 ]

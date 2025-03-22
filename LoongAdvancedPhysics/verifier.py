@@ -262,20 +262,7 @@ def clean_python_code(raw_code: str) -> str:
     # Case 4: Remove any surrounding quotes
     if (code.startswith("'") and code.endswith("'")) or (code.startswith('"') and code.endswith('"')):
         code = code[1:-1]
-    
-    # Remove any stray single quotes around individual code lines
-    code = re.sub(r"^'(.*)'$", r"\1", code, flags=re.MULTILINE)
-    
-    # Handle cases where entire code is wrapped in quotes with commas
-    if "'," in code:
-        parts = code.split("',")
-        cleaned_parts = []
-        for part in parts:
-            cleaned_part = part.strip()
-            if cleaned_part.startswith("'"):
-                cleaned_part = cleaned_part[1:]
-            cleaned_parts.append(cleaned_part)
-        code = "\n".join(cleaned_parts)
+
     
     return code
 
@@ -326,7 +313,6 @@ class PhysicsVerifier:
                 code = code.replace(f'{var}.evalf()', safe_evalf)
 
             try:
-                print(code)
                 # Compile the code first to catch syntax errors early.
                 compiled_code = compile(code, "<string>", "exec")
             except SyntaxError as se:
