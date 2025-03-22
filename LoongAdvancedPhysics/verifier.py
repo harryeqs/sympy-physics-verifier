@@ -100,6 +100,7 @@ class UnitParser:
         # Clean the LaTeX string
         unit_str = unit_str.strip().lstrip("$").rstrip("$").lstrip("^")
         unit_str = re.sub(r'\\mathrm\{([^}]*)\}', r'{\\\1}', unit_str)
+        unit_str = re.sub(r'\\text\{(.*?)\}', r'\1', unit_str)
         unit_str = unit_str.replace('~', '')
         
         try:
@@ -451,8 +452,8 @@ class PhysicsVerifier:
             response_unit_expr = None
             answer_unit_expr = None
         else:
-            response_unit_expr = self.unit_parser.parse_unit(response.unit.strip())
-            answer_unit_expr = (self.unit_parser.parse_unit(answer.unit.strip()) if answer.unit else None)
+            response_unit_expr = self.unit_parser.parse_unit(response.unit)
+            answer_unit_expr = (self.unit_parser.parse_unit(answer.unit) if answer.unit else None)
 
         logger.info(f'Response unit: {response_unit_expr}')
         logger.info(f'Ground truth unit: {answer_unit_expr}')
