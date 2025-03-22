@@ -1534,5 +1534,165 @@
             "subject": "Physics",
             "language": "English"
         }
+    },
+    {
+        "sample_id": "812",
+        "response": {
+            "code": "import sympy as sp\n\n# We set up the problem as described.\n# Given that each small sphere has potential 10 V, and its charge is q, when it touches the large sphere,\n# the charges equalize such that the potential (which is proportional to charge/radius) on both spheres\n# is the same. The large sphere has radius 10 m and each small sphere radius 1 m.\n# By conservation of charge and the proportionality of potential to q/r, one can show that after n contacts,\n# the charge on the large sphere is Q(n) = 10*q*(1 - (10/11)**n).\n# To reach a potential of 9 V on the large sphere, the charge must be at least 9q. Therefore, we require:\n# 10*(1 - (10/11)**n) >= 9  -> (10/11)**n <= 0.1\n# Taking the logarithm, we get n*log(10/11) <= log(0.1).\n# Since log(10/11) is negative, dividing both sides by log(10/11) reverses the inequality:\n# n >= log(0.1)/log(10/11).\n\n# Define the expression for n:\nn_expr = sp.log(sp.Rational(1, 10)) / sp.log(sp.Rational(10, 11))\n\n# The minimum number of spheres is the ceiling of this value:\nn_min = sp.ceiling(n_expr)\n\n# Convert to integer:\nresult = int(n_min)  # Expected result is 25\n",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "25",
+            "unit": null
+        },
+        "verification_result": {
+            "code_output": "25",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": [
+                "Let each sphere with radius $1 \\mathrm{~m}$ have charge $q$. Note that each time the large metal conducting sphere is contacted with each of the smaller spheres, the potential is equalized between the two objects. The potential on a sphere is proportional to $\\frac{q}{r}$, so the large conducting sphere must retain $\\frac{10}{11}$ of the total charge after it is contacted with a smaller sphere. Furthermore, to reach $9 \\mathrm{~V}$, the required end charge on the sphere of radius $10 \\mathrm{~m}$ is at least $9 q$. Thus, we get a recursion for the charge of the large square $Q$ in terms of the number of small spheres touched $n$.\n$$\nQ(n+1)=(Q(n)+q) \\cdot \\frac{10}{11}\n$$\n\nInductively applying this recursion, we obtain\n\n$$\nQ(n)=q\\left[\\left(\\frac{10}{11}\\right)^{n}+\\cdots+\\frac{10}{11}\\right]\n$$\n\nWe can now sum this geometric series:\n\n$$\nQ(n)=q\\left(\\frac{10}{11} \\cdot \\frac{\\left(\\frac{10}{11}\\right)^{n}-1}{\\frac{10}{11}-1}\\right) .\n$$\n\nThus, using $Q(n) \\geq 9 q$, we find that $\\left(\\frac{10}{11}\\right)^{n} \\leq 0.1$, which provides $n \\geq 24.1588$, or $n=25$ as the answer."
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": null,
+            "answer_type": "Numerical",
+            "error": "1e-3",
+            "question_type": "Open-ended",
+            "subfield": "Electromagnetism",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "870",
+        "response": {
+            "code": "import sympy as sp\n\n# The force F is proportional to I * r^4 * (alpha^2 - 1).\n# In the original setup:\n#   inner ring: radius = r, loops = 4N, current = I, so effective current factor ~ 4N * I\n#   outer ring: radius = 2r, loops = N, current = I, effective current factor ~ N * I\n# For the magnetic field gradient, the r dependence goes as r^4 and a factor of (alpha^2 - 1).\n\n# For the original setup, the outer to inner radius ratio, alpha, is 2, hence alpha^2 - 1 = 4 - 1 = 3.\n# Thus, we consider the effect proportional to I * r^4 * 3 (times some constant and the number-of-loops factor).\n\n# For the new setup:\n#   inner solenoid: radius = 2r, loops = 27N, current = 2I\n#   outer solenoid: radius = 3r, loops = 12N, current = 2I\n# Notice that in the derivation, the effective current for the inner ring changes from 4N to 27N, and current doubles, so a factor of (27/(4))*(2) = 27/2\n# The r dependence now scales as (2r)^4 = 16 r^4, giving an additional factor of 16.\n# The effective (alpha^2 - 1) factor changes with the new ratio alpha, where for the new setup inner ring is 2r and outer is 3r:\n#   new alpha = (3r)/(2r) = 3/2, so alpha^2 - 1 = (9/4) - 1 = 5/4.\n# To compare with the original, we take the ratio of the new (alpha^2 - 1) factor (5/4) to the old one (3).\n\n# Thus, the ratio F'/F becomes:\n#   F'/F = (27/2) * 16 * ((5/4)/3) = 90.\n\nratio = sp.Rational(27, 2) * 2**4 * (sp.Rational(5, 4) / 3)\n\n# Simplify the expression\nresult = sp.simplify(ratio)  # This yields 90\n",
+            "unit": "None"
+        },
+        "answer": {
+            "gt_answer": "90",
+            "unit": null
+        },
+        "verification_result": {
+            "code_output": "90",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": [
+                "We can solve the problem by assuming that the location of the setup is at the North Pole and that the solenoids are oriented so that their axis intersects the Earth's core. Note that if we had some other location or orientation, then both $F$ and $F^{\\prime}$ would be multiplied by the same factor, so their ratio remains the same.\nSuppose the radii of the solenoids are $r$ and $\\alpha r$, where the number of inner and outer loops are $N$ and $\\frac{N}{\\alpha^{2}}$, respectively. To find the force the Earth's dipole exerts on the solenoids, we can calculate the force the solenoids exert on the dipole. To do this, we need to find the gradient of the magnetic field produced by the solenoids at the dipole's location. Let the radius of the Earth be $R$.\n\nConsider the field produced by 2 concentric, coaxial, ring currents, the inner ring with current $I$ radius $r$ and the outer one with current $\\frac{I}{\\alpha^{2}}$ and radius $\\alpha r$. The currents are in opposite directions. At a distance $R$ away from the center of the rings, along their axis, the magnetic field is given by\n\n$$\n\\begin{aligned}\nB & =\\frac{\\mu_{0} I r^{2}}{2\\left(R^{2}+r^{2}\\right)^{\\frac{3}{2}}}-\\frac{\\mu_{0} I r^{2}}{2\\left(R^{2}+(\\alpha r)^{2}\\right)^{\\frac{3}{2}}} \\\\\n& =\\frac{\\mu_{0} I^{2}}{2 R^{3}}\\left(\\left(1+\\frac{r^{2}}{R^{2}}\\right)^{-\\frac{3}{2}}-\\left(1+\\frac{\\alpha^{2} r^{2}}{R^{2}}\\right)^{-\\frac{3}{2}}\\right) \\\\\n& \\approx \\frac{\\mu_{0} I^{2}}{2 R^{3}}\\left(\\frac{3}{2}\\left(\\alpha^{2}-1\\right) \\frac{r^{2}}{R^{2}}\\right) \\\\\n& =\\frac{3 \\mu_{0} I r^{4}}{4 R^{5}}\\left(\\alpha^{2}-1\\right)\n\\end{aligned}\n$$\n\nThus, the gradient of the magnetic field is proportional to $\\operatorname{Ir}^{4}\\left(\\alpha^{2}-1\\right)$. Now we consider the actual setup. The new setup multiplies the effective current $\\frac{27}{4} \\cdot \\frac{2}{1}=\\frac{27}{2}$ times, while multiplying $r$ by 2 . The factor $\\alpha^{2}-1$ changed from 3 to $\\frac{5}{4}$. Combining, we get $\\frac{F^{\\prime}}{F}=\\frac{27}{2} \\cdot 2^{4} \\cdot \\frac{5}{12}=90$."
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": null,
+            "answer_type": "Numerical",
+            "error": "1e-1",
+            "question_type": "Open-ended",
+            "subfield": "Mechanics",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "881",
+        "response": {
+            "code": "import sympy as sp\n\n# Define given numerical values\n# Iceberg geometry and thermal conditions\nL = 100.0       # m, side length of the iceberg\nH = 1.0         # m, height (thickness) of the iceberg\nDeltaT = 2.0    # K, temperature difference between fluid (2\u00b0C) and iceberg (0\u00b0C)\n\n# Ice properties\ndensity_ice = 917      # kg/m^3\nlatent_heat = 334e3    # J/kg (latent heat of melting)\n\n# Fluid properties for water (subscript w)\nrho_w = 1000         # kg/m^3\nmu_w = 1.792e-3      # kg/(m\u00b7s)\ncp_w = 4220         # J/(kg\u00b7K)\nk_w = 0.556        # W/(m\u00b7K)\n\n# Fluid properties for air (subscript a)\nrho_a = 1.29       # kg/m^3\nmu_a = 1.729e-5      # kg/(m\u00b7s)\ncp_a = 1004         # J/(kg\u00b7K)\nk_a = 0.025        # W/(m\u00b7K)\n\n# Relative velocity of the fluid with respect to the iceberg\nv = 0.2              # m/s\n\n# Using the relationship for convective heat transfer coefficient:\n# h = 0.664*(k/L)* ( (rho*v*L/mu)^(1/2) ) * ( (cp*mu/k)^(1/3) )\n\n# Calculate h for water-ice contact\nh_w = 0.664 * (k_w/L) * ((rho_w * v * L)/mu_w)**(sp.Rational(1,2)) * ((cp_w * mu_w/k_w))**(sp.Rational(1,3))\n\n# Calculate h for air-ice contact\nh_a = 0.664 * (k_a/L) * ((rho_a * v * L)/mu_a)**(sp.Rational(1,2)) * ((cp_a * mu_a/k_a))**(sp.Rational(1,3))\n\n# The convection is assumed to take place on the top (air) and bottom (water) faces.\n# Each face has an area A = L^2. Thus the total heat transfer rate is:\n# Qdot_total = (h_w + h_a) * L^2 * DeltaT\n\n# The energy required to melt the entire iceberg is given by:\n# Energy = (density of ice) * (volume) * (latent heat) = density_ice * (L^2 * H) * latent_heat\n\n# The time to melt the iceberg is then:\n# t = Energy / Qdot_total = (density_ice * L^2 * H * latent_heat) / ((h_w + h_a) * L^2 * DeltaT)\n# This simplifies to:\n# t = (density_ice * H * latent_heat) / ((h_w + h_a) * DeltaT)\n\nt_seconds = density_ice * H * latent_heat / ((h_w + h_a) * DeltaT)\n\n# Convert the time from seconds to days (1 day = 86400 seconds)\nt_days = t_seconds / 86400\n\n# Convert to a numerical value and round to the nearest day\nresult = int(round(sp.N(t_days, 5)))\n",
+            "unit": "days"
+        },
+        "answer": {
+            "gt_answer": "60",
+            "unit": "days"
+        },
+        "verification_result": {
+            "code_output": "60",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": [
+                "The heat transfer coefficient for water-ice and air-ice contact can be figured out with the relationship between the three dimensionless numbers\n$$\n\\mathrm{Nu}=0.664 \\operatorname{Re}^{1 / 2} \\operatorname{Pr}^{1 / 3} \\Longrightarrow h=0.664 \\frac{k}{L}\\left(\\frac{\\rho v_{\\infty} L}{\\mu}\\right)^{1 / 2}\\left(\\frac{c_{p} \\mu}{k}\\right)^{1 / 3}\n$$\n\nAs\n\n$$\n\\frac{\\mathrm{d} Q}{\\mathrm{~d} t}=h A \\Delta T\n$$\n\nwe then have\n\n$$\nt\\left(\\dot{Q}_{a}+\\dot{Q}_{w}\\right)=\\left(h_{w} A_{w}+h_{a} A_{a}\\right) \\Delta T \\Longrightarrow t=\\frac{\\rho L^{2} H L_{w}}{\\Delta T} \\frac{1}{h_{w} L^{2}+h_{a} L^{2}}=59.84 \\approx 60 \\text { days. }\n$$"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": "days",
+            "answer_type": "Numerical",
+            "error": "1e0",
+            "question_type": "Open-ended",
+            "subfield": "Thermodynamics",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "885",
+        "response": {
+            "code": "import sympy as sp\n\n# Define symbols for the mathematical constants we need\npi = sp.pi\n\n# Given Earth parameters\nG_val = 6.674e-11           # Universal gravitational constant in N.m^2/kg^2\nM_E_val = 5.972e24          # Earth's mass in kg\nR_E_val = 6370e3            # Earth's radius in m\nT_rot_val = 86164           # Earth's rotation period in s\n\n# Rocket and boosters masses\nm_rocket = 563.17e3         # Rocket mass (without fuel) in kg (563.17 metric tons)\nm_booster = 68415           # Mass of one booster in kg\nm_total = m_rocket + 2*m_booster  # Total mass of the craft = 700000 kg exactly\n\n# Booster thrusts (each booster provides 3421 kN)\nT_booster_each = 3421e3     # in Newtons\nT_boosters_total = 2 * T_booster_each\n\n# Given latitude of Kennedy Space Center: 28\u00b031'27\" N\n# Convert to decimal degrees\nlat_deg = 28 + 31/60 + 27/3600  # 28.52416667 degrees approximately\nlat = sp.pi * lat_deg/180       # Convert degrees to radians\n\n# Compute local gravitational acceleration at Earth\u2019s surface\n# g = G*M/R^2\ng_grav = G_val * M_E_val / R_E_val**2  # in m/s^2\n\n# Earth's angular rotation rate\nomega = 2 * sp.pi / T_rot_val\n\n# Compute the centripetal acceleration (magnitude) at the surface at a given latitude\n# a = (R*cos(lat))*omega^2\na = R_E_val * sp.cos(lat) * omega**2\n\n# The vertical component of the centrifugal acceleration is a*cos(lat)\nvertical_reduction = a * sp.cos(lat)\n\n# The effective vertical gravitational acceleration is g_grav minus the vertical reduction\ng_eff = g_grav - vertical_reduction\n\n# Additionally, there is a horizontal component of the centrifugal acceleration: a*sin(lat)\nhorizontal_acc = a * sp.sin(lat)\n\n# Compute the force components that the engine must provide\n# Vertical force required: weight - booster thrust\nF_vertical = m_total * g_eff - T_boosters_total\n# Horizontal force required: to counter the horizontal acceleration of the rotating Earth\nF_horizontal = m_total * horizontal_acc\n\n# Total engine thrust is the magnitude of these two components\nF_engine = sp.sqrt(F_vertical**2 + F_horizontal**2)\n\n# Convert the thrust to kN\nresult = sp.N(F_engine/1e3)  # result in kN approx 18.44 kN\n",
+            "unit": "kN"
+        },
+        "answer": {
+            "gt_answer": "$18.44$",
+            "unit": "kN"
+        },
+        "verification_result": {
+            "code_output": "18.4404283572568",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": [
+                "Note the additional information provided in the problem (latitude, Earth radius, revolution period), which makes it clear that the effect of the rotation of the Earth must also be considered.\nWe first compute local gravitational acceleration:\n\n$$\ng=\\frac{G M}{R^{2}}=9.823 \\frac{\\mathrm{m}}{\\mathrm{s}^{2}}\n$$\n\n\n\nAnd also acceleration due to the Earth's rotation:\n\n$$\na=(R \\cos \\theta) \\omega^{2}=0.02976 \\frac{\\mathrm{m}}{\\mathrm{s}^{2}}\n$$\n\nThen vertical acceleration is:\n\n$$\ng-a \\cos \\theta=9.7965 \\frac{\\mathrm{m}}{\\mathrm{s}^{2}}\n$$\n\nAnd horizontal acceleration:\n\n$$\na \\sin \\theta=0.0142 \\frac{m}{s^{2}}\n$$\n\nThe total mass of the craft is 700 metric tons, so the needed forces for liftoff are:\n\n$$\n\\left(F_{x}, F_{y}\\right)=(6857527,9948) \\mathrm{N}\n$$\n\nSubtracting out the effect of the solid fuel boosters, the force the liquid fuel engine needs to provide is:\n\n$$\n\\left(F_{x}, F_{y}\\right)=(15527,9948) \\mathrm{N}\n$$"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": "kN",
+            "answer_type": "Numerical",
+            "error": "1e-1",
+            "question_type": "Open-ended",
+            "subfield": "Mechanics",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "813",
+        "response": {
+            "code": "import sympy as sp\n\n# Define symbols and constants\nm, E_val = sp.symbols('m E_val')  # mass and extra energy loss\n\n# Given numerical constants (in SI units)\nm_val = 0.1  # mass in kg\nq_val = 0.5e-6  # charge of the particle in Coulomb\nQ_val = -4e-6  # charge at each vertex in Coulomb\nl_val = 1.5  # side length in meters\nE_loss = 0.00250  # energy loss in Joules\n\nk_val = 8.99e9  # Coulomb's constant in N m^2/C^2\n\n# For the cubical box, half side length\nhalf = l_val/2\n\n# List of vertices coordinates of a cube with center at origin\nvertices = []\nfor sx in [half, -half]:\n    for sy in [half, -half]:\n        for sz in [half, -half]:\n            vertices.append((sx, sy, sz))\n\n# Define positions for center and exit along an edge\n# Particle is at center (0,0,0) initially\npos_center = sp.Point(0, 0, 0)\n# Exit point: assume motion is parallel to the x-axis, so choose (half, 0, 0)\npos_exit = sp.Point(half, 0, 0)\n\n# Function to compute total potential energy at a point due to all vertices\n# U = sum_i [ k * (q * Q) / r_i ] where r_i is the distance from the point to vertex i\n\ndef total_potential_energy(point):\n    U = 0\n    for vertex in vertices:\n        r = sp.Point(vertex).distance(point)\n        U += k_val * (q_val * Q_val) / r\n    return U\n\n# Compute potential energy at the center and at the exit point\nU_center = total_potential_energy(pos_center)\nU_exit = total_potential_energy(pos_exit)\n\n# The energy difference required to overcome the potential barrier along the path\n# The particle must have kinetic energy equal to (U_exit - U_center) + E_loss\nDeltaU = U_exit - U_center\n\n# Minimum kinetic energy required\nE_required = DeltaU + E_loss\n\n# Kinetic energy = 1/2 * m * v^2, so solving for v:\nv_min = sp.sqrt(2 * E_required / m_val)\n\n# Assign the final value to the variable 'result'\nresult = sp.N(v_min)  # numerical evaluation\n",
+            "unit": "m/s"
+        },
+        "answer": {
+            "gt_answer": "0.354",
+            "unit": "m/s"
+        },
+        "verification_result": {
+            "code_output": "0.354202426761430",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": [
+                "Conservation of energy gives:\n$$\nT_{i}+U_{i}=T_{f}+U_{f}+E\n$$\n\nSolving for the initial potential energy gives\n\n$$\nU_{i}=-8 \\frac{k q Q}{l \\sqrt{3} / 2}=-\\frac{16 k q Q}{\\sqrt{3} l}\n$$\n\nAnd since the final kinetic energy is zero, the final potential energy is\n\n$$\nU_{f}=-4 \\frac{k q Q}{l / \\sqrt{2}}-4 \\frac{k q Q}{l \\sqrt{\\frac{3}{2}}}=-\\left(4 \\sqrt{2}+4 \\sqrt{\\frac{2}{3}}\\right) \\frac{k q Q}{l}\n$$\n\nand thus solving for the initial kinetic energy:\n\n$$\n\\frac{1}{2} m v^{2}=\\left(-4 \\sqrt{2}-4 \\sqrt{\\frac{2}{3}}+\\frac{16}{\\sqrt{3}}\\right) \\frac{k q Q}{l}+E\n$$\n\nThe final answer is $v=0.354 \\mathrm{~m} / \\mathrm{s}$."
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": "m/s",
+            "answer_type": "Numerical",
+            "error": "1e-2",
+            "question_type": "Open-ended",
+            "subfield": "Electromagnetism",
+            "subject": "Physics",
+            "language": "English"
+        }
     }
 ]
