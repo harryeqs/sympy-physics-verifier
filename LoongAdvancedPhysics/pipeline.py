@@ -13,43 +13,88 @@ import logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+# REASON_AGENT_PROMPT = """
+# Task: Solve the given physics problem using symbolic computation with Sympy. The generated code must be self-contained, executable, and free of syntax errors. Do not print the result; instead, assign it to the variable `result`.
+
+# **MANDATORY STRUCTURE (Follow this order strictly):**
+
+# 1. **Imports**  
+#    - Must include:
+#      ```python
+#      import sympy as sp
+#      ```
+
+# 2. **Symbol and Function Declaration**  
+#    - For declaring symbols, use sp.symbols() as follows:
+#      - Single symbol:
+#        ```python
+#        x = sp.symbols('x', positive=True)
+#        ```
+#      - Multiple symbols:
+#        ```python
+#        x, y = sp.symbols('x y', real=True)
+#        ```
+#    - For functions, use sp.Function(), for example:
+#      ```python
+#      f = sp.Function('f')(x)
+#      ```
+
+# 3. **Constant Definitions**  
+#    - Use numerical values only when required (e.g., `g = 9.81`). Otherwise, keep expressions symbolic (e.g., `G = sp.symbols('G')`).
+
+# 4. **Equation Setup**  
+#    - Always use the sp.Eq(left, right) format for equations.
+#    - Example:
+#      ```python
+#      eq = sp.Eq(F, m*a)
+#      ```
+
+# 5. **Solving the Equation**  
+#    - For symbolic solutions, use:
+#      ```python
+#      sol = sp.solve(eq, variable)
+#      ```
+#    - For numerical solutions, use:
+#      ```python
+#      sol = sp.nsolve(eq, variable, initial_guess)
+#      ```
+#    - Ensure that the equation has a valid solution before solving.
+
+# 6. **Result Assignment**  
+#    - Assign the final solution to the variable `result` without using any print statements.
+#    - Example:
+#      ```python
+#      result = sol[0] if isinstance(sol, list) else sol
+#      ```
+
+# **ERROR PREVENTION CHECKLIST:**
+# ✓ All calls to sp.symbols() and sp.Function() must have properly closed string literals.  
+# ✓ Ensure that all parentheses and brackets are correctly matched.  
+# ✓ Separate keyword parameters with commas correctly.  
+# ✓ No print statements should be present; output must be assigned to `result`.  
+# ✓ The final output should be a JSON object with keys "code" (executable code as a string) and "unit" (physical unit as a string).
+
+# **Example Template:**
+# ```json
+# {
+#   "code": "import sympy as sp\nx, y = sp.symbols('x y', real=True)\neq = sp.Eq(x**2 - y, 0)\nsol = sp.solve(eq, x)\nresult = sol[0]",
+#   "unit": "m"
+# }
+# ```
+# """
+
 REASON_AGENT_PROMPT = """
-Task: Solve the given physics problem using symbolic computation with Sympy. The solution must be self-contained, executable, and free of syntax errors. Do not print the result; assign it to `result`.
+Task: Write a self-contained Sympy code snippet to solve a physics problem. The code must be executable and free of syntax errors.
 
-Instructions:
-1. **Import Sympy**:
-   import sympy as sp
+Requirements:
+- Import Sympy as: `import sympy as sp`
+- Declare symbols one by one using sp.symbols (e.g., `x= sp.symbols('x', real=True)`) with properly closed string literals and correct keyword syntax.
+- Construct equations using sp.Eq (e.g., `eq = sp.Eq(left, right)`).
+- Solve the equation (using sp.solve for symbolic or sp.nsolve for numerical solutions).
+- Assign the final answer to the variable `result` (do not use print statements).
+- Output a JSON object with keys "code" (the complete code as a string) and "unit" (the physical unit as a string).
 
-2. **Define variables implicitly**:
-   - Use Sympy’s default symbols (e.g., `sp.pi`, `sp.E` for constants) or let Sympy auto-generate symbols.
-   Example: 
-     # For equations like "x^2 + y = 0":
-     eq = sp.Eq(x**2 + y, 0)
-
-3. **Define constants** (e.g., `g = 9.81` for gravity).
-
-4. **Set up equations**:
-   - Use `sp.Eq()` for clarity.
-   Example:
-     # For "force = mass * acceleration":
-     F, m, a = sp.symbols('F m a')
-     eq = sp.Eq(F, m * a)
-
-5. **Solve numerically if possible**:
-   - Use `sp.nsolve()` or `sp.N()` to avoid symbolic complexity.
-   Example:
-     result = sp.nsolve(eq, x, 2.0)  # Solve eq for x with initial guess 2.0
-
-6. **Final Result**:
-   - Assign the computed value to `result`:
-     result = <value>
-   - No printing/output.
-
-7. **Syntax Checks**:
-   - Ensure all parentheses/quotes are closed.
-   - Avoid manual symbol definition unless absolutely required.
-
-Return the output as a JSON object with keys "code" and "unit".
+Let the model decide on the details while ensuring the code is correct.
 """
 
 class PhysicsCodeGenPipeline():
