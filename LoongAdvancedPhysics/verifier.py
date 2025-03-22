@@ -4,7 +4,6 @@ import sympy as sp
 import concurrent.futures
 import re
 import math
-import multiprocessing
 from sympy.parsing.sympy_parser import parse_expr
 from sympy.parsing.latex import parse_latex
 from sympy.physics import units
@@ -326,6 +325,7 @@ class PhysicsVerifier:
                 code = code.replace(f'{var}.evalf()', safe_evalf)
 
             try:
+                print(code)
                 # Compile the code first to catch syntax errors early.
                 compiled_code = compile(code, "<string>", "exec")
             except SyntaxError as se:

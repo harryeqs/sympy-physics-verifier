@@ -1694,5 +1694,293 @@
             "subject": "Physics",
             "language": "English"
         }
+    },
+    {
+        "sample_id": "826",
+        "response": {
+            "code": "import sympy as sp\n\n# Define symbols for physical constants\nL = sp.Float(3.846e26)  # Solar luminosity in W\n\nd = sp.Float(1.496e11)  # Earth-sun distance in m\n\n# Calculate solar constant S0 at Earth (flux in W/m^2)\nS0 = L/(4*sp.pi*d**2)\n\n# Given parameters\nalpha = sp.Float(0.3)      # Albedo of the ground\nepsilon = sp.Float(0.8)    # Emissivity/absorptivity of the atmosphere\nsigma = sp.Float(5.67e-8)  # Stefan-Boltzmann constant in W/(m^2*K^4)\n\n# Energy balance equations in the two-layer model are given by:\n# At the top of the atmosphere:\n#   - (1/4) S0 (1 - alpha) + epsilon*sigma*T_a^4 + (1-epsilon)*sigma*T_s^4 = 0\n# At the surface:\n#   (1/4) S0 (1-alpha) + epsilon*sigma*T_a^4 - sigma*T_s^4 = 0\n# It can be shown that T_a = 2^(-1/4) T_s.\n# Substituting into the surface equation gives:\n#   sigma*T_s^4 (1 - epsilon/2) = (1/4) S0 (1-alpha).\n# Therefore, the surface temperature T_s (with an atmosphere) is:\n\nT_s = ((S0*(1 - alpha))/(4*sigma*(1 - epsilon/2)))**(sp.Rational(1,4))\n\n# Numerically evaluate T_s\nT_s_value = sp.N(T_s, 6)  # Approx to 6 significant figures\n\nresult = T_s_value  \n\n# result holds the equilibrium average temperature in Kelvin, expected ~289.601 K\n\n# Unit: Kelvin (K)\n",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "289.601",
+            "unit": "K"
+        },
+        "verification_result": {
+            "code_output": "289.608",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": [
+                "Let us solve this problem in the case of the Earth being a graybody first and then substitute values for when it is a blackbody. The portion of energy that reaches the Earth is given by the ratio between the cross-sectional area of the satellite and the area of an imaginary sphere centered around the sun with a radius of $L$. Thus, the incoming radiation is multiplied by a factor of $\\gamma=(R / 2 L)^{2}$. The energy from the sun that the surface absorbs is $\\gamma(1-\\alpha) E$, where $E$ is the energy output of the sun. Here $\\gamma=1 / 4$ as the sphere encompassing will be 4 times the area of its intercept.\nWe can now write two systems of equations at the atmosphere and the ground of the Earth. At the top of the atmosphere, we require equilibrium meaning that zero net radiation leaves the atmosphere or:\n\n$$\n-\\frac{1}{4} S_{0}(1-\\alpha)+\\varepsilon \\sigma T_{a}^{4}+(1-\\varepsilon) \\sigma T_{s}^{4}=0\n$$\n\nSimilarly, at the ground, we write another equilibrium equation of:\n\n$$\n\\frac{1}{4} S_{0}(1-\\alpha)+\\varepsilon \\sigma T_{a}^{4}-\\sigma T_{s}^{4}=0\n$$\n\nThus, solving the ground equilibrium equation yields us $T_{a}=2^{-1 / 4} T_{s}$ and plugging back into the atmosphere equilibrium equation tells us:\n\n$$\n\\frac{1}{4} S_{0}(1-\\alpha)=\\left(1-\\frac{\\varepsilon}{2}\\right) \\sigma T_{s}^{4} \\Longrightarrow T_{s}=289.601 \\mathrm{~K}\n$$"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": "K",
+            "answer_type": "Numerical",
+            "error": "1e0",
+            "question_type": "Open-ended",
+            "subfield": "Thermodynamics",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "835",
+        "response": {
+            "code": "import sympy as sp\nimport mpmath as mp\nimport math\n\n# Define constants\nG = 6.67e-11  # gravitational constant in m^3/(kg s^2)\n\n# Given planet properties\nR_planet = 10e3            # planet radius in m (10 km)\ndensity = 5e3              # density in kg/m^3 (5 g/cm^3)\n\n# Total mass of the planet\nM = density * (4.0/3.0) * sp.pi * R_planet**3\n\n# The planet splits into three equal sections, each of mass m\nm = M/3.0\n\n# According to the derivation, by symmetry the three masses behave as if a fixed mass M_c = m/sqrt(3) were at the center.\nM_c = m/sp.sqrt(3)\n\n# From energy conservation, the turning point (apoapsis) separation from the center is given as:\nl = 101000.0  # in meters\n\n# The final separation between the centers of each piece, taking their finite size into account, is given by\n# R_up = 10 km / cos(30\u00b0)\nR_up = 10000.0 / math.cos(math.pi/6)  # in meters\n\n# The time for a mass to fall from an initial distance 'l' to a final distance 'R_up' toward a fixed mass M_c is\n# given by the integral:\n#   t = 2 * \\int_{R_up}^{l} sqrt((x * l)/(2 G M_c (l - x))) dx\n# which accounts for the fall. (The factor 2 comes from the round-trip time for a collision.)\n\n# Define the integrand as a (Python) lambda function for numerical integration\nintegrand = lambda x: math.sqrt((x * l) / (2 * G * float(M_c) * (l - x)))\n\n# Use mpmath.quad for numerical integration\nt_collision = 2.0 * mp.quad(integrand, [R_up, l])\n\n# Assign the computed collision time in seconds to 'result'\nresult = t_collision\n\n# Now, result should be around 136000 s.\n",
+            "unit": "s"
+        },
+        "answer": {
+            "gt_answer": "136000",
+            "unit": "s"
+        },
+        "verification_result": {
+            "code_output": "135181.233656549",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": [
+                "Due to conservation of momentum, the three masses must form an equilateral triangle at all times. Let us determine the force as a function of $r$, the distance between each mass and the center.\n\n\n<img_4307>\n\nThe vector sum of the net force on any individual mass is\n\n$$\nF=\\frac{G m^{2}}{d^{2}} \\sqrt{2-2 \\cos 120^{\\circ}}=\\frac{\\sqrt{3} G m^{2}}{d^{2}}\n$$\n\nwhere $d$ is the distance between the mass and the center.\n\n$$\nd^{2}=3 r^{2}\n$$\n\nThe net force is thus\n\n$$\nF=\\frac{G m^{2}}{\\sqrt{3} r^{2}}\n$$\n\nThe system behaves as if there was a stationary mass $m^{\\prime}=m / \\sqrt{3}$ at the center, simplifying the problem greatly into a restricted two body system. Next, we need to figure out the height of the apoapsis. This can be done via conservation of energy.\n\n$$\nE_{\\text {binding,initial }}+E=3 E_{\\text {binding,final }}-\\frac{G m^{2}}{\\sqrt{3} \\ell} \\Longrightarrow \\ell=-\\frac{G m^{2}}{\\sqrt{3}\\left(-\\frac{3 G M^{2}}{5 R}+8.93 \\cdot 10^{17}-\\left(-3 \\frac{3 G m^{2}}{5 r_{f}}\\right)\\right)}=101,000 \\mathrm{~m}\n$$\n\nIf you have a stationary mass $M$ at the center. The time it takes for an object to fall into it is:\n\n$$\nT=\\pi \\sqrt{\\frac{\\ell^{3}}{8 G M}}\n$$\n\nour time will be double this, and the mass in the center will be $M=m / \\sqrt{3}$. So plugging in numbers gives:\n\n$$\nt=2 \\pi \\sqrt{\\frac{l^{3}}{8 G\\left(\\frac{m}{\\sqrt{3}}\\right)}}=138,000\n$$\n\n\n\nIf we take into account a nonzero radius so final separation is $10 / \\cos \\left(30^{\\circ}\\right) \\mathrm{km}$, then the answer should be:\n\n$$\n-2 \\int_{l}^{\\frac{10000}{\\cos \\left(\\frac{\\pi}{6}\\right)}}\\left(\\sqrt{\\frac{x l}{2 G\\left(\\frac{m}{\\sqrt{3}}\\right)(l-x)}}\\right) d x=136,000 \\mathrm{~s}\n$$\n\nNote if you set the upper bound to zero, you get the same answer as before. Both these answers will be accepted."
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": "s",
+            "answer_type": "Numerical",
+            "error": "1e3",
+            "question_type": "Open-ended",
+            "subfield": "Mechanics",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "871",
+        "response": {
+            "code": "import sympy as sp\n\n# Define the symbolic variable for Adithya's proper time (in natural units: c = a0 = 1)\n# We'll call it t1 (which is the proper time elapsed on Adithya's clock), and set t1 = 0.75 s.\n\nt1 = 0.75  \n\n# In these natural units, Adithya's velocity in the inertial frame is:\nv1 = sp.tanh(t1)  \n\n# For Eddie's rocket, his proper acceleration is half. His inertial frame velocity is v2 = tanh(t2/2), where t2 is his proper time.\n# The simultaneity condition (derived in the prompt) gives:\n#    tanh(t2/2) = sinh(t1) / (3 - cosh(t1))\n\nv2 = sp.simplify(sp.sinh(t1)/(3 - sp.cosh(t1)))\n\n# The velocity of Adithya as seen by Eddie (in the inertial frame) uses the velocity-addition formula:\n#    v_rel = (v1 + v2) / (1 + v1*v2)\n# (Note: Both velocities are taken in the appropriate direction; here v1 is to the right, and v2 is Eddie's velocity in the inertial frame, which, when subtracted, becomes a boost transformation. Using the derivation given, the effective transformation yields this formula.)\n\nv_rel = (v1 + v2) / (1 + v1*v2)  \n\n# Now, convert back to SI units by restoring c = 3.00e8 m/s. \n# That is, the speed in m/s is v = v_rel * c.\n\nc = 3.00e8  # m/s\nresult = sp.N(v_rel * c)\n\n# The expected numerical result should be approximately 2.564e8 m/s.\n",
+            "unit": "m/s"
+        },
+        "answer": {
+            "gt_answer": "$2.564 \\times 10^{8}$",
+            "unit": "m/s"
+        },
+        "verification_result": {
+            "code_output": "256613129.522695",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": [
+                "Throughout this solution, we will let $c=a_{0}=1$, for simplicity. We will work in the inertial frame that is initially at rest with both rockets at $t_{1}=t_{2}=0$. First, we determine the velocity of Adithya's rocket in this frame as a function of the proper time that has elapsed $t_{1}$. In frame. $S_{1}$, in a time $d t_{1}$, the rocket's velocity increases by $d t_{1}$, so by velocity addition, the new velocity in the inertial frame is\n$$\n\\frac{v_{1}+d t_{1}}{1+v_{1} d t_{1}} \\approx v_{1}+\\left(1-v_{1}^{2}\\right) d t_{1}\n$$\n\nTherefore, we have\n\n$$\n\\frac{d v_{1}}{d t_{1}}=1-v_{1}^{2}\n$$\n\nUpon separating and integrating, we find $v_{1}=\\tanh \\left(t_{1}\\right)$. Similarly, the velocity of Eddie's rocket in the inertial frame is $v_{2}=\\tanh \\left(t_{2} / 2\\right)$. Now, in this inertial frame, let the time between events $A$ and $B$ be $t$, and let the distance between rockets $A$ and $B$ be $x$. By a Lorentz transformation, the time between the events in frame $S_{2}$ is\n\n$$\nt^{\\prime}=\\gamma\\left(t-v_{2} x\\right)=0\n$$\n\nsince the events are simultaneous in $S_{2}$. Therefore, we must have $t=v_{2} x$. Note that $t=t_{A}-t_{B}$ where $t_{A}$ and $t_{B}$ denote the times of events $A$ and $B$ in the inertial frame, respectively. Also, note that $x=x_{A}+x_{B}$ where $x_{A}$ and $x_{B}$ are the respective displacements of the two rockets in the inertial frame. By the effects of time dilation, we have\n\n$$\nt_{A}=\\int \\gamma d t_{1}=\\int \\frac{1}{\\sqrt{1-v_{1}^{2}}} d t_{1}=\\int_{0}^{t_{1}} \\cosh \\left(t_{1}^{\\prime}\\right) d t_{1}^{\\prime}=\\sinh \\left(t_{1}\\right)\n$$\n\nSimilarly, $t_{B}=2 \\sinh \\left(t_{2} / 2\\right)$, and we obtain $t=2 \\sinh \\left(t_{2} / 2\\right)-\\sinh \\left(t_{1}\\right)$. Additionally, from the above result,\n\n$$\nx_{A}=\\int v_{1} d t=\\int v_{1} \\cosh \\left(t_{1}\\right) d t_{1}=\\int_{0}^{t_{1}} \\sinh \\left(t_{1}\\right) d t_{1}^{\\prime}=\\cosh \\left(t_{1}\\right)-1\n$$\n\nSimilarly, $x_{B}=2 \\cosh \\left(t_{2} / 2\\right)-2$, and $x=\\cosh \\left(t_{1}\\right)+2 \\cosh \\left(t_{2} / 2\\right)-3$. Thus, from $t=v_{2} x$,\n\n$$\n\\begin{gathered}\n2 \\sinh \\left(t_{2} / 2\\right)-\\sinh \\left(t_{1}\\right)=\\tanh \\left(t_{2} / 2\\right)\\left(\\cosh \\left(t_{1}\\right)+2 \\cosh \\left(t_{2} / 2\\right)-3\\right) . \\\\\n-\\sinh \\left(t_{1}\\right)=\\tanh \\left(t_{2} / 2\\right)\\left(\\cosh \\left(t_{1}\\right)-3\\right) . \\\\\n\\tanh \\left(t_{2} / 2\\right)=\\frac{\\sinh \\left(t_{1}\\right)}{3-\\cosh \\left(t_{1}\\right)} .\n\\end{gathered}\n$$\n\nNow, this is the velocity of Eddie's rocket as measured from the inertial frame, so by velocity addition, the velocity of Adithya's rocket as seen by Eddie is\n\n$$\nv=\\frac{\\tanh \\left(t_{1}\\right)+\\frac{\\sinh \\left(t_{1}\\right)}{3-\\cosh \\left(t_{1}\\right)}}{1+\\frac{\\sinh \\left(t_{1}\\right) \\tanh \\left(t_{1}\\right)}{3-\\cosh \\left(t_{1}\\right)}}=\\frac{3 \\tanh \\left(t_{1}\\right)}{3-\\cosh \\left(t_{1}\\right)+\\sinh \\left(t_{1}\\right) \\tanh \\left(t_{1}\\right)} .\n$$"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": "m/s",
+            "answer_type": "Numerical",
+            "error": "5e6",
+            "question_type": "Open-ended",
+            "subfield": "Mechanics",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "909",
+        "response": {
+            "code": "import sympy as sp\n\n# The problem can be solved by noting that the composed rapidity gives\n# v_f = tanh(ln(sqrt(21!))) which simplifies to\n# v_f = (sqrt(21!) - 1/sqrt(21!))/(sqrt(21!) + 1/sqrt(21!)) = 1 - 2/(21! + 1)\n\n# Thus we define delta = 2/(21!+1), so that v_f = 1 - delta.\n# Writing v_f in the form 0.999...9, we recognize that the number of repeated 9's is given by floor(-log10(delta)).\n\n# Calculate delta exactly\ndelta = 2 / (sp.factorial(21) + 1)\n\n# Compute the number of 9's\n# Use a high precision numerical evaluation to ensure accuracy\nx_val = sp.floor(-sp.log(delta, 10))\n\n# Convert to a standard Python integer\nresult = int(x_val)\n\n# Expected result is 19\n",
+            "unit": null
+        },
+        "answer": {
+            "gt_answer": "19",
+            "unit": null
+        },
+        "verification_result": {
+            "code_output": "19",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": [
+                "Let us define the rapidity as\n$$\n\\tanh \\phi \\equiv \\beta=\\frac{v}{c}\n$$\n\nwhere tanh is the hyperbolic tangent function. Let $\\beta_{1}=\\tanh \\phi_{1}$ and $\\beta_{2}=\\tanh \\phi_{2}$. If we add $\\beta_{1}$ and $\\beta_{2}$ using the relativistic velocity addition formula, we find that\n\n$$\n\\beta=\\frac{\\beta_{1}+\\beta_{2}}{1-\\beta_{1} \\beta_{2}}=\\frac{\\tanh \\phi_{1}+\\tanh \\phi_{2}}{1+\\tanh \\phi_{1} \\tanh \\phi_{2}}=\\tanh \\left(\\phi_{1}+\\phi_{2}\\right)\n$$\n\nWe can then rewrite the problem as\n\n$$\nv_{f}=\\tanh \\left(\\operatorname{arctanh} \\frac{1}{3}+\\operatorname{arctanh} \\frac{2}{4}+\\cdots+\\operatorname{arctanh} \\frac{20}{22}\\right)\n$$\n\n\n\nUsing the fact that $\\operatorname{arctanh}(\\phi)=\\frac{1}{2} \\ln \\left(\\frac{1+\\phi}{1-\\phi}\\right)$, we can find that\n\n$$\n\\begin{aligned}\nv_{f} & =\\tanh \\left(\\frac{1}{2} \\sum_{k=0}^{19} \\ln \\left(\\frac{1+\\frac{k+1}{k+3}}{1-\\frac{k+1}{k+3}}\\right)\\right)=\\tanh \\left(\\frac{1}{2} \\sum_{k=0}^{19} \\ln (k+2)\\right) \\\\\n& =\\tanh (\\ln \\sqrt{2 \\cdot 3 \\cdot 4 \\cdots 21})=\\tanh (\\ln \\sqrt{21 !})\n\\end{aligned}\n$$\n\nAs $\\tanh \\phi=\\left(e^{\\phi}-e^{-\\phi}\\right) /\\left(e^{\\phi}+e^{-\\phi}\\right)$, then\n\n$$\n\\tanh (\\ln (\\phi))=\\frac{\\phi-\\frac{1}{\\phi}}{\\phi+\\frac{1}{\\phi}}=1-\\frac{2}{\\phi^{2}+1} \\Longrightarrow v_{f}=1-\\frac{2}{21 !+1}\n$$\n\nThis implies 19 zeros, but you can also use Stirlings approximation to further approximate the factorial.\n\nAlternate 1: Define $u_{k}$ as Spaceship 0's velocity in frame $R_{k}$, given $c=1$. The recurrence relation from the relativistic velocity addition formula is: $u_{k+1}=\\frac{u_{k}(k+3)+(k+1)}{u_{k}(k+1)+(k+3)}$, starting with $u_{1}=\\frac{1}{3}$. The relation can be simplified as: $u_{k+1}=1+\\frac{2\\left(u_{k}-1\\right)}{u_{k}(k+1)+(k+3)}$. Introducing $v_{k}=u_{k}-1$, $v_{k+1}=v_{k} \\frac{2}{v_{k}(k+1)+(2 k+4)}$. Further simplifying with $w_{k}=\\frac{1}{v_{k}}$, we get $w_{k+1}=w_{k}(k+2)+\\frac{k+1}{2}$. By setting $x_{k}=w_{k}+c$, we find $c=-\\frac{1}{2}$ simplifies to $x_{k+1}=x_{k}(k+2)$. This gives $x_{k}=$ $(k+1)(k)(k-1) \\ldots(4)(3) x_{1}$ and using the initial condition $x_{1}=\\frac{1}{u_{1}-1}+\\frac{1}{2}=1$, we obtain $x_{k}=\\frac{(k+1) !}{2}$. Consequently, $u_{k}=\\frac{(k+1) !-1}{(k+1) !+1}$ and substituting $k=20, u_{20} \\approx 1-3.9 \\times 10^{-20}$, yielding 19 significant digits.\n\nAlternate 2: Let $l=k+2$, then $u_{l}=\\frac{l-1}{l+1}$. Let $u_{m}=\\frac{m-1}{m+1}$. Then you can find that the velocity addition of any $l, m$ will be $\\frac{m l-1}{m l+1}$. Using this identity, we can use recurrence to find that $u_{k}=\\frac{(k+1) !-1}{(k+1) !+1}$."
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": null,
+            "answer_type": "Numerical",
+            "error": "0",
+            "question_type": "Open-ended",
+            "subfield": "Mechanics",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "912",
+        "response": {
+            "code": "import sympy as sp\n\n# Define symbols and constants\nm = 1         # mass in kg\nvt = 20       # terminal speed in m/s\ng = 9.8       # acceleration due to gravity in m/s^2\nh0 = 30       # maximum height in m\n\n# Using the energy method with quadratic drag:\n# Upward motion:\n# (vt^2/2) * ln(1 + (v^2/vt^2)) = g (h0 - h)\n# At maximum height (h = h0), speed v=0, so the constant is g*h0.\n# At h=0, the initial speed v0 satisfies:\n# (vt^2/2) * ln(1 + (v0^2/vt^2)) = g * h0\n# => 1 + (v0^2/vt^2) = exp(2 g h0/vt^2)\n# Thus,\nv0 = vt * sp.sqrt(sp.exp(2*g*h0/vt**2) - 1)\n\n# Downward motion:\n# A similar analysis (with appropriate sign) gives the speed just before impact:\n# v_final = vt * sp.sqrt(1 - sp.exp(-2*g*h0/vt**2))\nv_final = vt * sp.sqrt(1 - sp.exp(-2*g*h0/vt**2))\n\n# Compute kinetic energies:\nKE_initial = 0.5 * m * v0**2\nKE_final   = 0.5 * m * v_final**2\n\n# The energy dissipated is the difference between the kinetic energy the ball had when thrown \n# and the kinetic energy just before impact:\nenergy_dissipated = KE_initial - KE_final\n\n# Evaluate the result numerically\nresult = sp.N(energy_dissipated, 6)  # Joules\n",
+            "unit": "joules"
+        },
+        "answer": {
+            "gt_answer": "515.83",
+            "unit": "joules"
+        },
+        "verification_result": {
+            "code_output": "515.832",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": [
+                "If we suppose that the magnitude of quadratic drag is $F_{\\mathrm{drag}}=c v^{2}$ for some constant $c$, then when the ball is falling downwards at terminal velocity $v_{t}$ this upwards drag force must cancel gravity to provide zero net force:\n$$\nm g=c v_{t}^{2} \\Longrightarrow c=\\frac{m g}{v_{t}^{2}}\n$$\n\nso we can rewrite our equations of motion in terms of terminal velocity. In the ascending portion of the ball's trajectory, suppose that the ball's speed changes from $v$ to $v+d v$ after traveling an infinitesimal distance from $h$ to $h+d h$. Then:\n\n$d($ kinetic energy $)=-d($ potential energy and energy lost to drag $) \\Longrightarrow m v d v=-\\frac{m g v^{2}}{v_{t}^{2}} d h-m g d h$\n\nwhere we used chain rule and $d W=F \\cdot d x$. This is a separable differential equation for velocity in terms of height (!), which we can solve:\n\n$$\n\\int \\frac{v d v}{1+\\frac{v^{2}}{v_{t}^{2}}}=\\int-g d h+\\text { constant }=\\text { constant }-g h\n$$\n\nWe u-sub the entire denominator $\\left(u=1+v^{2} / v_{t}^{2} \\Longrightarrow d u=2 v / v_{t}^{2} d v\\right)$, which nicely cancels the numerator. Our left-hand integral is\n\n$$\n\\frac{v_{t}^{2}}{2} \\int \\frac{d u}{u}=\\frac{v_{t}^{2}}{2} \\ln \\left|1+\\frac{v^{2}}{v_{t}^{2}}\\right|=\\text { constant }-g h\n$$\n\nNow to find the constant! At our maximum height $h_{0}=30 \\mathrm{~m}$, the speed and left-hand side are zero, so the constant must be $g h_{0}$. Then we can find the initial speed of the projectile by substituting $h=0$, from which:\n\n$$\nv_{\\text {initial }}=v_{t} \\sqrt{e^{\\frac{2 g h_{0}}{v_{t}^{2}}}-1}\n$$\n\nWe can use a similar argument for the downwards trajectory, albeit with drag pointing upwards. We should get that the final speed immediately before impact is\n\n$$\nv_{\\text {final }}=v_{t} \\sqrt{1-e^{\\frac{-2 g h_{0}}{v_{t}^{2}}}}\n$$\n\nfrom which the dissipated energy is the difference in final and initial kinetic energies, or\n\n$$\n\\frac{1}{2} m\\left(v_{\\text {final }}^{2}-v_{\\text {initial }}^{2}\\right) \\approx 515.83 \\text { joules }\n$$"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": "joules",
+            "answer_type": "Numerical",
+            "error": "2e-1",
+            "question_type": "Open-ended",
+            "subfield": "Mechanics",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "915",
+        "response": {
+            "code": "import sympy as sp\n\n# Define constants\npi = sp.pi\nepsilon0 = 8.85e-12  # Permittivity of free space in C^2/(N m^2)\n\n# Given charge density and width of the strips\nsigma = 1e-6  # C/m^2 (magnitude of the surface charge density)\nw = 2e-3      # width of the strips in m (2 mm)\n\n# Effective linear charge density for the strips\nlambda_val = sigma * w  # = 2e-9 C/m\n\n# According to the provided approximation, we consider two wires (one from each plate) located\n# at y = \u00b10.5 m from the x-axis. Their contributions do not cancel completely in the y-direction.\n# The resulting y-field is approximated using the integral over z from -0.5 to 0.5 m along the side of the plates.\n# The analytic result given is (after performing the integral):\n#\n# E_y = (0.5*lambda)/(4*pi*epsilon0) * ( 1/((0.5^2+0.05^2)*sqrt(0.5^2+0.5^2+0.05^2))\n#       - 1/((0.5^2+0.25^2)*sqrt(0.5^2+0.5^2+0.25^2)) )\n#\n# where the numbers 0.05 and 0.25 arise from the distances in z (half the plate length = 0.5 m)\n# and the two different distances from the observation point to the strips along the x-axis: 5 cm (0.05 m)\n# for the closer strip versus 25 cm (0.25 m) for the farther one.\n\n# Define the numerical terms\nterm1 = 1/((0.5**2 + 0.05**2) * sp.sqrt(0.5**2 + 0.5**2 + 0.05**2))\nterm2 = 1/((0.5**2 + 0.25**2) * sp.sqrt(0.5**2 + 0.5**2 + 0.25**2))\n\nprefactor = (0.5 * lambda_val) / (4 * pi * epsilon0)\n\nE_y = prefactor * (term1 - term2)  # This is the y-component of the electric field in N/C\n\n# Assign the computed numerical value to 'result'\nresult = sp.N(E_y)  # approximately 11.9 N/C\n",
+            "unit": "N/C"
+        },
+        "answer": {
+            "gt_answer": "$11.9$",
+            "unit": "N/C"
+        },
+        "verification_result": {
+            "code_output": "11.8712440222672",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": [
+                "By symmetry, the electric field due to the portion of the plates between $y=50 \\mathrm{~cm}$ and $y=-49.8 \\mathrm{~cm}$ will cancel out. We only need to consider the electric field from two $2 \\mathrm{~mm}$ wide strips of charge, which are small enough to be approximated as wires with charge per unit length $\\lambda=\\sigma w= \\pm 2 \\times 10^{-9} \\mathrm{C} / \\mathrm{m}^{2}$ at a distance $y=50 \\mathrm{~cm}$ away. The y-component of the electric field from these wires is then\n$$\n\\begin{aligned}\n& E_{y}=\\frac{0.5 \\lambda}{4 \\pi \\epsilon_{0}} \\int_{-0.5}^{0.5}\\left(\\frac{1}{\\left(z^{2}+0.5^{2}+0.05^{2}\\right)^{\\frac{3}{2}}}-\\frac{1}{\\left(z^{2}+0.5^{2}+0.25^{2}\\right)^{\\frac{3}{2}}}\\right) \\mathrm{d} z \\\\\n& E_{y}=\\frac{0.5 \\lambda}{4 \\pi \\epsilon_{0}}\\left(\\frac{z}{\\left(0.5^{2}+0.05^{2}\\right) \\sqrt{z^{2}+0.5^{2}+0.05^{2}}}-\\frac{z}{\\left(0.5^{2}+0.25^{2}\\right) \\sqrt{z^{2}+0.5^{2}+0.25^{2}}}\\right) \\\\\n& E_{y}=\\frac{0.5 \\lambda}{4 \\pi \\epsilon_{0}}\\left(\\frac{1}{\\left(0.5^{2}+0.05^{2}\\right) \\sqrt{0.5^{2}+0.5^{2}+0.05^{2}}}-\\frac{1}{\\left(0.5^{2}+0.25^{2}\\right) \\sqrt{0.5^{2}+0.5^{2}+0.25^{2}}}\\right)=11.9 \\mathrm{~N} / \\mathrm{C}\n\\end{aligned}\n$$"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": "N/C",
+            "answer_type": "Numerical",
+            "error": "1e-1",
+            "question_type": "Open-ended",
+            "subfield": "Electromagnetism",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "919",
+        "response": {
+            "code": "import sympy as sp\n\n# Define constants\nG = 6.67e-11  # gravitational constant in N m^2 / kg^2\nalpha = 3000  # density constant in kg/m^3 (converted from 3 g/cm^3; 1 g/cm^3 = 1000 kg/m^3)\nR = 7e8     # star radius in m (7 x 10^5 km = 7e8 m)\nsigma = 5.67e-8  # Stefan-Boltzmann constant in W/m^2/K^4\nc = 3.00e8       # speed of light in m/s\n\n# Radiation constant a defined via a = 4 sigma / c\na = 4*sigma/c   # in J/m^3/K^4 (should be ~7.56e-16)\n\n# For a star with density profile rho(r) = alpha*(1-r/R) the central pressure can be determined\n# by integrating the hydrostatic equilibrium equation. In this particular problem, one obtains:\n#     P_c = (5*pi*G*alpha**2*R**2)/36\n# (this result comes from carrying out the integration over the given density profile).\n\nP_c = (5*sp.pi*G*alpha**2*R**2)/36\n\n# The assumption is that the pressure at the core is provided solely by the radiation of photons.\n# In a photon gas in thermal equilibrium (here treated as a classical ideal gas) the pressure is given by\n# the relation:\n#     P = (1/3)*a*T^4\n# where a is the radiation constant given above.\n\n# Setting the central pressure equal to the radiation pressure, we have:\n#     (1/3)*a*T^4 = P_c\n# Solve for T:\n\nT_expr = ((3*P_c)/a)**(sp.Rational(1,4))\n\n# Evaluate the temperature numerically\nT_val = float(T_expr.evalf())\n\n# Round the answer to the nearest kilokelvin (i.e., nearest 1e3 K)\nresult = round(T_val, -3)",
+            "unit": "K"
+        },
+        "answer": {
+            "gt_answer": "$26718$",
+            "unit": "kK"
+        },
+        "verification_result": {
+            "code_output": "26714.0000000000",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": [
+                "For a star that doesn't collapse in on itself, there must be some source of pressure $p(r)$ that balances out the pressure due to gravity. Define the function:\n$$\nm(r)=\\int_{0}^{r} 4 \\pi r^{2} \\rho(r) d r\n$$\ninside the star. The gravitational pressure on an infinitesimal shell of radius $r$ and thickness $d r$ is given by:\n$$\nd p_{g}=-\\frac{G m(r) \\rho(r) 4 \\pi r^{2} d r}{r^{2} 4 \\pi r^{2}}=-\\frac{G m(r) \\rho(r)}{r^{2}} d r\n$$\nHence, the pressure source must provide a pressure gradient $\\frac{d p}{d r}$ given by:\n$$\n\\frac{d p}{d r}=\\frac{G m(r) \\rho(r)}{r^{2}}\n$$\nIf $\\rho(r)=\\alpha(1-r / R)$, then $m(r)=\\frac{1}{3} \\pi \\alpha r^{3}(3 r / R-4)$. We need the pressure gradient:\n$$\n\\frac{d p}{d r}=\\frac{1}{3} \\pi G \\alpha^{2} r(3 r / R-4)(r / R-1)\n$$\nWe integrate this equation from $r=0$ to $R$ with the obvious boundary condition $p(R)=0$. We find that $p(0)=\\frac{5}{36} \\pi G \\alpha^{2} R^{2}$. From the Stefan-Boltzmann law, along with elementary kinetic theory, the pressure due to local radiation is given by $\\frac{4 \\sigma}{3 c} T_{c}^{4}$. Plugging in values gives $T_{c}=26718 \\mathrm{kK}$"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": "kK",
+            "answer_type": "Numerical",
+            "error": "1e2",
+            "question_type": "Open-ended",
+            "subfield": "Modern Physics",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "928",
+        "response": {
+            "code": "import sympy as sp\n\n# Define symbols and constants (all in SI units)\nm_ball = 14e-6          # mass of the ball in kg (14 mg)\nL = 1.0                 # length of the string in m\nlambda_s = 1.1e-5       # mass per unit length of the string in kg/m\nq = 0.15e-9             # charge given to the ball in C (0.15 nC)\ng = 9.8                 # acceleration due to gravity in m/s^2\n\n# Electric field parameters\nV = 10e3                # voltage drop in V (10 kV)\nd = 0.17                # separation between the plates in m (17 cm)\n\n# Electrostatic force on the ball due to the applied field\nF = q * V / d           # F = Q V / d\n\n# Considering the mass of the string, the horizontal displacement x satisfies\n# x = F * int_{0}^{L}[dh / (m_ball*g + lambda_s*g*h)]\n# The integral yields:\n#   int_{0}^{L} dh / (m_ball*g + lambda_s*g*h) = (1/(lambda_s*g)) ln((m_ball + lambda_s*L)/m_ball)\n\nx = F/(lambda_s*g) * sp.log((m_ball + lambda_s*L)/m_ball)\n\n# Compute numerical value\nresult = sp.N(x)  \n\n# The expected result is approximately 0.0475 m\n",
+            "unit": "m"
+        },
+        "answer": {
+            "gt_answer": "$0.0475$",
+            "unit": "m"
+        },
+        "verification_result": {
+            "code_output": "0.0474586785375648",
+            "result_match": true,
+            "unit_match": true,
+            "error": null
+        },
+        "metadata": {
+            "solution": [
+                "The force on the Styrofoam ball due to the electric field from the two plates is $F=\\frac{Q V}{d}$. Since the plates are conducting, the ball also experiences an attraction toward the closer plate. This force can be neglected because it is much smaller than $\\frac{Q V}{d}$ (an assumption that will be justified at the end of the solution). The mass of the string, however, needs to be considered. Consider the forces on an infinitesimal segment of the string. The horizontal component of the tension must balance out the electric force on the ball and the vertical component must balance out the weight of everything below it (string and ball). This gives us\n$$\n\\frac{d x}{d h}=\\frac{F}{m g+\\lambda g h}\n$$\nwhere $h$ is the height above the ball, $x$ is the horizontal displacement from equilibrium, $F$ is the electrostatic force, $\\lambda$ is the mass density of the string, and $m$ is the mass of the ball. Separating\n\n\n\nvariables, we have\n$$\nx=F \\int_{0}^{L} \\frac{d h}{m g+\\lambda g h}\n$$\nwhere $L$ is the length of the string. Integrating, we get\n$$\nx=\\frac{F}{\\lambda g} \\ln \\left(\\frac{m+\\lambda L}{m}\\right)=0.0475 \\mathrm{~m}\n$$\nNow, let's justify our assumption that the attraction of the ball towards the plates is negligible. Using the method of image charges, the force due to the closer plate is equivalent to a charge $-Q$ a distance of $d-2 x$ away. Infinitely many image charges exist due to the other plate but they have a smaller effect so they will not be considered. The force due to the image charge is\n$$\nF^{\\prime}=\\frac{Q^{2}}{4 \\pi \\epsilon_{0}(d-2 x)^{2}}=3.59 \\times 10^{-8} \\mathrm{~N}\n$$\nwhich is indeed much less than $F=\\frac{Q V}{d}=8.82 \\times 10^{-6} \\mathrm{~N}$"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": "m",
+            "answer_type": "Numerical",
+            "error": "3e-3",
+            "question_type": "Open-ended",
+            "subfield": "Electromagnetism",
+            "subject": "Physics",
+            "language": "English"
+        }
+    },
+    {
+        "sample_id": "1013",
+        "response": {
+            "code": "import sympy as sp\n\n# Given values\ngamma = 0.0250  # Surface tension in N/m\nR0 = 1.00e-2  # Radius in meters\nPa = 1.013e5  # Atmospheric pressure in N/m^2\n\n# Calculate the ratio\nratio = 1 + (4 * gamma) / (R0 * Pa)\n\n# Calculate the numerical value of the expression\nresult = ratio.evalf() - 1",
+            "unit": "dimensionless"
+        },
+        "answer": {
+            "gt_answer": "1.0001",
+            "unit": null
+        },
+        "verification_result": {
+            "code_output": "1.0000987166831194",
+            "result_match": true,
+            "unit_match": true,
+            "error": "Failed to compare symbolic expressions: I don't understand this\nP_{2}(x)=C_{2}\\left(x^{2}+\\lambda_{1} x+\\lambda_{0}\\right)$ , $P_{3}=\\frac{1}{2}\\left(5 x^{3}-3 x\\right)\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^"
+        },
+        "metadata": {
+            "solution": [
+                "Using $\\gamma=0.025 \\mathrm{Nm}^{-1}, R_{0}=1.0 \\mathrm{~cm}$ and $P_{a}=1.013 \\times 10^{5} \\mathrm{Nm}^{-2}$, the numerical value of the ratio is\n\n$$\n\\frac{\\rho_{i} T_{i}}{\\rho_{a} T_{a}}=1+\\frac{4 \\gamma}{R_{0} P_{a}}=1+0.0001\n$$\n\n(The effect of the surface tension is very small.)"
+            ],
+            "modality": "Text-only",
+            "difficulty": "Competition",
+            "is_multiple_answer": false,
+            "unit": null,
+            "answer_type": "Numerical",
+            "error": "5e-5",
+            "question_type": "Open-ended",
+            "subfield": "Thermodynamics",
+            "subject": "Physics",
+            "language": "English"
+        }
     }
 ]

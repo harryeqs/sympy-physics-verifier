@@ -34,6 +34,7 @@ if __name__ == "__main__":
 
     DATASET_ORIGIN = input("Enter the dataset origin (SciBench or OlympiadBench): ")
     RERUN_FAILED_SAMPLES = input("Do you want to rerun failed samples? (y/n): ")
+    STARTING_SAMPLE = str(input("Enter the starting sample number (skip if you wish to start from the first sample): "))
 
     if RERUN_FAILED_SAMPLES.lower().strip() == 'y' or not RERUN_FAILED_SAMPLES:
         RERUN_FAILED_SAMPLES = True
@@ -79,6 +80,10 @@ if __name__ == "__main__":
         print('Rerun failed samples. Reset all failed problems.')
         with open(failed_output_location, 'w') as f:
             f.write("")
+
+    if STARTING_SAMPLE:
+        starting_location = unsolved_problem_ids.index(STARTING_SAMPLE)
+        unsolved_problem_ids = unsolved_problem_ids[starting_location:]
     
     print(f"Problems to solve in this run: {unsolved_problem_ids}")
     print(f'No. of problem to solve: {len(unsolved_problem_ids)}')
@@ -89,7 +94,7 @@ if __name__ == "__main__":
         output_location=output_location,
         problem_ids=unsolved_problem_ids,
         save_right_solution=True,
-        max_attempts=3
+        max_attempts=2
     )
 
     pipeline.run()
