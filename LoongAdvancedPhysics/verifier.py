@@ -101,6 +101,7 @@ class UnitParser:
         # Clean the LaTeX string
         unit_str = unit_str.strip().lstrip("$").rstrip("$").lstrip("^")
         unit_str = re.sub(r'\\mathrm\{([^}]*)\}', r'{\\\1}', unit_str)
+        unit_str = re.sub(r'\\text\{(.*?)\}', r'\1', unit_str)
         unit_str = unit_str.replace('~', '')
         
         try:
