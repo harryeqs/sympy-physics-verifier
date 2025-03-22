@@ -322,10 +322,18 @@ class PhysicsVerifier:
 
             for var in evalf_vars:
                 # Replace `XXX.evalf()` with a conditional check
-                safe_evalf = f"{var} if isinstance({var}, float) else {var}.evalf()"
-                code = code.replace(f"{var}.evalf()", safe_evalf)
+                safe_evalf = f'{var} if isinstance({var}, float) else {var}.evalf()'
+                code = code.replace(f'{var}.evalf()', safe_evalf)
 
-            exec(code, namespace, namespace)
+            try:
+                # Compile the code first to catch syntax errors early.
+                compiled_code = compile(code, "<string>", "exec")
+            except SyntaxError as se:
+                logger.error(f"Syntax error during compilation: {se}")
+                self.error_msg = f"Syntax error: {se}"
+                return None
+            
+            exec(compiled_code, namespace, namespace)
         except Exception as e:
             logger.info(f"Failed to execute llm generated code. Error: {e}")
             self.error_msg = f"Failed to execute code: {e}"
@@ -443,8 +451,8 @@ class PhysicsVerifier:
             response_unit_expr = None
             answer_unit_expr = None
         else:
-            response_unit_expr = self.unit_parser.parse_unit(response.unit)
-            answer_unit_expr = self.unit_parser.parse_unit(answer.unit)
+            response_unit_expr = self.unit_parser.parse_unit(response.unit.strip())
+            answer_unit_expr = (self.unit_parser.parse_unit(answer.unit.strip()) if answer.unit else None)
 
         logger.info(f'Response unit: {response_unit_expr}')
         logger.info(f'Ground truth unit: {answer_unit_expr}')

@@ -89,6 +89,7 @@ if __name__ == "__main__":
         output_location=output_location,
         problem_ids=unsolved_problem_ids,
         save_right_solution=True,
+        max_attempts=3
     )
 
     pipeline.run()

@@ -14,42 +14,42 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 REASON_AGENT_PROMPT = """
-Task: Solve the given physics problem using symbolic computation with Sympy. The solution must be self-contained, executable, and free of syntax errors. Do not include any special characters (e.g., Greek letters) and do not print the result; only assign it to the variable `result`.
-
-Output Format (JSON):
-{
-    "code": "<complete Sympy code as a string>",
-    "unit": "<unit as a string or None>"
-}
+Task: Solve the given physics problem using symbolic computation with Sympy. The solution must be self-contained, executable, and free of syntax errors. Do not print the result; assign it to `result`.
 
 Instructions:
-1. Import Sympy:
+1. **Import Sympy**:
    import sympy as sp
 
-2. Define all symbols using sp.symbols(). For example:
-   x, y, t = sp.symbols('x, y, t')
+2. **Define variables implicitly**:
+   - Use Sympy’s default symbols (e.g., `sp.pi`, `sp.E` for constants) or let Sympy auto-generate symbols.
+   Example: 
+     # For equations like "x^2 + y = 0":
+     eq = sp.Eq(x**2 + y, 0)
 
-3. Define constants (e.g., g = 9.81 for gravity).
+3. **Define constants** (e.g., `g = 9.81` for gravity).
 
-4. Set up the problem:
-   - Use comments to explain each step.
-   - Formulate equations using sp.Eq() if needed.
-   - Ensure SI units or appropriate conversions.
+4. **Set up equations**:
+   - Use `sp.Eq()` for clarity.
+   Example:
+     # For "force = mass * acceleration":
+     F, m, a = sp.symbols('F m a')
+     eq = sp.Eq(F, m * a)
 
-5. Solve the problem:
-   - Use sp.solve() for symbolic solving.
-   - Use sp.N() for numerical evaluation if necessary.
+5. **Solve numerically if possible**:
+   - Use `sp.nsolve()` or `sp.N()` to avoid symbolic complexity.
+   Example:
+     result = sp.nsolve(eq, x, 2.0)  # Solve eq for x with initial guess 2.0
 
-6. Final Result:
-   - The last line must assign the final value to `result`:
-     result = <computed_value>
-   - Do not print or output the result.
+6. **Final Result**:
+   - Assign the computed value to `result`:
+     result = <value>
+   - No printing/output.
 
-7. Syntax Check:
-   - Ensure matching parentheses and proper string quotes.
-   - Verify the code can run without syntax errors.
+7. **Syntax Checks**:
+   - Ensure all parentheses/quotes are closed.
+   - Avoid manual symbol definition unless absolutely required.
 
-Return the final output as a JSON object with the keys "code" and "unit".
+Return the output as a JSON object with keys "code" and "unit".
 """
 
 class PhysicsCodeGenPipeline():

@@ -130,32 +130,6 @@
     "language": "English"
   },
   {
-    "id": 810,
-    "question": "A magnetic field is located within a region enclosed by an elliptical island with semi-minor axis of $a=100 \\mathrm{~m}$ and semi-major axis of $b=200 \\mathrm{~m}$. A car carrying charge $+Q=1.5 \\mathrm{C}$ drives on the boundary of the island at a constant speed of $v=5 \\mathrm{~m} / \\mathrm{s}$ and has mass $m=2000 \\mathrm{~kg}$. Any dimensions of the car can be assumed to be much smaller than the dimensions of the island. Ignore any contributions to the magnetic field from the moving car and assume that the car has enough traction to continue driving in its elliptical path.\n\nLet the center of the island be located at the point $(0,0)$ while the semi major and semi minor axes lie on the $x$ and $y$-axes, respectively.\n\nOn this island, the magnetic field varies as a function of $x$ and $y: B(x, y)=k_{b} e^{c_{b} x y} \\hat{z}$ (pointing in the upward direction, perpendicular to the island plane in the positive $z$-direction). The constant $c_{b}=10^{-4} \\mathrm{~m}^{-2}$ and the constant $k_{b}=2.1 \\mu \\mathrm{T}$\n\nAt what point on the island is the force from the magnetic field a maximum? Write the distance of this point from the $x$-axis in metres.",
-    "solution": [
-      "To find a minimum or maximum, the gradient of the constraint function $f(x, y)=\\frac{x^{2}}{b^{2}}+\\frac{y^{2}}{a^{2}}-1$ and the gradient of the $B$ field function should be scalar multiples of each other.\n\n$$\n\\begin{aligned}\n& \\frac{2 x}{b^{2}} \\mu=c_{b} y e^{x y} \\\\\n& \\frac{2 y}{a^{2}} \\mu=c_{b} x e^{x y}\n\\end{aligned}\n$$\n\nSolving the two equations, we get that a maximum point $(x, y)$ is of the form $\\left(\\frac{b}{\\sqrt{2}}, \\frac{a}{\\sqrt{2}}\\right)$ or $\\left(-\\frac{b}{\\sqrt{2}},-\\frac{a}{\\sqrt{2}}\\right)$. The distance from the $\\mathrm{y}$-axis is thus $\\frac{a}{\\sqrt{2}}=70.7 \\mathrm{~m}$."
-    ],
-    "final_answer": [
-      "70.7"
-    ],
-    "context": "- Proton mass, $m_{p}=1.67 \\cdot 10^{-27} \\mathrm{~kg}$\n- Neutron mass, $m_{n}=1.67 \\cdot 10^{-27} \\mathrm{~kg}$\n- Electron mass, $m_{e}=9.11 \\cdot 10^{-31} \\mathrm{~kg}$\n- Avogadro's constant, $N_{0}=6.02 \\cdot 10^{23} \\mathrm{~mol}^{-1}$\n- Universal gas constant, $R=8.31 \\mathrm{~J} /(\\mathrm{mol} \\cdot \\mathrm{K})$\n- Boltzmann's constant, $k_{B}=1.38 \\cdot 10^{-23} \\mathrm{~J} / \\mathrm{K}$\n- Electron charge magnitude, $e=1.60 \\cdot 10^{-19} \\mathrm{C}$\n- 1 electron volt, $1 \\mathrm{eV}=1.60 \\cdot 10^{-19} \\mathrm{~J}$\n- Speed of light, $c=3.00 \\cdot 10^{8} \\mathrm{~m} / \\mathrm{s}$\n- Universal Gravitational constant,\n\n$$\nG=6.67 \\cdot 10^{-11}\\left(\\mathrm{~N} \\cdot \\mathrm{m}^{2}\\right) / \\mathrm{kg}^{2}\n$$\n\n- Solar Mass\n\n$$\nM_{\\odot}=1.988 \\cdot 10^{30} \\mathrm{~kg}\n$$\n\n- Acceleration due to gravity, $g=9.8 \\mathrm{~m} / \\mathrm{s}^{2}$\n- 1 unified atomic mass unit,\n\n$$\n1 \\mathrm{u}=1.66 \\cdot 10^{-27} \\mathrm{~kg}=931 \\mathrm{MeV} / \\mathrm{c}^{2}\n$$\n\n- Planck's constant,\n\n$$\nh=6.63 \\cdot 10^{-34} \\mathrm{~J} \\cdot \\mathrm{s}=4.41 \\cdot 10^{-15} \\mathrm{eV} \\cdot \\mathrm{s}\n$$\n\n- Permittivity of free space,\n\n$$\n\\epsilon_{0}=8.85 \\cdot 10^{-12} \\mathrm{C}^{2} /\\left(\\mathrm{N} \\cdot \\mathrm{m}^{2}\\right)\n$$\n\n- Coulomb's law constant,\n\n$$\nk=\\frac{1}{4 \\pi \\epsilon_{0}}=8.99 \\cdot 10^{9}\\left(\\mathrm{~N} \\cdot \\mathrm{m}^{2}\\right) / \\mathrm{C}^{2}\n$$\n\n- Permeability of free space,\n\n$$\n\\mu_{0}=4 \\pi \\cdot 10^{-7} \\mathrm{~T} \\cdot \\mathrm{m} / \\mathrm{A}\n$$\n\n- Magnetic constant,\n\n$$\n\\frac{\\mu_{0}}{4 \\pi}=1 \\cdot 10^{-7}(\\mathrm{~T} \\cdot \\mathrm{m}) / \\mathrm{A}\n$$\n\n- 1 atmospheric pressure,\n\n$$\n1 \\mathrm{~atm}=1.01 \\cdot 10^{5} \\mathrm{~N} / \\mathrm{m}^{2}=1.01 \\cdot 10^{5} \\mathrm{~Pa}\n$$\n\n- Wien's displacement constant, $b=2.9$. $10^{-3} \\mathrm{~m} \\cdot \\mathrm{K}$\n- Stefan-Boltzmann constant,\n\n$$\n\\sigma=5.67 \\cdot 10^{-8} \\mathrm{~W} / \\mathrm{m}^{2} / \\mathrm{K}^{4}\n$$",
-    "image_1": null,
-    "image_2": null,
-    "image_3": null,
-    "image_4": null,
-    "image_5": null,
-    "modality": "Text-only",
-    "difficulty": "Competition",
-    "is_multiple_answer": false,
-    "unit": "m",
-    "answer_type": "Numerical",
-    "error": "1e-1",
-    "question_type": "Open-ended",
-    "subfield": "Electromagnetism",
-    "subject": "Physics",
-    "language": "English"
-  },
-  {
     "id": 811,
     "question": "Inside a laboratory at room temperature, a steel tuning fork in the shape of a $\\mathrm{U}$ is struck and begins to vibrate at $f=426 \\mathrm{~Hz}$. The tuning fork is then brought outside where it is $10^{\\circ} \\mathrm{C}$ hotter and the experiment is performed again. What is the change in frequency, $\\Delta f$ of the tuning fork? (A positive value will indicate an increase in frequency, and a negative value will indicate a decrease.)\n\nNote: The linear thermal coefficient of expansion for steel is $\\alpha=1.5 \\times 10^{-5} \\mathrm{~K}^{-1}$ and you may assume the expansion is isotropic and linear. When the steel bends, there is a restoring torque $\\tau=-\\kappa \\theta$ such that $\\kappa \\equiv G J$ where $G=77 \\mathrm{GPa}$ is constant and $J$ depends on the geometry and dimensions of the cross-sectional area.",
     "solution": [
