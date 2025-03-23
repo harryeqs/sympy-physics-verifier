@@ -1,4 +1,5 @@
 from pipeline import PhysicsCodeGenPipeline
+from cot_pipeline import CoT_PhysicsCodeGenPipeline
 from camel.models import DeepSeekModel, OpenAIModel
 from camel.types import ModelType
 from typing import Dict, Literal
@@ -15,6 +16,7 @@ parser.add_argument("--num", type=int, required=False, help="Number of samples t
 parser.add_argument("--sample", action='store_true', help='randomly sample from the datasets instead of choosing the first few. It will be ignored if you have specified problem_ids.')
 parser.add_argument("--problem_ids", nargs='+', default='', help='specify problem ids to solve. Pass in multiples using "--problem_ids id_1 id_2 ... "')
 parser.add_argument("--out_location", type=str, required=False, help="Output directory for the generated samples.")
+parser.add_argument("--cot_as_gt", action='store_true', help='Use answers generated from Chain of Thought to compare against.')
 
 args = parser.parse_args()
 
@@ -53,13 +55,23 @@ if __name__ == "__main__":
     else:
         problem_ids = [problem_id.strip() for problem_id in args.problem_ids]
 
-    pipeline = PhysicsCodeGenPipeline(
-        reason_model=reason_model,
-        dataset=dataset,
-        output_location = output_location,
-        num=args.num,
-        sample=args.sample,
-        problem_ids=problem_ids,
-    )
+    if args.cot_as_gt:
+        pipeline = CoT_PhysicsCodeGenPipeline(
+            reason_model=reason_model,
+            dataset=dataset,
+            output_location = output_location,
+            num=args.num,
+            sample=args.sample,
+            problem_ids=problem_ids,
+        )
+    else:
+        pipeline = PhysicsCodeGenPipeline(
+            reason_model=reason_model,
+            dataset=dataset,
+            output_location = output_location,
+            num=args.num,
+            sample=args.sample,
+            problem_ids=problem_ids,
+        )
 
     pipeline.run()
