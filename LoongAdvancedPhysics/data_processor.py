@@ -60,6 +60,8 @@ class DataProcessor():
 
         dataset = []
         for file in files:
+            if not os.path.exists(os.path.join(dataset_path, file)):
+                raise FileNotFoundError(f"Dataset file not found: {os.path.join(dataset_path, file)}")
             with open(os.path.join(dataset_path, file)) as f:
                 d = json.load(f)
                 f.close()

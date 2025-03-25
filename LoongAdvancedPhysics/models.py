@@ -6,6 +6,7 @@ class ResponseFormat(BaseModel):
    unit: Union[str, None] = None
 
 class AnswerFormat(BaseModel):
+   cot: Union[str, None] = None
    gt_answer: str
    unit: Union[str, None] = None
 
@@ -20,5 +21,4 @@ class OutputFormat(BaseModel):
    response: ResponseFormat
    answer: AnswerFormat
    verification_result: Union[VerificationResult, None]
-   metadata: Dict
-   
+   metadata: Dict            
