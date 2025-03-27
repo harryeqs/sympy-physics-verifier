@@ -21,4 +21,9 @@ class OutputFormat(BaseModel):
    response: ResponseFormat
    answer: AnswerFormat
    verification_result: Union[VerificationResult, None]
-   metadata: Dict            
+   metadata: Dict
+
+class CodeVerificationResult(BaseModel):
+   sample_id: str
+   is_valid: bool
+   issue: str         
