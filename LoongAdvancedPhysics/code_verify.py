@@ -24,72 +24,76 @@ Follow these steps:
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+logger.addHandler(logging.StreamHandler())
+logger.setLevel(logging.INFO)
 
-# rRad seed datasets
-current_path = os.path.dirname(os.path.abspath(__file__))
-output_location = os.path.join(current_path, 'PhysicsDatasets', 'seed_dataset', 'code_verification.json')
-dataset_path = os.path.join(current_path, "PhysicsDatasets/seed_dataset/")
-files = ['OlympiadBench.json', 'SciBench.json']
-dataset=[]
-for file in files:
-   if not os.path.exists(os.path.join(dataset_path, file)):
-         raise FileNotFoundError(f"Dataset file not found: {os.path.join(dataset_path, file)}")
-   with open(os.path.join(dataset_path, file), 'r', encoding='UTF-8') as f:
-         d = json.load(f)
-         f.close()
-   dataset += d
+if __name__ == "__main__":
+   # rRad seed datasets
+   current_path = os.path.dirname(os.path.abspath(__file__))
+   output_location = os.path.join(current_path, 'PhysicsDatasets', 'seed_dataset', 'code_verification.json')
+   dataset_path = os.path.join(current_path, "PhysicsDatasets/seed_dataset/")
+   files = ['OlympiadBench.json', 'SciBench.json']
+   dataset=[]
+   for file in files:
+      if not os.path.exists(os.path.join(dataset_path, file)):
+            raise FileNotFoundError(f"Dataset file not found: {os.path.join(dataset_path, file)}")
+      with open(os.path.join(dataset_path, file), 'r', encoding='UTF-8') as f:
+            d = json.load(f)
+            f.close()
+      dataset += d
 
-# Define LLM
-reason_model = OpenAIModel(
-   model_type=ModelType.O3_MINI,
-   model_config_dict={
-      "temperature": 0.2,
+   # Define LLM
+   reason_model = OpenAIModel(
+      model_type=ModelType.GPT_4O_MINI,
+      model_config_dict={
+         "temperature": 0.2,
+      }
+   )
+   reason_agent = ChatAgent(
+      model=reason_model,
+      system_message=CODE_VERIFICATION_PROMPT
+   )
+
+   verification_summary = {
+      'total_samples': len(dataset),
+      'successful': 0,
+      'failed': 0
    }
-)
-reason_agent = ChatAgent(
-   model=reason_model,
-   system_message=CODE_VERIFICATION_PROMPT
-)
+   sample_count=0
+   failed_samples_ids=[]
 
-verification_summary = {
-   'total_samples': len(dataset),
-   'successful': 0,
-   'failed': 0
-}
-sample_count=0
-failed_samples_ids=[]
+   # Start Verification
+   for sample in dataset:
+      sample_count += 1
+      sample_id = str(sample['sample_id']).strip()
+      code = sample['response']
+      code = code['code']
 
-# Start Verification
-for sample in dataset:
-   sample_count += 1
-   sample_id = str(sample['sample_id']).strip()
-   code = sample['response']
-   code = code['code']
+      reason_agent.reset()
+      prompt_message = code
+      logger.info(f'==========Verifying Code for Question {sample_id} ({sample_count}/{len(dataset)})==========')
+      try:
+         raw_response = reason_agent.step(prompt_message, response_format=CodeVerificationResult)
+         structured_response = CodeVerificationResult.model_validate(raw_response.msgs[0].parsed)
+      except Exception as e:
+         logger.info(f'Failed to verify Question {sample_id} with error {e}')
 
-   reason_agent.reset()
-   prompt_message = code
-   logger.info(f'==========Verifying Code for Question {sample_id} ({sample_count}/{len(dataset)})==========')
-   try:
-      raw_response = reason_agent.step(prompt_message, response_format=CodeVerificationResult)
-      structured_response = CodeVerificationResult.model_validate(raw_response.msgs[0].parsed)
-   except Exception as e:
-      logger.info(f'Failed to verify Question {sample_id} with error {e}')
+      # Manage Output
+      output = CodeVerificationResult(
+            sample_id=sample_id,
+            is_valid=structured_response.is_valid,
+            issue=structured_response.issue
+         )
+      if output.is_valid:
+         verification_summary['successful'] += 1
+      else:
+         verification_summary['failed'] += 1
+         failed_samples_ids.append(sample_id)
 
-   # Manage Output
-   output = CodeVerificationResult(
-         sample_id=sample_id,
-         is_valid=structured_response.is_valid,
-         issue=structured_response.issue
-      )
-   if output.is_valid:
-      verification_summary['successful'] += 1
-   else:
-      verification_summary['failed'] += 1
-      failed_samples_ids.append(sample_id)
-
-logger.info(f"==========Seed Dataset Generation Summary==========")
-logger.info(f"Total Samples: {verification_summary['total_samples']}")
-logger.info(f"Successful Generations: {verification_summary['successful_generations']}")
-logger.info(f"Failed Generations: {verification_summary['failed_generations']}")
-logger.info(f"Failed Sample IDs: {failed_samples_ids}")
-logger.info(f"======================================")
+   logger.info(f"==========Seed Dataset Generation Summary==========")
+   logger.info(f"Total Samples: {verification_summary['total_samples']}")
+   logger.info(f"Successful Generations: {verification_summary['successful']}")
+   logger.info(f"Failed Generations: {verification_summary['failed']}")
+   logger.info(f"Failed Sample IDs: {failed_samples_ids}")
+   logger.info(f"======================================")
+   
