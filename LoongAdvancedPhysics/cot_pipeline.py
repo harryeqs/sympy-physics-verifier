@@ -19,9 +19,9 @@ Task: Write a self-contained Sympy code snippet to solve a physics problem. The 
 Requirements:
 - Import Sympy as: `import sympy as sp`
 - Declare symbols one by one using sp.symbols (e.g., `x= sp.symbols('x', real=True)`) with properly closed string literals and correct keyword syntax.
-- Construct equations using sp.Eq (e.g., `eq = sp.Eq(left, right)`).
 - Solve the equation (using sp.solve for symbolic or sp.nsolve for numerical solutions).
 - Assign the final answer to the variable `result` (do not use print statements).
+- The result is prefered to be a sympy equation (e.g., `result = sp.Eq(A, B)`).
 - Output a JSON object with keys "code" (the complete code as a string) and "unit" (the physical unit as a string).
 
 Let the model decide on the details while ensuring the code is correct.
@@ -33,7 +33,7 @@ Task: Solve the given physics problem by reasoning step-by-step using Chain of T
 Output Format (JSON):
 {
     "cot": "<step-by-step reasoning as a string>",
-    "gt_answer": "<final answer derived from reasoning as a string>",
+    "gt_answer": "<final answer as a string; use LaTeX (e.g., \\\\alpha \\\\Delta t) for symbolic expressions, or a numerical value if applicable; equation form is prefered>",
     "unit": "<unit as a string or None>"
 }
 
@@ -41,26 +41,27 @@ Instructions:
 1. Chain of Thought Reasoning:
    - Break down the problem into clear, logical steps.
    - Identify known values, variables, and relevant physics formulas.
-   - Perform calculations step-by-step, showing unit consistency.
+   - Use LaTeX for symbolic computations throughout the process.
    - Derive the final answer and specify its unit (if applicable).
-   - The final answer should not include any special characters (e.g., Greek letters).
-   - The final answer should be a single number but not multiple numbers (e.g., "0.1" instead of "0.1, 0,2").
 
 2. Unit Handling:
-   - Specify the unit of the `reasoning_answer` in the `unit` field (e.g., "m/s", "kg*m/s^2", or None for dimensionless).
    - Maintain unit consistency throughout the reasoning.
+   - Specify the unit of the `reasoning_answer` in the `unit` field (e.g., "m/s", "kg*m/s^2", or None for dimensionless).
    - For composite units, explicitly use "*" between components. Use "^(-1)", "^(-2)" for negative exponents. e.g. "J*K^(-1)*mol^(-1)" instead of "J K^-1 mol^-1".
 
 Example:
-Problem: "Calculate the velocity of an object falling 10 meters under gravity (g = 9.81 m/s²)."
-Output:
+Problem: "A one horsepower propeller powered by a battery and is used to propel a small boat initially at rest. You have two options:\n\n1. Put the propeller on top of the boat and push on the air with an initial force $F_{1}$\n2. Put the propeller underwater and push on the water with an initial force $F_{2}$.\n\nThe density of water is $997 \\mathrm{~kg} / \\mathrm{m}^{3}$ while the density of air is $1.23 \\mathrm{~kg} / \\mathrm{m}^{3}$. Assume that the force is both cases is dependent upon only the density of the medium, the surface area of the propeller, and the power delivered by the battery. What is $F_{2} / F_{1}$ ? You may assume (unrealistically) the efficiency of the propeller does not change. Round to the nearest tenths."
 {
-    "cot": "Step 1: Identify known values: h = 10 m, g = 9.81 m/s².\nStep 2: Use the kinematic equation v² = 2gh.\nStep 3: Substitute values: v² = 2 * 9.81 * 10 = 196.2 m²/s².\nStep 4: Take the square root: v = √196.2 ≈ 14.007 m/s.",
-    "gt_answer": "14.007",
-    "unit": "m/s"
+    "cot": "The force exerted on the fluid is roughly proportional to the change in momentum with respect to time:\n$$\nF=\\frac{d p}{d t}=v \\frac{d m}{d t}=v \\frac{d}{d t}(\\rho A x)=\\rho A v^{2}\n$$\n\nIt is kept at a constant power $P=F v$, which can allow us to solve for the speed $v$ of the propellers.\n\n$$\nP=\\rho A v^{3} \\Longrightarrow v=\\left(\\frac{P}{\\rho A}\\right)^{1 / 3}\n$$\n\nso the force is given by:\n\n$$\nF=\\rho A\\left(\\frac{P}{\\rho A}\\right)^{2 / 3} \\Longrightarrow F \\propto \\rho^{1 / 3}\n$$\n\nTherefore:\n\n$$\nF_{2} / F_{1}=(997 / 1.23)^{1 / 3}=9.26 \\text { times }\n$$",
+    "cot_answer": "9.26",
+    "cot_unit": "J"
 }
-
-Return the final output as a JSON object with the keys "cot", "cot_answer", and "cot_unit".
+For a problem yielding a symbolic frequency expression, your response might look like:
+{
+    "cot": "Step 1: Start with the equation. Step 2: Substitute a = \\frac{i \\hbar}{2m}. Step 3: Derive \\omega = \\frac{\\hbar k^2}{2m}.",
+    "cot_answer": "\\omega = \\frac{\\hbar k^2}{2m}",
+    "cot_unit": "rad/s"
+}
 """
 
 class CoT_PhysicsCodeGenPipeline():
@@ -76,7 +77,7 @@ class CoT_PhysicsCodeGenPipeline():
          sample: bool = False,
          problem_ids: Union[List[int], None] = None,
          max_attempts: int = 3,
-         save_right_solution: bool = False,
+         save_right_solution: bool = True,
          ):
       """
       Initialize the pipeline with the reason model and the dataset.
@@ -130,16 +131,23 @@ class CoT_PhysicsCodeGenPipeline():
       self.failed_samples_ids = []
       self.max_attempts = max_attempts
    
-   def generate_cot(self, question: str) -> Union[AnswerFormat, None]:
+   def generate_cot(self, question: str, double: bool=False) -> Union[AnswerFormat, None]:
       """
       Generate CoT response in JSON format for the given question.
 
       Args:
          question: The physics problem to solve.
+         double: Double-check the CoT.
       """
       try:
          raw_response = self.cot_agent.step(question, response_format=AnswerFormat)
          structured_response = AnswerFormat.model_validate(raw_response.msgs[0].parsed)
+         print(structured_response.gt_answer)
+         if double == True:
+            prompt_message = question + (f"\n\nThe following solution may be wrong, clarify the errors if applicable and give the right solution.\n{structured_response.cot}")
+            raw_response = self.reason_agent.step(prompt_message, response_format=AnswerFormat)
+            structured_response = AnswerFormat.model_validate(raw_response.msgs[0].parsed)
+            print(structured_response.gt_answer)
          return structured_response
       except Exception as e:
          logger.error(f"Failed to parse CoT response: {e}")
