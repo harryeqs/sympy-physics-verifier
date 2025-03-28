@@ -1,8 +1,5 @@
 import json
-import random
-import time
 import os
-from typing import List, Dict, Union, Literal
 from models import CodeVerificationResult
 from camel.agents import ChatAgent
 from camel.models import OpenAIModel
@@ -21,26 +18,18 @@ Follow these steps:
 2. Determine Validity: Decide if the code is valid. Output a JSON object with keys "is_valid" (A boolean, True if the code is valid, False if it is not) and "issue" (A string describing the specific problem if is_valid is false, or null if is_valid is true).
 """
 
-# Set up logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
-logger.addHandler(logging.StreamHandler())
-logger.setLevel(logging.INFO)
-
 if __name__ == "__main__":
-   # rRad seed datasets
-   current_path = os.path.dirname(os.path.abspath(__file__))
-   output_location = os.path.join(current_path, 'PhysicsDatasets', 'seed_dataset', 'code_verification.json')
-   dataset_path = os.path.join(current_path, "PhysicsDatasets/seed_dataset/")
-   files = ['OlympiadBench.json', 'SciBench.json']
-   dataset=[]
-   for file in files:
-      if not os.path.exists(os.path.join(dataset_path, file)):
-            raise FileNotFoundError(f"Dataset file not found: {os.path.join(dataset_path, file)}")
-      with open(os.path.join(dataset_path, file), 'r', encoding='UTF-8') as f:
-            d = json.load(f)
-            f.close()
-      dataset += d
+   # Set up logging
+   logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+   logger = logging.getLogger(__name__)
+   logger.addHandler(logging.StreamHandler())
+   logger.setLevel(logging.INFO)
+   
+   file = 'reformatted_OlympianBench.json' # Change this to the path of your dataset file
+   output_location = 'verified_OlympiadBench.json'
+   with open(file, 'r', encoding='utf-8') as f:
+      seed_dataset = json.load(f)
+   logger.info(f"Loaded {len(seed_dataset)} solved samples from {file}")
 
    # Define LLM
    reason_model = OpenAIModel(
@@ -55,45 +44,45 @@ if __name__ == "__main__":
    )
 
    verification_summary = {
-      'total_samples': len(dataset),
+      'total_samples': len(seed_dataset),
       'successful': 0,
       'failed': 0
    }
+
    sample_count=0
    failed_samples_ids=[]
+   outputs = []
 
    # Start Verification
-   for sample in dataset:
+   for i, sample in enumerate(seed_dataset):
       sample_count += 1
-      sample_id = str(sample['sample_id']).strip()
-      code = sample['response']
-      code = code['code']
 
       reason_agent.reset()
-      prompt_message = code
-      logger.info(f'==========Verifying Code for Question {sample_id} ({sample_count}/{len(dataset)})==========')
+      logger.info(f'Verifying code for Question {i} of {file}')
+      prompt_message = f"The question is: {sample['question']}. The code is: {sample['rationale']}"
       try:
          raw_response = reason_agent.step(prompt_message, response_format=CodeVerificationResult)
          structured_response = CodeVerificationResult.model_validate(raw_response.msgs[0].parsed)
       except Exception as e:
-         logger.info(f'Failed to verify Question {sample_id} with error {e}')
+         logger.info(f'Failed to verify Question {i} of {file} with error {e}')
 
       # Manage Output
       output = CodeVerificationResult(
-            sample_id=sample_id,
             is_valid=structured_response.is_valid,
             issue=structured_response.issue
          )
+      
       if output.is_valid:
          verification_summary['successful'] += 1
+         outputs.append(output)
       else:
          verification_summary['failed'] += 1
-         failed_samples_ids.append(sample_id)
+         failed_samples_ids.append(i)
 
    logger.info(f"==========Seed Dataset Generation Summary==========")
    logger.info(f"Total Samples: {verification_summary['total_samples']}")
-   logger.info(f"Successful Generations: {verification_summary['successful']}")
+   logger.info(f"Successful Code Generations: {verification_summary['successful']}")
    logger.info(f"Failed Generations: {verification_summary['failed']}")
-   logger.info(f"Failed Sample IDs: {failed_samples_ids}")
+   logger.info(f"Failed Code Sample IDs: {failed_samples_ids}")
    logger.info(f"======================================")
    

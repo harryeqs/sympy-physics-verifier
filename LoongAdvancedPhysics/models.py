@@ -24,6 +24,5 @@ class OutputFormat(BaseModel):
    metadata: Dict
 
 class CodeVerificationResult(BaseModel):
-   sample_id: str
    is_valid: bool
    issue: str         
