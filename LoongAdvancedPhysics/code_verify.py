@@ -4,6 +4,7 @@ from models import CodeVerificationResult
 from camel.agents import ChatAgent
 from camel.models import OpenAIModel
 from camel.types import ModelType
+from camel.datasets import DataPoint
 
 import logging
 
@@ -26,7 +27,8 @@ if __name__ == "__main__":
    logger.setLevel(logging.INFO)
    
    file = 'reformatted_OlympianBench.json' # Change this to the path of your dataset file
-   output_location = 'verified_OlympiadBench.json'
+   valid_location = 'verified_OlympiadBench.json'
+   invalid_location = 'invalid_OlympiaBench.json'
    with open(file, 'r', encoding='utf-8') as f:
       seed_dataset = json.load(f)
    logger.info(f"Loaded {len(seed_dataset)} solved samples from {file}")
@@ -51,7 +53,8 @@ if __name__ == "__main__":
 
    sample_count=0
    failed_samples_ids=[]
-   outputs = []
+   valid_outputs = []
+   invalid_outputs = []
 
    # Start Verification
    for i, sample in enumerate(seed_dataset):
@@ -62,25 +65,25 @@ if __name__ == "__main__":
       prompt_message = f"The question is: {sample['question']}. The code is: {sample['rationale']}"
       try:
          raw_response = reason_agent.step(prompt_message, response_format=CodeVerificationResult)
-         structured_response = CodeVerificationResult.model_validate(raw_response.msgs[0].parsed)
+         verification_result = CodeVerificationResult.model_validate(raw_response.msgs[0].parsed)
       except Exception as e:
          logger.info(f'Failed to verify Question {i} of {file} with error {e}')
-
-      # Manage Output
-      output = CodeVerificationResult(
-            is_valid=structured_response.is_valid,
-            issue=structured_response.issue
-         )
       
-      if output.is_valid:
+      if verification_result.is_valid:
          verification_summary['successful'] += 1
-         outputs.append(output.model_dump())
+         valid_outputs.append(sample)
       else:
          verification_summary['failed'] += 1
          failed_samples_ids.append(i)
+         sample['issue'] = verification_result.issue
+         invalid_outputs.append(sample)
 
-   with open(output_location,'w') as f:
-      json.dump(outputs, f, indent=4)
+
+   with open(valid_location,'w') as f:
+      json.dump(valid_outputs, f, indent=4)
+
+   with open(invalid_location, 'w') as f:
+      json.dump(invalid_outputs, f, indent=4)
 
    logger.info(f"==========Seed Dataset Generation Summary==========")
    logger.info(f"Total Samples: {verification_summary['total_samples']}")
