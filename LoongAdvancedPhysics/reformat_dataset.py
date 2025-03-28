@@ -28,7 +28,7 @@ def reformat_dataset(code_file, raw_file, output_file):
             # If it's not a number, skip this item
             pass
         reformatted_item = DataPoint(
-            question=raw_data_dict[code_item['sample_id']]['question'],
+            question=f'{raw_data_dict[code_item['sample_id']].get('context', '')}{raw_data_dict[code_item['sample_id']]['question']}',
             rationale=code_item['response']['code'],
             final_answer=f"{value} {code_item['response']['unit']}",    
             metadata=code_item['metadata']
