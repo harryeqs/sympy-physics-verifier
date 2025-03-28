@@ -74,10 +74,13 @@ if __name__ == "__main__":
       
       if output.is_valid:
          verification_summary['successful'] += 1
-         outputs.append(output)
+         outputs.append(output.model_dump())
       else:
          verification_summary['failed'] += 1
          failed_samples_ids.append(i)
+
+   with open(output_location,'w') as f:
+      json.dump(outputs, f, indent=4)
 
    logger.info(f"==========Seed Dataset Generation Summary==========")
    logger.info(f"Total Samples: {verification_summary['total_samples']}")
