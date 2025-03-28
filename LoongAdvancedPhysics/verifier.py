@@ -485,11 +485,27 @@ class PhysicsVerifier:
                     sp.Symbol('e'): sp.E
                 })
                 logger.info(f'Ground truth expression: {gt_expr}')
-
-                if isinstance(gt_expr, (int, float, sp.Number)):
-                    output = output.evalf()
-
-                result_match = sp.simplify(output - gt_expr) == 0
+                # Make sure gt_symbols and output_symbols are using the same sympy symbols.
+                output_symbols = output.free_symbols
+                gt_symbols = gt_expr.free_symbols
+                if output_symbols != gt_symbols:
+                    symbol_mapping = {}
+                    for gt_sym in gt_symbols:
+                        gt_name = str(gt_sym)
+                        for out_sym in output_symbols:
+                            if str(out_sym) == gt_name:
+                                symbol_mapping[gt_sym] = out_sym
+                                break
+                    gt_expr = gt_expr.subs(symbol_mapping)
+                # Handle Equalities
+                if isinstance (output, sp.Eq) and isinstance(gt_expr, sp.Eq):
+                    diff = sp.simplify(output.rhs - gt_expr.rhs)
+                elif not isinstance(output, sp.Eq) and not isinstance(gt_expr, sp.Eq):
+                    diff = sp.simplify(output - gt_expr)
+                else:
+                    raise ValueError("Cannot compare an equation with a non-equation directly")
+                logger.info(f'Difference after simplification: {diff}')
+                result_match = diff == 0
             except Exception as e:
                 logger.error(f"Failed to compare symbolic expressions: {e}")
                 self.error_msg = f"Failed to compare symbolic expressions: {e}"
