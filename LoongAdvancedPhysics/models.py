@@ -25,4 +25,8 @@ class OutputFormat(BaseModel):
 
 class CodeVerificationResult(BaseModel):
    is_valid: bool
-   issue: str         
+   issue: str 
+
+class LLMVerificationResult(BaseModel):
+   result_match: bool
+   unit_match: bool

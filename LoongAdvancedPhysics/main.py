@@ -17,6 +17,7 @@ parser.add_argument("--sample", action='store_true', help='randomly sample from 
 parser.add_argument("--problem_ids", nargs='+', default='', help='specify problem ids to solve. Pass in multiples using "--problem_ids id_1 id_2 ... "')
 parser.add_argument("--out_location", type=str, required=False, help="Output directory for the generated samples.")
 parser.add_argument("--cot_as_gt", action='store_true', help='Use answers generated from Chain of Thought to compare against.')
+parser.add_argument("--llm_verifier", action='store_true', help='Use LLM to verify whether the output matches the ground truth')
 
 args = parser.parse_args()
 
@@ -31,7 +32,7 @@ if __name__ == "__main__":
     dataset = physics_data_processor.preprocess_dataset()
 
     reason_model = OpenAIModel(
-        model_type=ModelType.GPT_4O_MINI,
+        model_type=ModelType.O3_MINI,
         model_config_dict={
             "temperature": 0.2,
         }
@@ -63,6 +64,7 @@ if __name__ == "__main__":
             num=args.num,
             sample=args.sample,
             problem_ids=problem_ids,
+            llm_verifier=args.llm_verifier
         )
     else:
         pipeline = PhysicsCodeGenPipeline(
@@ -72,6 +74,7 @@ if __name__ == "__main__":
             num=args.num,
             sample=args.sample,
             problem_ids=problem_ids,
+            llm_verifier=args.llm_verifier
         )
 
     pipeline.run()

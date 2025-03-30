@@ -479,7 +479,7 @@ class PhysicsVerifier:
             # Compare symbolic expressions
             try:
                 logger.info(f'Response expression: {output}')
-                gt_expr = parse_latex(answer.gt_answer.lstrip("$").rstrip("$"))
+                gt_expr = parse_latex(cleaned_answer.lstrip("$").rstrip("$"))
                 gt_expr = gt_expr.subs({
                     sp.Symbol('pi'): sp.pi,
                     sp.Symbol('e'): sp.E

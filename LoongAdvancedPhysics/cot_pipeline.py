@@ -6,6 +6,7 @@ from camel.agents import ChatAgent
 from camel.models import BaseModelBackend
 from typing import List, Dict, Union, Literal
 from verifier import PhysicsVerifier, logger
+from llm_verifier import LLMVerifier
 from models import ResponseFormat, AnswerFormat, VerificationResult, OutputFormat
 
 import logging
@@ -19,9 +20,9 @@ Task: Write a self-contained Sympy code snippet to solve a physics problem. The 
 Requirements:
 - Import Sympy as: `import sympy as sp`
 - Declare symbols one by one using sp.symbols (e.g., `x= sp.symbols('x', real=True)`) with properly closed string literals and correct keyword syntax.
+- Construct equations using sp.Eq (e.g., `eq = sp.Eq(left, right)`).
 - Solve the equation (using sp.solve for symbolic or sp.nsolve for numerical solutions).
 - Assign the final answer to the variable `result` (do not use print statements).
-- The result is prefered to be a sympy equation (e.g., `result = sp.Eq(A, B)`).
 - Output a JSON object with keys "code" (the complete code as a string) and "unit" (the physical unit as a string).
 
 Let the model decide on the details while ensuring the code is correct.
@@ -33,7 +34,7 @@ Task: Solve the given physics problem by reasoning step-by-step using Chain of T
 Output Format (JSON):
 {
     "cot": "<step-by-step reasoning as a string>",
-    "gt_answer": "<final answer as a string; use LaTeX (e.g., \\\\alpha \\\\Delta t) for symbolic expressions, or a numerical value if applicable; equation form is prefered>",
+    "gt_answer": "<final answer as a string; should be parsed by sympy or latex; the unit is not includes>",
     "unit": "<unit as a string or None>"
 }
 
@@ -78,6 +79,7 @@ class CoT_PhysicsCodeGenPipeline():
          problem_ids: Union[List[int], None] = None,
          max_attempts: int = 3,
          save_right_solution: bool = True,
+         llm_verifier: bool = False
          ):
       """
       Initialize the pipeline with the reason model and the dataset.
@@ -118,7 +120,10 @@ class CoT_PhysicsCodeGenPipeline():
          system_message=COT_PROMPT
       )
       
-      self.verifier = PhysicsVerifier()
+      if llm_verifier == True:
+         self.verifier = LLMVerifier(reason_model=reason_model)
+      else:
+         self.verifier = PhysicsVerifier()
       self.output_location = output_location
       self.save_right_solution = save_right_solution
 
@@ -142,9 +147,8 @@ class CoT_PhysicsCodeGenPipeline():
       try:
          raw_response = self.cot_agent.step(question, response_format=AnswerFormat)
          structured_response = AnswerFormat.model_validate(raw_response.msgs[0].parsed)
-         print(structured_response.gt_answer)
          if double == True:
-            prompt_message = question + (f"\n\nThe following solution may be wrong, clarify the errors if applicable and give the right solution.\n{structured_response.cot}")
+            prompt_message = question + (f"\n\nCheck the validity of this solution and give the right solution based on it.\n{structured_response.cot}")
             raw_response = self.reason_agent.step(prompt_message, response_format=AnswerFormat)
             structured_response = AnswerFormat.model_validate(raw_response.msgs[0].parsed)
             print(structured_response.gt_answer)
@@ -159,7 +163,7 @@ class CoT_PhysicsCodeGenPipeline():
 
       Args:
           response (ResponseFormat): The response format containing the code and the units.
-          answer (AnswerFormat): The CoT generated answer to compare against.
+          gt_answer (AnswerFormat): The CoT generated answer to compare against.
       """
       return self.verifier.verify(response, answer)
       
