@@ -8,15 +8,15 @@ from camel.datasets import DataPoint
 
 import logging
 
-# 1. Understand the Problem: Review the physics problem statement carefully. Identify the key physical principles, equations, and variables involved.
 CODE_VERIFICATION_PROMPT="""
 Task: Verify whether the given code correctly solves a physics problem. Your goal is to ensure the code authentically calculates the solution based on the problem’s requirements, without cheating (e.g., hardcoding the answer, directly assigning the solution to a variable based on a provided answer, or skipping essential steps). 
 Follow these steps:
-1. Analyze the Code: Examine the provided code line by line. Check if it:
+1. Understand the Problem: Review the physics problem statement carefully. Identify the key physical principles, equations, and variables involved.
+2. Analyze the Code: Examine the provided code line by line. Check if it:
     Uses appropriate physics formulas or methods to compute the solution.
     Avoids directly setting the answer variable to a predefined value or expression (e.g., answer = 42) unless explicitly justified by the problem.
     Implements the necessary calculations rather than relying on external data or shortcuts unrelated to the problem’s context.
-2. Determine Validity: Decide if the code is valid. Output a JSON object with keys "is_valid" (A boolean, True if the code is valid, False if it is not) and "issue" (A string describing the specific problem if is_valid is false, or null if is_valid is true).
+3. Determine Validity: Decide if the code is valid. Output a JSON object with keys "is_valid" (A boolean, True if the code is valid, False if it is not) and "issue" (A string describing the specific problem if is_valid is false, or null if is_valid is true).
 """
 
 if __name__ == "__main__":
