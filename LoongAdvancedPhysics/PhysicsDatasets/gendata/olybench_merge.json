@@ -1,0 +1,942 @@
+[
+    {
+        "id": "machine_task_1",
+        "instruction": "A metal rod of length \\( L \\) and cross-sectional area \\( A \\) is heated at one end to a temperature \\( T_h \\) and the other end is maintained at temperature \\( T_c \\); calculate the steady-state heat transfer rate \\( Q \\) through the rod in terms of its thermal conductivity \\( k \\), the temperature difference \\( \\Delta T = T_h - T_c \\), and the dimensions \\( L \\) and \\( A \\)."
+    },
+    {
+        "id": "machine_task_2",
+        "instruction": "A cylindrical wire of length \\( L \\) and diameter \\( d \\) is subjected to a uniform tensile stress, leading to an elongation \\( \\Delta L \\); derive an expression for the strain energy stored in the wire in terms of its Young's modulus \\( Y \\), the applied stress \\( \\sigma \\), and the dimensions of the wire."
+    },
+    {
+        "id": "machine_task_3",
+        "instruction": "Derive an expression for the drag force experienced by a spherical object of radius \\( r \\) moving with velocity \\( v \\) through a viscous fluid of dynamic viscosity \\( \\mu \\), in terms of the Reynolds number \\( Re \\)."
+    },
+    {
+        "id": "machine_task_4",
+        "instruction": "A mass \\( m \\) is attached to a spring with spring constant \\( k \\) and is pulled to stretch the spring by a distance \\( x \\) before being released; derive an expression for the maximum velocity of the mass as it passes through the equilibrium position."
+    },
+    {
+        "id": "machine_task_5",
+        "instruction": "A charged particle with mass \\( m \\) moves in a uniform magnetic field \\( \\vec{B} \\) with a velocity \\( \\vec{v} \\), and derive the expression for the radius of its circular path in terms of its charge \\( q \\), the magnetic field strength \\( B \\), and its speed \\( v \\)."
+    },
+    {
+        "id": "machine_task_6",
+        "instruction": "A simple harmonic oscillator of mass \\( m \\) and spring constant \\( k \\) is subjected to a damping force proportional to its velocity; derive the equation for the damped oscillation period \\( T_d \\) in terms of \\( m \\), \\( k \\), and the damping coefficient \\( b \\)."
+    },
+    {
+        "id": "machine_task_7",
+        "instruction": "A mass \\( m \\) is attached to a spring with spring constant \\( k \\) and is subjected to a driving force \\( F_0 \\cos(\\omega t) \\); derive the expression for the amplitude of the resulting oscillation in terms of \\( m \\), \\( k \\), \\( F_0 \\), and \\( \\omega \\)."
+    },
+    {
+        "id": "machine_task_8",
+        "instruction": "A thin rod of length \\( L \\) and mass \\( m \\) is pivoted at one end and released from rest in a vertical position; derive the expression for the angular velocity of the rod just before it strikes the ground."
+    },
+    {
+        "id": "machine_task_9",
+        "instruction": "A satellite in a geostationary orbit is experiencing a small perturbation in its trajectory due to gravitational forces from a nearby celestial body; calculate the additional delta-v needed to maintain its orbit back to the geostationary position, given the gravitational acceleration at the orbit and the satellite's mass."
+    },
+    {
+        "id": "machine_task_10",
+        "instruction": "Determine the resonant frequency of a driven damped harmonic oscillator described by mass \\( m \\), spring constant \\( k \\), and damping coefficient \\( \\beta \\)."
+    },
+    {
+        "id": "machine_task_11",
+        "instruction": "A mass \\( m \\) is attached to a spring with spring constant \\( k \\) and undergoes simple harmonic motion; derive the expression for the maximum velocity of the mass as a function of the amplitude \\( A \\)."
+    },
+    {
+        "id": "machine_task_12",
+        "instruction": "A block of mass \\( m \\) slides down a frictionless incline of angle \\( \\theta \\); derive the expression for the acceleration of the block in terms of \\( g \\) and \\( \\theta \\)."
+    },
+    {
+        "id": "machine_task_13",
+        "instruction": "A particle of mass \\( m \\) is attached to a spring with spring constant \\( k \\) and is released from rest at a distance \\( x_0 \\) from the equilibrium position; derive the expression for the maximum speed of the particle during its oscillation in terms of \\( x_0 \\), \\( k \\), and \\( m \\)."
+    },
+    {
+        "id": "machine_task_14",
+        "instruction": "Consider a circuit consisting of a resistor \\( R \\), a capacitor \\( C \\), and an inductor \\( L \\) connected in series, and derive the expression for the quality factor \\( Q \\) of the circuit in terms of \\( R \\), \\( L \\), and \\( C \\)."
+    },
+    {
+        "id": "machine_task_15",
+        "instruction": "A cylindrical rod of length \\( L \\) and radius \\( r \\) is subjected to a uniform tensile load \\( F \\), calculate the strain energy stored in the rod in terms of \\( F, L, r, \\) and the material's Young's modulus \\( E \\)."
+    },
+    {
+        "id": "machine_task_16",
+        "instruction": "A copper wire of length \\( L \\) and cross-sectional area \\( A \\) carries a current \\( I \\) and is subjected to a uniform magnetic field \\( B \\); calculate the magnetic force \\( F \\) acting on the wire in terms of \\( I, L, B, \\) and the angle \\( \\theta \\) between the current direction and the magnetic field."
+    },
+    {
+        "id": "machine_task_17",
+        "instruction": "A car accelerates uniformly from rest to a speed of \\( v_f \\) in a distance of \\( d \\); calculate the time taken to reach that speed in terms of \\( d \\) and \\( v_f \\)."
+    },
+    {
+        "id": "machine_task_18",
+        "instruction": "Consider a pendulum of length \\( L \\) and mass \\( m \\) that is displaced by an angle \\( \\theta \\) from the vertical; derive the equation of motion for the pendulum and find the period of small-angle oscillations in terms of \\( L \\) and \\( g \\)."
+    },
+    {
+        "id": "machine_task_19",
+        "instruction": "An object with mass \\( m \\) is dropped from a height \\( h \\) in a vacuum; calculate the kinetic energy of the object just before it reaches the ground in terms of \\( m \\) and \\( h \\)."
+    },
+    {
+        "id": "machine_task_20",
+        "instruction": "A spherical object of radius \\( r \\) is submerged in a fluid with density \\( \\rho \\) and moves with velocity \\( v \\); express the buoyant force acting on the object as a function of \\( r \\), \\( v \\), and \\( \\rho \\)."
+    },
+    {
+        "id": "machine_task_21",
+        "instruction": "A particle of mass \\( m \\) is placed in a harmonic potential described by \\( V(x) = \\frac{1}{2} k x^2 \\), where \\( k \\) is the spring constant; derive the expression for the angular frequency \\( \\omega \\) of oscillation in terms of \\( m \\) and \\( k \\)."
+    },
+    {
+        "id": "machine_task_22",
+        "instruction": "A cylindrical container of height \\( h \\) and radius \\( r \\) is filled with a fluid of density \\( \\rho \\) and has a small hole at its base; derive an expression for the time \\( t \\) it takes for the fluid to drain completely through the hole as a function of \\( h \\), \\( r \\), and \\( \\rho \\)."
+    },
+    {
+        "id": "machine_task_23",
+        "instruction": "A beam of charged particles with mass \\( m \\) and velocity \\( v \\) enters a uniform magnetic field \\( B \\) perpendicular to its direction; calculate the radius of the resulting circular path in terms of \\( m, v, \\) and \\( B \\)."
+    },
+    {
+        "id": "machine_task_24",
+        "instruction": "A rigid cylindrical body of mass \\( M \\) and radius \\( R \\) rolls down an incline of angle \\( \\theta \\) without slipping; derive the expression for its acceleration down the incline in terms of \\( M \\), \\( R \\), \\( g \\), and \\( \\theta \\)."
+    },
+    {
+        "id": "machine_task_25",
+        "instruction": "A block of mass \\( m \\) is placed on a frictionless incline at an angle \\( \\theta \\) and is subjected to a force \\( F \\) parallel to the incline; derive the equation of motion for the block and determine the acceleration in terms of \\( F, m, g, \\) and \\( \\theta \\)."
+    },
+    {
+        "id": "machine_task_26",
+        "instruction": "A charged particle is moving in a uniform magnetic field with strength \\( B \\) while experiencing an electric field \\( \\mathbf{E} \\) that is inclined at an angle \\( \\theta \\) to the magnetic field; derive the expression for the net force \\( \\mathbf{F} \\) on the particle and determine how it affects the trajectory of the particle."
+    },
+    {
+        "id": "machine_task_27",
+        "instruction": "A cylindrical capacitor consists of an inner cylinder of radius \\( r_1 \\) and an outer cylindrical shell of radius \\( r_2 \\); if the capacitor is charged to a potential difference \\( V \\) and the dielectric material between the cylinders has a permittivity \\( \\epsilon \\), find the expression for the energy stored in the capacitor as a function of \\( r_1 \\), \\( r_2 \\), \\( V \\), and \\( \\epsilon \\)."
+    },
+    {
+        "id": "machine_task_28",
+        "instruction": "Determine the maximum height \\( h \\) that a projectile will reach when launched at an angle \\( \\theta \\) with an initial velocity \\( v_0 \\), neglecting air resistance."
+    },
+    {
+        "id": "machine_task_29",
+        "instruction": "Calculate the thermal energy \\( Q \\) required to raise the temperature of a mass \\( m \\) of a substance with specific heat capacity \\( c \\) from an initial temperature \\( T_i \\) to a final temperature \\( T_f \\)."
+    },
+    {
+        "id": "machine_task_30",
+        "instruction": "A spherical shell with inner radius \\( R_1 \\) and outer radius \\( R_2 \\) is uniformly charged with a surface charge density \\( \\sigma \\); derive the expression for the electric field \\( E \\) both inside and outside the shell as a function of \\( R_1 \\), \\( R_2 \\), and \\( \\sigma \\)."
+    },
+    {
+        "id": "machine_task_31",
+        "instruction": "A metallic rod of length \\( L \\) and cross-sectional area \\( A \\) is heated at one end while maintaining the other end at a constant temperature; calculate the steady-state temperature distribution along the length of the rod as a function of position \\( x \\) from the heated end."
+    },
+    {
+        "id": "machine_task_32",
+        "instruction": "A spherical balloon filled with a gas at temperature \\( T_i \\) and pressure \\( P_i \\) is released into the atmosphere where the temperature decreases with height; derive an expression for the altitude \\( H \\) at which the balloon will burst due to external atmospheric pressure."
+    },
+    {
+        "id": "machine_task_33",
+        "instruction": "In a simple harmonic oscillator system with mass \\( m \\) and spring constant \\( k \\), derive the expression for the total mechanical energy \\( E \\) of the system in terms of the amplitude \\( A \\) and the angular frequency \\( \\omega \\)."
+    },
+    {
+        "id": "machine_task_34",
+        "instruction": "A block of mass \\( m \\) slides down a frictionless incline of angle \\( \\theta \\) and height \\( h \\); determine the speed of the block at the bottom of the incline in terms of \\( m \\), \\( g \\), \\( h \\), and \\( \\theta \\)."
+    },
+    {
+        "id": "machine_task_35",
+        "instruction": "A tank filled with water has a cylindrical shape with radius \\( R=3 \\mathrm{~m} \\) and height \\( H=5 \\mathrm{~m} \\); calculate the pressure at a depth of \\( 2 \\mathrm{~m} \\) below the surface of the water in pascals, and express the final pressure result in terms of \\( \\pi \\)."
+    },
+    {
+        "id": "machine_task_36",
+        "instruction": "Determine the kinetic energy \\( K \\) of an object with mass \\( m \\) moving at speed \\( v \\) in terms of \\( m \\) and \\( v \\)."
+    },
+    {
+        "id": "machine_task_37",
+        "instruction": "Calculate the total gravitational potential energy \\( U \\) of a solid sphere of uniform density \\( \\rho \\) and radius \\( R \\)."
+    },
+    {
+        "id": "machine_task_38",
+        "instruction": "A cylinder of height \\( h \\) and radius \\( R \\) is filled with a non-ideal gas that obeys the state relation \\( p = B V^{\\gamma} T^{\\delta} \\), where \\( B \\) is a constant, \\( \\gamma = \\frac{5}{3} \\) and \\( \\delta = 1 \\); derive an expression for the pressure \\( p \\) at the height \\( z \\) within the cylinder in terms of the constants \\( B, R, T, h, \\) and atmospheric pressure \\( P_0 \\)."
+    },
+    {
+        "id": "machine_task_39",
+        "instruction": "A spherical balloon with radius \\( R \\) is inflated uniformly with a gas characterized by an adiabatic expansion described by the relation \\( PV^{\\gamma} = \\text{constant} \\); determine the expression for the pressure \\( P \\) inside the balloon in terms of the gas constant \\( R \\), temperature \\( T \\), and volume \\( V \\)."
+    },
+    {
+        "id": "machine_task_40",
+        "instruction": "Determine the gravitational potential energy \\( U \\) of a mass \\( m \\) at a height \\( h \\) above the ground in terms of \\( m \\), \\( g \\) (acceleration due to gravity), and \\( h \\)."
+    },
+    {
+        "id": "machine_task_41",
+        "instruction": "A gas is contained in a piston-cylinder assembly where the pressure is held constant while the volume expands; derive the work done by the gas during the expansion in terms of the initial volume \\( V_1 \\), final volume \\( V_2 \\), and the constant pressure \\( P \\)."
+    },
+    {
+        "id": "machine_task_42",
+        "instruction": "Determine the resonant frequency of a LC circuit consisting of an inductor with inductance \\( L = 10 \\, \\mu H \\) and a capacitor with capacitance \\( C = 5 \\, nF \\)."
+    },
+    {
+        "id": "machine_task_43",
+        "instruction": "A particle of mass \\( m \\) is moving in a uniform magnetic field \\( B \\) with an initial velocity \\( v \\) at an angle \\( \\theta \\) relative to the field direction; determine the radius \\( r \\) of the circular path it will follow while under the influence of the magnetic force."
+    },
+    {
+        "id": "machine_task_44",
+        "instruction": "Determine the angular frequency \\( \\omega \\) of a simple harmonic oscillator with mass \\( m \\) and spring constant \\( k \\)."
+    },
+    {
+        "id": "machine_task_45",
+        "instruction": "Using the ideal gas law, determine the pressure \\( P \\) of a contained gas at temperature \\( T \\) and volume \\( V \\) with the number of moles \\( n \\) given the gas constant \\( R \\)."
+    },
+    {
+        "id": "machine_task_46",
+        "instruction": "A mass \\( m \\) is attached to a spring with spring constant \\( k \\) and stretched to a distance \\( x \\) from its equilibrium position; determine the potential energy stored in the spring in terms of \\( m \\), \\( k \\), and \\( x \\)."
+    },
+    {
+        "id": "machine_task_47",
+        "instruction": "A capacitor consists of two parallel plates with area \\( A = 0.1 \\, \\mathrm{m}^2 \\) separated by a distance \\( d = 0.01 \\, \\mathrm{m} \\) and a dielectric with a relative permittivity \\( \\epsilon_r = 2.5 \\); calculate the capacitance \\( C \\) of this capacitor in farads."
+    },
+    {
+        "id": "machine_task_48",
+        "instruction": "A block of mass \\( m \\) rests on a frictionless inclined plane with an angle \\( \\theta \\); determine the acceleration of the block as it slides down the incline due to gravity."
+    },
+    {
+        "id": "machine_task_49",
+        "instruction": "A wave pulse travels along a string with linear mass density \\( \\mu \\) and tension \\( T \\); determine the speed of the wave pulse if the wave equation for the string can be expressed as \\( v = \\sqrt{\\frac{T}{\\mu}} \\)."
+    },
+    {
+        "id": "machine_task_50",
+        "instruction": "A solid sphere of radius \\( R \\) is rolling without slipping on a horizontal surface with a constant velocity \\( v_0 \\); derive an expression for its kinetic energy in terms of its mass \\( m \\), radius \\( R \\), and the velocity \\( v_0 \\)."
+    },
+    {
+        "id": "machine_task_51",
+        "instruction": "Using the conservation of energy, derive an expression for the maximum height \\( h \\) that a projectile reaches when launched with an initial velocity \\( v_0 \\) at an angle \\( \\theta \\) above the horizontal in a gravitational field."
+    },
+    {
+        "id": "machine_task_52",
+        "instruction": "Calculate the change in gravitational potential energy of a 2 kg mass lifted vertically from a height of 10 m to a height of 25 m, using \\( g = 9.81 \\, \\text{m/s}^2 \\)."
+    },
+    {
+        "id": "machine_task_53",
+        "instruction": "A cylindrical rod of length \\( L \\) and radius \\( r \\) made from a material with thermal conductivity \\( k \\) is heated at one end; calculate the steady-state temperature distribution along the rod when the other end is kept at a constant temperature \\( T_0 \\)."
+    },
+    {
+        "id": "machine_task_54",
+        "instruction": "A cylindrical container has a radius \\( R \\) and is filled with a viscous fluid that has a viscosity \\( \\eta \\); determine the shear stress acting on the wall of the container when a torque \\( \\tau \\) is applied to rotate the container at a constant angular velocity \\( \\omega \\)."
+    },
+    {
+        "id": "machine_task_55",
+        "instruction": "A cylindrical wire of length \\( L \\), radius \\( r \\), and resistivity \\( \\rho \\) is uniformly heated to a temperature such that its resistance becomes \\( R \\); find the expression for the power dissipated in the wire when a voltage \\( V \\) is applied across its ends."
+    },
+    {
+        "id": "machine_task_56",
+        "instruction": "If a particle of mass $m$ is moving in a one-dimensional potential $V(x) = \\frac{1}{2} k x^2$, determine the angular frequency of small oscillations around the equilibrium position."
+    },
+    {
+        "id": "machine_task_57",
+        "instruction": "Consider a cylindrical container with a volume of $V$ filled with a fluid, and if the height of the fluid is increased by $h$, calculate the change in pressure at the bottom of the container in terms of $V$, $h$, and the fluid density $\\rho$."
+    },
+    {
+        "id": "machine_task_58",
+        "instruction": "A charged particle of mass $m$ and charge $q$ is moving in a uniform magnetic field $\\mathbf{B}$, derive an expression for the radius of the particle's circular motion in terms of its velocity $v$, the magnetic field strength $B$, and the charge-to-mass ratio $\\frac{q}{m}$."
+    },
+    {
+        "id": "machine_task_59",
+        "instruction": "A cylindrical container filled with helium gas at a density of \\( \\rho = 0.1786 \\, \\text{g/cm}^3 \\) and a temperature of \\( T = 300 \\, \\text{K} \\) has a piston of area \\( A = 20 \\, \\text{cm}^2 \\) moving at a speed \\( v = 50 \\, \\text{cm/s} \\) horizontally; calculate the approximate drag force exerted on the piston by the helium gas."
+    },
+    {
+        "id": "machine_task_60",
+        "instruction": "A solid sphere of radius $R$ and uniform density $ \\rho$ rolls without slipping down a frictionless incline of angle $\\theta$, determine the acceleration of the sphere down the slope in terms of $R$, $\\rho$, and $\\theta$."
+    },
+    {
+        "id": "machine_task_61",
+        "instruction": "Calculate the frequency of oscillation of a simple harmonic oscillator with a mass of $m$ and a spring constant $k$, and express the result in terms of $m$ and $k$."
+    },
+    {
+        "id": "machine_task_62",
+        "instruction": "A solid sphere of radius \\( R \\) and mass \\( M \\) rolls without slipping down a frictionless incline of angle \\( \\theta \\); calculate the acceleration of the sphere along the incline in terms of \\( g \\), \\( \\theta \\), and \\( R \\)."
+    },
+    {
+        "id": "machine_task_63",
+        "instruction": "A block of mass \\( m \\) is released from rest at a height \\( h \\) above a frictionless surface and slides down a ramp inclined at an angle \\( \\theta \\); determine the speed of the block at the bottom of the ramp in terms of \\( h \\), \\( g \\), and \\( \\theta \\)."
+    },
+    {
+        "id": "machine_task_64",
+        "instruction": "A projectile is launched vertically upward with an initial velocity \\( v_0 \\) from a height \\( h \\); derive an expression for the maximum height \\( H \\) it reaches above the ground in terms of \\( v_0 \\), \\( g \\), and \\( h \\)."
+    },
+    {
+        "id": "machine_task_65",
+        "instruction": "Calculate the gravitational potential energy \\( U_g \\) of a satellite of mass \\( m_s = 1000 \\, \\mathrm{kg} \\) in orbit at a height \\( h = 500 \\, \\mathrm{km} \\) above the Earth's surface, and express it as a multiple of the kinetic energy \\( K \\) of the satellite at that height, given that the mass of the Earth \\( M = 5.972 \\times 10^{24} \\, \\mathrm{kg} \\) and the radius of the Earth \\( R_E = 6.371 \\times 10^6 \\, \\mathrm{m} \\)."
+    },
+    {
+        "id": "machine_task_66",
+        "instruction": "Consider a gas contained in a cylinder with a movable piston; if the gas compresses isothermally from volume \\( V_1 \\) to volume \\( V_2 \\), and the initial pressure is \\( P_1 \\), derive an expression for the work done on the gas during the compression and calculate the numerical value of this work if \\( P_1 = 2 \\, \\text{atm} \\), \\( V_1 = 10 \\, \\text{L} \\), and \\( V_2 = 5 \\, \\text{L} \\)."
+    },
+    {
+        "id": "machine_task_67",
+        "instruction": "A block of mass \\( m \\) is placed on a frictionless incline with an angle \\( \\theta \\); derive an expression for the time \\( t \\) it takes to slide a distance \\( d \\) down the incline in terms of \\( g \\), \\( \\theta \\), and \\( d \\)."
+    },
+    {
+        "id": "machine_task_68",
+        "instruction": "A beam of light with intensity \\( I_0 \\) passes through two polarizers, the first oriented at an angle \\( \\theta_1 \\) relative to the beam's initial polarization direction and the second at an angle \\( \\theta_2 \\) relative to the first; derive an expression for the transmitted intensity \\( I \\) in terms of \\( I_0 \\), \\( \\theta_1 \\), and \\( \\theta_2 \\)."
+    },
+    {
+        "id": "machine_task_69",
+        "instruction": "Given a resonant circuit with inductance \\( L \\) and capacitance \\( C \\), derive the expression for the angular frequency \\( \\omega \\) of oscillation in terms of \\( L \\) and \\( C \\)."
+    },
+    {
+        "id": "machine_task_70",
+        "instruction": "A cylindrical tank with height \\( H \\) and radius \\( R \\) is filled with water to a height \\( h \\) (where \\( h < H \\)), calculate the hydrostatic pressure at the base of the tank in terms of \\( \\rho \\) (density of water), \\( g \\) (acceleration due to gravity), and \\( h \\)."
+    },
+    {
+        "id": "machine_task_71",
+        "instruction": "Determine the energy density of a photon gas in a cubic container with volume \\( V \\) at a temperature \\( T \\) using the Stefan-Boltzmann law and express it in terms of \\( V \\) and fundamental constants."
+    },
+    {
+        "id": "machine_task_72",
+        "instruction": "A solid rectangular block of mass \\( m \\) and dimensions \\( a \\times b \\times c \\) is placed on an inclined plane with angle \\( \\theta \\); determine the minimum angle \\( \\theta \\) at which the block will start to topple over if the height \\( h \\) from the base to the center of mass is given by \\( h = \\frac{c}{2} \\)."
+    },
+    {
+        "id": "machine_task_73",
+        "instruction": "Calculate the velocity of sound in air at room temperature (20°C) using the formula \\( v = \\sqrt{\\frac{\\gamma \\cdot R \\cdot T}{M}} \\), where \\( \\gamma \\) is the adiabatic index, \\( R \\) is the universal gas constant, \\( T \\) is the absolute temperature in Kelvin, and \\( M \\) is the molar mass of air, expressing your answer in meters per second."
+    },
+    {
+        "id": "machine_task_74",
+        "instruction": "Consider a block attached to a spring with spring constant \\( k \\) and mass \\( m \\) that is released from rest at a distance \\( x_0 \\) from its equilibrium position; derive the expression for the maximum speed of the block as it passes through the equilibrium position in terms of \\( k \\) and \\( m \\)."
+    },
+    {
+        "id": "machine_task_75",
+        "instruction": "A car accelerates from rest to a speed of \\( 25 \\, \\mathrm{m/s} \\) in \\( 10 \\, \\mathrm{s} \\); calculate the average power output of the car's engine during this acceleration, assuming the mass of the car is \\( 1200 \\, \\mathrm{kg} \\) and neglecting any resistive forces."
+    },
+    {
+        "id": "machine_task_76",
+        "instruction": "Given a gas in a cylindrical container with volume \\( V \\), temperature \\( T \\), and number of moles \\( n \\), derive the expression for the pressure \\( P \\) of the gas in terms of \\( n, R, \\) and \\( T \\), where \\( R \\) is the universal gas constant."
+    },
+    {
+        "id": "machine_task_77",
+        "instruction": "Determine the minimum speed required for a projectile to reach a height \\( h \\) while accounting for air resistance that is proportional to the velocity, given that the drag coefficient is \\( k \\)."
+    },
+    {
+        "id": "machine_task_78",
+        "instruction": "A cylindrical container filled with a gas of molar mass \\( M \\) and density \\( \\rho \\) is heated from temperature \\( T_1 \\) to \\( T_2 \\); calculate the change in pressure \\( \\Delta P \\) assuming ideal gas behavior and a constant volume."
+    },
+    {
+        "id": "machine_task_79",
+        "instruction": "Calculate the energy levels of a hydrogen atom in units of electronvolts (eV) using the Rydberg formula and express your result in terms of the quantum number \\( n \\)."
+    },
+    {
+        "id": "machine_task_80",
+        "instruction": "A block of mass \\( m \\) is attached to a spring with spring constant \\( k \\) and is initially at rest on a frictionless horizontal surface; if the block is displaced to a distance \\( x_0 \\) from its equilibrium position and released, find the maximum speed of the block as it passes through the equilibrium position."
+    },
+    {
+        "id": "machine_task_81",
+        "instruction": "In a small circular loop of wire with radius \\( r \\), carrying a steady current \\( I \\), calculate the magnetic field \\( B \\) at the center of the loop in terms of the permeability of free space \\( \\mu_0 \\) and the current \\( I \\)."
+    },
+    {
+        "id": "machine_task_82",
+        "instruction": "A particle of mass \\( m \\) is subjected to a central force described by \\( F(r) = -k r^n \\), where \\( k \\) is a constant and \\( n \\) is a positive integer; derive an expression for the effective potential energy \\( V_{\\text{eff}}(r) \\) and determine the condition for stable circular orbits."
+    },
+    {
+        "id": "machine_task_83",
+        "instruction": "A projectile is launched from the ground with an initial velocity \\( v_0 \\) at an angle \\( \\theta \\) to the horizontal; derive an expression for the maximum height \\( h \\) reached by the projectile in terms of \\( v_0 \\) and \\( \\theta \\)."
+    },
+    {
+        "id": "machine_task_84",
+        "instruction": "A circular loop of radius \\( R \\) carries a steady current \\( I \\); derive the expression for the magnetic field at the center of the loop and evaluate it in terms of \\( R \\) and \\( I \\)."
+    },
+    {
+        "id": "machine_task_85",
+        "instruction": "A cylindrical rod of length \\( L \\) and radius \\( r \\) is uniformly heated from end to end; derive an expression for the temperature distribution along the rod in steady state, given the thermal conductivity \\( k \\) and the temperature difference \\( \\Delta T \\) between the ends."
+    },
+    {
+        "id": "machine_task_86",
+        "instruction": "A block of mass $m$ slides on a frictionless surface and collides elastically with a stationary block of mass $2m$; calculate the final velocities of both blocks after the collision if the initial velocity of the first block is $v_0$."
+    },
+    {
+        "id": "machine_task_87",
+        "instruction": "A pendulum of length \\( L \\) swings in a gravitational field, and at its lowest point, it has a speed \\( v \\); determine the maximum height it reaches on the opposite side in terms of \\( L \\) and \\( v \\)."
+    },
+    {
+        "id": "machine_task_88",
+        "instruction": "A particle of mass \\( m \\) is subjected to a central force that decreases with distance according to \\( F(r) = -\\frac{k}{r^2} \\) (where \\( k \\) is a positive constant); determine the stable orbital radius \\( r \\) for a particle moving at speed \\( v \\) in this potential."
+    },
+    {
+        "id": "machine_task_89",
+        "instruction": "A mass \\( m \\) is attached to a spring with spring constant \\( k \\) and is released from rest at a distance \\( A \\) from the equilibrium position; find the maximum speed of the mass as it oscillates."
+    },
+    {
+        "id": "machine_task_90",
+        "instruction": "A small sphere of mass \\( m \\) is released from rest at a height \\( h \\) above a horizontal surface and collides elastically with a block of mass \\( M \\) at rest; calculate the final velocities of both the sphere and the block immediately after the collision if the collision is head-on."
+    },
+    {
+        "id": "machine_task_91",
+        "instruction": "A pendulum of length \\( L \\) is released from an angle \\( \\theta_0 \\) with respect to the vertical; find the speed of the pendulum bob at the lowest point of its swing in terms of \\( L \\) and \\( \\theta_0 \\)."
+    },
+    {
+        "id": "machine_task_92",
+        "instruction": "Calculate the gravitational potential energy of a mass \\( m \\) positioned at height \\( h \\) above the ground, expressing your answer in terms of \\( m \\), \\( g \\), and \\( h \\)."
+    },
+    {
+        "id": "machine_task_93",
+        "instruction": "A cylinder with radius \\( R \\) and height \\( h \\) is filled with water to a height \\( H \\) and then rotated about its central axis with angular velocity \\( \\omega \\); find the pressure at a depth \\( z \\) below the water surface in terms of \\( R, H, h, \\omega, \\) and \\( z \\)."
+    },
+    {
+        "id": "machine_task_94",
+        "instruction": "A small spherical object of mass \\( m = 5 \\, \\text{kg} \\) is released from a height \\( h = 10 \\, \\text{m} \\) above the ground; calculate the speed of the object just before it makes contact with the ground, assuming no air resistance."
+    },
+    {
+        "id": "machine_task_95",
+        "instruction": "A satellite of mass \\( m = 500 \\, \\text{kg} \\) orbits a planet with mass \\( M = 6 \\times 10^{24} \\, \\text{kg} \\) at a distance \\( r = 7 \\times 10^{6} \\, \\text{m} \\) from the center of the planet; calculate the gravitational potential energy of the satellite in its orbit."
+    },
+    {
+        "id": "machine_task_96",
+        "instruction": "A circular loop of radius \\( R \\) is placed in a uniform magnetic field \\( \\mathbf{B} \\) that is perpendicular to the plane of the loop, and the loop is expanded uniformly at a rate \\( v \\); compute the induced electromotive force (emf) in the loop as a function of time in terms of \\( R \\), \\( v \\), and \\( B \\)."
+    },
+    {
+        "id": "machine_task_97",
+        "instruction": "Calculate the potential energy of a mass \\( m \\) at a height \\( h \\) in a gravitational field, expressed in terms of \\( m, g, \\) and \\( h \\)."
+    },
+    {
+        "id": "machine_task_98",
+        "instruction": "A circular loop of wire with radius \\( R \\) is rotated with an angular velocity \\( \\omega \\) about its vertical axis in a uniform gravitational field; determine the induced electromotive force (emf) across the wire in terms of \\( R, \\omega, \\) and the gravitational acceleration \\( g \\)."
+    },
+    {
+        "id": "machine_task_99",
+        "instruction": "A spherical object of radius \\( R \\) is submerged in a fluid of density \\( \\rho \\) and experiences a buoyant force \\( F_b \\); derive an expression for the net force acting on the object when it is submerged to a depth \\( h \\) below the surface of the fluid."
+    },
+    {
+        "id": "machine_task_100",
+        "instruction": "A particle of mass \\( m \\) is attached to a spring with spring constant \\( k \\) and is displaced from its equilibrium position by a distance \\( x_0 \\); calculate the maximum speed of the particle when it passes through the equilibrium position if it was released from rest."
+    },
+    {
+        "id": "machine_task_101",
+        "instruction": "A rectangular waveguide of width \\( a \\) and height \\( b \\) contains an electromagnetic wave propagating in the dominant mode; derive the cutoff frequency for this mode in terms of \\( a \\), \\( b \\), and the speed of light \\( c \\)."
+    },
+    {
+        "id": "machine_task_102",
+        "instruction": "A cylindrical tank with height \\( H \\) and radius \\( R \\) is filled with water to a height \\( h \\); using Torricelli's law, derive the time it takes for the water to drain completely through a hole at the bottom with radius \\( r \\)."
+    },
+    {
+        "id": "machine_task_103",
+        "instruction": "A block of mass \\( m \\) is sliding down a frictionless inclined plane with an angle \\( \\theta \\); calculate the acceleration of the block in terms of \\( g \\) and \\( \\theta \\)."
+    },
+    {
+        "id": "machine_task_104",
+        "instruction": "A solid sphere of radius \\( R \\) and mass \\( M \\) rolls down a frictionless inclined plane of height \\( h \\) without slipping; determine the final speed of the sphere at the bottom of the incline in terms of \\( R, M, \\) and \\( h \\)."
+    },
+    {
+        "id": "machine_task_105",
+        "instruction": "A particle of mass \\( m \\) is attached to a spring with spring constant \\( k \\) and undergoes simple harmonic motion; determine the period of the motion in terms of \\( m \\) and \\( k \\)."
+    },
+    {
+        "id": "machine_task_106",
+        "instruction": "A cylindrical container with a radius \\( R \\) and height \\( h \\) is filled with a fluid of density \\( \\rho \\); derive the expression for the pressure at a depth \\( d \\) below the fluid surface in terms of \\( \\rho \\), \\( g \\), and \\( d \\)."
+    },
+    {
+        "id": "machine_task_107",
+        "instruction": "Calculate the potential difference \\( V \\) across a parallel plate capacitor of area \\( A \\) and separation distance \\( d \\) when it is charged to a total charge \\( Q \\) and the electric field \\( E \\) between the plates is uniform."
+    },
+    {
+        "id": "machine_task_108",
+        "instruction": "A guitar string of length \\( L \\) is fixed at both ends and vibrates in its fundamental mode; calculate the frequency of vibration in terms of \\( L \\), the tension \\( T \\) in the string, and the linear mass density \\( \\mu \\)."
+    },
+    {
+        "id": "machine_task_109",
+        "instruction": "A block of mass \\( m \\) slides down a frictionless ramp inclined at an angle \\( \\theta \\) from a height \\( h \\); find the speed of the block at the bottom of the ramp in terms of \\( m, g, h, \\) and \\( \\theta \\)."
+    },
+    {
+        "id": "machine_task_110",
+        "instruction": "A particle of mass \\( m \\) is released from rest at a height \\( h \\) above a frictionless surface; calculate the speed of the particle just before it strikes the surface using energy conservation principles."
+    },
+    {
+        "id": "machine_task_111",
+        "instruction": "In a distant galaxy, a planet with mass \\(M=5 \\times 10^{27} \\, \\text{kg}\\) and radius \\(R=6 \\times 10^6 \\, \\text{m}\\) has a moon of mass \\(m=1.5 \\times 10^{22} \\, \\text{kg}\\) orbiting at a distance \\(d=1.2 \\times 10^7 \\, \\text{m}\\) from the planet's center; calculate the gravitational force acting on the moon due to the planet."
+    },
+    {
+        "id": "machine_task_112",
+        "instruction": "A charged particle of mass \\( m \\) is subjected to a uniform electric field \\( E \\) and a magnetic field \\( B \\); derive the equations of motion for the particle and determine the trajectory it follows in the \\( x-y \\) plane assuming it starts from rest at the origin."
+    },
+    {
+        "id": "machine_task_113",
+        "instruction": "A cylindrical shell with radius \\( R \\) and height \\( h \\) has a uniform charge density \\( \\rho \\); derive an expression for the electric field \\( E \\) at a distance \\( r \\) from the axis of the cylinder for both \\( r < R \\) and \\( r > R \\) by applying Gauss's law."
+    },
+    {
+        "id": "machine_task_114",
+        "instruction": "A solid cylindrical conductor of radius \\( R \\) carries a uniform current \\( I \\); find the magnetic field inside the conductor as a function of the distance \\( r \\) from the center, where \\( r < R \\)."
+    },
+    {
+        "id": "machine_task_115",
+        "instruction": "A particle of mass \\( m \\) is subjected to a restoring force proportional to its displacement from equilibrium, \\( F = -kx \\); derive the expression for the angular frequency \\( \\omega \\) of the harmonic motion in terms of \\( m \\) and \\( k \\)."
+    },
+    {
+        "id": "machine_task_116",
+        "instruction": "A block of mass $m=3 \\mathrm{~kg}$ is attached to a spring with spring constant $k=300 \\mathrm{~N/m}$ and is initially stretched to a length of $0.5 \\mathrm{~m}$ from its natural length, find the frequency of oscillation when released in a frictionless environment."
+    },
+    {
+        "id": "machine_task_117",
+        "instruction": "A cylindrical container with a height of $1 \\mathrm{~m}$ and a radius of $0.3 \\mathrm{~m}$ is filled with water up to a height of $0.7 \\mathrm{~m}$; if a solid sphere made of some material with a density of $800 \\mathrm{~kg/m}^3$ and a radius of $0.1 \\mathrm{~m}$ is submerged in the water, calculate the change in water level in the container due to the sphere's displacement."
+    },
+    {
+        "id": "machine_task_118",
+        "instruction": "A rectangular pool measuring $10 \\mathrm{~m} \\times 5 \\mathrm{~m} \\times 2 \\mathrm{~m}$ is filled with water to a height of $1.5 \\mathrm{~m}$; if a solid cube with a side length of $1 \\mathrm{~m}$ and a density of $700 \\mathrm{~kg/m}^3$ is submerged into the pool, calculate the new height of the water level in the pool."
+    },
+    {
+        "id": "machine_task_119",
+        "instruction": "A satellite orbits the Earth in a circular path with a radius of \\(7000 \\, \\text{km}\\) and completes one revolution in \\(90 \\, \\text{minutes}\\); calculate the gravitational potential energy of the satellite with respect to the center of the Earth, given that the mass of the Earth is \\(5.97 \\times 10^{24} \\, \\text{kg}\\)."
+    },
+    {
+        "id": "machine_task_120",
+        "instruction": "A cylindrical capacitor consists of two coaxial cylinders with charge densities \\(\\sigma_1 = 60 \\, \\mu \\mathrm{C} / \\mathrm{m}^2\\) and \\(\\sigma_2 = -30 \\, \\mu \\mathrm{C} / \\mathrm{m}^2\\) and radii \\(r_1 = 5 \\, \\mathrm{cm}\\) and \\(r_2 = 10 \\, \\mathrm{cm}\\), respectively; calculate the electric field intensity at a point located at a distance of \\(8 \\, \\mathrm{cm}\\) from the axis of the cylindrical capacitor."
+    },
+    {
+        "id": "machine_task_121",
+        "instruction": "Calculate the gravitational potential energy of a system consisting of two point masses \\(m_1\\) and \\(m_2\\) separated by a distance \\(d\\) in a vacuum, and express your answer in terms of \\(G\\), \\(m_1\\), \\(m_2\\), and \\(d\\)."
+    },
+    {
+        "id": "machine_task_122",
+        "instruction": "Calculate the frequency of oscillation for a simple pendulum with a length of \\(1.5 \\, \\text{m}\\) and a small angular displacement."
+    },
+    {
+        "id": "machine_task_123",
+        "instruction": "Derive the expression for the gravitational force $F$ experienced by an object of mass $m$ inside a non-uniform sphere of total mass $M$ and radius $R$, as a function of the distance from the center of the sphere and other relevant constants."
+    },
+    {
+        "id": "machine_task_124",
+        "instruction": "A block of mass \\( m \\) is sliding down a frictionless inclined plane at an angle \\( \\theta \\) with respect to the horizontal; calculate the acceleration of the block in terms of gravitational acceleration \\( g \\) and the angle \\( \\theta \\)."
+    },
+    {
+        "id": "machine_task_125",
+        "instruction": "A car is initially at rest at the top of a hill that is \\(20 \\mathrm{~m}\\) high; if it rolls down the hill without friction, calculate its speed just before reaching the bottom."
+    },
+    {
+        "id": "machine_task_126",
+        "instruction": "A cylindrical conductor of radius \\( R \\) carries a uniform volume charge density \\( \\rho \\) and has a length \\( L \\); determine the electric field \\( E \\) at a distance \\( r \\) from the axis for \\( r < R \\) and \\( r > R \\)."
+    },
+    {
+        "id": "machine_task_127",
+        "instruction": "Using the ideal gas law, determine the change in pressure when the volume of a gas is halved while keeping the temperature constant."
+    },
+    {
+        "id": "machine_task_128",
+        "instruction": "A block of mass \\( m = 2 \\, \\text{kg} \\) is placed on a frictionless inclined plane with an angle of inclination \\( \\theta = 30^\\circ \\); calculate the acceleration of the block as it slides down the incline."
+    },
+    {
+        "id": "machine_task_129",
+        "instruction": "A steel beam of length \\(L\\) is subjected to a uniform load \\(w\\) over its length; derive the expression for the maximum deflection of the beam in terms of \\(w\\), \\(L\\), and the beam's modulus of elasticity \\(E\\) and moment of inertia \\(I\\)."
+    },
+    {
+        "id": "machine_task_130",
+        "instruction": "A solid sphere of radius \\(R\\) and mass \\(M\\) is rolling without slipping down an inclined plane of angle \\(\\theta\\); derive an expression for its acceleration down the incline in terms of \\(g\\) and \\(\\theta\\)."
+    },
+    {
+        "id": "machine_task_131",
+        "instruction": "Given a simple harmonic oscillator with mass \\(m\\) and spring constant \\(k\\), derive the expression for the total energy \\(E\\) of the oscillator in terms of its amplitude \\(A\\)."
+    },
+    {
+        "id": "machine_task_132",
+        "instruction": "A spring with a spring constant \\( k = 250 \\, \\text{N/m} \\) is compressed by a distance of \\( 0.1 \\, \\text{m} \\); calculate the potential energy stored in the spring when compressed."
+    },
+    {
+        "id": "machine_task_133",
+        "instruction": "A block of mass \\( m \\) is released from rest at a height \\( h \\) on a frictionless incline that makes an angle \\( \\theta \\) with the horizontal; calculate the speed \\( v \\) of the block at the bottom of the incline as a function of \\( h \\), \\( g \\), and \\( \\theta \\)."
+    },
+    {
+        "id": "machine_task_134",
+        "instruction": "Derive the expression for the period \\( T \\) of a simple pendulum as a function of its length \\( L \\) and the acceleration due to gravity \\( g \\), and calculate \\( T \\) for a pendulum of length \\( L = 2 \\, \\mathrm{m} \\) under standard gravitational conditions."
+    },
+    {
+        "id": "machine_task_135",
+        "instruction": "A particle moves in a two-dimensional plane under the influence of a constant force vector \\( \\mathbf{F} = (3 \\, \\text{N}, 4 \\, \\text{N}) \\); determine the final velocity of the particle after it has been subjected to the force for \\(5 \\, \\text{s}\\), given that its initial velocity is \\( \\mathbf{v_0} = (2 \\, \\text{m/s}, 1 \\, \\text{m/s})\\) and its mass is \\(2 \\, \\text{kg}\\)."
+    },
+    {
+        "id": "machine_task_136",
+        "instruction": "A 5 kg object is in free fall and experiences a linear drag force given by \\( F_d = -cv \\) where \\( c = 10 \\, \\text{kg/s} \\); calculate the terminal velocity of the object."
+    },
+    {
+        "id": "machine_task_137",
+        "instruction": "Determine the expression for the electric field \\( E \\) inside a parallel plate capacitor as a function of the voltage \\( V \\) applied across the plates and the separation \\( d \\) between them, and calculate \\( E \\) when \\( V = 100 \\, \\text{V} \\) and \\( d = 5 \\, \\text{mm} \\)."
+    },
+    {
+        "id": "machine_task_138",
+        "instruction": "A car of mass \\( m = 1200 \\, \\text{kg} \\) accelerates from rest to a speed of \\( v = 25 \\, \\text{m/s} \\) over a distance \\( d = 100 \\, \\text{m} \\); calculate the average power required to achieve this acceleration assuming no energy losses."
+    },
+    {
+        "id": "machine_task_139",
+        "instruction": "An electric circuit contains a resistor with resistance \\(R\\), a capacitor with capacitance \\(C\\), and an inductor with inductance \\(L\\); derive the expression for the resonant frequency \\(f_0\\) of the circuit in terms of \\(R\\), \\(C\\), and \\(L\\)."
+    },
+    {
+        "id": "machine_task_140",
+        "instruction": "A spherical balloon with a radius of \\( r \\) is inflated with a gas that has a density \\( \\rho \\); express the mass \\( m \\) of the gas inside the balloon in terms of \\( r \\) and \\( \\rho \\)."
+    },
+    {
+        "id": "machine_task_141",
+        "instruction": "A car of mass \\( m \\) is traveling on a circular track of radius \\( r \\) with a constant speed \\( v \\); calculate the centripetal acceleration experienced by the car as a function of \\( v \\) and \\( r \\)."
+    },
+    {
+        "id": "machine_task_142",
+        "instruction": "A cylindrical object with height \\( h \\) and radius \\( r \\) is submerged vertically in a fluid with density \\( \\rho \\); derive the expression for the buoyant force \\( F_b \\) acting on the object in terms of \\( \\rho \\), \\( g \\), \\( h \\), and \\( r \\)."
+    },
+    {
+        "id": "machine_task_143",
+        "instruction": "A mass-spring system consists of a mass \\( m \\) attached to a spring with spring constant \\( k \\); derive the equation of motion for the mass when it is displaced from its equilibrium position and released, identifying all relevant forces acting on the mass."
+    },
+    {
+        "id": "machine_task_144",
+        "instruction": "Using the concept of angular momentum, determine the relationship between the moment of inertia \\( I \\) of a rigid body rotating about an axis and its angular velocity \\( \\omega \\) when a torque \\( \\tau \\) is applied for a time \\( t \\)."
+    },
+    {
+        "id": "machine_task_145",
+        "instruction": "A box with a square base of side length \\(a\\) and height \\(h\\) is filled with a liquid of density \\(\\rho\\); find the force exerted by the liquid on the bottom surface of the box when it is submerged in water to a depth \\(d\\)."
+    },
+    {
+        "id": "machine_task_146",
+        "instruction": "A cylindrical rod of length $L$, radius $R$, and made of a material with Young's modulus $Y$ and density $\\rho$, is fixed at one end and undergoes longitudinal oscillations; estimate the fundamental frequency of oscillation as $\\omega \\sim L^{a} R^{b} \\rho^{c} Y^{d}$ and find the value of $4a^{2} + 3b^{2} + 2c^{2} + d^{2}$."
+    },
+    {
+        "id": "machine_task_147",
+        "instruction": "A charged particle with charge $q$ is moving in a uniform magnetic field $\\vec{B}$ at an angle $\\theta$ with respect to the field direction; calculate the work done by the magnetic field on the particle as it undergoes a complete circular motion."
+    },
+    {
+        "id": "machine_task_148",
+        "instruction": "A uniform spherical shell of radius \\( R \\) and charge \\( Q \\) is placed at the origin; calculate the electric potential at a point located at a distance \\( d \\) (where \\( d > R \\)) from the center of the shell in terms of \\( Q \\), \\( R \\), \\( d \\), and any necessary numerical constants."
+    },
+    {
+        "id": "machine_task_149",
+        "instruction": "A satellite is in a circular orbit around the Earth at a height \\( h \\) above the surface, with a mass \\( m \\); calculate the gravitational potential energy of the satellite in terms of \\( m \\), \\( g \\), \\( R \\) (the radius of the Earth), and any necessary numerical constants."
+    },
+    {
+        "id": "machine_task_150",
+        "instruction": "A spherical shell of radius \\( R \\) carries a uniform surface charge density \\( \\sigma \\); determine the electric potential at a point located a distance \\( d \\) away from the center of the shell along the axis of symmetry."
+    },
+    {
+        "id": "machine_task_151",
+        "instruction": "A spherical capacitor is formed by two concentric spherical shells with radii \\( R_1 \\) and \\( R_2 \\) (where \\( R_1 < R_2 \\)), charged with opposite charges; derive an expression for the electric field in the space between the shells and calculate the capacitance of the system."
+    },
+    {
+        "id": "machine_task_152",
+        "instruction": "Calculate the time it takes for a radio wave emitted from a transmitter at a height of 20 meters to reach a receiver located 5 kilometers away at ground level, assuming no interference or obstacles and the speed of light \\( c \\)."
+    },
+    {
+        "id": "machine_task_153",
+        "instruction": "A particle of mass \\( m = 1.50 \\, \\text{kg} \\) is attached to a spring with spring constant \\( k = 250 \\, \\text{N/m} \\) and is oscillating with an amplitude \\( A = 0.2 \\, \\text{m} \\); determine the maximum speed of the particle during its motion when it is displaced \\( 0.1 \\, \\text{m} \\) from the equilibrium position."
+    },
+    {
+        "id": "machine_task_154",
+        "instruction": "Determine the gravitational potential energy of a mass \\( m \\) located a distance \\( r \\) from the center of a uniform spherical mass distribution of radius \\( R \\) and total mass \\( M \\), expressed in terms of \\( G, m, M, R, \\) and \\( r \\) for both \\( r < R \\) and \\( r \\geq R \\)."
+    },
+    {
+        "id": "machine_task_155",
+        "instruction": "A swimmer dives into a pool from a height of \\( h = 3.5 \\, \\mathrm{m} \\); calculate the speed of the swimmer just before entering the water, ignoring air resistance."
+    },
+    {
+        "id": "machine_task_156",
+        "instruction": "A uniform solid sphere of radius \\( R \\) and mass \\( M \\) is rolling without slipping down an inclined plane; derive the expression for the acceleration of the center of mass in terms of \\( R \\), \\( M \\), and the angle of the incline \\( \\theta \\)."
+    },
+    {
+        "id": "machine_task_157",
+        "instruction": "A long straight wire carries a steady current \\( I \\) and is placed along the \\( z \\)-axis; derive the expression for the magnetic field \\( \\vec{B} \\) at a point located at a distance \\( r \\) from the wire in the plane perpendicular to the wire, and specify the direction of the field using the right-hand rule."
+    },
+    {
+        "id": "machine_task_158",
+        "instruction": "A charged conducting sphere of radius \\( R \\) is placed in a uniform electric field \\( \\vec{E}_0 \\); derive the expression for the induced surface charge density on the sphere in terms of \\( \\epsilon_0 \\), \\( E_0 \\), and \\( R \\)."
+    },
+    {
+        "id": "machine_task_159",
+        "instruction": "A cylindrical rod of length \\( L \\), radius \\( R \\), made of a material with Young's modulus \\( Y \\), is subjected to a tensile force \\( F \\) at both ends; derive an expression for the elongation \\( \\Delta L \\) of the rod in terms of \\( F, L, R, Y \\)."
+    },
+    {
+        "id": "machine_task_160",
+        "instruction": "A star is located at a distance of 2 parsecs from the Earth and has an average luminosity of \\(5 \\times 10^{28} \\, \\text{W}\\); calculate the apparent magnitude of the star as observed from Earth, assuming the distance modulus formula applies."
+    },
+    {
+        "id": "machine_task_161",
+        "instruction": "A block of mass \\( m \\) is sliding down an inclined plane with angle \\( \\theta \\) and experiencing a frictional force proportional to the normal force; derive the expression for the acceleration of the block in terms of \\( m, g, \\theta, \\) and the coefficient of friction \\( \\mu \\)."
+    },
+    {
+        "id": "machine_task_162",
+        "instruction": "A car is traveling at a constant speed of \\( v = 25 \\mathrm{~m/s} \\) around a flat circular track with a radius of \\( R = 50 \\mathrm{~m} \\); calculate the necessary centripetal force required to keep the car moving in a circle if the mass of the car is \\( m = 1000 \\mathrm{~kg} \\)."
+    },
+    {
+        "id": "machine_task_163",
+        "instruction": "A block of mass \\( m \\) is connected to a spring with spring constant \\( k \\) and is displaced from its equilibrium position; derive the expression for the maximum potential energy stored in the spring when the block oscillates with amplitude \\( A \\)."
+    },
+    {
+        "id": "machine_task_164",
+        "instruction": "Consider a circular loop of radius \\( R \\) carrying a uniform current \\( I \\); find the magnetic field strength \\( B \\) at the center of the loop in terms of \\( R, I, \\) and the permeability of free space \\( \\mu_0 \\)."
+    },
+    {
+        "id": "machine_task_165",
+        "instruction": "Calculate the gravitational potential energy of an object of mass \\( m \\) placed at a height \\( h \\) above the surface of the Earth, expressed in terms of \\( G \\), \\( M \\), and \\( R \\), where \\( G \\) is the gravitational constant, \\( M \\) is the mass of the Earth, and \\( R \\) is the radius of the Earth."
+    },
+    {
+        "id": "machine_task_166",
+        "instruction": "A charged particle with mass \\( m \\) and charge \\( q \\) moves in a uniform magnetic field \\( B \\); derive an expression for the radius of the circular path it follows in terms of its velocity \\( v \\) and the magnetic field strength \\( B \\)."
+    },
+    {
+        "id": "machine_task_167",
+        "instruction": "A cylindrical conductor of radius \\( R \\) carries a uniform linear charge density \\( \\lambda \\); derive the electric field both inside and outside the cylinder, and write your answers in terms of \\( \\lambda, R, \\epsilon_0, \\) and any necessary numerical constants."
+    },
+    {
+        "id": "machine_task_168",
+        "instruction": "A cylindrical canister filled with gas has a height of \\(h\\) and radius \\(r\\); derive the expression for the pressure \\(P\\) of the gas inside in terms of \\(h\\), \\(r\\), and the number of gas molecules \\(N\\) contained in the canister."
+    },
+    {
+        "id": "machine_task_169",
+        "instruction": "A mass \\( m = 5 \\, \\text{kg} \\) is connected to a pendulum of length \\( L = 2 \\, \\text{m} \\) and swings to an angle of \\( \\theta = 30^\\circ \\) from the vertical; calculate the gravitational potential energy of the mass at this position relative to the lowest point of the swing."
+    },
+    {
+        "id": "machine_task_170",
+        "instruction": "A point charge \\( q \\) is placed at the center of a uniformly charged spherical shell of radius \\( R \\) and charge density \\( \\sigma \\); determine the electric field strength both inside and outside the shell in terms of \\( q, \\sigma, \\epsilon_0, \\) and \\( R \\)."
+    },
+    {
+        "id": "machine_task_171",
+        "instruction": "Determine the frequency of oscillation of a simple pendulum of length \\( L \\) in terms of \\( L \\) and the acceleration due to gravity \\( g \\)."
+    },
+    {
+        "id": "machine_task_172",
+        "instruction": "Estimate the gravitational potential energy stored in a uniform spherical mass with density $\\rho$ and radius $R$, in terms of $\\rho$ and $G$, the gravitational constant."
+    },
+    {
+        "id": "machine_task_173",
+        "instruction": "An electric capacitor with capacitance \\( C \\) and charge \\( Q \\) is connected to a resistor \\( R \\); derive the expression for the time constant \\( \\tau \\) of the circuit in terms of \\( C \\) and \\( R \\)."
+    },
+    {
+        "id": "machine_task_174",
+        "instruction": "A solid sphere of radius \\( R \\) made of a material with thermal conductivity \\( k \\), specific heat capacity \\( c_p \\), and density \\( \\rho \\) is initially at a uniform temperature \\( T_0 \\); if it is suddenly exposed to a constant temperature \\( T_{\\infty} \\) of the surrounding environment, derive the time-dependent temperature distribution inside the sphere assuming one-dimensional heat conduction and adequate boundary conditions."
+    },
+    {
+        "id": "machine_task_175",
+        "instruction": "A satellite in a circular orbit around the Earth has a speed of \\( v \\) and is subject to gravitational forces; calculate the minimum altitude \\( h \\) above the Earth's surface, in terms of \\( v \\), where the gravitational force equals the centripetal force needed to maintain its orbit."
+    },
+    {
+        "id": "machine_task_176",
+        "instruction": "What is the final velocity $v_f$ of an object of mass $m$ that is accelerating uniformly at $a$ for a time $t$, given its initial velocity $v_i$?"
+    },
+    {
+        "id": "machine_task_177",
+        "instruction": "Calculate the gravitational potential energy of a satellite with mass \\( m \\) orbiting the Earth at an altitude \\( h \\) above the surface, using the mass of the Earth \\( M \\) and the radius of the Earth \\( R \\)."
+    },
+    {
+        "id": "machine_task_178",
+        "instruction": "A proton with a rest mass energy of \\(938 \\ \\text{MeV}\\) is accelerated to a speed approaching the speed of light; calculate the total energy \\(E\\) of the proton in MeV when its speed is \\(0.99c\\)."
+    },
+    {
+        "id": "machine_task_179",
+        "instruction": "Determine the work done, in joules, by a force \\( F \\) acting on an object of mass \\( m \\) that is displaced by a distance \\( d \\) in the direction of the force."
+    },
+    {
+        "id": "machine_task_180",
+        "instruction": "Calculate the minimum kinetic energy \\( K \\) required for a neutron to undergo neutron-proton conversion via weak interaction, given that the rest mass energies of the neutron and proton are \\( 939.57 \\ \\text{MeV} \\) and \\( 938.27 \\ \\text{MeV} \\) respectively."
+    },
+    {
+        "id": "machine_task_181",
+        "instruction": "Calculate the gravitational potential energy \\( U \\) of a mass \\( m \\) located at a height \\( h \\) above the Earth's surface, expressing your answer in terms of \\( U = mgh \\), where \\( g \\) is the acceleration due to gravity."
+    },
+    {
+        "id": "machine_task_182",
+        "instruction": "In a medium with index of refraction \\( n \\), derive an expression for the critical angle \\( \\theta_c \\) for total internal reflection when light travels from the medium into a vacuum."
+    },
+    {
+        "id": "machine_task_183",
+        "instruction": "Derive the expression for the gravitational potential energy \\( U \\) of a mass \\( m \\) at a distance \\( r \\) from a spherical mass \\( M_{\\odot} \\), including any relevant constants and assumptions about the mass distribution."
+    },
+    {
+        "id": "machine_task_184",
+        "instruction": "Calculate the work done \\( W \\) when an ideal gas expands isothermally from volume \\( V_1 \\) to volume \\( V_2 \\) at temperature \\( T \\), expressing your answer in terms of the number of moles \\( n \\) and the ideal gas constant \\( R \\)."
+    },
+    {
+        "id": "machine_task_185",
+        "instruction": "Calculate the time dilation experienced by a spacecraft traveling at a speed of \\(0.8c\\) relative to an observer on Earth during a journey of \\(10\\) years as measured by the observer."
+    },
+    {
+        "id": "machine_task_186",
+        "instruction": "Determine the electric field strength \\( E \\) at a distance \\( r \\) from a point charge \\( q \\), expressing your answer in terms of the permittivity of free space \\( \\epsilon_0 \\) and the charge \\( q \\), using the formula \\( E = \\frac{q}{4 \\pi \\epsilon_0 r^2} \\)."
+    },
+    {
+        "id": "machine_task_187",
+        "instruction": "Determine the gravitational force \\( F \\) acting on an object of mass \\( m \\) located at a distance \\( r \\) from the center of the Earth, expressing your answer in terms of the mass of the Earth \\( M \\), the gravitational constant \\( G \\), and the distance \\( r \\) using the formula \\( F = \\frac{GMm}{r^2} \\)."
+    },
+    {
+        "id": "machine_task_188",
+        "instruction": "Determine the change in internal energy of an ideal gas that expands isothermally and reversibly when it does work \\( W \\) by a volume change \\( \\Delta V \\) at temperature \\( T \\), using the ideal gas law \\( PV = nRT \\)."
+    },
+    {
+        "id": "machine_task_189",
+        "instruction": "Determine the magnetic field \\( \\mathbf{B} \\) at a distance \\( r \\) from a long, straight conductor carrying a current \\( I \\), using Ampère's law, and express your answer in terms of \\( \\mu_0 \\), \\( I \\), and \\( r \\)."
+    },
+    {
+        "id": "machine_task_190",
+        "instruction": "Calculate the escape velocity \\( v_e \\) of an object from the surface of a planet with mass \\( M \\) and radius \\( R \\), expressing your answer in terms of \\( G \\), \\( M \\), and \\( R \\)."
+    },
+    {
+        "id": "machine_task_191",
+        "instruction": "A photon with energy \\( E_{\\gamma} = 500 \\mathrm{keV} \\) collides with a stationary electron; calculate the maximum kinetic energy that the electron can gain from the collision, in keV, using conservation of energy and momentum principles."
+    },
+    {
+        "id": "machine_task_192",
+        "instruction": "Calculate the force experienced by an object of mass \\( m \\) undergoing uniform circular motion with radius \\( r \\) and angular velocity \\( \\omega \\), expressing your answer in terms of \\( m \\), \\( r \\), and \\( \\omega \\)."
+    },
+    {
+        "id": "machine_task_193",
+        "instruction": "A spherical shell of radius \\( R \\) is uniformly charged with a total charge \\( Q \\); derive the electric potential \\( V \\) at a point located a distance \\( d \\) from the center of the shell, in terms of \\( R \\), \\( Q \\), and fundamental constants."
+    },
+    {
+        "id": "machine_task_194",
+        "instruction": "Calculate the gravitational potential energy of a satellite of mass \\( m \\) in a circular orbit at a height \\( h \\) above the Earth's surface, using the formula \\( U = -\\frac{G M m}{r} \\), where \\( r \\) is the distance from the center of the Earth to the satellite."
+    },
+    {
+        "id": "machine_task_195",
+        "instruction": "Assume that a gas expands adiabatically and reversibly, derive the relation between the pressure and volume of the gas using the first law of thermodynamics and the ideal gas equation, and evaluate the expressions for work done during the expansion."
+    },
+    {
+        "id": "machine_task_196",
+        "instruction": "A neutron in a nuclear reactor undergoes elastic scattering with a proton at rest, and you are to calculate the maximum kinetic energy transfer to the proton, given the initial kinetic energy of the neutron is \\( T_n = 2.5 \\, \\text{MeV} \\)."
+    },
+    {
+        "id": "machine_task_197",
+        "instruction": "Calculate the kinetic energy of a particle with mass \\( m \\) moving at a velocity \\( v \\), and express your answer in terms of \\( E_0 = mc^2 \\) and the Lorentz factor \\( \\gamma = \\frac{1}{\\sqrt{1 - \\frac{v^2}{c^2}}} \\)."
+    },
+    {
+        "id": "machine_task_198",
+        "instruction": "A cylindrical tank with a radius of \\( r \\) and height \\( h \\) is filled to a height \\( H \\) with water; calculate the hydrostatic pressure at the bottom of the tank in terms of the water density \\( \\rho \\), gravitational acceleration \\( g \\), and the height \\( H \\)."
+    },
+    {
+        "id": "machine_task_199",
+        "instruction": "Determine the change in the Gibbs free energy \\( \\Delta G \\) for a system undergoing an isothermal, isobaric process when \\( n \\) moles of an ideal gas expand from volume \\( V_1 \\) to \\( V_2 \\)."
+    },
+    {
+        "id": "machine_task_200",
+        "instruction": "Determine the change in internal energy \\( \\Delta U \\) for a monatomic ideal gas when it is heated at constant volume from temperature \\( T_1 \\) to \\( T_2 \\), in terms of the number of moles \\( n \\) and the specific heat capacity at constant volume \\( C_V \\)."
+    },
+    {
+        "id": "machine_task_201",
+        "instruction": "A spherical balloon with a radius of \\( R = 0.5 \\mathrm{~m} \\) is filled with helium at a pressure of \\( P = 1.2 \\mathrm{~atm} \\) and has a wall thickness of \\( d = 0.01 \\mathrm{~m} \\); calculate the tensile stress in the balloon wall in pascals, expressing your answer in terms of the Young's modulus \\( Y \\) of the balloon material and the change in volume due to the pressure difference."
+    },
+    {
+        "id": "machine_task_202",
+        "instruction": "A cylindrical container with a radius of \\(0.5 \\ \\text{m}\\) and a height of \\(2 \\ \\text{m}\\) is filled with water, and a block of wood with a density of \\(600 \\ \\text{kg/m}^3\\) and a mass of \\(10 \\ \\text{kg}\\) is floating on the surface; calculate the height of the water level in the container when the block is placed inside, assuming the container is initially filled to the rim."
+    },
+    {
+        "id": "machine_task_203",
+        "instruction": "Determine the minimum energy \\( E_{\\gamma 3} \\) of a photon required to produce a muon-antimuon pair when colliding with a stationary electron, given that the rest mass energy of a muon is approximately \\( 105.7 \\text{ MeV} \\)."
+    },
+    {
+        "id": "machine_task_204",
+        "instruction": "Calculate the power output \\( P \\) of a heat engine operating between a hot reservoir at temperature \\( T_H \\) and a cold reservoir at temperature \\( T_C \\), when the engine absorbs a quantity of heat \\( Q_H \\) from the hot reservoir, and express your answer in terms of \\( Q_H \\), \\( T_H \\), and \\( T_C \\) using the efficiency formula \\( \\eta = 1 - \\frac{T_C}{T_H} \\)."
+    },
+    {
+        "id": "machine_task_205",
+        "instruction": "A cylindrical tank with a radius of \\( R = 2 \\mathrm{~m} \\) and height \\( H = 5 \\mathrm{~m} \\) is filled with water to a height of \\( h = 4 \\mathrm{~m} \\); calculate the hydrostatic pressure at the bottom of the tank in pascals."
+    },
+    {
+        "id": "machine_task_206",
+        "instruction": "Calculate the gravitational potential energy $U$ of two masses $m_1$ and $m_2$ separated by a distance $r$ in terms of the gravitational constant $G$ and the masses involved."
+    },
+    {
+        "id": "machine_task_207",
+        "instruction": "Calculate the electric field $E$ at a distance $d$ from an infinitely long charged line with linear charge density $\\lambda$, and express your answer in terms of $\\lambda$ and $d$."
+    },
+    {
+        "id": "machine_task_208",
+        "instruction": "Calculate the energy required to fully ionize a hydrogen atom in the ground state, expressing your answer in electron volts and using the Rydberg constant in your calculations."
+    },
+    {
+        "id": "machine_task_209",
+        "instruction": "Calculate the electric potential \\( V(r) \\) at a distance \\( r \\) from a point charge \\( Q \\) in a vacuum."
+    },
+    {
+        "id": "machine_task_210",
+        "instruction": "Determine the period \\( T \\) of a simple harmonic oscillator with mass \\( m \\) and spring constant \\( k \\) by expressing it in terms of these variables and physical constants."
+    },
+    {
+        "id": "machine_task_211",
+        "instruction": "Derive the expression for the magnetic field $B$ at a distance $r$ from an infinitely long straight wire carrying a current $I$, and express your answer in terms of the permeability of free space $\\mu_0$ and the current $I$."
+    },
+    {
+        "id": "machine_task_212",
+        "instruction": "A satellite of mass \\( m = 500 \\, \\mathrm{kg} \\) is in a circular orbit at a height \\( h = 400 \\, \\mathrm{km} \\) above the Earth's surface; determine the speed of the satellite in its orbit using \\( g = 9.81 \\, \\mathrm{m/s^2} \\) at the Earth's surface."
+    },
+    {
+        "id": "machine_task_213",
+        "instruction": "A circular loop of radius \\( R \\) carries a steady current \\( I \\) and is placed in a uniform magnetic field \\( \\mathbf{B} \\) at an angle \\( \\theta \\) to the normal of the loop, calculate the torque \\( \\tau \\) acting on the loop in terms of \\( R, I, B, \\) and \\( \\theta \\)."
+    },
+    {
+        "id": "machine_task_214",
+        "instruction": "A cylindrical conductor of length \\( L \\) and radius \\( R \\) carries a uniform charge density \\( \\lambda \\); determine the total electric charge stored in the conductor when placed in a uniform electric field \\( E_0 \\) parallel to its axis."
+    },
+    {
+        "id": "machine_task_215",
+        "instruction": "Compute the gravitational potential energy of a uniform cylindrical object of height \\( h \\) and radius \\( r \\) in terms of its mass \\( M \\) and the distance from the center of the base to the center of mass, assuming the center of mass is located at the midpoint of the cylinder."
+    },
+    {
+        "id": "machine_task_216",
+        "instruction": "A point charge \\( q \\) is placed at a distance \\( r \\) from an infinitely long charged wire with linear charge density \\( \\lambda \\); calculate the electric field \\( E \\) at the location of the point charge in terms of \\( q, \\lambda, \\) and \\( r \\)."
+    },
+    {
+        "id": "machine_task_217",
+        "instruction": "Calculate the electric potential \\( V \\) at a distance \\( r \\) from a uniformly charged sphere of total charge \\( Q \\) and radius \\( R \\) when the point of interest is located outside the sphere."
+    },
+    {
+        "id": "machine_task_218",
+        "instruction": "Determine the electric field \\( E \\) at a distance \\( r \\) from an infinitely long straight wire carrying a uniform linear charge density \\( \\lambda \\)."
+    },
+    {
+        "id": "machine_task_219",
+        "instruction": "Determine the magnetic field \\( B \\) at a distance \\( r \\) from a long, straight conductor carrying a constant current \\( I \\)."
+    },
+    {
+        "id": "machine_task_220",
+        "instruction": "Derive the expression for the electric potential \\( V \\) due to a uniformly charged spherical shell of radius \\( R \\) and total charge \\( Q \\) at a distance \\( r \\) from the center of the shell, and express your answer in terms of \\( Q \\), \\( R \\), and \\( r \\)."
+    },
+    {
+        "id": "machine_task_221",
+        "instruction": "Determine the expression for the pressure $P(z)$ as a function of altitude $z$ in the atmosphere, assuming an isothermal atmosphere and incorporating the ideal gas law."
+    },
+    {
+        "id": "machine_task_222",
+        "instruction": "Determine the gravitational acceleration \\( g \\) at a height \\( h \\) above the Earth's surface in terms of the Earth's radius \\( R \\) and the gravitational constant \\( G \\)."
+    },
+    {
+        "id": "machine_task_223",
+        "instruction": "A satellite of mass \\( m=1000 \\, \\text{kg} \\) is in a circular orbit at an altitude of \\( h = 500 \\, \\text{km} \\) above the Earth's surface; calculate the gravitational force acting on it, given that the mass of the Earth is \\( M_e = 5.97 \\times 10^{24} \\, \\text{kg} \\) and the radius of the Earth is \\( R_e = 6371 \\, \\text{km} \\)."
+    },
+    {
+        "id": "machine_task_224",
+        "instruction": "A charged particle with charge \\( q \\) moves in a uniform magnetic field \\( \\mathbf{B} \\) with a velocity \\( \\mathbf{v} \\); determine the radius of the circular path traced by the particle as a function of \\( q, v, \\) and \\( B \\)."
+    },
+    {
+        "id": "machine_task_225",
+        "instruction": "Derive the expression for the electric field \\( E \\) inside a uniformly charged spherical shell of radius \\( R \\) and total charge \\( Q \\), explicitly stating the conditions under which the field inside the shell is evaluated."
+    },
+    {
+        "id": "machine_task_226",
+        "instruction": "Calculate the gravitational force acting on a small object of mass \\( m \\) located a distance \\( d \\) from the surface of a planet with mass \\( M \\) and radius \\( R \\), where \\( d \\) is much smaller than \\( R \\)."
+    },
+    {
+        "id": "machine_task_227",
+        "instruction": "Determine the torque \\( \\tau \\) acting on a current loop of area \\( A \\) placed in a uniform magnetic field \\( \\mathbf{B} \\) when the plane of the loop makes an angle \\( \\theta \\) with the field direction, and express your answer in terms of the current \\( I \\), the number of turns \\( N \\), and the magnetic moment \\( \\boldsymbol{\\mu} \\)."
+    },
+    {
+        "id": "machine_task_228",
+        "instruction": "Calculate the electric potential \\( V(r) \\) at a distance \\( r \\) from an infinitely long line of charge with charge per unit length \\( \\lambda \\)."
+    },
+    {
+        "id": "machine_task_229",
+        "instruction": "A small cylindrical rod of length \\( L \\) and cross-sectional area \\( A \\) is made from a material with Young's modulus \\( Y \\); calculate the change in length \\( \\Delta L \\) of the rod when subjected to a tensile force \\( F \\)."
+    },
+    {
+        "id": "machine_task_230",
+        "instruction": "Calculate the work done by a constant force \\( F \\) acting on an object that moves a distance \\( d \\) in the direction of the force, and express this work in terms of the force magnitude, distance moved, and the angle \\( \\theta \\) between the force and the displacement vector."
+    },
+    {
+        "id": "machine_task_231",
+        "instruction": "Determine the frequency of oscillation and the amplitude of a simple harmonic oscillator given its mass \\( m \\), spring constant \\( k \\), and initial displacement \\( x_0 \\) from equilibrium, and express your results in terms of \\( m \\) and \\( k \\)."
+    },
+    {
+        "id": "machine_task_232",
+        "instruction": "Calculate the gravitational force between two identical spherical objects with mass \\( m = 3 \\times 10^{28} \\text{ kg} \\) and radius \\( r = 10 \\text{ km} \\) that are placed at a distance \\( d = 1 \\text{ km} \\) from each other."
+    },
+    {
+        "id": "machine_task_233",
+        "instruction": "A cylindrical conductor of radius \\( R \\) carries a uniform charge density \\( \\lambda \\) along its length \\( L \\), calculate the electric potential \\( V \\) at a distance \\( r \\) from the axis of the cylinder for \\( r > R \\)."
+    },
+    {
+        "id": "machine_task_234",
+        "instruction": "Given a circuit with a resistor \\( R \\), an inductor \\( L \\), and a capacitor \\( C \\) in series, derive the expression for the resonant frequency \\( \\omega_0 \\) as a function of \\( R \\), \\( L \\), and \\( C \\)."
+    },
+    {
+        "id": "machine_task_235",
+        "instruction": "A spherical shell with radius \\( R \\) and uniform surface charge density \\( \\sigma \\) is placed in a uniform electric field \\( \\mathbf{E}_0 \\); find the resulting electric field inside the shell due to the surface charge and the external field."
+    }
+]

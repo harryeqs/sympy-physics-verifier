@@ -1,0 +1,910 @@
+[
+    {
+        "id": "machine_task_1",
+        "instruction": "A car traveling at a speed of $90 \\mathrm{~km/h}$ comes to a stop in $4.0 \\mathrm{~s}$ due to friction; calculate the distance the car travels during this time and the work done by friction if the car's mass is $1200 \\mathrm{~kg}$."
+    },
+    {
+        "id": "machine_task_2",
+        "instruction": "A 2 kg block slides down a frictionless incline of angle $30^\\circ$ from rest; calculate its speed at the bottom of the incline if it descends a vertical height of 5 m."
+    },
+    {
+        "id": "machine_task_3",
+        "instruction": "A 10 kg block is pushed up a 25° incline with an initial speed of 8 m/s; calculate the distance it moves up the incline before coming to rest if the coefficient of kinetic friction between the block and the incline is 0.2."
+    },
+    {
+        "id": "machine_task_4",
+        "instruction": "A diver leaps from a 3-meter high diving board; calculate the speed of the diver just before hitting the water, ignoring air resistance."
+    },
+    {
+        "id": "machine_task_5",
+        "instruction": "A 2000 kg car accelerates from rest to a speed of 25 m/s in 10 seconds while experiencing a constant friction force of 400 N; calculate the net force exerted on the car during this acceleration."
+    },
+    {
+        "id": "machine_task_6",
+        "instruction": "A cyclist traveling at a speed of 25 m/s applies the brakes and decelerates at a constant rate of 3 m/s²; calculate the distance covered before coming to a complete stop."
+    },
+    {
+        "id": "machine_task_7",
+        "instruction": "A block of mass $5 \\mathrm{~kg}$ is sliding down a frictionless incline at an angle of $30^\\circ$ to the horizontal; calculate the acceleration of the block and the time it takes to slide down a distance of $2 \\mathrm{~m}$."
+    },
+    {
+        "id": "machine_task_8",
+        "instruction": "A 15 kg cart is pushed up a frictionless ramp inclined at 30° with an initial speed of 5 m/s; calculate the maximum height it reaches before coming to a stop."
+    },
+    {
+        "id": "machine_task_9",
+        "instruction": "A 70 kg person is standing at the edge of a 15 m tall cliff and decides to jump off; calculate the speed of the person just before hitting the ground, assuming no air resistance."
+    },
+    {
+        "id": "machine_task_10",
+        "instruction": "A 1500 kg car is traveling at a constant speed of 30 m/s when it suddenly encounters a 5 m high ramp; calculate the speed of the car just after it leaves the ramp, ignoring air resistance."
+    },
+    {
+        "id": "machine_task_11",
+        "instruction": "A 500 g balloon filled with helium rises in the air and reaches a height of 200 m; calculate the work done against gravity in lifting the balloon to this height."
+    },
+    {
+        "id": "machine_task_12",
+        "instruction": "A satellite orbits the Earth at an altitude of 500 km; calculate the satellite's gravitational potential energy if its mass is 1000 kg."
+    },
+    {
+        "id": "machine_task_13",
+        "instruction": "A 60 kg astronaut is floating in space and needs to calculate the amount of fuel required to stop their drift towards a space station that is 100 m away, using a thruster that expels gas at a velocity of 150 m/s; if they aim to stop within 4 seconds, how much mass of fuel must they expel?"
+    },
+    {
+        "id": "machine_task_14",
+        "instruction": "A projectile is launched at an angle of $30^{\\circ}$ with an initial speed of $20 \\mathrm{~m/s}$; calculate the maximum height it reaches before falling back to the ground."
+    },
+    {
+        "id": "machine_task_15",
+        "instruction": "A spring with a spring constant of $200 \\, \\text{N/m}$ is compressed by $0.5 \\, \\text{m}$; calculate the potential energy stored in the spring when it is compressed."
+    },
+    {
+        "id": "machine_task_16",
+        "instruction": "A 2 kg object is dropped from a height of 45 meters; calculate the speed of the object just before it hits the ground, assuming no air resistance."
+    },
+    {
+        "id": "machine_task_17",
+        "instruction": "A 2 kg block slides down a frictionless ramp inclined at 45° from a height of 10 m; calculate the speed of the block at the bottom of the ramp."
+    },
+    {
+        "id": "machine_task_18",
+        "instruction": "A small block of mass $m = 0.5 \\, \\text{kg}$ is attached to a spring with spring constant $k = 200 \\, \\text{N/m}$ and released from a height of $h = 2 \\, \\text{m}$ above the ground; calculate the maximum compression of the spring when the block collides with it, considering the effects of gravitational potential energy."
+    },
+    {
+        "id": "machine_task_19",
+        "instruction": "Calculate the period of a simple pendulum with a length of 1.5 meters and a small angle approximation for angles less than 15 degrees."
+    },
+    {
+        "id": "machine_task_20",
+        "instruction": "A 2 kg block is attached to a frictionless surface and connected to a spring with a spring constant of 150 N/m; calculate the maximum displacement of the spring from its equilibrium position when the block is pushed with a force of 30 N and released."
+    },
+    {
+        "id": "machine_task_21",
+        "instruction": "A 0.25 kg ball is dropped from a height of 10 m; calculate the speed of the ball just before it hits the ground, assuming air resistance is negligible."
+    },
+    {
+        "id": "machine_task_22",
+        "instruction": "Calculate the work done in compressing a gas at constant pressure of 2 atm from a volume of 10 L to 5 L at a temperature of 300 K."
+    },
+    {
+        "id": "machine_task_23",
+        "instruction": "At a temperature of $350 \\mathrm{~K}$ and a pressure of $1.00 \\mathrm{~atm}$, calculate the change in enthalpy ($\\Delta H$) for the reaction $\\mathrm{C(s) + O_2(g) \\rightarrow CO_2(g)}$, given that $\\Delta H_f^{\\circ}(\\mathrm{CO_2(g)}) = -393.5 \\mathrm{~kJ/mol}$ and $\\Delta H_f^{\\circ}(\\mathrm{C(s)}) = 0$."
+    },
+    {
+        "id": "machine_task_24",
+        "instruction": "A sample of a radioactive isotope has a current activity of 5.0 decay events per minute, and its original activity when it was formed was 50.0 decay events per minute; if the half-life of the isotope is 10 years, how many years old is the sample?"
+    },
+    {
+        "id": "machine_task_25",
+        "instruction": "A circular loop of wire with a radius of 10 cm moves with a velocity of 2 m/s perpendicular to a uniform magnetic field of 0.5 T; calculate the induced emf in the loop."
+    },
+    {
+        "id": "machine_task_26",
+        "instruction": "A metal rod of length $L = 1.5 \\mathrm{~m}$ and cross-sectional area $A = 5.0 \\mathrm{~cm}^2$ is subjected to a tensile force of $5000 \\mathrm{~N}$; calculate the resulting stress and strain in the rod, given that the Young's modulus for the material is $200 \\mathrm{~GPa}$."
+    },
+    {
+        "id": "machine_task_27",
+        "instruction": "Calculate the molar heat capacity of a solid substance after it is heated from 25 °C to 200 °C, resulting in a temperature change of 175 °C and absorbing 500 J of heat in the process."
+    },
+    {
+        "id": "machine_task_28",
+        "instruction": "A cylinder containing an ideal gas is heated from an initial temperature of $T_i = 300 \\, \\mathrm{K}$ to a final temperature of $T_f = 500 \\, \\mathrm{K}$ at constant pressure of $1.00 \\, \\mathrm{atm}$; calculate the change in internal energy ($\\Delta U$) given that the molar heat capacity at constant volume is $C_{V,m} = 25 \\, \\mathrm{J \\, mol^{-1} \\, K^{-1}}$."
+    },
+    {
+        "id": "machine_task_29",
+        "instruction": "A car of mass $1200 \\mathrm{~kg}$ is traveling at a speed of $25 \\mathrm{~m/s}$ and suddenly applies brakes with a uniform deceleration of $5 \\mathrm{~m/s^2}$; calculate the distance the car travels before coming to a complete stop."
+    },
+    {
+        "id": "machine_task_30",
+        "instruction": "Calculate the gravitational potential energy of a $2.5 \\mathrm{~kg}$ mass lifted to a height of $15 \\mathrm{~m}$ above the ground."
+    },
+    {
+        "id": "machine_task_31",
+        "instruction": "Calculate the final temperature of 2 kg of water at 20 °C when 0.5 kg of ice at 0 °C is added, assuming no heat loss to the surroundings."
+    },
+    {
+        "id": "machine_task_32",
+        "instruction": "A 2.00 kg block of ice at -10.0 °C is placed in a calorimeter with 0.500 kg of water at 25.0 °C; calculate the final temperature of the system after equilibrium is reached, assuming no heat is lost to the surroundings and the specific heat capacities are 2.09 J/g°C for ice and 4.18 J/g°C for water, and that the heat of fusion of ice is 334 J/g."
+    },
+    {
+        "id": "machine_task_33",
+        "instruction": "A cylindrical tank with a radius of 1 m is filled with water to a height of 4 m; calculate the pressure exerted by the water at the bottom of the tank."
+    },
+    {
+        "id": "machine_task_34",
+        "instruction": "A 5 kg block is sliding down a frictionless inclined plane at an angle of 30 degrees; calculate the acceleration of the block due to gravity."
+    },
+    {
+        "id": "machine_task_35",
+        "instruction": "A 1500 kg car is moving at a speed of 20 m/s when it collides with a stationary 1000 kg car, and assuming an elastic collision, calculate the final velocities of both cars after the collision."
+    },
+    {
+        "id": "machine_task_36",
+        "instruction": "A capacitor consists of two parallel plates, each with an area of \\(0.02 \\, \\mathrm{m}^2\\) and separated by a distance of \\(1 \\, \\mathrm{mm}\\); calculate the capacitance if the space between the plates is filled with a material that has a relative permittivity of \\(3.5\\)."
+    },
+    {
+        "id": "machine_task_37",
+        "instruction": "Calculate the pH of a solution that results from mixing 0.1 M acetic acid with 0.1 M sodium acetate, given that the dissociation constant, \\( K_a \\), for acetic acid is \\( 1.8 \\times 10^{-5} \\)."
+    },
+    {
+        "id": "machine_task_38",
+        "instruction": "A mass-spring system with a mass of 0.5 kg and a spring constant of 200 N/m is compressed by 0.1 m from its equilibrium position; calculate the potential energy stored in the spring."
+    },
+    {
+        "id": "machine_task_39",
+        "instruction": "A car accelerates uniformly from rest to a speed of 27 m/s over a distance of 90 meters; calculate the time it takes for the car to reach this speed."
+    },
+    {
+        "id": "machine_task_40",
+        "instruction": "Calculate the gravitational potential energy of a 5 kg object raised to a height of 10 m above the Earth's surface."
+    },
+    {
+        "id": "machine_task_41",
+        "instruction": "A coil of wire with a radius of $5 \\mathrm{~cm}$ carries a current of $2.0 \\mathrm{~A}$; calculate the magnetic field strength at the center of the coil."
+    },
+    {
+        "id": "machine_task_42",
+        "instruction": "An electric car with a mass of 1500 kg accelerates from rest to a speed of 30 m/s over a distance of 300 m; calculate the average power output required by the car's motor if the time taken for this acceleration is 12 seconds."
+    },
+    {
+        "id": "machine_task_43",
+        "instruction": "A cylinder of gas with an initial volume of 10.0 L, an initial pressure of 1.00 atm, and an initial temperature of 300 K is compressed isothermally to a final volume of 5.00 L; calculate the work done on the gas during this process."
+    },
+    {
+        "id": "machine_task_44",
+        "instruction": "A 2 kg block is sliding down a frictionless incline of angle 30 degrees and reaches the bottom in 3 seconds; calculate the distance traveled along the incline."
+    },
+    {
+        "id": "machine_task_45",
+        "instruction": "Calculate the weight of a 75 kg object on Mars, where the acceleration due to gravity is approximately $3.7 \\, \\mathrm{m/s}^2$."
+    },
+    {
+        "id": "machine_task_46",
+        "instruction": "Calculate the amount of heat required to convert 50 g of ice at -10 °C to steam at 100 °C, using the following values: specific heat of ice = 2.09 J/g·°C, specific heat of water = 4.18 J/g·°C, specific heat of steam = 2.09 J/g·°C, heat of fusion of ice = 334 J/g, and heat of vaporization of water = 2260 J/g."
+    },
+    {
+        "id": "machine_task_47",
+        "instruction": "A car is traveling at a constant speed of 25 m/s when it starts to brake, decelerating at a rate of 5 m/s²; calculate the distance it takes for the car to come to a complete stop."
+    },
+    {
+        "id": "machine_task_48",
+        "instruction": "A 500 $\\mathrm{g}$ ball is dropped from a height of $10 \\mathrm{~m}$; calculate the gravitational potential energy converted into kinetic energy just before it hits the ground, assuming no air resistance."
+    },
+    {
+        "id": "machine_task_49",
+        "instruction": "A pendulum of length 2.5 m is released from rest at an angle of 30 degrees from the vertical; calculate its speed at the lowest point of the swing."
+    },
+    {
+        "id": "machine_task_50",
+        "instruction": "A 200 g object is thrown vertically upward with an initial speed of 15 m/s; calculate the maximum height it reaches before coming to a momentary stop, assuming no air resistance."
+    },
+    {
+        "id": "machine_task_51",
+        "instruction": "A 1500 kg car accelerates from rest to a speed of 25 m/s in 10 seconds; calculate the average power required to achieve this acceleration, assuming no frictional losses."
+    },
+    {
+        "id": "machine_task_52",
+        "instruction": "A 2.00 kg block is attached to a spring with a spring constant of 200 N/m and is displaced 0.50 m from its equilibrium position; calculate the potential energy stored in the spring when the block is released."
+    },
+    {
+        "id": "machine_task_53",
+        "instruction": "A 1.5 kg object is dropped from a height of 20 meters; calculate the speed of the object just before it hits the ground, assuming no air resistance."
+    },
+    {
+        "id": "machine_task_54",
+        "instruction": "A car traveling at a speed of 20 m/s applies brakes that produce a constant deceleration of 4 m/s²; calculate the distance it travels before coming to a complete stop."
+    },
+    {
+        "id": "machine_task_55",
+        "instruction": "A mass of 3.00 kg is attached to a pendulum and released from a height of 1.20 m; calculate the speed of the mass at the lowest point of the swing, assuming no energy is lost to air resistance."
+    },
+    {
+        "id": "machine_task_56",
+        "instruction": "A cyclist traveling at a speed of 15 m/s applies brakes and decelerates uniformly to a stop in 5 seconds; calculate the distance covered during the braking process."
+    },
+    {
+        "id": "machine_task_57",
+        "instruction": "A coil with a resistance of 12.0 ohms and an inductance of 0.5 henries is connected to a 24.0-volt battery; calculate the current flowing through the coil after 3 seconds if the current is growing exponentially from an initial value of zero."
+    },
+    {
+        "id": "machine_task_58",
+        "instruction": "A car of mass 1500 kg is traveling at a speed of 20 m/s and collides with a stationary car of mass 1000 kg; calculate the final speed of both cars if they stick together after the collision, assuming it is perfectly inelastic."
+    },
+    {
+        "id": "machine_task_59",
+        "instruction": "A 2 kg block is pushed along a frictionless surface from rest with a constant force of 10 N for 4 seconds; calculate the final velocity of the block after the force has been applied."
+    },
+    {
+        "id": "machine_task_60",
+        "instruction": "A 1.5 kg block sliding down a frictionless incline of angle 30 degrees reaches the bottom in 2 seconds; calculate the distance traveled along the incline."
+    },
+    {
+        "id": "machine_task_61",
+        "instruction": "Calculate the gravitational potential energy of a 75 kg object lifted to a height of 10 meters above the ground."
+    },
+    {
+        "id": "machine_task_62",
+        "instruction": "A 2 kg block sliding down an inclined plane at an angle of 30° meets a 0.5 m section of rough surface with a friction coefficient of 0.25; calculate the speed of the block as it exits this rough section if it initially starts from rest at the top of the incline which is 3 m high."
+    },
+    {
+        "id": "machine_task_63",
+        "instruction": "A capacitor with a capacitance of 10 µF is charged to a voltage of 50 V and then disconnected from the power supply; calculate the energy stored in the capacitor."
+    },
+    {
+        "id": "machine_task_64",
+        "instruction": "A 1500 kg car is moving at a speed of 25 m/s when it collides with a wall, and if the impact lasts for 0.5 seconds, calculate the average force exerted on the car during the collision."
+    },
+    {
+        "id": "machine_task_65",
+        "instruction": "A 2.0 kg object is subjected to a net force of 10 N; calculate the acceleration of the object."
+    },
+    {
+        "id": "machine_task_66",
+        "instruction": "Calculate the final velocity of a 1.5 kg object that is subjected to a constant acceleration of 4.0 m/s² for a duration of 3 seconds, starting from rest."
+    },
+    {
+        "id": "machine_task_67",
+        "instruction": "A 2.00 kg block slides down a frictionless incline of 30 degrees and a height of 5.00 m; calculate the speed of the block just before it reaches the bottom of the incline."
+    },
+    {
+        "id": "machine_task_68",
+        "instruction": "A 1500 kg car accelerates uniformly from rest to a speed of 25 m/s over a distance of 200 m; calculate the work done by the engine during this acceleration."
+    },
+    {
+        "id": "machine_task_69",
+        "instruction": "A block of mass 10 kg is sliding down a frictionless inclined plane at an angle of 30 degrees to the horizontal; calculate the acceleration of the block and the time it takes to reach the bottom of the incline if the length of the incline is 5 meters."
+    },
+    {
+        "id": "machine_task_70",
+        "instruction": "A cylindrical tank with a radius of 1.5 meters is filled with water to a height of 10 meters; calculate the pressure at the bottom of the tank due to the water."
+    },
+    {
+        "id": "machine_task_71",
+        "instruction": "Calculate the gravitational potential energy of a $1200 \\, \\text{kg}$ car parked on a hill that is $15 \\, \\text{m}$ high above a reference point."
+    },
+    {
+        "id": "machine_task_72",
+        "instruction": "A block of mass 2 kg is sliding down a frictionless incline of 30 degrees; determine its speed at the bottom of the incline if it started from rest at a height of 5 meters."
+    },
+    {
+        "id": "machine_task_73",
+        "instruction": "A cylindrical tank with a radius of 0.5 m and a height of 2 m is filled with water; calculate the pressure at the bottom of the tank when the water is at a temperature of 25°C."
+    },
+    {
+        "id": "machine_task_74",
+        "instruction": "A 50 kg astronaut on the International Space Station throws a 2 kg tool away at a speed of 5 m/s; calculate the recoil speed of the astronaut."
+    },
+    {
+        "id": "machine_task_75",
+        "instruction": "A child slides down a playground slide that is 5 meters high; calculate the speed of the child at the bottom of the slide assuming no energy is lost to friction."
+    },
+    {
+        "id": "machine_task_76",
+        "instruction": "A capacitor with a capacitance of 5.0 μF is charged to a voltage of 12 V; calculate the energy stored in the capacitor."
+    },
+    {
+        "id": "machine_task_77",
+        "instruction": "A cylindrical rod of radius \\( R \\) and length \\( L \\) carries a uniform volume charge density \\( \\rho \\); calculate the electric field at a point along the axis of the rod at a distance \\( z \\) from one end."
+    },
+    {
+        "id": "machine_task_78",
+        "instruction": "Calculate the final temperature when 100 g of ice at -10°C is mixed with 200 g of water at 25°C, assuming no heat loss to the surroundings and that the specific heat capacities are 2.09 J/g·°C for ice and 4.18 J/g·°C for water, while the heat of fusion for ice is 334 J/g."
+    },
+    {
+        "id": "machine_task_79",
+        "instruction": "A block of mass $5 \\, \\mathrm{kg}$ is released from rest at a height of $20 \\, \\mathrm{m}$ above the ground, calculate the speed of the block just before it hits the ground assuming no air resistance."
+    },
+    {
+        "id": "machine_task_80",
+        "instruction": "Calculate the wavelength of the first transition for a hydrogen atom electron moving from the third energy level (n=3) to the second energy level (n=2)."
+    },
+    {
+        "id": "machine_task_81",
+        "instruction": "A metal rod with a length of 1.2 m is heated uniformly from 20°C to 100°C; calculate the change in length if the coefficient of linear expansion for the metal is \\( 12 \\times 10^{-6} \\, \\text{°C}^{-1} \\)."
+    },
+    {
+        "id": "machine_task_82",
+        "instruction": "A 1500 kg car accelerates uniformly from rest, reaching a speed of 25 m/s in 10 seconds; calculate the distance the car travels during this time."
+    },
+    {
+        "id": "machine_task_83",
+        "instruction": "A container holds a gas at a pressure of $2.5 \\, \\mathrm{atm}$ and a temperature of $300 \\, \\mathrm{K}$; calculate the number of moles of gas in the container if its volume is $10 \\, \\mathrm{L}$."
+    },
+    {
+        "id": "machine_task_84",
+        "instruction": "A 1000 kg car traveling at a constant speed of 20 m/s suddenly brakes and comes to a complete stop in 4 seconds; calculate the magnitude of the average deceleration experienced by the car during this time."
+    },
+    {
+        "id": "machine_task_85",
+        "instruction": "A 500 kg satellite is in a circular orbit around Earth at an altitude of 300 km; calculate the gravitational force acting on the satellite."
+    },
+    {
+        "id": "machine_task_86",
+        "instruction": "A 0.5 kg block slides down a frictionless incline of height 5 m; calculate the speed of the block at the bottom of the incline just before it reaches the horizontal surface."
+    },
+    {
+        "id": "machine_task_87",
+        "instruction": "A 2.0 kg ball is thrown vertically upward with an initial velocity of 15 m/s; find the maximum height reached by the ball before it begins to fall back down."
+    },
+    {
+        "id": "machine_task_88",
+        "instruction": "A cylindrical tank with a radius of 2 meters and a height of 5 meters is filled with water to a height of 3 meters; calculate the pressure exerted by the water at the bottom of the tank."
+    },
+    {
+        "id": "machine_task_89",
+        "instruction": "A capacitor with a capacitance of 5.0 µF is charged to a voltage of 12 V; calculate the energy stored in the capacitor."
+    },
+    {
+        "id": "machine_task_90",
+        "instruction": "A 2.0 kg object is dropped from a height of 40 m; calculate the speed of the object just before it hits the ground, assuming air resistance is negligible."
+    },
+    {
+        "id": "machine_task_91",
+        "instruction": "An ideal gas occupies a volume of 10 liters at a pressure of 2 atm and a temperature of 300 K; determine the number of moles of gas present using the ideal gas law."
+    },
+    {
+        "id": "machine_task_92",
+        "instruction": "A car traveling with an initial speed of $25 \\mathrm{~m/s}$ comes to a stop in $5 \\mathrm{~s}$ due to constant braking; calculate the distance it travels before coming to a complete stop."
+    },
+    {
+        "id": "machine_task_93",
+        "instruction": "A metal rod of length 0.5 m and cross-sectional area 2.0 cm² is subjected to a tensile force of 1000 N; calculate the resulting strain in the rod."
+    },
+    {
+        "id": "machine_task_94",
+        "instruction": "A massless spring with a spring constant of 200 N/m is compressed by 0.15 m; calculate the potential energy stored in the spring when it is compressed."
+    },
+    {
+        "id": "machine_task_95",
+        "instruction": "A solid sphere with a radius of 0.2 m and a mass of 3 kg rolls down an inclined plane that is 4 m high; calculate the speed of the sphere at the bottom of the incline just before it begins to roll on a flat surface."
+    },
+    {
+        "id": "machine_task_96",
+        "instruction": "A 5 kg block is resting on a horizontal surface with a coefficient of static friction of 0.4; calculate the maximum force that can be applied horizontally to the block before it starts to slide."
+    },
+    {
+        "id": "machine_task_97",
+        "instruction": "A transformer has 200 turns on its primary coil and 50 turns on its secondary coil; if the primary voltage is 120 V, what is the secondary voltage?"
+    },
+    {
+        "id": "machine_task_98",
+        "instruction": "Calculate the standard enthalpy change for the reaction of 1 mole of hydrogen gas with 1 mole of nitrogen gas to form ammonia, given that the standard heat of formation for ammonia ($\\Delta H_f^{\\circ} \\mathrm{(NH}_3\\mathrm{, g)})$ is -45.9 kJ/mol at 298 K."
+    },
+    {
+        "id": "machine_task_99",
+        "instruction": "A rectangular swimming pool measures 10 meters in length, 5 meters in width, and 2 meters in depth; calculate the volume of water required to fill the pool completely in liters."
+    },
+    {
+        "id": "machine_task_100",
+        "instruction": "A car accelerates uniformly from rest to a speed of 25 m/s over a distance of 100 meters; calculate the time it takes to reach this speed."
+    },
+    {
+        "id": "machine_task_101",
+        "instruction": "A particle moves along a straight line with an acceleration given by the equation \\( a(t) = 6t - 4 \\), where \\( t \\) is in seconds; if the initial velocity at \\( t = 0 \\) is \\( 2 \\, \\mathrm{m/s} \\), determine the velocity of the particle at \\( t = 3 \\, \\mathrm{s} \\)."
+    },
+    {
+        "id": "machine_task_102",
+        "instruction": "A car is traveling at a speed of $25 \\mathrm{~m/s}$ when the driver applies the brakes, causing a constant deceleration of $2.5 \\mathrm{~m/s}^2$; calculate the distance required for the car to come to a complete stop."
+    },
+    {
+        "id": "machine_task_103",
+        "instruction": "A projectile is launched vertically upward with an initial speed of 30 m/s; calculate the maximum height it reaches before coming to a momentary rest."
+    },
+    {
+        "id": "machine_task_104",
+        "instruction": "A 1500 kg car traveling at 25 m/s crashes into a wall and comes to a complete stop in 0.5 seconds; calculate the force exerted on the car during this time."
+    },
+    {
+        "id": "machine_task_105",
+        "instruction": "A circuit contains a resistor of $12 \\, \\Omega$ and a capacitor of $100 \\, \\mu\\text{F}$ in series, and it is connected to a \\( 9 \\, \\text{V} \\) battery; calculate the time constant of the circuit."
+    },
+    {
+        "id": "machine_task_106",
+        "instruction": "A cylindrical metal rod with a length of 1.5 m and a uniform cross-sectional area of 0.004 m² is heated at one end to a temperature of 100 °C while the other end is maintained at 20 °C; calculate the rate of heat transfer through the rod, assuming a thermal conductivity of 50 W/(m·K)."
+    },
+    {
+        "id": "machine_task_107",
+        "instruction": "A sample of gas with an initial volume of 5.00 L at a pressure of 1.00 atm is compressed to a volume of 2.00 L; calculate the final pressure exerted by the gas assuming it behaves ideally."
+    },
+    {
+        "id": "machine_task_108",
+        "instruction": "A capacitor with a capacitance of $5 \\ \\mu\\mathrm{F}$ is charged to a voltage of $12 \\ \\mathrm{V}$; calculate the energy stored in the capacitor and the charge on its plates."
+    },
+    {
+        "id": "machine_task_109",
+        "instruction": "A 0.50 m long coil of wire carrying a current of 5.0 A is placed in a uniform magnetic field of strength 0.80 T; calculate the torque experienced by the coil when the plane of the coil is oriented at an angle of 30 degrees with respect to the magnetic field direction."
+    },
+    {
+        "id": "machine_task_110",
+        "instruction": "A capacitor with a capacitance of $10 \\, \\mu\\mathrm{F}$ is disconnected from a $9 \\, \\mathrm{V}$ battery and then connected across a resistor of $50 \\, \\Omega$; calculate the time constant of the discharge circuit."
+    },
+    {
+        "id": "machine_task_111",
+        "instruction": "A 2.0 kg block is slid down a frictionless incline of angle $30^\\circ$ and travels a distance of $1.5 \\mathrm{~m}$; calculate the work done by gravity on the block during its descent."
+    },
+    {
+        "id": "machine_task_112",
+        "instruction": "A circuit contains a resistor of $20 \\, \\Omega$ in series with a $9 \\, \\text{V}$ battery; calculate the current flowing through the circuit and the power dissipated by the resistor."
+    },
+    {
+        "id": "machine_task_113",
+        "instruction": "Calculate the heat absorbed by 200 g of water when it is heated from 25 °C to 85 °C, given that the specific heat capacity of water is 4.18 J/g·°C."
+    },
+    {
+        "id": "machine_task_114",
+        "instruction": "A loop of wire with a radius of 0.1 m is placed in a uniform magnetic field of strength 0.5 T; calculate the maximum emf induced in the loop if it is rotated at a constant angular velocity of 100 rad/s."
+    },
+    {
+        "id": "machine_task_115",
+        "instruction": "Calculate the final temperature of a gas sample of 0.50 moles that expands isothermally from a volume of 2.0 L to 5.0 L while absorbing 300 J of heat, assuming it behaves ideally."
+    },
+    {
+        "id": "machine_task_116",
+        "instruction": "Calculate the change in Gibbs free energy, $\\Delta G$, at 298 K for the reaction $\\mathrm{C}(s) + \\mathrm{O}_2(g) \\rightleftharpoons \\mathrm{CO}_2(g)$ given that the standard enthalpy change, $\\Delta H^\\circ$, is -394 kJ/mol and the standard entropy change, $\\Delta S^\\circ$, is -213 J/(mol·K)."
+    },
+    {
+        "id": "machine_task_117",
+        "instruction": "Calculate the electric potential energy of a system of two point charges, +3 μC and -5 μC, separated by a distance of 0.2 m in a vacuum."
+    },
+    {
+        "id": "machine_task_118",
+        "instruction": "A block of mass $m$ is placed on a frictionless inclined plane making an angle $\\theta$ with the horizontal; calculate the acceleration of the block down the slope when it is released from rest."
+    },
+    {
+        "id": "machine_task_119",
+        "instruction": "A 1.5 kg object is lifted vertically through a height of 4.0 m; calculate the work done against gravity during this lift."
+    },
+    {
+        "id": "machine_task_120",
+        "instruction": "A 2.0 kg block sliding down a frictionless incline of angle 30° descends a height of 5.0 m; calculate the speed of the block at the bottom of the incline."
+    },
+    {
+        "id": "machine_task_121",
+        "instruction": "A perpendicular magnetic field of strength \\(0.5 \\, \\mathrm{T}\\) is applied to a straight wire carrying a current of \\(10 \\, \\mathrm{A}\\); calculate the force exerted on a \\(2 \\, \\mathrm{m}\\) segment of the wire."
+    },
+    {
+        "id": "machine_task_122",
+        "instruction": "A 1.5 kg mass is attached to a spring with a spring constant of 200 N/m and is compressed 0.3 m from its equilibrium position; calculate the potential energy stored in the spring when compressed."
+    },
+    {
+        "id": "machine_task_123",
+        "instruction": "A beam of light with a wavelength of $500 \\, \\mathrm{nm}$ passes from air into a material with a refractive index of $1.5$; calculate the angle of refraction in the material when the angle of incidence is $30^\\circ$."
+    },
+    {
+        "id": "machine_task_124",
+        "instruction": "A box of mass \\(2 \\, \\mathrm{kg}\\) is sliding down a frictionless incline of \\(30^\\circ\\); calculate the acceleration of the box."
+    },
+    {
+        "id": "machine_task_125",
+        "instruction": "A 150 g block of ice at -5 °C is placed in a 500 g container of water at 25 °C; calculate the final equilibrium temperature of the system assuming no heat loss to the surroundings."
+    },
+    {
+        "id": "machine_task_126",
+        "instruction": "A car of mass 1200 kg accelerates uniformly from rest to a speed of 30 m/s in 10 seconds; calculate the average power output of the engine during this acceleration."
+    },
+    {
+        "id": "machine_task_127",
+        "instruction": "A car traveling at a speed of $72 \\, \\mathrm{km/h}$ applies brakes to come to a stop, and if the coefficient of friction between the tires and the road is $0.7$, calculate the distance the car travels before it stops."
+    },
+    {
+        "id": "machine_task_128",
+        "instruction": "A car accelerates from rest to a speed of 25 m/s in 10 seconds while traveling along a straight road; calculate the distance traveled by the car during this acceleration period."
+    },
+    {
+        "id": "machine_task_129",
+        "instruction": "A projectile is launched from the ground with an initial speed of 20 m/s at an angle of 30 degrees above the horizontal; calculate the maximum height reached by the projectile."
+    },
+    {
+        "id": "machine_task_130",
+        "instruction": "A balloon filled with helium rises in the atmosphere, and if the volume of the balloon is \\(0.5 \\, \\mathrm{m}^3\\) and the outside air pressure is \\(100 \\, \\mathrm{kPa}\\), calculate the buoyant force acting on the balloon."
+    },
+    {
+        "id": "machine_task_131",
+        "instruction": "A 2 kg ball is dropped from a height of 10 m; calculate the speed of the ball just before it hits the ground, assuming no air resistance."
+    },
+    {
+        "id": "machine_task_132",
+        "instruction": "A block of mass 5 kg is sliding down a frictionless incline that makes an angle of 30° with the horizontal; calculate the acceleration of the block as it moves down the incline."
+    },
+    {
+        "id": "machine_task_133",
+        "instruction": "A car traveling at an initial speed of \\(20 \\, \\mathrm{m/s}\\) applies brakes and decelerates at a rate of \\(4 \\, \\mathrm{m/s^2}\\); calculate the time it takes for the car to come to a complete stop."
+    },
+    {
+        "id": "machine_task_134",
+        "instruction": "A 2000 kg car accelerates uniformly from rest to a speed of 25 m/s over a distance of 100 m; determine the average power output of the car's engine during this acceleration period."
+    },
+    {
+        "id": "machine_task_135",
+        "instruction": "A solid cylinder of radius 0.10 m and height 0.25 m made of a material with a density of 800 kg/m³ is rotated around its central axis; calculate the moment of inertia of the cylinder."
+    },
+    {
+        "id": "machine_task_136",
+        "instruction": "Calculate the magnetic field at a distance of 10 cm from a long, straight current-carrying wire that carries a current of 5 A using Ampère's law."
+    },
+    {
+        "id": "machine_task_137",
+        "instruction": "A 0.5 kg ball is thrown vertically upward with an initial velocity of 15 m/s; calculate the maximum height reached by the ball before it begins to fall back down."
+    },
+    {
+        "id": "machine_task_138",
+        "instruction": "A parallel-plate capacitor has a plate area of $0.01 \\mathrm{~m}^2$ and a separation of $1.0 \\mathrm{~mm}$ filled with a dielectric material of dielectric constant $3.0$; if a voltage of $12.0 \\mathrm{~V}$ is applied, what is the electric field strength between the plates?"
+    },
+    {
+        "id": "machine_task_139",
+        "instruction": "Determine the amount of energy stored in a capacitor with a capacitance of $5.0 \\, \\mu\\mathrm{F}$ when it is charged to a voltage of $9.0 \\, \\mathrm{V}$."
+    },
+    {
+        "id": "machine_task_140",
+        "instruction": "A solution contains 0.150 moles of sodium chloride and 0.100 moles of potassium nitrate in 500.0 mL of water; calculate the molality of the solution."
+    },
+    {
+        "id": "machine_task_141",
+        "instruction": "An ideal gas cylinder contains 2.00 moles of an ideal monatomic gas at a temperature of 300 K, and if the gas is compressed isothermally to half its volume, calculate the work done during the compression process."
+    },
+    {
+        "id": "machine_task_142",
+        "instruction": "A stone is thrown vertically upward with an initial speed of $20 \\mathrm{~m/s}$; calculate the maximum height it reaches before coming to a momentary stop."
+    },
+    {
+        "id": "machine_task_143",
+        "instruction": "A 0.200 M solution of sodium sulfate is mixed with 0.100 M solution of barium chloride; calculate the molarity of barium sulfate that forms as a precipitate."
+    },
+    {
+        "id": "machine_task_144",
+        "instruction": "A mass of 2.5 kg is attached to a spring with a spring constant of 200 N/m; calculate the maximum height it reaches when released from an initial compression of 0.1 m."
+    },
+    {
+        "id": "machine_task_145",
+        "instruction": "A mass of 0.150 kg is attached to a spring with a spring constant of 250 N/m and pulled to a displacement of 0.10 m from the equilibrium position; determine the potential energy stored in the spring at this displacement."
+    },
+    {
+        "id": "machine_task_146",
+        "instruction": "A 5 kg block is sliding down a frictionless incline at an angle of 30°; calculate the acceleration of the block as it descends the incline."
+    },
+    {
+        "id": "machine_task_147",
+        "instruction": "A 1.5 kg object is moving with an initial speed of 10 m/s along a frictionless surface when it collides with a stationary object of mass 2 kg; determine the final speed of both objects assuming a perfectly elastic collision."
+    },
+    {
+        "id": "machine_task_148",
+        "instruction": "A 5.0 kg block is pushed up a frictionless incline with an angle of 30 degrees to the horizontal; if the block is accelerated at 2.0 m/s², how much work is done by the applied force over a distance of 2.0 meters along the incline?"
+    },
+    {
+        "id": "machine_task_149",
+        "instruction": "A spring with a spring constant of $500 \\mathrm{~N/m}$ is compressed by $0.2 \\mathrm{~m}$; calculate the potential energy stored in the spring when it is compressed."
+    },
+    {
+        "id": "machine_task_150",
+        "instruction": "A charged particle with mass \\( m = 0.5 \\, \\text{kg} \\) and charge \\( q = 2 \\times 10^{-6} \\, \\text{C} \\) moves in a uniform electric field of strength \\( E = 500 \\, \\text{N/C} \\); calculate the acceleration of the particle."
+    },
+    {
+        "id": "machine_task_151",
+        "instruction": "A cylindrical capacitor has a length of 0.5 m and an inner radius of 2 cm with a potential difference of 300 V applied across it; calculate the electric field strength within the capacitor."
+    },
+    {
+        "id": "machine_task_152",
+        "instruction": "A block of mass 5 kg is placed on a frictionless incline of 30 degrees; calculate the acceleration of the block as it slides down the incline."
+    },
+    {
+        "id": "machine_task_153",
+        "instruction": "A block of mass \\( m = 5 \\, \\text{kg} \\) is resting on a frictionless inclined plane that makes an angle of \\( 30^\\circ \\) with the horizontal; calculate the acceleration of the block as it slides down the incline."
+    },
+    {
+        "id": "machine_task_154",
+        "instruction": "A circuit consists of a \\( 12 \\, \\Omega \\) resistor, a \\( 6 \\, \\Omega \\) resistor, and a \\( 3 \\, \\Omega \\) resistor connected in parallel; calculate the total resistance of the circuit."
+    },
+    {
+        "id": "machine_task_155",
+        "instruction": "A 50 g bullet is fired vertically upwards with an initial speed of 300 m/s; calculate the maximum height the bullet reaches before it stops momentarily."
+    },
+    {
+        "id": "machine_task_156",
+        "instruction": "A $0.5 \\mathrm{~kg}$ block slides down a frictionless incline of $30^\\circ$ with respect to the horizontal, calculate its speed at the bottom of the incline if it starts from rest and the incline height is $2 \\mathrm{~m}$."
+    },
+    {
+        "id": "machine_task_157",
+        "instruction": "A 2.5 kg object is attached to a vertical spring with a spring constant of 200 N/m and displaced 0.1 m from its equilibrium position; calculate the period of oscillation of the object-spring system."
+    },
+    {
+        "id": "machine_task_158",
+        "instruction": "A cylindrical tank with a height of 1.5 m and a radius of 0.5 m is filled with water; calculate the pressure at the bottom of the tank in pascals, assuming the density of water is $1000 \\mathrm{~kg/m}^3$."
+    },
+    {
+        "id": "machine_task_159",
+        "instruction": "A capacitor with a plate area of \\( 0.01 \\, \\text{m}^2 \\) and plate separation of \\( 1 \\, \\text{mm} \\) is charged to a potential difference of \\( 12 \\, \\text{V} \\); calculate the capacitance of the capacitor."
+    },
+    {
+        "id": "machine_task_160",
+        "instruction": "A mass \\( m \\) attached to a spring with a spring constant \\( k \\) is displaced by \\( x \\) meters from its equilibrium position; calculate the potential energy stored in the spring."
+    },
+    {
+        "id": "machine_task_161",
+        "instruction": "A $1.0\\, \\mathrm{kg}$ cart is pushed up a frictionless incline at an angle of $25^\\circ$ to the horizontal, and if it starts from rest at a height of $1.5\\, \\mathrm{m}$, determine the speed of the cart when it reaches the top of the incline."
+    },
+    {
+        "id": "machine_task_162",
+        "instruction": "A car accelerates uniformly from rest to a speed of \\( 25 \\, \\mathrm{m/s} \\) over a distance of \\( 100 \\, \\mathrm{m} \\); calculate the time taken to reach this speed."
+    },
+    {
+        "id": "machine_task_163",
+        "instruction": "Calculate the final temperature of a gas initially at 300 K that expands isothermally to double its volume, while performing 50 J of work on the surroundings."
+    },
+    {
+        "id": "machine_task_164",
+        "instruction": "A car is traveling at a speed of $25\\, \\mathrm{m/s}$ when the driver applies the brakes, causing a uniform deceleration of $2\\, \\mathrm{m/s^2}$; calculate the distance the car travels before coming to a complete stop."
+    },
+    {
+        "id": "machine_task_165",
+        "instruction": "A 500 g block slides down a frictionless incline of height 2.0 m, determine the speed of the block at the bottom of the incline."
+    },
+    {
+        "id": "machine_task_166",
+        "instruction": "Calculate the equilibrium constant \\( K \\) for the following reaction at 25 °C: \\( \\text{N}_2(g) + 3 \\text{H}_2(g) \\rightleftharpoons 2 \\text{NH}_3(g) \\) given that the standard Gibbs free energy change \\( \\Delta G^{\\circ} \\) for the reaction is -33.0 kJ."
+    },
+    {
+        "id": "machine_task_167",
+        "instruction": "A point charge of \\( +5.0 \\, \\mu \\mathrm{C} \\) is placed at the origin, and a second point charge of \\( -3.0 \\, \\mu \\mathrm{C} \\) is located at \\( (4.0 \\, \\mathrm{cm}, 0) \\); calculate the magnitude of the electric field at the point \\( (2.0 \\, \\mathrm{cm}, 0) \\)."
+    },
+    {
+        "id": "machine_task_168",
+        "instruction": "A spherical drop of water with a radius of $0.500 \\mathrm{~cm}$ is hanging in static equilibrium from a thread, and the surface tension of water is $72.8 \\mathrm{~mN/m}$; calculate the weight of the drop."
+    },
+    {
+        "id": "machine_task_169",
+        "instruction": "A 2-kg block is sliding down a frictionless incline that makes an angle of 30 degrees with the horizontal; calculate the acceleration of the block."
+    },
+    {
+        "id": "machine_task_170",
+        "instruction": "A 1.5-kg ball is thrown horizontally from the edge of a 20-meter high cliff; calculate the horizontal distance it will travel before hitting the ground, neglecting air resistance."
+    },
+    {
+        "id": "machine_task_171",
+        "instruction": "A spring with a spring constant of 250 N/m is compressed by 0.2 meters; calculate the potential energy stored in the spring when it is released."
+    },
+    {
+        "id": "machine_task_172",
+        "instruction": "A capacitor with a capacitance of $5.0 \\, \\mu \\mathrm{F}$ is charged to a voltage of $10.0 \\, \\mathrm{V}$; calculate the amount of energy stored in the capacitor."
+    },
+    {
+        "id": "machine_task_173",
+        "instruction": "Calculate the final temperature of a 200 g piece of aluminum initially at 150 °C when it is placed into 500 g of water at 25 °C, assuming no heat loss to the surroundings."
+    },
+    {
+        "id": "machine_task_174",
+        "instruction": "A metal sphere of mass 5 kg and temperature 150 °C is dropped into 2 kg of oil at 30 °C in an insulated container; calculate the final temperature of the system once thermal equilibrium has been reached."
+    },
+    {
+        "id": "machine_task_175",
+        "instruction": "A gas occupies a volume of 5.0 L at a pressure of 2.0 atm and a temperature of 300 K; determine the final volume when the gas is compressed to a pressure of 4.0 atm at constant temperature."
+    },
+    {
+        "id": "machine_task_176",
+        "instruction": "Calculate the magnetic field strength at a distance of 0.1 m from a long straight current-carrying conductor that has a current of 5 A flowing through it."
+    },
+    {
+        "id": "machine_task_177",
+        "instruction": "A cylinder with a height of 0.75 m and a diameter of 0.1 m is filled with water at 20 °C; calculate the pressure at the bottom of the cylinder in pascals due to the water column."
+    },
+    {
+        "id": "machine_task_178",
+        "instruction": "Calculate the period of a simple pendulum with a length of 2 meters, assuming no air resistance and a small angle approximation."
+    },
+    {
+        "id": "machine_task_179",
+        "instruction": "A cylindrical container with a radius of 0.3 m and a height of 1.2 m is filled with oil of density 850 kg/m³; calculate the mass of oil in the container."
+    },
+    {
+        "id": "machine_task_180",
+        "instruction": "A 2.0-kg block is connected to a pulley system and is subjected to a downward force of 15 N; calculate the acceleration of the block if the friction between the block and the surface is negligible."
+    },
+    {
+        "id": "machine_task_181",
+        "instruction": "Calculate the magnetic field strength at a distance of 0.1 m from a long, straight wire carrying a current of 5 A using Ampère's law, and determine the direction of the magnetic field using the right-hand rule."
+    },
+    {
+        "id": "machine_task_182",
+        "instruction": "Calculate the total energy of a simple pendulum with a length of 2 meters and a mass of 1 kg, when displaced to an angle of 30 degrees from the vertical."
+    },
+    {
+        "id": "machine_task_183",
+        "instruction": "A car initially at rest accelerates uniformly to a speed of 25 m/s over a distance of 150 m; calculate the time taken to reach this speed."
+    },
+    {
+        "id": "machine_task_184",
+        "instruction": "A 1 kg block slides down a frictionless incline of 30 degrees with respect to the horizontal; determine its speed at the bottom of the incline if the length of the incline is 5 m."
+    },
+    {
+        "id": "machine_task_185",
+        "instruction": "A block of mass 2 kg is placed on a frictionless inclined plane at an angle of 30 degrees; calculate the acceleration of the block down the slope due to gravity."
+    },
+    {
+        "id": "machine_task_186",
+        "instruction": "A 0.5-kg object is attached to a spring with a spring constant of 200 N/m and compressed 0.1 m from its equilibrium position; calculate the potential energy stored in the spring when released."
+    },
+    {
+        "id": "machine_task_187",
+        "instruction": "A car traveling at a speed of 25 m/s enters a curve of radius 50 m; what is the maximum lateral force exerted on the car if its mass is 1200 kg before it begins to skid?"
+    },
+    {
+        "id": "machine_task_188",
+        "instruction": "What is the total energy stored in a 2.0 μF capacitor charged to a voltage of 50 V?"
+    },
+    {
+        "id": "machine_task_189",
+        "instruction": "A capacitor with a capacitance of 10.0 μF is charged to a potential difference of 12.0 V; what is the energy stored in the capacitor?"
+    },
+    {
+        "id": "machine_task_190",
+        "instruction": "Calculate the electric potential energy of a point charge of $5 \\mathrm{C}$ located $0.2 \\mathrm{m}$ away from another point charge of $3 \\mathrm{C}$."
+    },
+    {
+        "id": "machine_task_191",
+        "instruction": "A spherical oil droplet of radius 2.0 mm is charged with a uniform charge density of $+3.0 \\, \\mu\\mathrm{C}/\\mathrm{m}^3$; calculate the electric potential at a point 5.0 mm away from the center of the droplet."
+    },
+    {
+        "id": "machine_task_192",
+        "instruction": "A pendulum of length 2 meters is released from an angle of 30 degrees; calculate the maximum speed of the pendulum bob at its lowest point."
+    },
+    {
+        "id": "machine_task_193",
+        "instruction": "A cylindrical container has a radius of 0.1 m and a height of 0.5 m, filled with water to a height of 0.4 m; calculate the hydrostatic pressure at the bottom of the container in pascals."
+    },
+    {
+        "id": "machine_task_194",
+        "instruction": "Calculate the gravitational potential energy of a 500 kg satellite in orbit at an altitude of 1,200 km above Earth's surface."
+    },
+    {
+        "id": "machine_task_195",
+        "instruction": "A car travels in a circular path with a radius of 50 meters at a constant speed of 20 m/s; calculate the centripetal acceleration of the car."
+    },
+    {
+        "id": "machine_task_196",
+        "instruction": "Calculate the minimal energy required to ionize a hydrogen atom from its ground state, given that the ionization energy is approximately 13.6 eV."
+    },
+    {
+        "id": "machine_task_197",
+        "instruction": "A copper wire of length 2.0 m and cross-sectional area 1.0 mm² is connected to a battery causing a current of 3.0 A to flow; calculate the temperature rise of the wire after 5 minutes, given that the resistivity of copper is \\(1.68 \\times 10^{-8} \\, \\Omega \\cdot \\text{m}\\)."
+    },
+    {
+        "id": "machine_task_198",
+        "instruction": "Calculate the work done by a gas that expands isothermally from a volume of 5.0 L to 15.0 L at a temperature of 300 K, given that the external pressure is constant at 1.0 atm."
+    },
+    {
+        "id": "machine_task_199",
+        "instruction": "Calculate the change in entropy for the isothermal compression of 3.0 moles of an ideal gas at 250 K from a volume of 10.0 L to 4.0 L."
+    },
+    {
+        "id": "machine_task_200",
+        "instruction": "A 2 kg object is attached to a spring with a spring constant of 300 N/m and is set into simple harmonic motion; calculate the period of oscillation and the maximum speed if the object is displaced 0.5 m from the equilibrium position."
+    },
+    {
+        "id": "machine_task_201",
+        "instruction": "Calculate the final temperature of a gas when 2.0 moles of it at an initial temperature of 400 K and a pressure of 5.0 atm are allowed to expand adiabatically to a final pressure of 1.0 atm."
+    },
+    {
+        "id": "machine_task_202",
+        "instruction": "Calculate the heat required to raise the temperature of 500 g of water from 25°C to 75°C, assuming no phase change occurs and the specific heat capacity of water is 4.18 J/g·°C."
+    },
+    {
+        "id": "machine_task_203",
+        "instruction": "A capacitor with a capacitance of 10 µF is charged to a potential difference of 50 V; calculate the total energy stored in the capacitor."
+    },
+    {
+        "id": "machine_task_204",
+        "instruction": "Calculate the time taken for a sound wave to travel a distance of 1 km in air at a temperature of 20°C, given that the speed of sound in air at this temperature is approximately 343 m/s."
+    },
+    {
+        "id": "machine_task_205",
+        "instruction": "A cyclist traveling at a speed of 12 m/s needs to ascend a hill with a height of 50 meters; calculate the minimum work required against gravity, assuming the cyclist's total mass is 75 kg."
+    },
+    {
+        "id": "machine_task_206",
+        "instruction": "Calculate the heat absorbed by 1.5 moles of an ideal gas when it is heated at constant pressure from 200 K to 400 K, given that the molar heat capacity at constant pressure, \\( C_P \\), is 29.1 J/(mol·K)."
+    },
+    {
+        "id": "machine_task_207",
+        "instruction": "A circuit consists of a 12V battery, a resistor of 4Ω, and a capacitor of 20μF connected in series; calculate the time constant of the circuit."
+    },
+    {
+        "id": "machine_task_208",
+        "instruction": "A circuit includes a resistor of 20 ohms and a capacitor of 10 µF in series with a power supply of 12 V; calculate the time constant of the circuit and the voltage across the capacitor after 5 time constants."
+    },
+    {
+        "id": "machine_task_209",
+        "instruction": "A gas mixture containing 4 moles of gas \\(C\\) at a pressure of 5.0 atm and 3 moles of gas \\(D\\) at a pressure of 2.0 atm is allowed to react according to the equation \\(C + D \\rightarrow E\\); calculate the total pressure of the system after the reaction goes to completion if the volume and temperature remain constant."
+    },
+    {
+        "id": "machine_task_210",
+        "instruction": "A container holds 5 moles of an ideal gas at an initial pressure of 10 atm and a volume of 20 L; if the gas expands isothermally to a volume of 40 L at a constant temperature of 300 K, calculate the final pressure of the gas."
+    },
+    {
+        "id": "machine_task_211",
+        "instruction": "Calculate the total energy of a photon with a wavelength of 500 nm."
+    },
+    {
+        "id": "machine_task_212",
+        "instruction": "A car travels a distance of 150 km at a constant speed of 90 km/h, followed by a 30-minute stop, then continues at 120 km/h for another 100 km; calculate the total time taken for the entire journey."
+    },
+    {
+        "id": "machine_task_213",
+        "instruction": "Calculate the final temperature of a mixture formed by combining 200 g of water at 80°C with 300 g of water at 20°C, assuming no heat loss to the surroundings and that the specific heat capacity of water remains constant."
+    },
+    {
+        "id": "machine_task_214",
+        "instruction": "A car traveling at a constant speed of 20 m/s enters a circular turn with a radius of 50 meters; calculate the centripetal acceleration experienced by the car in terms of $g$ units."
+    },
+    {
+        "id": "machine_task_215",
+        "instruction": "A gas mixture consists of 3.0 moles of gas A and 2.0 moles of gas B; calculate the partial pressure of gas A in the mixture at a temperature of 298 K, given that the total pressure is 1.2 atm."
+    },
+    {
+        "id": "machine_task_216",
+        "instruction": "A large cylindrical tank filled with water has a height of 3 meters and a radius of 1 meter; calculate the hydrostatic pressure at the bottom of the tank, assuming the density of water is \\(1000 \\, \\text{kg/m}^3\\) and neglecting atmospheric pressure."
+    },
+    {
+        "id": "machine_task_217",
+        "instruction": "A car travels with a constant speed of 90 km/h for 2 hours, then slows down to 60 km/h for another 1.5 hours; calculate the total distance traveled by the car during this journey."
+    },
+    {
+        "id": "machine_task_218",
+        "instruction": "A 0.250 kg sample of aluminum is heated from 25°C to 200°C; calculate the amount of heat absorbed by the aluminum, given that its specific heat capacity is 0.897 J/g·°C."
+    },
+    {
+        "id": "machine_task_219",
+        "instruction": "A cyclist traveling at a speed of 15 m/s applies the brakes and decelerates at a rate of 3 m/s²; calculate the distance covered before coming to a complete stop."
+    },
+    {
+        "id": "machine_task_220",
+        "instruction": "Calculate the change in internal energy for 1.5 moles of an ideal gas that undergoes an isochoric process, where the temperature rises from 300 K to 600 K."
+    },
+    {
+        "id": "machine_task_221",
+        "instruction": "A car with a mass of 1000 kg is initially moving at a speed of 30 m/s when it begins to decelerate uniformly due to a braking force of 4000 N; calculate the distance it travels before coming to a complete stop."
+    },
+    {
+        "id": "machine_task_222",
+        "instruction": "A 50 g ice cube at -10°C is placed in 200 g of water at 30°C; calculate the final temperature of the system when thermal equilibrium is reached, assuming no heat loss to the environment."
+    },
+    {
+        "id": "machine_task_223",
+        "instruction": "Calculate the moment of inertia of a solid cylinder of radius \\( R = 0.5 \\, \\mathrm{m} \\) and mass \\( M = 2.0 \\, \\mathrm{kg} \\) about its central axis."
+    },
+    {
+        "id": "machine_task_224",
+        "instruction": "A car is traveling on a straight road at a constant speed of 72 km/h when the driver suddenly sees a red light ahead and applies the brakes, decelerating at a rate of 4 m/s²; calculate the distance the car will travel before coming to a complete stop."
+    },
+    {
+        "id": "machine_task_225",
+        "instruction": "Calculate the gravitational potential energy change for a satellite with a mass of 500 kg when it ascends from an altitude of 200 km to an altitude of 1000 km above the Earth's surface, given that the radius of the Earth is approximately 6371 km."
+    },
+    {
+        "id": "machine_task_226",
+        "instruction": "Calculate the change in internal energy when 1.5 moles of an ideal gas is heated at constant volume from 200 K to 350 K, given that the molar heat capacity at constant volume is \\( C_V = 20.8 \\, \\mathrm{J \\, mol^{-1} \\, K^{-1}} \\)."
+    },
+    {
+        "id": "machine_task_227",
+        "instruction": "Calculate the amount of work done when 2 moles of an ideal gas expand isothermally from an initial volume of 10 L to a final volume of 30 L at a temperature of 300 K."
+    }
+]
