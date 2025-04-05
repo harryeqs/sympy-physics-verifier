@@ -38,7 +38,28 @@ class DataProcessor():
             }
             
             keys_to_exclude = {"problemid", "problem_text", "answer_number"}
-        
+        elif self.dataset_origin == "gendatasci": 
+            processed = {
+                "id": data.get("id"),
+                "question": data.get("instruction"),
+                # "unit": data.get("unit"),clear
+                "solution": {},
+                "metadata": {}
+            }
+            
+            keys_to_exclude = {}
+
+        elif self.dataset_origin == "gendataoly": 
+            processed = {
+                "id": data.get("id"),
+                "question": data.get("instruction"),
+                # "unit": data.get("unit"),clear
+                "solution": {},
+                "metadata": {}
+            }
+            
+            keys_to_exclude = {}
+
         # Put the remaining keys into metadata.
         for key, value in data.items():
             if key not in keys_to_exclude:
@@ -55,6 +76,12 @@ class DataProcessor():
             dataset_path = os.path.join(self.base_dir, "PhysicsDatasets/SciBench/")
             # files = ['class_sol.json', 'fund_sol.json', 'thermo_sol.json']
             files = ['full_question.json']
+        elif self.dataset_origin == "gendataoly":
+            dataset_path = os.path.join(self.base_dir, "PhysicsDatasets/gendata/")
+            files = ['olybench_merge.json']
+        elif self.dataset_origin == "gendatasci":
+            dataset_path = os.path.join(self.base_dir, "PhysicsDatasets/gendata/")
+            files = ['scibench_merge.json']
         else:
             raise ValueError("Invalid dataset name. Please choose either 'OlympiadBench' or 'SciBench'.")
 

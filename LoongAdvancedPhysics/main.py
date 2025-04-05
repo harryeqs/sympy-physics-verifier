@@ -11,7 +11,7 @@ import argparse
 from data_processor import DataProcessor
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--dataset", type=str, required=True, help="Which dataset to use: OlympiadBench or SciBench")
+parser.add_argument("--dataset", type=str, required=True, help="Which dataset to use: OlympiadBench, SciBench or gendatasci/gendataoly")
 parser.add_argument("--num", type=int, required=False, help="Number of samples to generate. If not provided, all samples will be generated. It will be ignored if you have specified problem_ids.")
 parser.add_argument("--sample", action='store_true', help='randomly sample from the datasets instead of choosing the first few. It will be ignored if you have specified problem_ids.')
 parser.add_argument("--problem_ids", nargs='+', default='', help='specify problem ids to solve. Pass in multiples using "--problem_ids id_1 id_2 ... "')
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     dataset = physics_data_processor.preprocess_dataset()
 
     reason_model = OpenAIModel(
-        model_type=ModelType.O3_MINI,
+        model_type=ModelType.GPT_4O_MINI,
         model_config_dict={
             "temperature": 0.2,
         }
